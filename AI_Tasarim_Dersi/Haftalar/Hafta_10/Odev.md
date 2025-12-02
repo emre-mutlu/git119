@@ -1,40 +1,7 @@
 # Proje Adı: Yapay Zeka ile Marka Kimliği Tasarımı
 
 ## 1. Proje Senaryosu ve Bağlam
-Tebrikler! Kendi tasarım ajansınızı kurdunuz. Bilgisayarınızı açtınız ve mail kutunuzda 3 farklı potansiyel müşteriden gelen iş tekliflerini gördünüz. Aşağıdaki mailleri okuyun ve çalışmak istediğiniz **TEK markayı** seçin.
-
----
-
-### **SEÇENEK A | Müşteri: Meryem Toprak (Terra Ceramics)**
-**Konu: Lütfen o "yapay" görünümden kaçınalım...**
-
-Merhaba,
-
-Küçük seramik atölyem "Terra Ceramics" için sana yazıyorum. Bizim olayımız tamamen doğallık. Biliyorsun, yapay zeka genelde her şeyi çok plastik ve kusursuz yapıyor. Ama ben bunu istemiyorum. Benim vazolarım, fincanlarım biraz yamuktur, el izi vardır, kusurludur (wabi-sabi). Bana öyle bir görsel dünyası kur ki, insanlar ekrana baktığında o pişmiş toprağın pütürlü dokusunu hissetsin, güneşin vurduğu o sıcak anı yaşasın. Minimalist olsun, abartıdan uzak olsun, huzur versin.
-
-Yapabilir miyiz? O yapay hissi kırıp gerçek bir his verebilir misin?
-
----
-
-### **SEÇENEK B | Müşteri: "Glitch" (CEO)**
-**Konu: YO! PATLATALIM ORTALIĞI!!! ⚡️🎮**
-
-Kanka selam!
-
-Yeni enerji içeceğimiz "Glitch Energy" piyasaya giriyor ve oyuncuları (gamer) hedefliyoruz. Bize sıkıcı, kurumsal şeyler sakın getirme! Biz kaos istiyoruz. Neon yeşiller, morlar, siberpunk havası... Sanki bilgisayar bozulmuş da (glitch), o hatadan sanat doğmuş gibi. Markamız 90'ların retro havasıyla geleceğin teknolojisini birleştiriyor.
-
-Ürünümüz rafta durduğunda "Beni iç ve level atla" diye bağırmalı. Yapay zekanın o çılgın, stilize, renkli ve yüksek enerjili tarafını sonuna kadar kullanmanı istiyorum. Beni şaşırt!
-
----
-
-### **SEÇENEK C | Müşteri: X-7 (Galactic Gourmet)**
-**Konu: Dünya Dışı Bir Talep**
-
-Saygıdeğer Dünya Vatandaşı,
-
-Biz 3050 yılından gelen 'Galactic Gourmet' markasıyız. Sizin zamanınızda henüz bilinmeyen bir atıştırmalık olan "Quantum Bites"ı (Kuantum Lokmaları) tanıtmak istiyoruz. Sorun şu ki; bu ürün dünyadaki hiçbir yiyeceğe benzemiyor. Ham maddesi ışık saçan (biyolüminesans) bitki özleri olsa da, formu alışılmışın çok dışında. Belki geometrik bir küp, belki akışkan bir jöle, belki de havada asılı duran kristalize bir yapı... Yerçekimsiz ortamda süzülüyor ve içinden dumanlar çıkıyor. Tadı galaksi gibi.
-
-Yapay zekanızın "halüsinasyon" görmesini istiyoruz! Bize daha önce kimsenin görmediği, mantık sınırlarını zorlayan ama bir o kadar da lüks ve iştah kabartan bir ürün tasarlayın.
+Bu ödevin senaryosu ve detaylı brief'i için **[Yapay Zeka ile Marka Kimliği Tasarımı Proje Briefi](Artisan_Roast_Projesi.md)** belgesine bakınız.
 
 ## 2. Projenin Amacı
 Bu projenin amacı, yapay zekayı bir "sihirli değnek" olarak değil, ham madde üreten bir "tasarım ortağı" olarak kullanmaktır. Yapay zeka ile üretilen görselleri profesyonel bir grafik tasarımcı gözüyle işleyerek (post-prodüksiyon), tipografi ekleyerek ve hataları gidererek nihai bir marka kimliği taslağı oluşturma becerisini geliştirmektir. (Sadece bir operatör değil, yapay zekayı yöneten ve işleyen bir "Kreatif Direktör" olun.)

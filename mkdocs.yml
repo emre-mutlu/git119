@@ -1,0 +1,65 @@
+site_name: git119
+docs_dir: AI_Tasarim_Dersi
+site_url: https://your-github-username.github.io/git119/
+repo_url: https://github.com/your-github-username/git119
+repo_name: git119
+
+nav:
+  - Ana Sayfa: Syllabus_Guncel.md
+  - Güncel Syllabus: Syllabus_Guncel.md
+  - Ders Akışı: Ders_Akisi_Taslagi.md
+  - Ders Kaynakçası: Kaynakca.md
+  - Dönem Sonu Anket: Ders_Sonu_Degerlendirme_Anketi.md
+  - Haftalık Materyaller:
+      - Hafta 01: Haftalar/Hafta_01/Ders_Plani.md
+      - Hafta 02: Haftalar/Hafta_02/Ders_Plani.md
+      - Hafta 03:
+          - Ödev: Haftalar/Hafta_03/Odev.md
+          - Değerlendirme Rubriği: Haftalar/Hafta_03/Degerlendirme_Rubrigi.md
+      - Hafta 04:
+          - Ödev: Haftalar/Hafta_04/Odev.md
+          - Değerlendirme Rubriği: Haftalar/Hafta_04/Degerlendirme_Rubrigi.md
+      - Hafta 05:
+          - Ödev: Haftalar/Hafta_05/Odev.md
+          - Değerlendirme Rubriği: Haftalar/Hafta_05/Degerlendirme_Rubrigi.md
+      - Hafta 06:
+          - Ödev: Haftalar/Hafta_06/Odev.md
+          - Değerlendirme Rubriği: Haftalar/Hafta_06/Degerlendirme_Rubrigi.md
+      - Hafta 07:
+          - Ödev: Haftalar/Hafta_07/Odev.md
+          - Değerlendirme Rubriği: Haftalar/Hafta_07/Degerlendirme_Rubrigi.md
+      - Hafta 08:
+          - Ödev: Haftalar/Hafta_08/Odev.md
+          - Değerlendirme Rubriği: Haftalar/Hafta_08/Degerlendirme_Rubrigi.md
+      - Hafta 09:
+          - Ödev: Haftalar/Hafta_09/Odev.md
+          - Değerlendirme Rubriği: Haftalar/Hafta_09/Degerlendirme_Rubrigi.md
+      - Hafta 10:
+          - Ödev: Haftalar/Hafta_10/Odev.md
+          - Proje Briefi: Haftalar/Hafta_10/Artisan_Roast_Projesi.md
+          - Değerlendirme Rubriği: Haftalar/Hafta_10/Degerlendirme_Rubrigi.md
+      - Hafta 11:
+          - Ders Planı: Haftalar/Hafta_11/Ders_Plani.md
+          - Sunum: Haftalar/Hafta_11/Sunum.md
+          - Etkili Prompt Yazma Rehberi: Haftalar/Hafta_11/Etkili_Prompt_Yazma_Rehberi.md
+          - Örnek Prompt Listesi: Haftalar/Hafta_11/Ornek_Prompt_Listesi.md
+          - Kitap Formatında Ders Notları: Haftalar/Hafta_11/Kitap_Formatinda_Ders_Notlari.md
+          - Moodle Kitap Kopyası: Haftalar/Hafta_11/Kitap_Moodle.html
+          - Moodle Prompt Rehberi: Haftalar/Hafta_11/Prompt_Rehberi_Moodle.html
+          - Ödev: Haftalar/Hafta_11/Odev.md # Final Projesi
+          - Değerlendirme Rubriği: Haftalar/Hafta_11/Degerlendirme_Rubrigi.md
+      - Hafta 12:
+          - Ders Planı: Haftalar/Hafta_12/Ders_Plani.md
+          - Sunum: Haftalar/Hafta_12/Sunum.md
+
+theme:
+  name: material
+  features:
+    - navigation.expand
+    - navigation.tabs
+    - toc.integrate
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/your-github-username/git119
