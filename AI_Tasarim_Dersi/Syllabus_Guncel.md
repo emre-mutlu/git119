@@ -17,7 +17,7 @@
 Dijital Tasarıma Giriş dersi, temel tasarım ilkelerini dijital ortamda uygulayarak Adobe Illustrator ve Photoshop programlarıyla estetik ve işlevsel görseller oluşturmayı amaçlar. Ders, öğrencilere vektörel ve piksel tabanlı tasarımın temellerini öğretirken, son haftalarda üretken yapay zeka (Generative AI) araçlarının tasarım süreçlerine entegrasyonunu da kapsar.
 
 ## Ders Amaçları
-Bu ders, temel tasarım ilkelerini dijital ortamda uygulayarak Photoshop ve Illustrator programlarında yaratıcı projeler geliştirmeyi amaçlar. Öğrencilerin, dijital araçları etkin kullanarak çizgi, renk, form ve tipografi düzenlemeleri yapmaları, estetik ve işlevselliği dengeli şekilde uygulamaları hedeflenir. Ek olarak, üretken yapay zeka araçlarını bir "tasarım ortağı" olarak kullanmayı, etkili prompt'lar yazmayı ve AI ile üretilen görselleri profesyonel bir tasarıma dönüştürmeyi öğrenmeleri amaçlanır. Problem çözme, planlama ve görsel ifade becerilerini geliştirerek, dijital tasarım süreçlerinde teknik bilgi ve yaratıcılığı birleştirmeleri hedeflenir.
+Bu ders, temel tasarım ilkelerini dijital ortamda uygulayarak Photoshop ve Illustrator programlarında yaratıcı projeler geliştirmeyi amaçlar. Öğrencilerin, dijital araçları etkin kullanarak çizgi, renk, form ve tipografi düzenlemeleri yapmaları, estetik ve işlevselliği dengeli şekilde uygulamaları hedeflenir. Ek olarak, üretken yapay zeka araçlarını bir "tasarım ortağı" olarak kullanmayı, etkili Prompt (Metin Komutu)'lar yazmayı ve AI ile üretilen görselleri profesyonel bir tasarıma dönüştürmeyi öğrenmeleri amaçlanır. Problem çözme, planlama ve görsel ifade becerilerini geliştirerek, dijital tasarım süreçlerinde teknik bilgi ve yaratıcılığı birleştirmeleri hedeflenir.
 
 ## Ders Kitapları ve/veya Kaynaklar
 - "Adobe Photoshop Classroom in a Book (2024 Release)" – Andrew Faulkner, Conrad Chavez
@@ -35,7 +35,7 @@ Bu ders, temel tasarım ilkelerini dijital ortamda uygulayarak Photoshop ve Illu
 6.  Illustrator programını kullanarak vektörel grafik oluşturma ve düzenleme becerilerini kazanır.
 7.  Dijital tasarım projelerinde, estetik ve işlevselliği bir arada kullanarak dengeli kompozisyonlar oluşturur.
 8.  Başlangıç seviyesindeki dijital projeler sürecinde problem çözme ve planlama becerilerini geliştirir.
-9.  Üretken yapay zeka platformlarında (Midjourney, DALL-E 3, Adobe Firefly) etkili metin komutları (prompt) yazarak konsept görseller üretebilir.
+9.  Üretken yapay zeka platformlarında (Midjourney, DALL-E 3, Adobe Firefly) etkili metin komutları (Prompt) yazarak konsept görseller üretebilir.
 10. Yapay zeka ile üretilmiş ham görselleri, Photoshop ve Illustrator gibi programlarda düzenleyerek (post-prodüksiyon) nihai bir tasarıma dönüştürebilir.
 11. Yapay zekayı bir fikir geliştirme ve ilham aracı olarak tasarım süreçlerine entegre edebilir.
 12. Uygulamalı projeler aracılığıyla, dijital tasarım süreçlerinde yaratıcılığı, teknik bilgiyi ve yapay zeka araçlarını harmanlayarak çözümler üretebilir.

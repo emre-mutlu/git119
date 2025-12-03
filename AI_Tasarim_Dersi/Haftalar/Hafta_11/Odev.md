@@ -58,16 +58,16 @@ Konu tamamen serbesttir. Bu afiş, sizin dünyaya bir mesajınız olabilir. İlh
 
 ### 5.1. Ürün 1: Vektörel Kitap Kapağı Tasarımı İçin
 - **Kritik Araçlar:** Tüm Adobe Illustrator araçları ve teknikleri.
-- **Yapay Zeka (AI) Kullanımı:** Adobe Illustrator ve Photoshop içerisindeki yapay zeka araçları veya diğer üretken yapay zeka modelleri (Midjourney, DALL-E vb.) serbesttir. Ancak, bu araçlar bir **yardımcı** olarak görülmelidir. Tasarımın ana konseptini ve uygulamasını tamamen yapay zekaya yaptırmak, projenizin başarısız sayılmasına neden olabilir.
+- **Yapay Zeka Kullanımı:** Adobe Illustrator ve Photoshop içerisindeki yapay zeka araçları veya diğer üretken yapay zeka modelleri (Midjourney, DALL-E vb.) serbesttir. Ancak, bu araçlar tamamen Yapay Zeka'ya yaptırmak, projenizin başarısız sayılmasına neden olabilir.
   - **Kabul Edilebilir Kullanımlar:** Eskiz ve fikir geliştirme, ilham alma, belirli bir konsept için görsel referanslar oluşturma, arka plan için doku veya desen üretme, manuel olarak düzenleyeceğiniz veya üzerinden çizeceğiniz temel formlar oluşturma.
-  - **Kabul Edilemez Kullanımlar:** Bir prompt (metin komutu) ile üretilmiş görseli hiçbir değişiklik yapmadan veya çok az bir müdahale ile projenin ana görseli olarak kullanmak.
+  - **Kabul Edilemez Kullanımlar:** Bir Prompt (metin komutu) ile üretilmiş görseli hiçbir değişiklik yapmadan veya çok az bir müdahale ile projenin ana görseli olarak kullanmak.
 - **Yardımcı Kaynaklar:** "Typographic book covers", "minimalist book cover", "vector art book cover", "geometric book design", "Art Deco book cover", "Swiss design poster" gibi anahtar kelimelerle araştırma yapabilirsiniz.
 
 ### 5.2. Ürün 2: Serbest Konulu Afiş Tasarımı İçin
 - **Kritik Araçlar:** Layer Masks, Adjustment Layers, Blending Modes, Smart Objects, gelişmiş dekupe (seçim) araçları (Select and Mask, Pen Tool).
-- **Yapay Zeka (AI) Kullanımı:** Adobe Photoshop içerisindeki yapay zeka araçları (Generative Fill vb.) veya diğer üretken yapay zeka modelleri (Midjourney, DALL-E vb.) serbesttir. Ancak, bu araçlar birer **yardımcı** olarak görülmelidir. Tasarımın ana konseptini ve uygulamasını tamamen yapay zekaya yaptırmak, projenizin başarısız sayılmasına neden olabilir.
+- **Yapay Zeka Kullanımı:** Adobe Photoshop içerisindeki yapay zeka araçları (Generative Fill vb.) veya diğer üretken yapay zeka modelleri (Midjourney, DALL-E vb.) serbesttir. Ancak, bu araçlar birer **yardımcı** olarak görülmelidir. Tasarımın ana konseptini ve uygulamasını tamamen yapay zekaya yaptırmak, projenizin başarısız sayılmasına neden olabilir.
   - **Kabul Edilebilir Kullanımlar:** Kompozisyonunuzdaki bir nesneyi genişletme (Generative Expand), fotoğraflardaki istenmeyen öğeleri temizleme, farklı görselleri birleştirirken aradaki boşlukları doldurma, ilham almak için konsept görseller üretme, özgün dokular veya desenler oluşturma.
-  - **Kabul Edilemez Kullanımlar:** Bir prompt (metin komutu) ile üretilmiş görseli hiçbir değişiklik yapmadan veya çok az bir müdahale ile projenin ana görseli olarak kullanmak.
+  - **Kabul Edilemez Kullanımlar:** Bir Prompt (metin komutu) ile üretilmiş görseli hiçbir değişiklik yapmadan veya çok az bir müdahale ile projenin ana görseli olarak kullanmak.
 - **Yardımcı Kaynaklar:** "Digital collage poster", "cinematic poster design", "double exposure effect", "surreal photo manipulation", "conceptual advertising" gibi anahtar kelimelerle Behance ve Pinterest üzerinde araştırma yapabilirsiniz.
 
 ## 6. Kaçınılması Gereken Hatalar

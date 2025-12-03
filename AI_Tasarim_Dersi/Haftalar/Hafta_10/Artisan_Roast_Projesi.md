@@ -1,4 +1,4 @@
-# Proje Brief'i: "Artisan Roast" Kahve Markası Görsel Kimlik Tasarımı
+# Proje Brief'i: "Artisan Roast" Kahve Markası Görsel Kimlik Tasarımı (Hafta 10 Ödevi)
 
 **Proje Adı:** Artisan Roast - Doğadan Gelen İlham
 
@@ -9,24 +9,22 @@ Artisan Roast, sürdürülebilir tarım yöntemleriyle Latin Amerika'nın yükse
 25-45 yaş arası, şehirli, eğitimli, sağlık ve çevre bilincine sahip, kaliteye ve hikayesi olan ürünlere para harcamaktan çekinmeyen, "üçüncü dalga kahve" kültürüne aşina bireyler.
 
 **Projenin Amacı:**
-Bu iki haftalık modülün final projesi olarak, her öğrenciden "Artisan Roast" markası için yapay zeka araçlarını kullanarak bir sosyal medya gönderisi veya dijital afiş tasarlaması beklenmektedir. Amaç, yapay zeka ile üretilen görselleri, markanın kimliğine uygun bir şekilde profesyonel bir tasarıma dönüştürme becerisini ölçmektir.
+Bu proje, Yapay Zeka araçlarıyla daha önce (Hafta 9'da) üretilmiş görselleri ve kavramları, "Artisan Roast" markasının kimliğine uygun bir şekilde profesyonel bir tasarıma dönüştürme becerisini ölçmeyi amaçlamaktadır. Yapay zeka çıktılarını bir ham madde olarak ele alarak, Adobe Photoshop ve Illustrator'ın ileri seviye araçlarıyla post-prodüksiyon süreçlerini yöneterek nihai bir marka kimliği tasarımı oluşturulacaktır.
 
 **Proje Gereksinimleri ve Adımları:**
 
-1.  **İlham ve Konsept (1. Hafta Görevi):**
-    *   Yapay zeka araçlarını (Midjourney, DALL-E 3 vb.) kullanarak marka için bir **mood board (ilham panosu)** oluşturun.
-    *   Bu panoda markanın doğallığını, zanaatkarlığını ve modern sadeliğini yansıtan görseller, dokular, renk paletleri ve kompozisyonlar yer almalıdır.
+1.  **Mevcut İlham ve Konseptin Değerlendirilmesi:**
+    *   Hafta 9'da oluşturduğunuz (veya marka konseptiyle uyumlu) **mood board'unuzu** ve **Yapay Zeka ile ürettiğiniz ilk görsel varlıklarınızı** projenizin başlangıç noktası olarak kullanın. Bu varlıkları "Artisan Roast" markasının doğallık, zanaatkarlık ve modern sadelik felsefesiyle ne kadar uyumlu olduğunu değerlendirin. Gerekirse ufak tefek düzenlemeler yapın.
 
-2.  **Varlık Üretimi (1. Hafta Sonu):**
-    *   Marka için kullanılabilecek spesifik görsel varlıklar (assets) üretin.
-    *   **Örnekler:** Vektörel kahve fincanı ikonu, kahve bitkisi illüstrasyonu, ürün ambalajı konsepti, kahve çekirdeklerinden oluşan bir doku (pattern) vb.
+2.  **Yapay Zeka Destekli Varlıkların Entegrasyonu ve İyileştirilmesi:**
+    *   Marka için kullanılabilecek spesifik görsel varlıklarınızı (ikon, illüstrasyon, doku, ürün ambalajı konsepti vb. – *daha önce Yapay Zeka ile üretilmiş veya gerekirse bu hafta Adobe Illustrator'ın "Metinden Vektöre" özelliğiyle yeniden üretilmiş*) seçin ve projeye dahil edin.
 
-3.  **Tasarım ve Entegrasyon (2. Hafta Görevi):**
-    *   Ürettiğiniz görsellerden en az birini **Adobe Photoshop**'a aktarın. Gerekli gördüğünüz yerlerde **Üretken Dolgu (Generative Fill)** veya **Üretken Genişletme (Generative Expand)** araçlarını kullanarak görseli son haline getirin.
-    *   Yine yapay zeka ile (tercihen Adobe Illustrator'ın "Metinden Vektöre" özelliğiyle) en az bir **vektörel ikon veya logo taslağı** üretin.
-    *   Tüm bu elementleri (ana görsel, ikon, marka adı, slogan) **Photoshop veya Illustrator**'da bir araya getirerek bir sosyal medya gönderisi (1080x1080 px) veya dijital afiş (A4 boyutunda) tasarlayın.
+3.  **Tasarım ve Profesyonel Entegrasyon:**
+    *   Markanın ana görselini oluşturmak için, Yapay Zeka ile üretilmiş bir görseli **Adobe Photoshop**'a aktarın. Gerekli gördüğünüz yerlerde **Üretken Dolgu (Generative Fill)** veya **Üretken Genişletme (Generative Expand)** araçlarını kullanarak görseli son haline getirin. Yapay zeka kaynaklı hataları (anatomi, fiziksel tutarsızlıklar vb.) manuel olarak düzeltiniz.
+    *   Marka için bir **logo (Logo Lockup)** tasarlayın. Bu logoda, Yapay Zeka ile üretilmiş veya `Metinden Vektöre` özelliğiyle oluşturulmuş bir ikon/sembolü, markanın karakterine uygun seçilmiş bir font ile **Adobe Photoshop veya Illustrator** kullanarak birleştirin. **Yapay Zeka Tipografisi kabul edilmeyecektir; metinleri manuel olarak ekleyiniz.**
+    *   Tüm bu elementleri (ana görsel, ikon/logo, marka adı, slogan) **Photoshop veya Illustrator**'da bir araya getirerek "Artisan Roast" için bir sosyal medya gönderisi (1080x1080 px) veya dijital afiş (A4 boyutunda) taslağı oluşturun.
 
-**Marka Anahtar Kelimeleri (Prompt'larınızda Kullanmak İçin):**
+**Marka Anahtar Kelimeleri (Prompt'larınızda Kullanmak İçin - Hafta 9 Referans):**
 *   **Stil:** Organik, doğal, minimalist, modern, temiz, zanaatkar (artisanal), rustik, sade.
 *   **Nesneler:** Kahve çekirdeği, kahve bitkisi, seramik fincan, chemex, pour-over, yemyeşil dağlar, sisli orman, ahşap doku.
 *   **Renkler:** Toprak tonları, orman yeşili, bej, kırık beyaz, minimalist siyah.
@@ -36,11 +34,10 @@ Bu iki haftalık modülün final projesi olarak, her öğrenciden "Artisan Roast
 *   "Artisan Roast: Her Yudumda Zanaat."
 
 **Teslim Formatı:**
-Projenizi `Adiniz_Soyadiniz_ArtisanRoast.JPG` formatında kaydedin.
+Projenizi `Adiniz_Soyadiniz_ArtisanRoast_Hafta10.JPG` formatında kaydedin.
 
 **Değerlendirme Kriterleri:**
-*   Yapay zeka araçlarını kullanarak markanın kimliğine uygun görseller üretebilme.
-*   Etkili ve yaratıcı prompt'lar yazabilme.
-*   Üretilen görselleri Photoshop/Illustrator'da düzenleyerek tasarıma entegre edebilme.
-*   Tipografi, renk ve kompozisyon gibi temel tasarım prensiplerine uygunluk.
+*   Yapay Zeka araçları ile üretilmiş görselleri markanın kimliğine uygun bir şekilde profesyonel bir tasarıma dönüştürebilme (post-prodüksiyon başarısı).
+*   Yapay Zeka çıktılarını Photoshop/Illustrator'da düzenleyerek ve hataları gidererek tasarıma entegre edebilme.
+*   Tipografi, renk ve kompozisyon gibi temel tasarım prensiplerine uygunluk ve bu prensipleri Yapay Zeka çıktılarıyla birleştirme.
 *   Genel estetik ve yaratıcılık.

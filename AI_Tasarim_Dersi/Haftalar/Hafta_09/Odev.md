@@ -66,11 +66,11 @@ Bu ödev kapsamında, Adobe Photoshop'un Retouch (Rötuş) Araçları (Healing B
 Gereken araçlar (Healing Brush, Clone Stamp, Patch Tool vb.) ile ilgili videoları bulmak için doğrudan aracın adını kullanarak (örneğin "Photoshop Clone Stamp Tutorial") Google veya YouTube araması yapabilirsiniz.
 
 ### 5.3. Kaynak Görsel Oluşturma (İsteğe Bağlı Yapay Zeka Kullanımı)
-İnternetten bulacağınız yüksek çözünürlüklü fotoğrafları kullanabileceğiniz gibi, dilediğiniz takdirde aşağıdaki promptu Gemini, ChatGPT, Firefly gibi yapay zeka görsel oluşturma platformlarında kullanarak kendi kaynak görselinizi üretebilirsiniz:
+İnternetten bulacağınız yüksek çözünürlüklü fotoğrafları kullanabileceğiniz gibi, dilediğiniz takdirde aşağıdaki Prompt'u Gemini, ChatGPT, Firefly gibi yapay zeka görsel oluşturma platformlarında kullanarak kendi kaynak görselinizi üretebilirsiniz:
 
 **Temel Yapay Zeka Promptu:** `High-resolution, full-frame, old photograph of one or more figures. The photograph must strictly contain only the image content, with absolutely no borders, frames, or extraneous elements around the main subject. The entire photograph must be moderately damaged with visible but not overly prominent creases, tears, stains, spots, and subtle portions missing, resembling a somewhat preserved antique photo. Crucially, while the damage should be visible across the photograph, it must avoid obscuring or significantly damaging the faces or central features of the human figures. Photorealistic, highly detailed, 8K.`
 
-**Prompt Özelleştirme Notu:** Mevcut prompt insan figürleri içeren bir fotoğraf üretir. Kendi kafanızda başka bir fotoğraf konsepti varsa, prompt içindeki "old photograph of one or more figures" kısmını değiştirebilirsiniz. Diğer kısımlar olduğu gibi kalmalıdır.
+**Prompt Özelleştirme Notu:** Mevcut Prompt insan figürleri içeren bir fotoğraf üretir. Kendi kafanızda başka bir fotoğraf konsepti varsa, Prompt içindeki "old photograph of one or more figures" kısmını değiştirebilirsiniz. Diğer kısımlar olduğu gibi kalmalıdır.
 
 **Prompt Örnekleri (Değiştirilebilecek Bölüm İçin):**
 - `A detailed portrait of an elderly woman sitting by a window, with soft natural light illuminating her face.` (Portre)
