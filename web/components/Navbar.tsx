@@ -15,12 +15,12 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-slate-900 text-slate-200 shadow-md border-b border-slate-800 sticky top-0 z-50">
+    <nav className="bg-dark text-slate-200 shadow-md border-b border-primary/20 sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           {/* Logo / Brand */}
           <Link href="/" className="flex items-center group select-none">
-            <span className="font-josefin text-5xl tracking-wider font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-500 group-hover:from-purple-500 group-hover:to-violet-400 transition-all duration-300">
+            <span className="font-josefin text-5xl tracking-wider font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent group-hover:from-accent group-hover:to-primary transition-all duration-300">
               git.119
             </span>
           </Link>
@@ -37,11 +37,11 @@ export default function Navbar() {
                   href={item.href}
                   className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ease-in-out ${
                     isActive
-                      ? 'bg-indigo-500/10 text-indigo-400'
-                      : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800'
+                      ? 'bg-primary/20 text-accent'
+                      : 'text-slate-400 hover:text-white hover:bg-primary/10'
                   }`}
                 >
-                  <Icon size={16} className={isActive ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300'} />
+                  <Icon size={16} className={isActive ? 'text-accent' : 'text-slate-500 group-hover:text-slate-300'} />
                   <span>{item.name}</span>
                 </Link>
               );

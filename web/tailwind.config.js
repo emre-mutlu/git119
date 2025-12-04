@@ -11,6 +11,10 @@ module.exports = {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
+        // Custom color palette
+        dark: '#0E0725',
+        primary: '#5C03BC',
+        accent: '#E536AB',
       },
       fontFamily: {
         sans: ['var(--font-outfit)', 'system-ui', 'sans-serif'],

@@ -46,15 +46,15 @@ export default function WeeksIndexPage() {
 
             return (
               <Link key={slug} href={href} className="group block">
-                <div className="relative bg-slate-900/60 backdrop-blur-sm border border-slate-800 hover:border-purple-500/50 p-5 rounded-xl transition-all duration-300 overflow-hidden
+                <div className="relative bg-dark backdrop-blur-sm border border-primary/20 hover:border-accent/50 p-5 rounded-xl transition-all duration-300 overflow-hidden
                   blur-[0.5px] hover:blur-0">
                   {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600/5 to-violet-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
                   <div className="relative flex items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
-                      <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-purple-600/20 to-violet-600/20 rounded-lg flex items-center justify-center border border-purple-500/20 group-hover:border-purple-500/40 transition-colors">
-                        <span className="text-xl font-bold text-purple-400">{parseInt(weekNum)}</span>
+                      <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-primary/30 to-accent/20 rounded-lg flex items-center justify-center border border-primary/30 group-hover:border-accent/50 transition-colors">
+                        <span className="text-xl font-bold text-accent">{parseInt(weekNum)}</span>
                       </div>
                       <div>
                         <span className="text-xs text-slate-500 uppercase tracking-wider">Hafta {parseInt(weekNum)}</span>
@@ -63,7 +63,7 @@ export default function WeeksIndexPage() {
                         </h2>
                       </div>
                     </div>
-                    <ArrowRight size={20} className="text-slate-600 group-hover:text-purple-400 group-hover:translate-x-1 transition-all flex-shrink-0" />
+                    <ArrowRight size={20} className="text-slate-600 group-hover:text-accent group-hover:translate-x-1 transition-all flex-shrink-0" />
                   </div>
                 </div>
               </Link>

@@ -4,18 +4,12 @@
 
 :root {
   --foreground-rgb: 226, 232, 240;
-  --background-start-rgb: 2, 6, 23;
-  --background-end-rgb: 15, 23, 42;
+  --background-color: #0E0725;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: var(--background-color);
 }
 
 .font-sans {
