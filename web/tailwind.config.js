@@ -15,6 +15,7 @@ module.exports = {
         dark: '#0E0725',
         primary: '#5C03BC',
         accent: '#E536AB',
+        neon: '#39FF14',
       },
       fontFamily: {
         sans: ['var(--font-outfit)', 'system-ui', 'sans-serif'],

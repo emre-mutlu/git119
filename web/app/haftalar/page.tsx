@@ -1,6 +1,8 @@
+'use client';
+
 import Link from 'next/link';
-import { getAllMarkdownSlugs } from '@/lib/markdown';
-import { Calendar, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
 
 // Week titles mapping
 const weekTitles: { [key: string]: string } = {
@@ -18,17 +20,69 @@ const weekTitles: { [key: string]: string } = {
   '12': 'İleri Tasarım İpuçları ve Portfolyo Hazırlığı',
 };
 
+const weeks = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+
 export default function WeeksIndexPage() {
-  // Get all slugs related to 'Haftalar'
-  const allSlugs = getAllMarkdownSlugs();
-  const weekSlugs = allSlugs.filter(slug => slug.startsWith('Haftalar/') && slug.includes('Ders_Plani'));
-  
-  // Sort weeks numerically (Week 1, Week 2...)
-  weekSlugs.sort((a, b) => {
-    const numA = parseInt(a.match(/Hafta_(\d+)/)?.[1] || '0');
-    const numB = parseInt(b.match(/Hafta_(\d+)/)?.[1] || '0');
-    return numA - numB;
-  });
+  const [mouseY, setMouseY] = useState<number | null>(null);
+  const [hoveredWeek, setHoveredWeek] = useState<string | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        setMouseY(e.clientY - rect.top);
+      }
+    };
+
+    const handleMouseLeave = () => {
+      setMouseY(null);
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('mousemove', handleMouseMove);
+      container.addEventListener('mouseleave', handleMouseLeave);
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener('mousemove', handleMouseMove);
+        container.removeEventListener('mouseleave', handleMouseLeave);
+      }
+    };
+  }, []);
+
+  const getBlurAndBrightness = (weekNum: string) => {
+    if (hoveredWeek === weekNum) {
+      return { blur: 0, brightness: 1.2, scale: 1.02 };
+    }
+
+    if (mouseY === null || !containerRef.current) {
+      return { blur: 2, brightness: 0.8, scale: 1 };
+    }
+
+    const cardElement = cardRefs.current[weekNum];
+    if (!cardElement) {
+      return { blur: 2, brightness: 0.8, scale: 1 };
+    }
+
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const cardRect = cardElement.getBoundingClientRect();
+    const cardCenterY = cardRect.top - containerRect.top + cardRect.height / 2;
+    
+    // Calculate distance from mouse to card center
+    const distance = Math.abs(mouseY - cardCenterY);
+    const maxDistance = 300; // Max distance for full blur
+    
+    // Calculate blur based on distance (0 at mouse position, max at maxDistance)
+    const normalizedDistance = Math.min(distance / maxDistance, 1);
+    const blur = normalizedDistance * 3; // Max blur of 3px
+    const brightness = 1 - (normalizedDistance * 0.3); // 0.7 to 1.0 brightness
+
+    return { blur, brightness, scale: 1 };
+  };
 
   return (
     <div className="container mx-auto px-4 py-16">
@@ -38,18 +92,27 @@ export default function WeeksIndexPage() {
           Dönem boyunca işleyeceğimiz konular, ödevler ve materyaller.
         </p>
 
-        <div className="flex flex-col gap-4">
-          {weekSlugs.map((slug) => {
-            const weekNum = slug.match(/Hafta_(\d+)/)?.[1] || '01';
-            const href = `/${slug}`;
+        <div ref={containerRef} className="flex flex-col gap-4">
+          {weeks.map((weekNum) => {
+            const href = `/Haftalar/Hafta_${weekNum}/Ders_Plani`;
             const title = weekTitles[weekNum] || 'Ders Planı';
+            const { blur, brightness, scale } = getBlurAndBrightness(weekNum);
 
             return (
-              <Link key={slug} href={href} className="group block">
-                <div className="relative bg-dark backdrop-blur-sm border border-primary/20 hover:border-accent/50 p-5 rounded-xl transition-all duration-300 overflow-hidden
-                  blur-[0.5px] hover:blur-0">
+              <Link key={weekNum} href={href} className="group block">
+                <div 
+                  ref={(el) => { cardRefs.current[weekNum] = el; }}
+                  onMouseEnter={() => setHoveredWeek(weekNum)}
+                  onMouseLeave={() => setHoveredWeek(null)}
+                  className="relative bg-dark backdrop-blur-sm border border-primary/20 hover:border-accent/50 p-5 rounded-xl transition-all duration-200 overflow-hidden"
+                  style={{
+                    filter: `blur(${blur}px) brightness(${brightness})`,
+                    transform: `scale(${scale})`,
+                    boxShadow: hoveredWeek === weekNum ? '0 0 30px rgba(229, 54, 171, 0.3), 0 0 60px rgba(92, 3, 188, 0.2)' : 'none',
+                  }}
+                >
                   {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
                   <div className="relative flex items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
