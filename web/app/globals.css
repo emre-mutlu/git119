@@ -60,13 +60,14 @@ body {
   border-color: rgb(51 65 85 / 0.5);
 }
 
-/* RGB Glitch Effect - No movement, just color distortion */
-.glitch-rgb {
+/* Pixel Glitch Effect - Only on hover */
+.glitch-pixel {
   position: relative;
+  image-rendering: pixelated;
 }
 
-.glitch-rgb::before,
-.glitch-rgb::after {
+.glitch-pixel::before,
+.glitch-pixel::after {
   content: attr(data-text);
   position: absolute;
   top: 0;
@@ -74,89 +75,75 @@ body {
   width: 100%;
   height: 100%;
   background: transparent;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.glitch-rgb::before {
-  color: #ff0000;
-  animation: glitch-rgb-r 0.15s infinite linear alternate-reverse;
-  mix-blend-mode: screen;
+.glitch-pixel:hover::before {
+  opacity: 1;
+  color: #E536AB;
+  animation: pixel-glitch-1 0.1s infinite steps(2);
+  text-shadow: 2px 0 #E536AB, -2px 0 #E536AB;
 }
 
-.glitch-rgb::after {
-  color: #00ff00;
-  animation: glitch-rgb-g 0.15s infinite linear alternate-reverse;
+.glitch-pixel:hover::after {
+  opacity: 1;
+  color: #39FF14;
+  animation: pixel-glitch-2 0.1s infinite steps(2);
   animation-delay: 0.05s;
-  mix-blend-mode: screen;
+  text-shadow: -2px 0 #39FF14, 2px 0 #39FF14;
 }
 
-/* Main text acts as blue channel */
-.glitch-rgb {
-  color: #0000ff;
-  mix-blend-mode: screen;
-}
-
-@keyframes glitch-rgb-r {
-  0%, 100% {
-    clip-path: inset(0 0 95% 0);
-  }
-  10% {
-    clip-path: inset(40% 0 30% 0);
+@keyframes pixel-glitch-1 {
+  0% {
+    clip-path: polygon(0 0, 100% 0, 100% 10%, 0 10%);
+    transform: translate(-2px, 0);
   }
   20% {
-    clip-path: inset(80% 0 5% 0);
-  }
-  30% {
-    clip-path: inset(10% 0 60% 0);
+    clip-path: polygon(0 20%, 100% 20%, 100% 35%, 0 35%);
+    transform: translate(2px, 0);
   }
   40% {
-    clip-path: inset(50% 0 25% 0);
-  }
-  50% {
-    clip-path: inset(20% 0 55% 0);
+    clip-path: polygon(0 50%, 100% 50%, 100% 60%, 0 60%);
+    transform: translate(-1px, 0);
   }
   60% {
-    clip-path: inset(70% 0 15% 0);
-  }
-  70% {
-    clip-path: inset(5% 0 85% 0);
+    clip-path: polygon(0 70%, 100% 70%, 100% 80%, 0 80%);
+    transform: translate(3px, 0);
   }
   80% {
-    clip-path: inset(35% 0 45% 0);
+    clip-path: polygon(0 85%, 100% 85%, 100% 95%, 0 95%);
+    transform: translate(-2px, 0);
   }
-  90% {
-    clip-path: inset(65% 0 20% 0);
+  100% {
+    clip-path: polygon(0 40%, 100% 40%, 100% 50%, 0 50%);
+    transform: translate(1px, 0);
   }
 }
 
-@keyframes glitch-rgb-g {
-  0%, 100% {
-    clip-path: inset(85% 0 5% 0);
-  }
-  10% {
-    clip-path: inset(15% 0 70% 0);
+@keyframes pixel-glitch-2 {
+  0% {
+    clip-path: polygon(0 15%, 100% 15%, 100% 25%, 0 25%);
+    transform: translate(2px, 0);
   }
   20% {
-    clip-path: inset(55% 0 25% 0);
-  }
-  30% {
-    clip-path: inset(25% 0 50% 0);
+    clip-path: polygon(0 45%, 100% 45%, 100% 55%, 0 55%);
+    transform: translate(-3px, 0);
   }
   40% {
-    clip-path: inset(75% 0 10% 0);
-  }
-  50% {
-    clip-path: inset(5% 0 80% 0);
+    clip-path: polygon(0 65%, 100% 65%, 100% 75%, 0 75%);
+    transform: translate(1px, 0);
   }
   60% {
-    clip-path: inset(45% 0 35% 0);
-  }
-  70% {
-    clip-path: inset(90% 0 0 0);
+    clip-path: polygon(0 5%, 100% 5%, 100% 15%, 0 15%);
+    transform: translate(-2px, 0);
   }
   80% {
-    clip-path: inset(30% 0 55% 0);
+    clip-path: polygon(0 30%, 100% 30%, 100% 40%, 0 40%);
+    transform: translate(2px, 0);
   }
-  90% {
-    clip-path: inset(60% 0 25% 0);
+  100% {
+    clip-path: polygon(0 90%, 100% 90%, 100% 100%, 0 100%);
+    transform: translate(-1px, 0);
   }
 }

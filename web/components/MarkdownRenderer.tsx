@@ -3,7 +3,7 @@
 import ReactMarkdown from 'react-markdown';
 import { useState, useEffect } from 'react';
 
-const colors = ['#5C03BC', '#E536AB', '#39FF14']; // primary, accent, neon
+const colors = ['#E536AB', '#39FF14']; // pink (accent) and green (neon) only
 
 function ColorfulHr() {
   const [color, setColor] = useState(colors[0]);

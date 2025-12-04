@@ -23,7 +23,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center group select-none relative">
             <span 
               data-text="git.119"
-              className="font-mono text-4xl tracking-tight font-bold text-white glitch-rgb"
+              className="font-mono text-4xl tracking-tight font-bold text-white glitch-pixel"
             >
               git.119
             </span>
