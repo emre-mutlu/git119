@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Book, CalendarDays, FolderOpen, Files, ClipboardList } from 'lucide-react';
+import { Book, CalendarDays, FolderOpen, Files, ClipboardList } from 'lucide-react';
 
 const navigationItems = [
   { name: 'Müfredat', href: '/mufredat/syllabus', icon: Book },
@@ -18,14 +18,11 @@ export default function Navbar() {
   return (
     <nav className="bg-slate-900 text-slate-200 shadow-md border-b border-slate-800 sticky top-0 z-50">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo / Brand */}
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:bg-indigo-400 transition-colors">
-              <span className="text-white font-bold text-sm">GİT</span>
-            </div>
-            <span className="text-xl font-bold text-slate-100 tracking-tight group-hover:text-white transition-colors">
-              119
+        <div className="flex justify-between items-center h-20">
+          {/* Logo / Brand - Updated Style */}
+          <Link href="/" className="flex items-center group select-none">
+            <span className="font-bebas text-5xl tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400 group-hover:to-indigo-400 transition-all duration-300 drop-shadow-sm">
+              GİT<span className="text-slate-100 ml-1 group-hover:text-white">119</span>
             </span>
           </Link>
 

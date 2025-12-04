@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
+const bebasNeue = Bebas_Neue({ weight: '400', subsets: ['latin'], variable: '--font-bebas' });
 
 export const metadata: Metadata = {
   title: "GİT 119 | Dijital Tasarıma Giriş",
@@ -17,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" className="dark">
-      <body className={`${inter.className} bg-slate-950 text-slate-200 antialiased`}>
+      <body className={`${inter.variable} ${bebasNeue.variable} font-sans bg-slate-950 text-slate-200 antialiased`}>
         <Navbar />
         {children}
       </body>

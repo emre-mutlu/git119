@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@fontsource/bebas-neue": "^5.2.7",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.555.0",
     "react-markdown": "^10.1.0"
