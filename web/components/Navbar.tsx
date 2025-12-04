@@ -23,7 +23,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center group select-none relative">
             <span 
               data-text="git.119"
-              className="font-mono text-4xl tracking-tight font-bold text-white glitch-pixel"
+              className="font-mono text-4xl tracking-tight font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent glitch-pixel"
             >
               git.119
             </span>
@@ -63,7 +63,7 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
-    <div className="h-[1px] bg-yellow sticky top-20 z-50" />
+    <div className="h-[1px] bg-primary sticky top-20 z-50" />
     </>
   );
 }

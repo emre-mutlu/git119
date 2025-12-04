@@ -24,13 +24,14 @@ const weeks = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
 
 // Generate random but consistent rotations for each week
 const generateRotations = () => {
-  const rotations: { [key: string]: { rotateX: number; rotateY: number } } = {};
+  const rotations: { [key: string]: { rotateX: number; rotateY: number; translateY: number } } = {};
   weeks.forEach((week, index) => {
     // Use index to create pseudo-random but consistent values
     const seed = (index * 7 + 3) % 12;
     rotations[week] = {
-      rotateX: (seed % 5 - 2) * 1.5, // -3 to 3 degrees
-      rotateY: ((seed + 5) % 7 - 3) * 1.5, // -4.5 to 4.5 degrees
+      rotateX: (seed % 5 - 2) * 4.5, // -9 to 9 degrees (3x)
+      rotateY: ((seed + 5) % 7 - 3) * 4.5, // -13.5 to 13.5 degrees (3x)
+      translateY: ((seed + 2) % 5 - 2) * 3, // -6 to 6 pixels
     };
   });
   return rotations;
@@ -126,8 +127,8 @@ export default function WeeksIndexPage() {
                   style={{
                     filter: `blur(${blur}px) brightness(${brightness})`,
                     transform: isHovered 
-                      ? `scale(${scale}) rotateX(0deg) rotateY(0deg)` 
-                      : `scale(${scale}) rotateX(${rotation.rotateX}deg) rotateY(${rotation.rotateY}deg)`,
+                      ? `scale(${scale}) rotateX(0deg) rotateY(0deg) translateY(0px)` 
+                      : `scale(${scale}) rotateX(${rotation.rotateX}deg) rotateY(${rotation.rotateY}deg) translateY(${rotation.translateY}px)`,
                     transformStyle: 'preserve-3d',
                   }}
                 >
