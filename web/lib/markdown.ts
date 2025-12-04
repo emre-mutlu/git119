@@ -6,6 +6,25 @@ import matter from 'gray-matter';
 // This path is from the root of the entire git119 repository.
 const CONTENT_BASE_DIR = path.join(process.cwd(), '../Ders_Icerigi');
 
+// URL to file path mapping for case-insensitive matching
+const PATH_MAPPINGS: { [key: string]: string } = {
+  'mufredat': 'Mufredat',
+  'syllabus': 'Syllabus',
+  'kaynaklar': 'Kaynaklar',
+  'kaynakca': 'Kaynakca',
+  'kisayollar': 'Kisayollar',
+  'haftalar': 'Haftalar',
+  'sablonlar': 'Sablonlar',
+  'odev-brief': 'Odev_Brief_Sablonu',
+  'degerlendirme-rubrigi': 'Degerlendirme_Rubrigi_Sablonu',
+  'raporlar-ve-analizler': 'Raporlar_ve_Analizler',
+  'ders-icerigi-gozden-gecirme-raporu': 'Ders_Icerigi_Gozden_Gecirme_Raporu',
+};
+
+function mapUrlToPath(urlSegment: string): string {
+  return PATH_MAPPINGS[urlSegment.toLowerCase()] || urlSegment;
+}
+
 export interface MarkdownContent {
   data: { [key: string]: any };
   content: string;
@@ -18,11 +37,21 @@ export interface MarkdownContent {
  * @returns {MarkdownContent} An object containing the frontmatter data and markdown content.
  */
 export function getMarkdownContent(relativePath: string): MarkdownContent | null {
-  const fullPath = path.join(CONTENT_BASE_DIR, relativePath);
+  // Map URL segments to actual file paths
+  const mappedPath = relativePath.split('/').map(mapUrlToPath).join('/');
+  const fullPath = path.join(CONTENT_BASE_DIR, mappedPath);
 
   if (!fs.existsSync(fullPath)) {
-    console.warn(`Markdown file not found: ${fullPath}`);
-    return null;
+    // Try the original path as fallback
+    const originalFullPath = path.join(CONTENT_BASE_DIR, relativePath);
+    if (!fs.existsSync(originalFullPath)) {
+      console.warn(`Markdown file not found: ${fullPath} or ${originalFullPath}`);
+      return null;
+    }
+    const fileContents = fs.readFileSync(originalFullPath, 'utf8');
+    const { data, content } = matter(fileContents);
+    const slug = relativePath.replace(/\.md$/, '');
+    return { data, content, slug };
   }
 
   const fileContents = fs.readFileSync(fullPath, 'utf8');

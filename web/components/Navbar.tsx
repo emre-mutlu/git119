@@ -22,8 +22,8 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-20">
           {/* Logo / Brand */}
           <Link href="/" className="flex items-center group select-none">
-            <span className="font-josefin text-5xl tracking-wider font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400 group-hover:from-indigo-300 group-hover:to-cyan-300 transition-all duration-300">
-              GİT 119
+            <span className="font-josefin text-5xl tracking-wider font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-indigo-500 group-hover:from-violet-400 group-hover:to-indigo-400 transition-all duration-300">
+              git119
             </span>
           </Link>
 

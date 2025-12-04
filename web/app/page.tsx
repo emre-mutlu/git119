@@ -3,21 +3,24 @@ import { ArrowRight, Calendar, BookOpen, FileText, Layers, Files } from 'lucide-
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-indigo-500/30">
+    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-violet-500/30">
       
       {/* Hero Section */}
       <header className="relative overflow-hidden bg-gradient-to-b from-slate-900 to-slate-950 pt-24 pb-16 md:pt-32 md:pb-24 border-b border-slate-800/60">
+        {/* Grain overlay */}
+        <div className="absolute inset-0 opacity-30 pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }} />
+        
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full px-3 py-1 mb-6 backdrop-blur-sm">
-              <span className="flex w-2 h-2 bg-indigo-400 rounded-full animate-pulse"></span>
-              <span className="text-indigo-300 text-xs font-medium tracking-wide uppercase">2025 Bahar Dönemi</span>
+            <div className="inline-flex items-center space-x-2 bg-violet-500/10 border border-violet-500/20 rounded-full px-3 py-1 mb-6 backdrop-blur-sm">
+              <span className="flex w-2 h-2 bg-violet-400 rounded-full animate-pulse"></span>
+              <span className="text-violet-300 text-xs font-medium tracking-wide uppercase">2025 Bahar Dönemi</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
-              Dijital Tasarıma <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Giriş</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-purple-400 to-indigo-400">Dijital Tasarım</span>a Giriş
             </h1>
             <p className="text-lg md:text-xl text-slate-400 mb-8 leading-relaxed">
-              GİT 119 dersi kapsamında Adobe Photoshop, Illustrator ve Üretken Yapay Zeka araçlarını kullanarak yaratıcılığınızı dijital dünyaya taşıyın.
+              git119 dersi kapsamında Adobe Photoshop, Illustrator ve Üretken Yapay Zeka araçlarını kullanarak yaratıcılığınızı dijital dünyaya taşıyın.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/mufredat/syllabus" className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg shadow-lg shadow-indigo-500/20 transition-all duration-200 flex items-center group">
@@ -32,9 +35,9 @@ export default function Home() {
         </div>
         
         {/* Abstract Background Decoration */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none opacity-30">
-           <div className="absolute top-[-10%] right-[-5%] w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl"></div>
-           <div className="absolute bottom-[-10%] left-[-10%] w-72 h-72 bg-cyan-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none opacity-40">
+           <div className="absolute top-[-10%] right-[-5%] w-96 h-96 bg-violet-700/30 rounded-full blur-3xl"></div>
+           <div className="absolute bottom-[-10%] left-[-10%] w-72 h-72 bg-indigo-800/20 rounded-full blur-3xl"></div>
         </div>
       </header>
 
