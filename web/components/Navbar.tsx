@@ -23,7 +23,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center group select-none relative">
             <span 
               data-text="git.119"
-              className="font-josefin text-5xl tracking-wider font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent group-hover:from-accent group-hover:to-primary transition-all duration-300 glitch-hover"
+              className="font-mono text-4xl tracking-tight font-bold text-white glitch-rgb"
             >
               git.119
             </span>

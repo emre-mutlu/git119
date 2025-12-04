@@ -31,11 +31,11 @@ export default async function MarkdownPage({ params }: PageProps) {
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
       <article className="prose prose-invert prose-lg mx-auto
-        prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-white
-        prose-h1:text-3xl prose-h1:md:text-4xl
-        prose-h2:text-2xl prose-h2:text-white prose-h2:border-b prose-h2:border-primary/30 prose-h2:pb-3
-        prose-h3:text-xl prose-h3:text-slate-200
-        prose-h4:text-lg prose-h4:text-slate-300
+        prose-headings:font-bold prose-headings:tracking-tight
+        prose-h1:text-3xl prose-h1:md:text-4xl prose-h1:text-accent
+        prose-h2:text-2xl prose-h2:text-primary prose-h2:border-b prose-h2:border-primary/30 prose-h2:pb-3
+        prose-h3:text-xl prose-h3:text-neon
+        prose-h4:text-lg prose-h4:text-accent
         prose-p:text-slate-300 prose-p:leading-relaxed prose-p:text-base
         prose-a:text-accent prose-a:no-underline prose-a:border-b prose-a:border-accent/30 hover:prose-a:border-accent hover:prose-a:text-white
         prose-strong:text-white prose-strong:font-semibold

@@ -1,15 +1,17 @@
 'use client';
 
 import ReactMarkdown from 'react-markdown';
-import { useId } from 'react';
+import { useState, useEffect } from 'react';
 
 const colors = ['#5C03BC', '#E536AB', '#39FF14']; // primary, accent, neon
 
 function ColorfulHr() {
-  const id = useId();
-  // Use a deterministic random based on the id to avoid hydration mismatch
-  const colorIndex = Math.abs(id.charCodeAt(1) + id.charCodeAt(2)) % colors.length;
-  const color = colors[colorIndex];
+  const [color, setColor] = useState(colors[0]);
+  
+  useEffect(() => {
+    // Truly random color on client side
+    setColor(colors[Math.floor(Math.random() * colors.length)]);
+  }, []);
 
   return (
     <hr 

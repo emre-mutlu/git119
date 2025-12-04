@@ -20,6 +20,7 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-outfit)', 'system-ui', 'sans-serif'],
         josefin: ['var(--font-josefin)', 'serif'],
+        mono: ['Courier New', 'Courier', 'monospace'],
       },
     },
   },
