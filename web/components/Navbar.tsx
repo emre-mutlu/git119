@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 import { Home, Book, CalendarDays, FolderOpen, Files, ClipboardList } from 'lucide-react';
 
 const navigationItems = [
-  { name: 'Ana Sayfa', href: '/', icon: Home },
   { name: 'Müfredat', href: '/mufredat/syllabus', icon: Book },
   { name: 'Haftalık Akış', href: '/haftalar', icon: CalendarDays },
   { name: 'Raporlar', href: '/raporlar-ve-analizler/ders-icerigi-gozden-gecirme-raporu', icon: ClipboardList },
