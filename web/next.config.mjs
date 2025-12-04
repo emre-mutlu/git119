@@ -5,12 +5,10 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // GitHub Pages URL: https://emre-mutlu.github.io/git119/
-  // Repo Name: git119
   basePath: '/git119',
-  // assetPrefix genellikle basePath ile aynıdır, Next.js bunu otomatik halleder ama
-  // bazen explicit belirtmek gerekebilir.
-  assetPrefix: '/git119',
+  // assetPrefix'i tam URL olarak vermek, statik hostinglerde (GitHub Pages gibi) 
+  // dosya yollarının karışmasını kesin olarak engeller.
+  assetPrefix: 'https://emre-mutlu.github.io/git119',
 };
 
 export default nextConfig;
