@@ -24,7 +24,6 @@ const weeks = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
 
 export default function WeeksIndexPage() {
   const [mouseY, setMouseY] = useState<number | null>(null);
-  const [hoveredWeek, setHoveredWeek] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
@@ -55,10 +54,6 @@ export default function WeeksIndexPage() {
   }, []);
 
   const getBlurAndBrightness = (weekNum: string) => {
-    if (hoveredWeek === weekNum) {
-      return { blur: 0, brightness: 1.2, scale: 1.02 };
-    }
-
     if (mouseY === null || !containerRef.current) {
       return { blur: 1, brightness: 0.9, scale: 1 };
     }
@@ -74,14 +69,17 @@ export default function WeeksIndexPage() {
     
     // Calculate distance from mouse to card center
     const distance = Math.abs(mouseY - cardCenterY);
-    const maxDistance = 500; // Max distance for full blur (increased for larger focus area)
+    const maxDistance = 700; // Max distance for full blur (increased by 200px)
     
     // Calculate blur based on distance (0 at mouse position, max at maxDistance)
     const normalizedDistance = Math.min(distance / maxDistance, 1);
-    const blur = normalizedDistance * 1.5; // Max blur of 1.5px (reduced)
+    const blur = normalizedDistance * 1.5; // Max blur of 1.5px
     const brightness = 1 - (normalizedDistance * 0.2); // 0.8 to 1.0 brightness
+    
+    // Scale up slightly when very close to mouse
+    const scale = distance < 100 ? 1.02 : 1;
 
-    return { blur, brightness, scale: 1 };
+    return { blur, brightness, scale };
   };
 
   return (
@@ -102,13 +100,10 @@ export default function WeeksIndexPage() {
               <Link key={weekNum} href={href} className="group block">
                 <div 
                   ref={(el) => { cardRefs.current[weekNum] = el; }}
-                  onMouseEnter={() => setHoveredWeek(weekNum)}
-                  onMouseLeave={() => setHoveredWeek(null)}
-                  className="relative bg-dark backdrop-blur-sm border border-primary/20 hover:border-accent/50 p-5 rounded-xl transition-all duration-200 overflow-hidden"
+                  className="relative bg-dark backdrop-blur-sm border border-primary/20 hover:border-accent/50 p-5 rounded-xl transition-all duration-200 overflow-hidden hover:shadow-[0_0_30px_rgba(229,54,171,0.3),0_0_60px_rgba(92,3,188,0.2)]"
                   style={{
                     filter: `blur(${blur}px) brightness(${brightness})`,
                     transform: `scale(${scale})`,
-                    boxShadow: hoveredWeek === weekNum ? '0 0 30px rgba(229, 54, 171, 0.3), 0 0 60px rgba(92, 3, 188, 0.2)' : 'none',
                   }}
                 >
                   {/* Gradient overlay on hover */}
