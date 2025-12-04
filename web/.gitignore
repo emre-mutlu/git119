@@ -1,0 +1,13 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# build output
+.next/
+out/
+
+# dependencies
+node_modules/
+
+# debug
+.env*.local
+.DS_Store
+.turbo
