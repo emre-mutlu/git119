@@ -4,9 +4,9 @@ import { notFound } from 'next/navigation';
 import path from 'path';
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string[];
-  };
+  }>;
 }
 
 // Generate static params for all markdown files to be statically exported
@@ -18,7 +18,8 @@ export async function generateStaticParams() {
 }
 
 export default async function MarkdownPage({ params }: PageProps) {
-  const slugPath = params.slug.join('/');
+  const { slug } = await params;
+  const slugPath = slug.join('/');
   const markdownData = getMarkdownContent(slugPath + '.md');
 
   if (!markdownData) {
