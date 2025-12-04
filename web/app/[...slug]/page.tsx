@@ -32,7 +32,7 @@ export default async function MarkdownPage({ params }: PageProps) {
     <div className="container mx-auto px-4 py-12 max-w-4xl">
       <article className="prose prose-invert prose-lg mx-auto
         prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-white
-        prose-h1:text-3xl prose-h1:md:text-4xl prose-h1:text-transparent prose-h1:bg-clip-text prose-h1:bg-gradient-to-r prose-h1:from-primary prose-h1:via-accent prose-h1:to-accent
+        prose-h1:text-3xl prose-h1:md:text-4xl
         prose-h2:text-2xl prose-h2:text-white prose-h2:border-b prose-h2:border-primary/30 prose-h2:pb-3
         prose-h3:text-xl prose-h3:text-slate-200
         prose-h4:text-lg prose-h4:text-slate-300

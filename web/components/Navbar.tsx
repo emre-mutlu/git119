@@ -20,8 +20,11 @@ export default function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           {/* Logo / Brand */}
-          <Link href="/" className="flex items-center group select-none">
-            <span className="font-josefin text-5xl tracking-wider font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent group-hover:from-accent group-hover:to-primary transition-all duration-300">
+          <Link href="/" className="flex items-center group select-none relative">
+            <span 
+              data-text="git.119"
+              className="font-josefin text-5xl tracking-wider font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent group-hover:from-accent group-hover:to-primary transition-all duration-300 glitch-hover"
+            >
               git.119
             </span>
           </Link>
@@ -60,7 +63,7 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
-    <div className="h-[2px] bg-neon shadow-[0_0_10px_#39FF14,0_0_20px_#39FF14] sticky top-20 z-50" />
+    <div className="h-[1px] bg-neon sticky top-20 z-50" />
     </>
   );
 }

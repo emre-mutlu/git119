@@ -60,12 +60,12 @@ export default function WeeksIndexPage() {
     }
 
     if (mouseY === null || !containerRef.current) {
-      return { blur: 2, brightness: 0.8, scale: 1 };
+      return { blur: 1, brightness: 0.9, scale: 1 };
     }
 
     const cardElement = cardRefs.current[weekNum];
     if (!cardElement) {
-      return { blur: 2, brightness: 0.8, scale: 1 };
+      return { blur: 1, brightness: 0.9, scale: 1 };
     }
 
     const containerRect = containerRef.current.getBoundingClientRect();
@@ -74,12 +74,12 @@ export default function WeeksIndexPage() {
     
     // Calculate distance from mouse to card center
     const distance = Math.abs(mouseY - cardCenterY);
-    const maxDistance = 300; // Max distance for full blur
+    const maxDistance = 500; // Max distance for full blur (increased for larger focus area)
     
     // Calculate blur based on distance (0 at mouse position, max at maxDistance)
     const normalizedDistance = Math.min(distance / maxDistance, 1);
-    const blur = normalizedDistance * 3; // Max blur of 3px
-    const brightness = 1 - (normalizedDistance * 0.3); // 0.7 to 1.0 brightness
+    const blur = normalizedDistance * 1.5; // Max blur of 1.5px (reduced)
+    const brightness = 1 - (normalizedDistance * 0.2); // 0.8 to 1.0 brightness
 
     return { blur, brightness, scale: 1 };
   };
