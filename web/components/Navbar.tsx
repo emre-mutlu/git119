@@ -2,9 +2,10 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Book, CalendarDays, FolderOpen, Files, ClipboardList } from 'lucide-react';
+import { Book, CalendarDays, FolderOpen, Files, ClipboardList, Home } from 'lucide-react';
 
 const navigationItems = [
+  { name: 'Ana Sayfa', href: '/', icon: Home },
   { name: 'Müfredat', href: '/mufredat/syllabus', icon: Book },
   { name: 'Haftalık Akış', href: '/haftalar', icon: CalendarDays },
   { name: 'Raporlar', href: '/raporlar-ve-analizler/ders-icerigi-gozden-gecirme-raporu', icon: ClipboardList },
@@ -19,10 +20,10 @@ export default function Navbar() {
     <nav className="bg-slate-900 text-slate-200 shadow-md border-b border-slate-800 sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
-          {/* Logo / Brand - Updated Style */}
+          {/* Logo / Brand */}
           <Link href="/" className="flex items-center group select-none">
-            <span className="font-bebas text-5xl tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400 group-hover:to-indigo-400 transition-all duration-300 drop-shadow-sm">
-              GİT<span className="text-slate-100 ml-1 group-hover:text-white">119</span>
+            <span className="font-josefin text-5xl tracking-wider font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400 group-hover:from-indigo-300 group-hover:to-cyan-300 transition-all duration-300">
+              GİT 119
             </span>
           </Link>
 
