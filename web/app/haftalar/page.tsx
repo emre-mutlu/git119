@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 
 // Week titles mapping
 const weekTitles: { [key: string]: string } = {
@@ -22,10 +22,28 @@ const weekTitles: { [key: string]: string } = {
 
 const weeks = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
+// Generate random but consistent rotations for each week
+const generateRotations = () => {
+  const rotations: { [key: string]: { rotateX: number; rotateY: number } } = {};
+  weeks.forEach((week, index) => {
+    // Use index to create pseudo-random but consistent values
+    const seed = (index * 7 + 3) % 12;
+    rotations[week] = {
+      rotateX: (seed % 5 - 2) * 1.5, // -3 to 3 degrees
+      rotateY: ((seed + 5) % 7 - 3) * 1.5, // -4.5 to 4.5 degrees
+    };
+  });
+  return rotations;
+};
+
 export default function WeeksIndexPage() {
   const [mouseY, setMouseY] = useState<number | null>(null);
+  const [hoveredWeek, setHoveredWeek] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  
+  // Memoize rotations so they stay consistent
+  const rotations = useMemo(() => generateRotations(), []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -90,20 +108,27 @@ export default function WeeksIndexPage() {
           Dönem boyunca işleyeceğimiz konular, ödevler ve materyaller.
         </p>
 
-        <div ref={containerRef} className="flex flex-col gap-4">
+        <div ref={containerRef} className="flex flex-col gap-4" style={{ perspective: '1000px' }}>
           {weeks.map((weekNum) => {
             const href = `/Haftalar/Hafta_${weekNum}/Ders_Plani`;
             const title = weekTitles[weekNum] || 'Ders Planı';
             const { blur, brightness, scale } = getBlurAndBrightness(weekNum);
+            const rotation = rotations[weekNum];
+            const isHovered = hoveredWeek === weekNum;
 
             return (
               <Link key={weekNum} href={href} className="group block">
                 <div 
                   ref={(el) => { cardRefs.current[weekNum] = el; }}
-                  className="relative bg-dark backdrop-blur-sm border border-primary/20 hover:border-accent/50 p-5 rounded-xl transition-all duration-200 overflow-hidden hover:shadow-[0_0_30px_rgba(229,54,171,0.3),0_0_60px_rgba(92,3,188,0.2)]"
+                  onMouseEnter={() => setHoveredWeek(weekNum)}
+                  onMouseLeave={() => setHoveredWeek(null)}
+                  className="relative bg-dark backdrop-blur-sm border border-primary/20 hover:border-accent/50 p-5 rounded-xl transition-all duration-300 overflow-hidden hover:shadow-[0_0_30px_rgba(229,54,171,0.3),0_0_60px_rgba(92,3,188,0.2)]"
                   style={{
                     filter: `blur(${blur}px) brightness(${brightness})`,
-                    transform: `scale(${scale})`,
+                    transform: isHovered 
+                      ? `scale(${scale}) rotateX(0deg) rotateY(0deg)` 
+                      : `scale(${scale}) rotateX(${rotation.rotateX}deg) rotateY(${rotation.rotateY}deg)`,
+                    transformStyle: 'preserve-3d',
                   }}
                 >
                   {/* Gradient overlay on hover */}

@@ -63,7 +63,7 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
-    <div className="h-[1px] bg-neon sticky top-20 z-50" />
+    <div className="h-[1px] bg-yellow sticky top-20 z-50" />
     </>
   );
 }

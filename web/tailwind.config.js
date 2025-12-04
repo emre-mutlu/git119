@@ -16,6 +16,7 @@ module.exports = {
         primary: '#5C03BC',
         accent: '#E536AB',
         neon: '#39FF14',
+        yellow: '#FFFF00',
       },
       fontFamily: {
         sans: ['var(--font-outfit)', 'system-ui', 'sans-serif'],

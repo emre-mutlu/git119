@@ -15,10 +15,9 @@ function ColorfulHr() {
 
   return (
     <hr 
-      className="my-8 border-0 h-[2px] rounded-full" 
+      className="my-8 border-0 h-[1px] rounded-full" 
       style={{ 
-        backgroundColor: color,
-        boxShadow: `0 0 8px ${color}40, 0 0 16px ${color}20`
+        backgroundColor: color
       }}
     />
   );
