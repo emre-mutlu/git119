@@ -2,15 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Book, CalendarDays, FolderOpen, Files, ClipboardList, Home } from 'lucide-react';
+import { Book, CalendarDays, FolderOpen, Home } from 'lucide-react';
 
 const navigationItems = [
   { name: 'Ana Sayfa', href: '/', icon: Home },
-  { name: 'Müfredat', href: '/mufredat/syllabus', icon: Book },
+  { name: 'Müfredat', href: '/Mufredat/Syllabus', icon: Book },
   { name: 'Haftalık Akış', href: '/haftalar', icon: CalendarDays },
-  { name: 'Raporlar', href: '/raporlar-ve-analizler/ders-icerigi-gozden-gecirme-raporu', icon: ClipboardList },
-  { name: 'Kaynaklar', href: '/kaynaklar/kaynakca', icon: FolderOpen },
-  { name: 'Şablonlar', href: '/sablonlar/odev-brief', icon: Files },
+  { name: 'Kaynaklar', href: '/Kaynaklar/Kaynakca', icon: FolderOpen },
 ];
 
 export default function Navbar() {
@@ -22,8 +20,8 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-20">
           {/* Logo / Brand */}
           <Link href="/" className="flex items-center group select-none">
-            <span className="font-josefin text-5xl tracking-wider font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-indigo-500 group-hover:from-violet-400 group-hover:to-indigo-400 transition-all duration-300">
-              git119
+            <span className="font-josefin text-5xl tracking-wider font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-500 group-hover:from-purple-500 group-hover:to-violet-400 transition-all duration-300">
+              git.119
             </span>
           </Link>
 

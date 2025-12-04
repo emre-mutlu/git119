@@ -30,16 +30,16 @@ export default async function MarkdownPage({ params }: PageProps) {
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
-      <article className="prose prose-invert prose-lg prose-violet mx-auto
+      <article className="prose prose-invert prose-lg prose-purple mx-auto
         prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-slate-100
-        prose-h1:text-3xl prose-h1:md:text-4xl prose-h1:text-transparent prose-h1:bg-clip-text prose-h1:bg-gradient-to-r prose-h1:from-violet-400 prose-h1:to-indigo-400
+        prose-h1:text-3xl prose-h1:md:text-4xl prose-h1:text-transparent prose-h1:bg-clip-text prose-h1:bg-gradient-to-r prose-h1:from-purple-500 prose-h1:to-violet-400
         prose-h2:text-2xl prose-h2:text-slate-100 prose-h2:border-b prose-h2:border-slate-800 prose-h2:pb-3
         prose-h3:text-xl prose-h3:text-slate-200
         prose-h4:text-lg prose-h4:text-slate-300
         prose-p:text-slate-300 prose-p:leading-relaxed prose-p:text-base
-        prose-a:text-violet-400 prose-a:no-underline prose-a:border-b prose-a:border-violet-500/30 hover:prose-a:border-violet-400 hover:prose-a:text-violet-300
+        prose-a:text-purple-400 prose-a:no-underline prose-a:border-b prose-a:border-purple-500/30 hover:prose-a:border-purple-400 hover:prose-a:text-purple-300
         prose-strong:text-white prose-strong:font-semibold
-        prose-code:text-violet-300 prose-code:bg-violet-950/50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none prose-code:text-sm
+        prose-code:text-purple-300 prose-code:bg-purple-950/50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none prose-code:text-sm
         prose-pre:bg-slate-900 prose-pre:border prose-pre:border-slate-800
         prose-li:text-slate-300 prose-li:leading-relaxed
         prose-ul:space-y-2
