@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
   output: 'export',
   images: {
@@ -6,9 +9,9 @@ const nextConfig = {
   },
   // GitHub Pages genellikle bir alt dizinde çalışır (örn: emre-mutlu.github.io/git119/)
   // Bu yüzden basePath ayarlamamız gerekebilir.
-  // Bu değer GitHub deponuzun adıyla eşleşmelidir.
-  basePath: '/git119',
-  assetPrefix: '/git119',
+  // Ancak bu ayar sadece production build sırasında (GitHub Actions) geçerli olmalı.
+  basePath: isProd ? '/git119' : '',
+  assetPrefix: isProd ? '/git119' : '',
 };
 
 export default nextConfig;
