@@ -11,3 +11,6 @@ site/
 # Private Data & Archives
 Donem_Kayitlari/
 Private_Arsiv/
+
+# Virtual Environment
+.venv/
