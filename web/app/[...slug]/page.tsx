@@ -22,6 +22,7 @@ export default async function MarkdownPage({ params }: PageProps) {
   const slugPath = slug.join('/');
   const markdownData = getMarkdownContent(slugPath + '.md');
   const isSyllabus = slugPath.toLowerCase() === 'mufredat/syllabus';
+  const isKaynaklar = slugPath.toLowerCase().startsWith('kaynaklar/');
 
   if (!markdownData) {
     notFound();
@@ -45,7 +46,7 @@ export default async function MarkdownPage({ params }: PageProps) {
     prose-table:border-primary/30
     prose-th:text-white prose-th:bg-primary/20 prose-th:p-4
     prose-td:text-slate-400 prose-td:p-4`;
-  const articleClassName = `${proseBase} ${isSyllabus ? 'syllabus-prose' : ''}`;
+  const articleClassName = `${proseBase} ${isSyllabus ? 'syllabus-prose' : ''} ${isKaynaklar ? 'kaynaklar-prose' : ''}`;
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">

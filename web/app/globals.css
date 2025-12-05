@@ -299,3 +299,33 @@ body {
     background-position: -200% 0%;
   }
 }
+
+/* Kaynaklar page styles - h1 stays accent, h2+ becomes pink */
+.kaynaklar-prose h2,
+.kaynaklar-prose h3,
+.kaynaklar-prose h4,
+.kaynaklar-prose h5,
+.kaynaklar-prose h6 {
+  color: rgb(229, 54, 171);
+  position: relative;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.kaynaklar-prose h2::after,
+.kaynaklar-prose h3::after,
+.kaynaklar-prose h4::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: rgb(229, 54, 171);
+  opacity: 0.7;
+}
+
+/* Logo condensed font */
+.font-logo {
+  font-family: var(--font-roboto-condensed), system-ui, sans-serif;
+}

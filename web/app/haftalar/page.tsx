@@ -156,13 +156,14 @@ export default function WeeksIndexPage() {
   }, []);
 
   const getBlurAndBrightness = (weekNum: string) => {
-    if (mouseY === null || !containerRef.current) {
-      return { blur: 0.25, brightness: 0.9 };
+    const cardElement = cardRefs.current[weekNum];
+    if (!cardElement || !containerRef.current) {
+      return { blur: 0.4, brightness: 0.85 };
     }
 
-    const cardElement = cardRefs.current[weekNum];
-    if (!cardElement) {
-      return { blur: 0.25, brightness: 0.9 };
+    // Default state - slight blur
+    if (mouseY === null) {
+      return { blur: 0.4, brightness: 0.85 };
     }
 
     const containerRect = containerRef.current.getBoundingClientRect();
@@ -171,14 +172,18 @@ export default function WeeksIndexPage() {
     
     // Calculate distance from mouse to card center
     const distance = Math.abs(mouseY - cardCenterY);
-    const maxDistance = 700; // Max distance for full blur (increased by 200px)
+    const focusRadius = 150; // Only cards within this radius get clearer
     
-    // Calculate blur based on distance (0 at mouse position, max at maxDistance)
-    const normalizedDistance = Math.min(distance / maxDistance, 1);
-    const blur = normalizedDistance * 0.25; // Softer blur for cleaner edges
-    const brightness = 1 - (normalizedDistance * 0.2); // 0.8 to 1.0 brightness
-
-    return { blur, brightness };
+    if (distance <= focusRadius) {
+      // Within focus radius - reduce blur based on proximity
+      const normalizedDistance = distance / focusRadius;
+      const blur = normalizedDistance * 0.4; // 0 at center, 0.4 at edge
+      const brightness = 1 - (normalizedDistance * 0.15); // 1.0 at center, 0.85 at edge
+      return { blur, brightness };
+    }
+    
+    // Outside focus radius - keep default blur (don't increase)
+    return { blur: 0.4, brightness: 0.85 };
   };
 
   return (
@@ -208,7 +213,7 @@ export default function WeeksIndexPage() {
                   ref={(el) => { cardRefs.current[weekNum] = el; }}
                   onMouseEnter={() => setHoveredWeek(weekNum)}
                   onMouseLeave={() => setHoveredWeek(null)}
-                  className={`relative bg-dark/60 ${weekTheme.cardBg} backdrop-blur-md border ${weekTheme.cardBorder} ${weekTheme.cardHoverBorder} p-5 rounded-xl transition-all duration-300 overflow-hidden shadow-lg shadow-black/10`}
+                  className={`relative bg-dark/60 ${weekTheme.cardBg} backdrop-blur-md border ${weekTheme.cardBorder} ${weekTheme.cardHoverBorder} p-5 rounded-xl overflow-hidden shadow-lg shadow-black/10`}
                   style={{
                     transform: isHovered 
                       ? `scale(${scaleValue}) rotateX(0deg) rotateY(0deg) translateY(0px)` 
@@ -219,6 +224,7 @@ export default function WeeksIndexPage() {
                     WebkitBackfaceVisibility: 'hidden',
                     willChange: 'transform, filter',
                     outline: '1px solid transparent',
+                    transition: 'all 0.4s cubic-bezier(0.85, 0, 0.15, 1)',
                   }}
                 >
                   {/* Gradient overlay on hover */}

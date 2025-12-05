@@ -97,7 +97,7 @@ export default function Navbar() {
     '--glitch-after-color': glitchColors.after,
   };
 
-  const logoClassName = `font-mono text-4xl tracking-tight font-black text-transparent bg-clip-text logo-glitch ${
+  const logoClassName = `font-logo text-4xl tracking-tight font-black text-transparent bg-clip-text logo-glitch ${
     isGlitchActive ? 'logo-glitch-active' : ''
   }`;
 
