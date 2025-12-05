@@ -38,7 +38,7 @@ const getWeekTheme = (weekNum: string) => {
       cardHoverBorder: 'hover:border-accent/60',
       overlay: 'from-primary/25 via-accent/15 to-transparent',
       arrowHover: 'group-hover:text-accent',
-      hoverShadow: '0 0 32px rgba(229,54,171,0.5), 0 0 48px rgba(229,54,171,0.3)',
+      hoverShadow: '0 0 20px rgba(229,54,171,0.3), 0 0 35px rgba(229,54,171,0.15)',
     };
   }
 
@@ -54,7 +54,7 @@ const getWeekTheme = (weekNum: string) => {
       cardHoverBorder: 'hover:border-blazingflame-400/60',
       overlay: 'from-blazingflame-500/30 via-blazingflame-400/15 to-transparent',
       arrowHover: 'group-hover:text-blazingflame-300',
-      hoverShadow: '0 0 32px rgba(252,57,3,0.45), 0 0 52px rgba(253,96,53,0.35)',
+      hoverShadow: '0 0 20px rgba(252,57,3,0.3), 0 0 35px rgba(253,96,53,0.15)',
     };
   }
 
@@ -70,7 +70,7 @@ const getWeekTheme = (weekNum: string) => {
       cardHoverBorder: 'hover:border-ocean-400/60',
       overlay: 'from-ocean-500/30 via-ocean-400/15 to-transparent',
       arrowHover: 'group-hover:text-ocean-300',
-      hoverShadow: '0 0 32px rgba(0,145,255,0.45), 0 0 52px rgba(51,167,255,0.35)',
+      hoverShadow: '0 0 20px rgba(0,145,255,0.3), 0 0 35px rgba(51,167,255,0.15)',
     };
   }
 
@@ -87,7 +87,7 @@ const getWeekTheme = (weekNum: string) => {
       cardHoverBorder: 'hover:border-neon/60',
       overlay: 'from-neon/30 via-neon/15 to-transparent',
       arrowHover: 'group-hover:text-neon',
-      hoverShadow: '0 0 32px rgba(57,255,20,0.45), 0 0 52px rgba(57,255,20,0.35)',
+      hoverShadow: '0 0 20px rgba(57,255,20,0.3), 0 0 35px rgba(57,255,20,0.15)',
     };
   }
 
@@ -102,7 +102,7 @@ const getWeekTheme = (weekNum: string) => {
     cardHoverBorder: 'hover:border-lavender-400/60',
     overlay: 'from-lavender-500/30 via-lavender-400/15 to-transparent',
     arrowHover: 'group-hover:text-lavender-300',
-    hoverShadow: '0 0 32px rgba(149,96,159,0.45), 0 0 52px rgba(170,128,179,0.35)',
+    hoverShadow: '0 0 20px rgba(149,96,159,0.3), 0 0 35px rgba(170,128,179,0.15)',
   };
 };
 
