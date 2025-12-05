@@ -1,6 +1,5 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import { Palette, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
@@ -72,28 +71,12 @@ const applyVariablesToDocument = (values: Partial<Record<ThemeVariable, string>>
 const randomLabelText = 'Rastgele';
 
 export default function ThemeCustomizer({ 
-  isOpen: externalIsOpen, 
+  isOpen, 
   onClose 
 }: { 
-  isOpen?: boolean; 
-  onClose?: () => void;
-} = {}) {
-  const pathname = usePathname();
-  const isHome = pathname === '/';
-  const [internalIsOpen, setInternalIsOpen] = useState(false);
-  
-  // Use external state if provided, otherwise use internal
-  const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
-  const toggleOpen = () => {
-    if (externalIsOpen !== undefined && onClose) {
-      // If using external state, just call onClose to toggle
-      onClose();
-    } else {
-      // Otherwise use internal state
-      setInternalIsOpen((prev) => !prev);
-    }
-  };
-
+  isOpen: boolean; 
+  onClose: () => void;
+}) {
   const [selections, setSelections] = useState<Record<ThemeVariable, string>>(() => ({ ...defaultHexMap }));
   const [randomLabelColors, setRandomLabelColors] = useState<string[]>(() => randomizeLabelColors('Rastgele'));
 
@@ -106,11 +89,7 @@ export default function ThemeCustomizer({
     });
   };
 
-  useEffect(() => {
-    if (onClose) onClose();
-    else setInternalIsOpen(false);
-  }, [pathname, onClose]);
-
+  // Initial load from local storage or computed styles
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const stored = window.localStorage.getItem(STORAGE_KEY);
@@ -125,7 +104,7 @@ export default function ThemeCustomizer({
         applyVariablesToDocument(hydrated);
         return;
       } catch {
-        // fall through to computed styles
+        // fall through
       }
     }
 
@@ -161,119 +140,95 @@ export default function ThemeCustomizer({
     setRandomLabelColors(randomizeLabelColors(randomLabelText));
   };
 
-  const panel = (
-    <div className="w-72 rounded-xl border border-white/20 bg-dark/30 backdrop-blur-2xl p-3 shadow-2xl">
-      <div className="mb-3 flex items-center justify-between">
-        <div>
-          <p className="text-xs font-semibold text-white">Renk Paleti</p>
-        </div>
-        <div className="flex items-center gap-2 text-xs font-semibold">
-          <button
-            type="button"
-            className="px-2 py-0.5 rounded-full border border-white/10 text-slate-200 hover:text-white hover:border-white/30 transition text-[10px]"
-            onClick={handleRandomize}
-          >
-            <span className="inline-flex gap-0.5">
-              {randomLabelText.split('').map((ch, idx) => (
-                <span key={`${ch}-${idx}`} style={{ color: randomLabelColors[idx] ?? 'inherit' }}>
-                  {ch}
-                </span>
-              ))}
-            </span>
-          </button>
-          <button
-            type="button"
-            className="text-neon hover:text-white transition text-[10px]"
-            onClick={handleReset}
-          >
-            Sıfırla
-          </button>
-          <button
-            type="button"
-            className="text-slate-500 hover:text-white transition"
-            onClick={onClose || toggleOpen}
-            aria-label="Paneli kapat"
-          >
-            <X size={12} />
-          </button>
-        </div>
-      </div>
+  // Close on Escape key
+  useEffect(() => {
+      const handleEsc = (e: KeyboardEvent) => {
+          if (isOpen && e.key === 'Escape') onClose();
+      };
+      window.addEventListener('keydown', handleEsc);
+      return () => window.removeEventListener('keydown', handleEsc);
+  }, [isOpen, onClose]);
 
-      <div className="space-y-2.5">
-        {controls.map((ctrl) => (
-          <div key={ctrl.variable} className="space-y-1.5">
-            <div className="flex items-center justify-between text-[10px] text-slate-300">
-              <span className="font-semibold text-white">{ctrl.label}</span>
-              <span className="text-slate-400">{ctrl.description}</span>
-            </div>
-            <div className="grid grid-cols-4 gap-1.5">
-              {colorOptions.map((option) => (
-                <button
-                  key={`${ctrl.variable}-${option.hex}`}
-                  type="button"
-                  onClick={() => applyColor(ctrl.variable, option.hex)}
-                  className={`h-8 rounded-md border border-white/10 transition-transform focus:outline-none ${
-                    selections[ctrl.variable] === option.hex ? activeButtonClass : 'hover:border-white/40 hover:scale-105'
-                  }`}
-                  style={{ backgroundColor: option.hex }}
-                  aria-label={`${ctrl.label} ${option.name}`}
-                />
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-
-  if (isHome) {
-    return (
-      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-xs">
-        <button
-          type="button"
-          onClick={toggleOpen}
-          className="flex items-center justify-center gap-2 w-full rounded-full bg-dark/30 backdrop-blur-2xl px-4 py-2.5 text-xs font-semibold text-slate-100 border border-white/20 shadow-lg hover:bg-dark/40 transition neon-glow-button"
-        >
-          <Palette size={14} />
-          Tema Aracı
-          {isOpen && <X size={12} className="ml-1" />}
-        </button>
-        <div
-          className={`transition-all duration-250 origin-bottom ${
-            isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-2 pointer-events-none'
-          }`}
-        >
-          {isOpen && <div className="mt-2">{panel}</div>}
-        </div>
-      </div>
-    );
-  }
 
   return (
-    <div className="fixed top-1/2 right-0 -translate-y-1/2 z-50 flex flex-row-reverse items-center gap-2">
-      <button
-        type="button"
-        onClick={toggleOpen}
-        className={`rounded-l-xl border border-white/20 bg-dark/30 backdrop-blur-2xl px-2.5 py-4 text-slate-100 shadow-lg flex flex-col items-center gap-2 transition-all neon-glow-button ${
-          isOpen ? '' : 'translate-x-2'
-        }`}
-        aria-label="Tema aracını aç"
-      >
-        <Palette size={14} />
-        <span
-          className="text-[9px] tracking-[0.35em] uppercase"
-          style={{ writingMode: 'vertical-rl' }}
-        >
-          Tema
-        </span>
-      </button>
+    <>
+      {/* Backdrop for mobile or clicking outside */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 z-40 bg-transparent" 
+          onClick={onClose}
+        />
+      )}
+      
+      {/* Panel */}
       <div
-        className={`transition-all duration-300 ${
-          isOpen ? 'opacity-100 translate-x-0 pointer-events-auto' : 'opacity-0 translate-x-6 pointer-events-none'
+        className={`fixed z-50 top-20 right-4 w-72 rounded-xl border border-white/20 bg-dark/80 backdrop-blur-2xl p-3 shadow-2xl transition-all duration-300 origin-top-right ${
+          isOpen 
+            ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto' 
+            : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'
         }`}
       >
-        {panel}
+        <div className="mb-3 flex items-center justify-between">
+          <div>
+            <p className="text-xs font-semibold text-white">Renk Paleti</p>
+          </div>
+          <div className="flex items-center gap-2 text-xs font-semibold">
+            <button
+              type="button"
+              className="px-2 py-0.5 rounded-full border border-white/10 text-slate-200 hover:text-white hover:border-white/30 transition text-[10px]"
+              onClick={handleRandomize}
+            >
+              <span className="inline-flex gap-0.5">
+                {randomLabelText.split('').map((ch, idx) => (
+                  <span key={`${ch}-${idx}`} style={{ color: randomLabelColors[idx] ?? 'inherit' }}>
+                    {ch}
+                  </span>
+                ))}
+              </span>
+            </button>
+            <button
+              type="button"
+              className="text-neon hover:text-white transition text-[10px]"
+              onClick={handleReset}
+            >
+              Sıfırla
+            </button>
+            <button
+              type="button"
+              className="text-slate-500 hover:text-white transition"
+              onClick={onClose}
+              aria-label="Paneli kapat"
+            >
+              <X size={12} />
+            </button>
+          </div>
+        </div>
+
+        <div className="space-y-2.5">
+          {controls.map((ctrl) => (
+            <div key={ctrl.variable} className="space-y-1.5">
+              <div className="flex items-center justify-between text-[10px] text-slate-300">
+                <span className="font-semibold text-white">{ctrl.label}</span>
+                <span className="text-slate-400">{ctrl.description}</span>
+              </div>
+              <div className="grid grid-cols-4 gap-1.5">
+                {colorOptions.map((option) => (
+                  <button
+                    key={`${ctrl.variable}-${option.hex}`}
+                    type="button"
+                    onClick={() => applyColor(ctrl.variable, option.hex)}
+                    className={`h-8 rounded-md border border-white/10 transition-transform focus:outline-none ${
+                      selections[ctrl.variable] === option.hex ? activeButtonClass : 'hover:border-white/40 hover:scale-105'
+                    }`}
+                    style={{ backgroundColor: option.hex }}
+                    aria-label={`${ctrl.label} ${option.name}`}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

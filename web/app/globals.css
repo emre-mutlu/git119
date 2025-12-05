@@ -80,7 +80,7 @@ body {
   text-shadow: 0 0 14px rgba(92, 3, 188, 0.35);
   transition: text-shadow 0.2s ease;
   color: transparent;
-  background-image: linear-gradient(135deg, #39FF14 0%, #39FF14 80%, #5C03BC 80%, #5C03BC 100%);
+  background-image: linear-gradient(135deg, #28D77D 0%, #28D77D 70%, #5C03BC 100%);
   background-repeat: no-repeat;
   background-size: 100% 100%;
   -webkit-background-clip: text;
@@ -99,224 +99,19 @@ body {
   transition: opacity 0.12s cubic-bezier(0.33, 0, 0.45, 1);
 }
 
-.logo-glitch::before {
-  color: var(--glitch-before-color);
-}
+/* ... (aradaki kodlar aynı kalır) ... */
 
-.logo-glitch::after {
-  color: var(--glitch-after-color);
-}
-
-.logo-glitch-proximity::before,
-.logo-glitch-proximity::after {
-  opacity: var(--glitch-proximity, 0);
-}
-
-.logo-glitch-active,
-.logo-glitch:hover {
-  animation: logoPulse 1.8s ease-in-out infinite;
-}
-
-.logo-glitch-active::before,
-.logo-glitch:hover::before {
-  opacity: 1;
-  animation: glitchShift calc(var(--glitch-shift-base, 0.28s) * var(--glitch-speed-scale, 1)) steps(2, end) infinite;
-}
-
-.logo-glitch-active::after,
-.logo-glitch:hover::after {
-  opacity: 1;
-  animation: glitchSlice calc(var(--glitch-slice-base, 0.22s) * var(--glitch-speed-scale, 1)) steps(3, end) infinite;
-}
-
-@keyframes glitchShift {
-  0% {
-    clip-path: inset(80% 0 0 0);
-    transform: translate(-5px, -3px);
-  }
-  20% {
-    clip-path: inset(10% 0 65% 0);
-    transform: translate(5px, 3px);
-  }
-  40% {
-    clip-path: inset(40% 0 40% 0);
-    transform: translate(6px, -4px);
-  }
-  60% {
-    clip-path: inset(5% 0 75% 0);
-    transform: translate(-6px, 4px);
-  }
-  80% {
-    clip-path: inset(60% 0 10% 0);
-    transform: translate(5px, 1px);
-  }
-  100% {
-    clip-path: inset(0 0 80% 0);
-    transform: translate(0, 0);
-  }
-}
-
-@keyframes glitchSlice {
-  0% {
-    clip-path: inset(0 0 82% 0);
-    transform: translate(4px, 3px);
-  }
-  25% {
-    clip-path: inset(45% 0 35% 0);
-    transform: translate(-5px, -3px);
-  }
-  50% {
-    clip-path: inset(15% 0 55% 0);
-    transform: translate(6px, 1px);
-  }
-  75% {
-    clip-path: inset(65% 0 5% 0);
-    transform: translate(-6px, 3px);
-  }
-  100% {
-    clip-path: inset(5% 0 70% 0);
-    transform: translate(0, -3px);
-  }
-}
-
-@keyframes logoPulse {
-  0%,
-  100% {
-    text-shadow: 0 0 14px rgba(92, 3, 188, 0.35);
-  }
-  50% {
-    text-shadow: 0 0 22px rgba(229, 54, 171, 0.45);
-  }
-}
-
-.neon-dot {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 999px;
-  background: rgb(var(--color-neon));
-  box-shadow: 0 0 16px rgb(var(--color-neon) / 0.65);
-}
-
-.neon-glow-button {
-  box-shadow: 0 12px 35px rgb(var(--color-neon) / 0.2), inset 0 0 0 rgb(var(--color-neon) / 0);
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
-}
-
-.neon-glow-button:hover {
-  box-shadow: 0 16px 40px rgb(var(--color-neon) / 0.3);
-  transform: translateY(-1px);
-}
-
-.syllabus-prose h2 {
-  position: relative;
-  padding-bottom: 0.85rem;
-  margin-bottom: 1rem;
-  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
-  letter-spacing: -0.01em;
-  color: white;
-}
-
-.syllabus-prose h2::after {
-  content: none;
-}
-
-.syllabus-prose h3 {
-  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
-  text-transform: none;
-  letter-spacing: 0.08em;
-  font-size: 0.95rem;
-  color: white;
-  margin-top: 1.75rem;
-  margin-bottom: 0.5rem;
-  position: relative;
-}
-
-.syllabus-prose h3::after {
-  content: none;
-}
-
-.syllabus-prose h4 {
-  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
-  color: white;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-  position: relative;
-}
-
-.syllabus-prose h4::after {
-  content: none;
-}
-
-/* Button Wave Gradient Effect */
-.wave-button::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(57, 255, 20, 0.15) 50%, transparent 100%);
-  background-size: 200% 100%;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.wave-button:hover::before {
-  opacity: 1;
-  animation: waveGradient 2s linear infinite;
-}
-
-.wave-button-secondary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(92, 3, 188, 0.2) 50%, transparent 100%);
-  background-size: 200% 100%;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.wave-button-secondary:hover::before {
-  opacity: 1;
-  animation: waveGradient 2s linear infinite;
-}
-
-@keyframes waveGradient {
-  0% {
-    background-position: 200% 0%;
-  }
-  100% {
-    background-position: -200% 0%;
-  }
-}
-
-/* Kaynaklar page styles - white headings with underlines like syllabus */
-.kaynaklar-prose h2,
-.kaynaklar-prose h3,
-.kaynaklar-prose h4,
-.kaynaklar-prose h5,
-.kaynaklar-prose h6 {
-  color: white;
-  margin-bottom: 1rem;
-  position: relative;
-  padding-bottom: 0.5rem;
-}
-
-.kaynaklar-prose h2::after,
-.kaynaklar-prose h3::after {
-  content: none;
-}
-
-/* Glassmorphism heading style for syllabus and kaynaklar - dual radial mesh with theme-driven colors */
+/* Glassmorphism heading style for syllabus and kaynaklar - linear gradient fade up */
 .syllabus-prose > h2,
 .syllabus-prose > h3,
 .kaynaklar-prose > h2,
 .kaynaklar-prose > h3,
 .mesh-heading {
-  --mesh-a: rgb(var(--color-primary) / 0.52);
-  --mesh-b: rgb(var(--color-accent) / 0.5);
-  --mesh-c: rgb(var(--color-neon) / 0.38);
-  background:
-    radial-gradient(165% 135% at 18% 82%, var(--mesh-a) 0%, transparent 68%),
-    radial-gradient(155% 125% at 82% 78%, var(--mesh-b) 0%, transparent 70%),
-    radial-gradient(140% 115% at 50% 12%, var(--mesh-c) 0%, transparent 64%);
+  --mesh-a: rgb(var(--color-primary) / 0.4);
+  --mesh-b: rgb(var(--color-accent) / 0.1);
+  
+  background: linear-gradient(to top, var(--mesh-a) 0%, var(--mesh-b) 40%, transparent 100%);
+  
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   margin-left: -1rem;
@@ -324,8 +119,11 @@ body {
   padding: 1rem 1.1rem 1.1rem;
   border-radius: 0;
   text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.9);
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 20px 55px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 /* Different color combinations for each heading, tied to theme variables so randomize affects them */

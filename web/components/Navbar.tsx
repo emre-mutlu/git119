@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 import { BookOpen, Calendar, Layers, Home, Palette } from 'lucide-react';
 import { iconColorMap } from '@/lib/iconColors';
+import ThemeCustomizer from './ThemeCustomizer';
 
 const glitchPalettes = [
   {
@@ -40,8 +41,9 @@ const navigationItems = [
   { name: 'Kaynaklar', href: '/Kaynaklar/Kaynakca', icon: Layers, colorKey: 'kaynaklar' as const },
 ];
 
-export default function Navbar({ onThemeToggle }: { onThemeToggle?: () => void }) {
+export default function Navbar() {
   const pathname = usePathname();
+  const [isThemeOpen, setIsThemeOpen] = useState(false);
   const [isGlitchActive, setIsGlitchActive] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [proximity, setProximity] = useState(0);
@@ -150,7 +152,7 @@ export default function Navbar({ onThemeToggle }: { onThemeToggle?: () => void }
     '--glitch-after-color': glitchColors.after,
     '--glitch-proximity': proximity.toFixed(3),
     '--glitch-speed-scale': (0.5 + 0.35 * proximity).toFixed(3),
-    backgroundImage: 'linear-gradient(135deg, #39FF14 0%, #39FF14 80%, #5C03BC 80%, #5C03BC 100%)',
+    backgroundImage: 'linear-gradient(135deg, #28D77D 0%, #28D77D 70%, #5C03BC 100%)', // Updated gradient per request
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 100%',
     WebkitBackgroundClip: 'text',
@@ -187,7 +189,7 @@ export default function Navbar({ onThemeToggle }: { onThemeToggle?: () => void }
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-1">
+          <div className="hidden md:flex items-center space-x-1">
             {navigationItems.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
@@ -217,19 +219,38 @@ export default function Navbar({ onThemeToggle }: { onThemeToggle?: () => void }
                 </Link>
               );
             })}
+
+            {/* Divider */}
+            <div className="h-6 w-px bg-white/10 mx-2" />
+
+            {/* Theme Toggle (Desktop) */}
+            <button
+              onClick={() => setIsThemeOpen(!isThemeOpen)}
+              className={`p-2 rounded-md transition-all duration-200 border ${
+                isThemeOpen 
+                  ? 'text-white bg-white/10 border-white/20 shadow-[0_0_15px_rgba(57,255,20,0.3)]' 
+                  : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5 hover:border-white/10'
+              }`}
+              aria-label="Temayı Özelleştir"
+            >
+              <Palette size={18} />
+            </button>
           </div>
 
           {/* Mobile: Theme + Menu buttons */}
           <div className="md:hidden flex items-center gap-2">
-            {onThemeToggle && (
-              <button
-                className="text-slate-200 hover:text-white focus:outline-none p-2 rounded-lg border border-white/10 hover:border-white/20 transition"
-                onClick={onThemeToggle}
-                aria-label="Tema aracını aç"
-              >
-                <Palette size={20} />
-              </button>
-            )}
+            <button
+              className={`p-2 rounded-lg border transition ${
+                isThemeOpen 
+                ? 'text-white bg-white/10 border-white/20' 
+                : 'text-slate-200 border-white/10 hover:text-white hover:border-white/20'
+              }`}
+              onClick={() => setIsThemeOpen(!isThemeOpen)}
+              aria-label="Tema aracını aç"
+            >
+              <Palette size={20} />
+            </button>
+            
             <button
               className="text-slate-200 hover:text-white focus:outline-none p-2 rounded-lg border border-white/10 hover:border-white/20 transition"
               onClick={() => setIsMenuOpen((prev) => !prev)}
@@ -279,6 +300,9 @@ export default function Navbar({ onThemeToggle }: { onThemeToggle?: () => void }
           </div>
         </div>
       </div>
+      
+      {/* Theme Customizer Overlay/Panel */}
+      <ThemeCustomizer isOpen={isThemeOpen} onClose={() => setIsThemeOpen(false)} />
     </nav>
     <div className="h-[1px] bg-primary sticky top-20 z-50" />
     </>
