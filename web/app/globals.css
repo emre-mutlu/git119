@@ -4,20 +4,46 @@
 
 :root {
   --foreground-rgb: 226, 232, 240;
-  --background-color: #0e150e;
+  --background-color: #262626;
   
-  /* Onyx - Deep greens */
-  --color-onyx-50: #f0f5f0;
-  --color-onyx-100: #e0ebe0;
-  --color-onyx-200: #c2d6c2;
-  --color-onyx-300: #a3c2a3;
-  --color-onyx-400: #85ad85;
-  --color-onyx-500: #669966;
-  --color-onyx-600: #527a52;
-  --color-onyx-700: #3d5c3d;
-  --color-onyx-800: #293d29;
-  --color-onyx-900: #141f14;
-  --color-onyx-950: #0e150e;
+  /* Red */
+  --color-red-50: #ffe5e5;
+  --color-red-100: #ffcccc;
+  --color-red-200: #ff9999;
+  --color-red-300: #ff6666;
+  --color-red-400: #ff3333;
+  --color-red-500: #ff0000;
+  --color-red-600: #cc0000;
+  --color-red-700: #990000;
+  --color-red-800: #660000;
+  --color-red-900: #330000;
+  --color-red-950: #240000;
+
+  /* Lime */
+  --color-lime-50: #e5ffe5;
+  --color-lime-100: #ccffcc;
+  --color-lime-200: #99ff99;
+  --color-lime-300: #66ff66;
+  --color-lime-400: #33ff33;
+  --color-lime-500: #00ff00;
+  --color-lime-600: #00cc00;
+  --color-lime-700: #009900;
+  --color-lime-800: #006600;
+  --color-lime-900: #003300;
+  --color-lime-950: #002400;
+
+  /* Blue */
+  --color-blue-50: #e5e5ff;
+  --color-blue-100: #ccccff;
+  --color-blue-200: #9999ff;
+  --color-blue-300: #6666ff;
+  --color-blue-400: #3333ff;
+  --color-blue-500: #0000ff;
+  --color-blue-600: #0000cc;
+  --color-blue-700: #000099;
+  --color-blue-800: #000066;
+  --color-blue-900: #000033;
+  --color-blue-950: #000024;
 
   /* Fiery Terracotta */
   --color-fiery-terracotta-50: #fcede8;
@@ -135,6 +161,32 @@
   --color-lavender-mist-800: #3b2640;
   --color-lavender-mist-900: #1e1320;
   --color-lavender-mist-950: #150d16;
+
+  /* Ocean Blue */
+  --color-ocean-blue-50: #e6f4ff;
+  --color-ocean-blue-100: #cce9ff;
+  --color-ocean-blue-200: #99d3ff;
+  --color-ocean-blue-300: #66bdff;
+  --color-ocean-blue-400: #33a7ff;
+  --color-ocean-blue-500: #0091ff;
+  --color-ocean-blue-600: #0074cc;
+  --color-ocean-blue-700: #005799;
+  --color-ocean-blue-800: #003a66;
+  --color-ocean-blue-900: #001d33;
+  --color-ocean-blue-950: #001424;
+
+  /* Medium Slate Blue */
+  --color-medium-slate-blue-50: #ece5ff;
+  --color-medium-slate-blue-100: #daccff;
+  --color-medium-slate-blue-200: #b499ff;
+  --color-medium-slate-blue-300: #8f66ff;
+  --color-medium-slate-blue-400: #6933ff;
+  --color-medium-slate-blue-500: #4400ff;
+  --color-medium-slate-blue-600: #3600cc;
+  --color-medium-slate-blue-700: #290099;
+  --color-medium-slate-blue-800: #1b0066;
+  --color-medium-slate-blue-900: #0e0033;
+  --color-medium-slate-blue-950: #0a0024;
 }
 
 body {

@@ -24,37 +24,37 @@ const weeks = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
 
 // Color groups for every 4 weeks
 const colorGroups = {
-  // Week 1-4: Fiery Terracotta (orange-red)
+  // Week 1-4: Red (Illustrator)
   group1: {
-    border: 'border-terracotta-500/30',
-    hoverBorder: 'hover:border-terracotta-400/60',
-    gradient: 'from-terracotta-500/20 to-tuscan-500/10',
-    numberBg: 'from-terracotta-500/30 to-tuscan-500/20',
-    numberBorder: 'border-terracotta-500/30 group-hover:border-terracotta-400/60',
-    numberColor: 'text-terracotta-400',
-    shadow: '0_0_30px_rgba(226,72,29,0.3),0_0_60px_rgba(240,180,15,0.2)',
+    border: 'border-red-500/30',
+    hoverBorder: 'hover:border-red-400/60',
+    gradient: 'from-red-500/20 to-red-600/10',
+    numberBg: 'bg-red-500/20',
+    numberBorder: 'border-red-500/40 group-hover:border-red-400/60',
+    numberColor: 'text-red-400',
+    shadow: '0_0_30px_rgba(255,0,0,0.3),0_0_60px_rgba(255,51,51,0.2)',
     label: 'Adobe Illustrator',
   },
-  // Week 5-8: Mint Leaf (green)
+  // Week 5-8: Blue (Photoshop)
   group2: {
-    border: 'border-mint-500/30',
-    hoverBorder: 'hover:border-mint-400/60',
-    gradient: 'from-mint-500/20 to-darkemerald-500/10',
-    numberBg: 'from-mint-500/30 to-darkemerald-500/20',
-    numberBorder: 'border-mint-500/30 group-hover:border-mint-400/60',
-    numberColor: 'text-mint-400',
-    shadow: '0_0_30px_rgba(56,199,158,0.3),0_0_60px_rgba(60,195,114,0.2)',
+    border: 'border-blue-500/30',
+    hoverBorder: 'hover:border-blue-400/60',
+    gradient: 'from-blue-500/20 to-blue-600/10',
+    numberBg: 'bg-blue-500/20',
+    numberBorder: 'border-blue-500/40 group-hover:border-blue-400/60',
+    numberColor: 'text-blue-400',
+    shadow: '0_0_30px_rgba(0,0,255,0.3),0_0_60px_rgba(51,51,255,0.2)',
     label: 'Adobe Photoshop',
   },
-  // Week 9-12: Crimson Violet (purple)
+  // Week 9-12: Lime (AI & Final)
   group3: {
-    border: 'border-crimson-500/30',
-    hoverBorder: 'hover:border-crimson-400/60',
-    gradient: 'from-crimson-500/20 to-lavender-500/10',
-    numberBg: 'from-crimson-500/30 to-lavender-500/20',
-    numberBorder: 'border-crimson-500/30 group-hover:border-crimson-400/60',
-    numberColor: 'text-crimson-400',
-    shadow: '0_0_30px_rgba(203,52,158,0.3),0_0_60px_rgba(149,96,159,0.2)',
+    border: 'border-lime-500/30',
+    hoverBorder: 'hover:border-lime-400/60',
+    gradient: 'from-lime-500/20 to-lime-600/10',
+    numberBg: 'bg-lime-500/20',
+    numberBorder: 'border-lime-500/40 group-hover:border-lime-400/60',
+    numberColor: 'text-lime-400',
+    shadow: '0_0_30px_rgba(0,255,0,0.3),0_0_60px_rgba(51,255,51,0.2)',
     label: 'AI & Final',
   },
 };
@@ -168,7 +168,7 @@ export default function WeeksIndexPage() {
                   ref={(el) => { cardRefs.current[weekNum] = el; }}
                   onMouseEnter={() => setHoveredWeek(weekNum)}
                   onMouseLeave={() => setHoveredWeek(null)}
-                  className={`relative bg-onyx-900/80 backdrop-blur-sm border ${colors.border} ${colors.hoverBorder} p-5 rounded-xl transition-all duration-300 overflow-hidden`}
+                  className={`relative bg-neutral-800/80 backdrop-blur-sm border ${colors.border} ${colors.hoverBorder} p-5 rounded-xl transition-all duration-300 overflow-hidden`}
                   style={{
                     filter: `blur(${blur}px) brightness(${brightness})`,
                     transform: isHovered 
@@ -183,7 +183,7 @@ export default function WeeksIndexPage() {
                   
                   <div className="relative flex items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
-                      <div className={`flex-shrink-0 w-14 h-14 bg-gradient-to-br ${colors.numberBg} rounded-lg flex items-center justify-center border ${colors.numberBorder} transition-colors`}>
+                      <div className={`flex-shrink-0 w-14 h-14 ${colors.numberBg} rounded-lg flex items-center justify-center border ${colors.numberBorder} transition-colors`}>
                         <span className={`text-xl font-bold ${colors.numberColor}`}>{parseInt(weekNum)}</span>
                       </div>
                       <div>
