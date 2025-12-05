@@ -4,189 +4,7 @@
 
 :root {
   --foreground-rgb: 226, 232, 240;
-  --background-color: #262626;
-  
-  /* Red */
-  --color-red-50: #ffe5e5;
-  --color-red-100: #ffcccc;
-  --color-red-200: #ff9999;
-  --color-red-300: #ff6666;
-  --color-red-400: #ff3333;
-  --color-red-500: #ff0000;
-  --color-red-600: #cc0000;
-  --color-red-700: #990000;
-  --color-red-800: #660000;
-  --color-red-900: #330000;
-  --color-red-950: #240000;
-
-  /* Lime */
-  --color-lime-50: #e5ffe5;
-  --color-lime-100: #ccffcc;
-  --color-lime-200: #99ff99;
-  --color-lime-300: #66ff66;
-  --color-lime-400: #33ff33;
-  --color-lime-500: #00ff00;
-  --color-lime-600: #00cc00;
-  --color-lime-700: #009900;
-  --color-lime-800: #006600;
-  --color-lime-900: #003300;
-  --color-lime-950: #002400;
-
-  /* Blue */
-  --color-blue-50: #e5e5ff;
-  --color-blue-100: #ccccff;
-  --color-blue-200: #9999ff;
-  --color-blue-300: #6666ff;
-  --color-blue-400: #3333ff;
-  --color-blue-500: #0000ff;
-  --color-blue-600: #0000cc;
-  --color-blue-700: #000099;
-  --color-blue-800: #000066;
-  --color-blue-900: #000033;
-  --color-blue-950: #000024;
-
-  /* Fiery Terracotta */
-  --color-fiery-terracotta-50: #fcede8;
-  --color-fiery-terracotta-100: #f9dad2;
-  --color-fiery-terracotta-200: #f3b6a5;
-  --color-fiery-terracotta-300: #ed9178;
-  --color-fiery-terracotta-400: #e86c4a;
-  --color-fiery-terracotta-500: #e2481d;
-  --color-fiery-terracotta-600: #b53917;
-  --color-fiery-terracotta-700: #872b12;
-  --color-fiery-terracotta-800: #5a1d0c;
-  --color-fiery-terracotta-900: #2d0e06;
-  --color-fiery-terracotta-950: #200a04;
-
-  /* Tuscan Sun */
-  --color-tuscan-sun-50: #fdf7e7;
-  --color-tuscan-sun-100: #fcf0cf;
-  --color-tuscan-sun-200: #f9e19f;
-  --color-tuscan-sun-300: #f6d26f;
-  --color-tuscan-sun-400: #f3c33f;
-  --color-tuscan-sun-500: #f0b40f;
-  --color-tuscan-sun-600: #c0900c;
-  --color-tuscan-sun-700: #906c09;
-  --color-tuscan-sun-800: #604806;
-  --color-tuscan-sun-900: #302403;
-  --color-tuscan-sun-950: #221902;
-
-  /* Mint Leaf */
-  --color-mint-leaf-50: #ebf9f5;
-  --color-mint-leaf-100: #d7f4ec;
-  --color-mint-leaf-200: #afe9d8;
-  --color-mint-leaf-300: #88ddc5;
-  --color-mint-leaf-400: #60d2b2;
-  --color-mint-leaf-500: #38c79e;
-  --color-mint-leaf-600: #2d9f7f;
-  --color-mint-leaf-700: #22775f;
-  --color-mint-leaf-800: #16503f;
-  --color-mint-leaf-900: #0b2820;
-  --color-mint-leaf-950: #081c16;
-
-  /* Crimson Violet */
-  --color-crimson-violet-50: #faebf5;
-  --color-crimson-violet-100: #f5d6ec;
-  --color-crimson-violet-200: #eaaed8;
-  --color-crimson-violet-300: #e085c5;
-  --color-crimson-violet-400: #d55db1;
-  --color-crimson-violet-500: #cb349e;
-  --color-crimson-violet-600: #a22a7e;
-  --color-crimson-violet-700: #7a1f5f;
-  --color-crimson-violet-800: #51153f;
-  --color-crimson-violet-900: #290a20;
-  --color-crimson-violet-950: #1c0716;
-
-  /* Dark Emerald */
-  --color-dark-emerald-50: #ebf9f1;
-  --color-dark-emerald-100: #d8f3e3;
-  --color-dark-emerald-200: #b1e7c7;
-  --color-dark-emerald-300: #8adbaa;
-  --color-dark-emerald-400: #63cf8e;
-  --color-dark-emerald-500: #3cc372;
-  --color-dark-emerald-600: #309c5b;
-  --color-dark-emerald-700: #247544;
-  --color-dark-emerald-800: #184e2e;
-  --color-dark-emerald-900: #0c2717;
-  --color-dark-emerald-950: #081b10;
-
-  /* Midnight Violet */
-  --color-midnight-violet-50: #f8edf6;
-  --color-midnight-violet-100: #f1daed;
-  --color-midnight-violet-200: #e2b6da;
-  --color-midnight-violet-300: #d491c8;
-  --color-midnight-violet-400: #c66cb5;
-  --color-midnight-violet-500: #b847a3;
-  --color-midnight-violet-600: #933982;
-  --color-midnight-violet-700: #6e2b62;
-  --color-midnight-violet-800: #491d41;
-  --color-midnight-violet-900: #250e21;
-  --color-midnight-violet-950: #1a0a17;
-
-  /* Blazing Flame */
-  --color-blazing-flame-50: #ffebe6;
-  --color-blazing-flame-100: #fed7cd;
-  --color-blazing-flame-200: #feb09a;
-  --color-blazing-flame-300: #fd8868;
-  --color-blazing-flame-400: #fd6035;
-  --color-blazing-flame-500: #fc3903;
-  --color-blazing-flame-600: #ca2d02;
-  --color-blazing-flame-700: #972202;
-  --color-blazing-flame-800: #651701;
-  --color-blazing-flame-900: #320b01;
-  --color-blazing-flame-950: #230800;
-
-  /* Emerald */
-  --color-emerald-50: #e9fbf2;
-  --color-emerald-100: #d4f7e5;
-  --color-emerald-200: #a9efcb;
-  --color-emerald-300: #7ee7b1;
-  --color-emerald-400: #53df97;
-  --color-emerald-500: #28d77d;
-  --color-emerald-600: #20ac64;
-  --color-emerald-700: #18814b;
-  --color-emerald-800: #105632;
-  --color-emerald-900: #082b19;
-  --color-emerald-950: #061e11;
-
-  /* Lavender Mist */
-  --color-lavender-mist-50: #f4eff5;
-  --color-lavender-mist-100: #eadfec;
-  --color-lavender-mist-200: #d5bfd9;
-  --color-lavender-mist-300: #bf9fc6;
-  --color-lavender-mist-400: #aa80b3;
-  --color-lavender-mist-500: #95609f;
-  --color-lavender-mist-600: #774d80;
-  --color-lavender-mist-700: #593960;
-  --color-lavender-mist-800: #3b2640;
-  --color-lavender-mist-900: #1e1320;
-  --color-lavender-mist-950: #150d16;
-
-  /* Ocean Blue */
-  --color-ocean-blue-50: #e6f4ff;
-  --color-ocean-blue-100: #cce9ff;
-  --color-ocean-blue-200: #99d3ff;
-  --color-ocean-blue-300: #66bdff;
-  --color-ocean-blue-400: #33a7ff;
-  --color-ocean-blue-500: #0091ff;
-  --color-ocean-blue-600: #0074cc;
-  --color-ocean-blue-700: #005799;
-  --color-ocean-blue-800: #003a66;
-  --color-ocean-blue-900: #001d33;
-  --color-ocean-blue-950: #001424;
-
-  /* Medium Slate Blue */
-  --color-medium-slate-blue-50: #ece5ff;
-  --color-medium-slate-blue-100: #daccff;
-  --color-medium-slate-blue-200: #b499ff;
-  --color-medium-slate-blue-300: #8f66ff;
-  --color-medium-slate-blue-400: #6933ff;
-  --color-medium-slate-blue-500: #4400ff;
-  --color-medium-slate-blue-600: #3600cc;
-  --color-medium-slate-blue-700: #290099;
-  --color-medium-slate-blue-800: #1b0066;
-  --color-medium-slate-blue-900: #0e0033;
-  --color-medium-slate-blue-950: #0a0024;
+  --background-color: #0E0725;
 }
 
 body {
@@ -263,17 +81,17 @@ body {
 
 .glitch-pixel:hover::before {
   opacity: 1;
-  color: #fc3903;
+  color: #E536AB;
   animation: pixel-glitch-1 0.1s infinite steps(2);
-  text-shadow: 2px 0 #fc3903, -2px 0 #fc3903;
+  text-shadow: 2px 0 #E536AB, -2px 0 #E536AB;
 }
 
 .glitch-pixel:hover::after {
   opacity: 1;
-  color: #3cc372;
+  color: #39FF14;
   animation: pixel-glitch-2 0.1s infinite steps(2);
   animation-delay: 0.05s;
-  text-shadow: -2px 0 #3cc372, 2px 0 #3cc372;
+  text-shadow: -2px 0 #39FF14, 2px 0 #39FF14;
 }
 
 @keyframes pixel-glitch-1 {

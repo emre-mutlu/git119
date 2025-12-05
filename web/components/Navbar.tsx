@@ -23,7 +23,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center group select-none relative">
             <span 
               data-text="git.119"
-              className="font-[family-name:var(--font-lexend)] text-4xl tracking-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-darkemerald-500 to-slate-500 glitch-pixel"
+              className="font-mono text-4xl tracking-tight font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent glitch-pixel"
             >
               git.119
             </span>
@@ -39,13 +39,13 @@ export default function Navbar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ease-in-out group ${
+                  className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ease-in-out ${
                     isActive
-                      ? 'bg-ocean-500/20 text-white'
-                      : 'text-slate-400 hover:text-white hover:bg-ocean-500/10'
+                      ? 'bg-primary/20 text-accent'
+                      : 'text-slate-400 hover:text-white hover:bg-primary/10'
                   }`}
                 >
-                  <Icon size={16} className={isActive ? 'text-white' : 'text-slate-500 group-hover:text-white'} />
+                  <Icon size={16} className={isActive ? 'text-accent' : 'text-slate-500 group-hover:text-slate-300'} />
                   <span>{item.name}</span>
                 </Link>
               );

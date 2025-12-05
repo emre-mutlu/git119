@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-const colors = ['#95609f', '#b847a3', '#0091ff']; // lavender, midnight violet, ocean blue
+const colors = ['#5C03BC', '#E536AB', '#39FF14']; // primary, accent, neon
 
 export default function ColorfulHr() {
   const [color, setColor] = useState(colors[0]);
