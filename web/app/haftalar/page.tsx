@@ -26,20 +26,21 @@ const weeks = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
 const getWeekTheme = (weekNum: string) => {
   const num = parseInt(weekNum);
 
+  // Week 1 - Yellow (Altın Sarısı #F3C969)
   if (num === 1) {
     return {
       number: {
-        bg: 'bg-gradient-to-br from-primary/30 to-accent/20',
-        border: 'border-primary/30 group-hover:border-accent/50',
-        text: 'text-accent',
+        bg: 'bg-gradient-to-br from-yellow/30 to-yellow/20',
+        border: 'border-yellow/30 group-hover:border-yellow/50',
+        text: 'text-yellow',
       },
-      cardBg: 'bg-gradient-to-br from-primary/10 via-transparent to-accent/5',
-      cardBorder: 'border-primary/25',
-      cardHoverBorder: 'hover:border-accent/60',
-      overlay: 'from-primary/25 via-accent/15 to-transparent',
-      arrowHover: 'group-hover:text-accent',
-      hoverShadow: '0 0 20px rgba(229,54,171,0.3), 0 0 35px rgba(229,54,171,0.15)',
-      gradientColor: 'rgba(229,54,171,',
+      cardBg: 'bg-gradient-to-br from-yellow/10 via-transparent to-yellow/5',
+      cardBorder: 'border-yellow/25',
+      cardHoverBorder: 'hover:border-yellow/60',
+      overlay: 'from-yellow/25 via-yellow/15 to-transparent',
+      arrowHover: 'group-hover:text-yellow',
+      hoverShadow: '0 0 20px rgba(255,255,0,0.3), 0 0 35px rgba(255,255,0,0.15)',
+      gradientColor: 'rgba(255,255,0,',
     };
   }
 
@@ -95,6 +96,7 @@ const getWeekTheme = (weekNum: string) => {
     };
   }
 
+  // Weeks 11-12 - Primary/Accent (Purple/Pink)
   return {
     number: {
       bg: 'bg-gradient-to-br from-primary/30 to-accent/20',
@@ -135,6 +137,20 @@ export default function WeeksIndexPage() {
   
   // Memoize rotations so they stay consistent
   const rotations = useMemo(() => generateRotations(), []);
+
+  // Restore scroll position from sessionStorage on mount
+  useEffect(() => {
+    const savedScrollPos = sessionStorage.getItem('haftalar-scroll-pos');
+    if (savedScrollPos) {
+      window.scrollTo(0, parseInt(savedScrollPos, 10));
+      sessionStorage.removeItem('haftalar-scroll-pos');
+    }
+  }, []);
+
+  // Save scroll position before navigating to week detail
+  const handleWeekClick = () => {
+    sessionStorage.setItem('haftalar-scroll-pos', window.scrollY.toString());
+  };
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -230,7 +246,7 @@ export default function WeeksIndexPage() {
             const gradientPos = isHovered ? getGradientPosition(weekNum) : { x: 50, y: 50 };
 
             return (
-              <Link key={weekNum} href={href} className="group block">
+              <Link key={weekNum} href={href} className="group block" onClick={handleWeekClick}>
                 <div 
                   ref={(el) => { cardRefs.current[weekNum] = el; }}
                   onMouseEnter={() => setHoveredWeek(weekNum)}

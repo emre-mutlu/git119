@@ -2,6 +2,8 @@ import { getMarkdownContent, getAllMarkdownSlugs } from '@/lib/markdown';
 import { notFound } from 'next/navigation';
 import path from 'path';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 
 interface PageProps {
   params: Promise<{
@@ -23,6 +25,7 @@ export default async function MarkdownPage({ params }: PageProps) {
   const markdownData = getMarkdownContent(slugPath + '.md');
   const isSyllabus = slugPath.toLowerCase() === 'mufredat/syllabus';
   const isKaynaklar = slugPath.toLowerCase().startsWith('kaynaklar/');
+  const isWeekPage = slugPath.toLowerCase().startsWith('haftalar/hafta_');
 
   if (!markdownData) {
     notFound();
@@ -50,6 +53,17 @@ export default async function MarkdownPage({ params }: PageProps) {
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
+      {/* Back to weeks button for week pages */}
+      {isWeekPage && (
+        <Link 
+          href="/haftalar" 
+          className="inline-flex items-center gap-2 text-slate-400 hover:text-white mb-8 transition-colors group"
+        >
+          <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
+          <span>Haftalara Dön</span>
+        </Link>
+      )}
+      
       <article className={articleClassName}>
         {/* If there's a title in frontmatter, display it differently or let markdown h1 handle it */}
         {data.title && (
@@ -59,7 +73,7 @@ export default async function MarkdownPage({ params }: PageProps) {
            </div>
         )}
         
-        <MarkdownRenderer content={content} />
+        <MarkdownRenderer content={content} hideHr={isKaynaklar} />
       </article>
     </div>
   );
