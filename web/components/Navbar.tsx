@@ -44,10 +44,12 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isGlitchActive, setIsGlitchActive] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const [proximity, setProximity] = useState(0);
   const [glitchColors, setGlitchColors] = useState(glitchPalettes[0]);
   const triggerTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const activeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const triggerGlitchRef = useRef<() => void>();
+  const logoRef = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
     const scheduleNext = () => {
@@ -97,19 +99,44 @@ export default function Navbar() {
     setIsHovering(false);
   };
 
+  // Proximity-based gentle reveal
+  useEffect(() => {
+    const handleMove = (e: MouseEvent) => {
+      const el = logoRef.current;
+      if (!el) return setProximity(0);
+      const rect = el.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = e.clientX - cx;
+      const dy = e.clientY - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const radius = 220;
+      const value = Math.max(0, Math.min(1, 1 - dist / radius));
+      setProximity(value);
+    };
+    window.addEventListener('mousemove', handleMove);
+    return () => window.removeEventListener('mousemove', handleMove);
+  }, []);
+
   const logoStyle: React.CSSProperties & Record<string, string> = {
     '--glitch-gradient-start': glitchColors.gradientStart,
     '--glitch-gradient-end': glitchColors.gradientEnd,
     '--glitch-before-color': glitchColors.before,
     '--glitch-after-color': glitchColors.after,
+    '--glitch-proximity': proximity.toFixed(3),
   };
 
-  // Show glitch if: random trigger is active OR currently hovering
-  const showGlitch = isGlitchActive || isHovering;
+  // Show glitch if: random trigger OR hover OR proximity fade-in
+  const showGlitch = isGlitchActive || isHovering || proximity > 0.05;
+  const proximityClass = proximity > 0.02 ? 'logo-glitch-proximity' : '';
 
-  const logoClassName = `font-rokkitt text-4xl tracking-tight font-[550] text-transparent bg-clip-text logo-glitch ${
-    showGlitch ? 'logo-glitch-active' : ''
-  }`;
+  const logoClassName = [
+    'font-rokkitt text-4xl tracking-tight font-[550] text-transparent bg-clip-text logo-glitch',
+    showGlitch ? 'logo-glitch-active' : '',
+    proximityClass,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <>
@@ -119,6 +146,7 @@ export default function Navbar() {
           {/* Logo / Brand */}
           <Link href="/" className="flex items-center group select-none relative" onMouseEnter={handleLogoMouseEnter} onMouseLeave={handleLogoMouseLeave}>
             <span 
+              ref={logoRef}
               data-text="git119"
               className={logoClassName}
               style={logoStyle}
