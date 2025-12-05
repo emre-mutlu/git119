@@ -205,7 +205,7 @@ body {
   margin-bottom: 1rem;
   font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
   letter-spacing: -0.01em;
-  color: rgb(229, 54, 171);
+  color: white;
 }
 
 .syllabus-prose h2::after {
@@ -224,7 +224,7 @@ body {
   text-transform: none;
   letter-spacing: 0.08em;
   font-size: 0.95rem;
-  color: rgb(229, 54, 171);
+  color: white;
   margin-top: 1.75rem;
   margin-bottom: 0.5rem;
   position: relative;
@@ -243,7 +243,7 @@ body {
 
 .syllabus-prose h4 {
   font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
-  color: rgb(229, 54, 171);
+  color: white;
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
   position: relative;
@@ -300,29 +300,14 @@ body {
   }
 }
 
-/* Kaynaklar page styles - h1 stays accent, h2+ becomes pink */
+/* Kaynaklar page styles - all headings white, no underlines */
 .kaynaklar-prose h2,
 .kaynaklar-prose h3,
 .kaynaklar-prose h4,
 .kaynaklar-prose h5,
 .kaynaklar-prose h6 {
-  color: rgb(229, 54, 171);
-  position: relative;
-  padding-bottom: 0.5rem;
+  color: white;
   margin-bottom: 1rem;
-}
-
-.kaynaklar-prose h2::after,
-.kaynaklar-prose h3::after,
-.kaynaklar-prose h4::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 1px;
-  background: rgb(229, 54, 171);
-  opacity: 0.7;
 }
 
 /* Logo condensed font */
@@ -364,4 +349,27 @@ body {
 
 .animate-float-slower {
   animation: floatSlower 25s ease-in-out infinite;
+}
+
+/* Blob float animation with scale and movement */
+@keyframes blobFloat {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(30px, -40px) scale(1.1);
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  75% {
+    transform: translate(40px, 30px) scale(1.15);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+.animate-blob-float {
+  animation: blobFloat ease-in-out infinite;
 }

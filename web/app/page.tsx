@@ -1,8 +1,59 @@
+'use client';
+
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import DashboardCards from '@/components/DashboardCards';
+import { useState, useEffect } from 'react';
+
+// Color palette for animated blobs
+const blobColors = [
+  { color: 'rgba(92,3,188,', name: 'primary' },      // #5C03BC
+  { color: 'rgba(229,54,171,', name: 'accent' },     // #E536AB
+  { color: 'rgba(57,255,20,', name: 'neon' },        // #39FF14
+  { color: 'rgba(252,57,3,', name: 'blazingflame' }, // #FC3903
+  { color: 'rgba(0,145,255,', name: 'ocean' },       // #0091FF
+  { color: 'rgba(40,215,125,', name: 'emeraldgreen' },// #28D77D
+  { color: 'rgba(149,96,159,', name: 'lavender' },   // #95609F
+];
+
+interface Blob {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  color: string;
+  duration: number;
+  delay: number;
+}
+
+const generateBlobs = (): Blob[] => {
+  return Array.from({ length: 5 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100 - 20,
+    y: Math.random() * 100 - 20,
+    size: 300 + Math.random() * 300,
+    color: blobColors[Math.floor(Math.random() * blobColors.length)].color,
+    duration: 15 + Math.random() * 15,
+    delay: Math.random() * 5,
+  }));
+};
 
 export default function Home() {
+  const [blobs, setBlobs] = useState<Blob[]>([]);
+
+  useEffect(() => {
+    setBlobs(generateBlobs());
+    
+    // Change blob colors periodically
+    const interval = setInterval(() => {
+      setBlobs(prev => prev.map(blob => ({
+        ...blob,
+        color: blobColors[Math.floor(Math.random() * blobColors.length)].color,
+      })));
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <div className="bg-dark text-slate-200 font-sans selection:bg-accent/30 h-[calc(100vh-5rem)] flex flex-col">
       
@@ -23,23 +74,38 @@ export default function Home() {
               dersi kapsamında <span className="font-bold text-slate-200">Adobe Photoshop</span>, <span className="font-bold text-slate-200">Illustrator</span> ve <span className="font-bold text-slate-200">Üretken Yapay Zeka</span> araçlarını kullanarak yaratıcılığınızı dijital dünyaya taşıyın.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/Mufredat/Syllabus" className="relative overflow-hidden px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg flex items-center group border border-white/10 transform-gpu neon-glow-button wave-button hover:-translate-y-1" style={{ transition: 'all 0.3s cubic-bezier(0.7, 0, 0.84, 0)' }}>
+              <Link href="/Mufredat/Syllabus" className="relative overflow-hidden px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg flex items-center group border border-white/10 transform-gpu neon-glow-button wave-button hover:-translate-y-1" style={{ transition: 'all 0.3s cubic-bezier(0.37, 0, 0.63, 1)' }}>
                 <span className="relative z-10 flex items-center">
                   Syllabus'ı İncele
                   <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
-              <Link href="/haftalar" className="relative overflow-hidden px-6 py-3 bg-dark/50 backdrop-blur-md hover:bg-primary/20 text-slate-200 font-medium rounded-lg border border-primary/30 hover:border-accent/50 shadow-lg shadow-black/10 transform-gpu wave-button-secondary hover:-translate-y-1" style={{ transition: 'all 0.3s cubic-bezier(0.7, 0, 0.84, 0)' }}>
+              <Link href="/haftalar" className="relative overflow-hidden px-6 py-3 bg-dark/50 backdrop-blur-md hover:bg-primary/20 text-slate-200 font-medium rounded-lg border border-primary/30 hover:border-accent/50 shadow-lg shadow-black/10 transform-gpu wave-button-secondary hover:-translate-y-1" style={{ transition: 'all 0.3s cubic-bezier(0.37, 0, 0.63, 1)' }}>
                 <span className="relative z-10">Haftalık Programa Git</span>
               </Link>
             </div>
           </div>
         </div>
         
-        {/* Abstract Background Decoration */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none animated-bg">
-           <div className="absolute top-[-15%] right-[-10%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] animate-float-slow"></div>
-           <div className="absolute bottom-[-20%] left-[-15%] w-[400px] h-[400px] bg-accent/10 rounded-full blur-[100px] animate-float-slower"></div>
+        {/* Animated Background Blobs */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {blobs.map((blob) => (
+            <div
+              key={blob.id}
+              className="absolute rounded-full animate-blob-float"
+              style={{
+                left: `${blob.x}%`,
+                top: `${blob.y}%`,
+                width: `${blob.size}px`,
+                height: `${blob.size}px`,
+                backgroundColor: `${blob.color}0.15)`,
+                filter: 'blur(80px)',
+                animationDuration: `${blob.duration}s`,
+                animationDelay: `${blob.delay}s`,
+                transition: 'background-color 3s ease-in-out',
+              }}
+            />
+          ))}
         </div>
       </header>
 
