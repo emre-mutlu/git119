@@ -1,3 +1,12 @@
+---
+title: "Ürün Fotoğrafı ve Sosyal Medya Görseli"
+description: "Rötuş araçları (Healing, Clone) ile ürün iyileştirme, sosyal medya görsel standartları ve tanıtım tasarımı."
+week: 8
+order: 8
+category: "Piksel Tabanlı Tasarım"
+duration: "3 Saat"
+---
+
 # Hafta 8: Ürün Fotoğrafı Düzenleme ve Sosyal Medya Görseli Hazırlama
 
 **Dersin Hedefleri:**

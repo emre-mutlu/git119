@@ -1,3 +1,12 @@
+---
+title: "Adobe Photoshop'a Giriş: Katmanlar ve Maskeler"
+description: "Photoshop arayüzü, non-destructive çalışma prensipleri, katman (Layer) yönetimi, maskeleme teknikleri ve temel seçim araçları."
+week: 5
+order: 5
+category: "Piksel Tabanlı Tasarım"
+duration: "3 Saat"
+---
+
 # Hafta 5: Adobe Photoshop'a Giriş: Katmanlar, Maskeler ve Seçim Teknikleri
 
 **Dersin Hedefleri:**

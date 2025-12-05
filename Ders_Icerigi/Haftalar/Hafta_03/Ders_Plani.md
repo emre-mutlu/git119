@@ -1,3 +1,12 @@
+---
+title: "Pen Tool Atölyesi ve Karakter Tasarımı"
+description: "Illustrator'ın en güçlü aracı Pen Tool'da ustalaşma, çizgi ve eğri kontrolleri, eskizden dijitale aktarım ve karakter çizimi."
+week: 3
+order: 3
+category: "Vektörel Tasarım"
+duration: "3 Saat"
+---
+
 # Hafta 3: Pen Tool Atölyesi ve Karakter Tasarımı
 
 **Dersin Hedefleri:**

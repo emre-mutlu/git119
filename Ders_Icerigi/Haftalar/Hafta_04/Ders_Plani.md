@@ -1,3 +1,12 @@
+---
+title: "İleri Vektörel Teknikler ve Tipografiye Giriş"
+description: "Shape Builder ve Pathfinder ile karmaşık formlar oluşturma, tipografinin temelleri, font hiyerarşisi ve metin düzenleme araçları."
+week: 4
+order: 4
+category: "Vektörel Tasarım"
+duration: "3 Saat"
+---
+
 # Hafta 4: İleri Vektörel Teknikler ve Tipografiye Giriş
 
 **Dersin Hedefleri:**

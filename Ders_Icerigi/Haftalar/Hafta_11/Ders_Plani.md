@@ -1,3 +1,12 @@
+---
+title: "Final Projesi Başlangıcı ve Konsept Geliştirme"
+description: "Vektörel ve piksel tabanlı becerileri birleştiren final projesi başlangıcı, konu seçimi, araştırma, mood board ve konsept sunumu."
+week: 11
+order: 11
+category: "Proje Geliştirme"
+duration: "3 Saat"
+---
+
 # Hafta 11: Final Projesi Başlangıcı ve Konsept Geliştirme
 
 **Dersin Hedefleri:**

@@ -1,3 +1,12 @@
+---
+title: "Derse Giriş, Vektör ve Piksel Kavramları"
+description: "Dersin genel tanıtımı, syllabus incelemesi ve dijital tasarımın temelleri olan vektör ve piksel kavramlarının karşılaştırmalı analizi."
+week: 1
+order: 1
+category: "Temel Kavramlar"
+duration: "3 Saat"
+---
+
 # Hafta 1: Derse Giriş, Vektör ve Piksel Kavramları
 
 **Dersin Hedefleri:**

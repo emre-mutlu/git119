@@ -1,3 +1,12 @@
+---
+title: "Yapay Zeka ile Fikir Geliştirme: Prompt Sanatı"
+description: "Generative AI temelleri, Midjourney/Firefly/DALL-E kullanımı, etkili prompt yazma teknikleri ve mood board oluşturma."
+week: 9
+order: 9
+category: "Yapay Zeka (AI)"
+duration: "3 Saat"
+---
+
 # Hafta 9: Yapay Zeka ile Fikir Geliştirme: Prompt Sanatı
 
 **Dersin Hedefleri:**

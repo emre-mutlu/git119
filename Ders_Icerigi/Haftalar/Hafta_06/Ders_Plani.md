@@ -1,3 +1,12 @@
+---
+title: "Fotoğraf Manipülasyonu: Renk, Işık ve Kompozisyon"
+description: "Adjustment Layers ile renk/ışık kontrolü, Blending Modes ile harmanlama ve atmosferik manipülasyon teknikleri."
+week: 6
+order: 6
+category: "Piksel Tabanlı Tasarım"
+duration: "3 Saat"
+---
+
 # Hafta 6: Fotoğraf Manipülasyonu: Renk, Işık ve Kompozisyon
 
 **Dersin Hedefleri:**

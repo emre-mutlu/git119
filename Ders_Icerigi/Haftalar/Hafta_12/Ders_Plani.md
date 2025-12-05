@@ -1,3 +1,12 @@
+---
+title: "İleri Tasarım İpuçları ve Portfolyo Hazırlığı"
+description: "İleri tasarım teknikleri, görsel hiyerarşi, sunum stratejileri ve profesyonel portfolyo hazırlığı. Final projesi mentörlüğü."
+week: 12
+order: 12
+category: "Kariyer & Portfolyo"
+duration: "3 Saat"
+---
+
 # Hafta 12: İleri Tasarım İpuçları, Portfolyo Hazırlığı ve Final Projesi Mentörlüğü
 
 **Dersin Hedefleri:**

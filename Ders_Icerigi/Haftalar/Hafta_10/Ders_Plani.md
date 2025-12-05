@@ -1,3 +1,12 @@
+---
+title: "Yapay Zeka Görsellerini Profesyonel Tasarıma Dönüştürme"
+description: "AI çıktılarını Photoshop Generative Fill ve Illustrator Text to Vector ile işleme, post-prodüksiyon ve profesyonel entegrasyon."
+week: 10
+order: 10
+category: "Yapay Zeka (AI)"
+duration: "3 Saat"
+---
+
 # Hafta 10: Yapay Zeka Görsellerini Profesyonel Tasarıma Dönüştürme
 
 **Dersin Hedefleri:**

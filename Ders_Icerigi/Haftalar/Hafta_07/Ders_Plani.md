@@ -1,3 +1,12 @@
+---
+title: "Kavramsal Sanat / Poster Tasarımı"
+description: "İleri kompozisyon teknikleri, görsel metafor kullanımı ve kavramsal sanat üretimi. Poster tasarımı ve görsel anlatım pratikleri."
+week: 7
+order: 7
+category: "Piksel Tabanlı Tasarım"
+duration: "3 Saat"
+---
+
 # Hafta 7: Kavramsal Sanat / Poster Tasarımı
 
 **Dersin Hedefleri:**

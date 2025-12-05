@@ -1,3 +1,12 @@
+---
+title: "Adobe Illustrator Arayüzü ve Temel Araçlar"
+description: "Illustrator arayüzü, çalışma alanı yönetimi, temel seçim ve şekil araçları (Rectangle, Ellipse) ile vektörel çizime giriş."
+week: 2
+order: 2
+category: "Vektörel Tasarım"
+duration: "3 Saat"
+---
+
 # Hafta 2: Adobe Illustrator Arayüzü ve Temel Araçlar
 
 **Dersin Hedefleri:**
