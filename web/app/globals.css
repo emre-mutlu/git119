@@ -29,11 +29,13 @@ body {
 .prose h2 {
   margin-top: 2.5rem;
   margin-bottom: 1rem;
+  border-bottom: none !important;
 }
 
 .prose h3 {
   margin-top: 2rem;
   margin-bottom: 0.75rem;
+  border-bottom: none !important;
 }
 
 .prose h4, .prose h5, .prose h6 {

@@ -21,11 +21,11 @@ export default function Home() {
               git.119 dersi kapsamında Adobe Photoshop, Illustrator ve Üretken Yapay Zeka araçlarını kullanarak yaratıcılığınızı dijital dünyaya taşıyın.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/Mufredat/Syllabus" className="px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg shadow-lg shadow-primary/30 transition-all duration-200 flex items-center group border border-white/10">
+              <Link href="/Mufredat/Syllabus" className="px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg shadow-lg shadow-primary/30 transition-all duration-200 flex items-center group border border-white/10 transform-gpu">
                 Syllabus'ı İncele
                 <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link href="/haftalar" className="px-6 py-3 bg-dark/50 backdrop-blur-md hover:bg-primary/20 text-slate-200 font-medium rounded-lg border border-primary/30 hover:border-accent/50 transition-all duration-200 shadow-lg shadow-black/10">
+              <Link href="/haftalar" className="px-6 py-3 bg-dark/50 backdrop-blur-md hover:bg-primary/20 text-slate-200 font-medium rounded-lg border border-primary/30 hover:border-accent/50 transition-all duration-200 shadow-lg shadow-black/10 transform-gpu">
                 Haftalık Programa Git
               </Link>
             </div>
@@ -45,16 +45,20 @@ export default function Home() {
           
           {/* Card 1: Haftalık Akış */}
           <div className="bg-dark/50 backdrop-blur-md border border-primary/20 hover:border-accent/40 p-6 rounded-xl transition-all duration-200 group shadow-lg shadow-black/5 hover:shadow-accent/10">
-            <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
-              <Calendar className="text-accent" size={24} />
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center group-hover:bg-primary/30 transition-colors">
+                <Calendar className="text-accent" size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-white">Haftalık Akış</h3>
             </div>
-            <h3 className="text-xl font-bold text-white mb-2">Haftalık Akış</h3>
             <p className="text-slate-400 text-sm mb-4">
               Her haftanın ders planına, ödevlerine ve materyallerine buradan ulaşabilirsiniz.
             </p>
-            <Link href="/haftalar" className="text-accent text-sm font-medium hover:text-white flex items-center">
-              Programa Bak <ArrowRight size={14} className="ml-1" />
-            </Link>
+            <div className="flex justify-end">
+              <Link href="/haftalar" className="text-accent text-sm font-medium hover:text-white flex items-center">
+                Programa Bak <ArrowRight size={14} className="ml-1" />
+              </Link>
+            </div>
           </div>
 
           {/* Card 2: Müfredat */}
