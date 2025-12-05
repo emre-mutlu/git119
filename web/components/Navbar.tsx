@@ -50,6 +50,7 @@ export default function Navbar() {
   const activeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const triggerGlitchRef = useRef<() => void>();
   const logoRef = useRef<HTMLSpanElement | null>(null);
+  const navRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const scheduleNext = () => {
@@ -99,24 +100,46 @@ export default function Navbar() {
     setIsHovering(false);
   };
 
-  // Proximity-based gentle reveal
+  // Proximity-based gentle reveal (limited to navbar bounds)
   useEffect(() => {
+    const navEl = navRef.current;
+    if (!navEl) return;
+
     const handleMove = (e: MouseEvent) => {
       const el = logoRef.current;
       if (!el) return setProximity(0);
+      const navRect = navEl.getBoundingClientRect();
+      const insideNav =
+        e.clientX >= navRect.left &&
+        e.clientX <= navRect.right &&
+        e.clientY >= navRect.top &&
+        e.clientY <= navRect.bottom;
+      if (!insideNav) {
+        setProximity(0);
+        return;
+      }
+
       const rect = el.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
       const dx = e.clientX - cx;
       const dy = e.clientY - cy;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      const radius = 110; // tighter hotspot
+      const radius = 110; // hotspot radius within nav
       const raw = Math.max(0, Math.min(1, 1 - dist / radius));
-      const eased = Math.pow(raw, 1.1); // softer decay
+      const eased = Math.pow(raw, 1.05); // slightly softer decay
       setProximity(eased);
     };
-    window.addEventListener('mousemove', handleMove);
-    return () => window.removeEventListener('mousemove', handleMove);
+
+    const handleLeave = () => setProximity(0);
+
+    navEl.addEventListener('mousemove', handleMove);
+    navEl.addEventListener('mouseleave', handleLeave);
+
+    return () => {
+      navEl.removeEventListener('mousemove', handleMove);
+      navEl.removeEventListener('mouseleave', handleLeave);
+    };
   }, []);
 
   const logoStyle: React.CSSProperties & Record<string, string> = {
@@ -125,7 +148,8 @@ export default function Navbar() {
     '--glitch-before-color': glitchColors.before,
     '--glitch-after-color': glitchColors.after,
     '--glitch-proximity': proximity.toFixed(3),
-    '--glitch-speed-scale': (0.6 + 0.4 * proximity).toFixed(3),
+    '--glitch-speed-scale': (0.5 + 0.35 * proximity).toFixed(3),
+    backgroundImage: 'linear-gradient(120deg, #39FF14 0%, #39FF14 48%, #5C03BC 48%, #5C03BC 100%)',
   };
 
   // Show glitch if: random trigger OR hover OR proximity fade-in
@@ -142,7 +166,7 @@ export default function Navbar() {
 
   return (
     <>
-    <nav className="bg-dark/60 backdrop-blur-lg backdrop-saturate-200 backdrop-brightness-125 text-slate-200 shadow-md sticky top-0 z-50 border-b border-white/5">
+    <nav ref={navRef} className="bg-dark/60 backdrop-blur-lg backdrop-saturate-200 backdrop-brightness-125 text-slate-200 shadow-md sticky top-0 z-50 border-b border-white/5">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           {/* Logo / Brand */}

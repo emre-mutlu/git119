@@ -94,7 +94,7 @@ body {
   mix-blend-mode: screen;
   opacity: 0;
   /* Faster flash-then-fade */
-  transition: opacity 0.25s cubic-bezier(0.33, 0, 0.45, 1);
+  transition: opacity 0.12s cubic-bezier(0.33, 0, 0.45, 1);
 }
 
 .logo-glitch::before {
@@ -118,13 +118,13 @@ body {
 .logo-glitch-active::before,
 .logo-glitch:hover::before {
   opacity: 1;
-  animation: glitchShift calc(var(--glitch-shift-base, 0.35s) * var(--glitch-speed-scale, 1)) steps(2, end) infinite;
+  animation: glitchShift calc(var(--glitch-shift-base, 0.28s) * var(--glitch-speed-scale, 1)) steps(2, end) infinite;
 }
 
 .logo-glitch-active::after,
 .logo-glitch:hover::after {
   opacity: 1;
-  animation: glitchSlice calc(var(--glitch-slice-base, 0.28s) * var(--glitch-speed-scale, 1)) steps(3, end) infinite;
+  animation: glitchSlice calc(var(--glitch-slice-base, 0.22s) * var(--glitch-speed-scale, 1)) steps(3, end) infinite;
 }
 
 @keyframes glitchShift {
@@ -308,12 +308,13 @@ body {
 .kaynaklar-prose > h2,
 .kaynaklar-prose > h3,
 .mesh-heading {
-  --mesh-a: rgb(var(--color-primary) / 0.5);
-  --mesh-b: rgb(var(--color-accent) / 0.45);
-  --mesh-c: rgb(var(--color-neon) / 0.35);
+  --mesh-a: rgb(var(--color-primary) / 0.52);
+  --mesh-b: rgb(var(--color-accent) / 0.5);
+  --mesh-c: rgb(var(--color-neon) / 0.38);
   background:
-    radial-gradient(120% 90% at 18% 105%, var(--mesh-a) 0%, transparent 60%),
-    radial-gradient(115% 85% at 82% 98%, var(--mesh-b) 0%, transparent 58%);
+    radial-gradient(140% 110% at 12% 96%, var(--mesh-a) 0%, transparent 55%),
+    radial-gradient(135% 105% at 88% 108%, var(--mesh-b) 0%, transparent 58%),
+    radial-gradient(120% 95% at 55% -5%, var(--mesh-c) 0%, transparent 60%);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   margin-left: -1rem;
@@ -387,78 +388,6 @@ body {
   --mesh-b: rgb(var(--color-neon) / 0.38);
 }
 
-/* Week card custom palettes (greens for weeks 8-10) */
-.week8-card-bg {
-  background: linear-gradient(135deg, rgba(46, 204, 113, 0.16), rgba(26, 188, 156, 0.08));
-}
-
-.week8-card-border {
-  border-color: rgba(46, 204, 113, 0.35);
-}
-
-.week8-card-hover:hover {
-  border-color: rgba(46, 204, 113, 0.65);
-}
-
-.week8-number-bg {
-  background: linear-gradient(135deg, rgba(46, 204, 113, 0.35), rgba(26, 188, 156, 0.25));
-}
-
-.week8-number-border {
-  border-color: rgba(46, 204, 113, 0.4);
-}
-
-.week8-number-text {
-  color: #2ECC71;
-}
-
-.week9-card-bg {
-  background: linear-gradient(135deg, rgba(125, 252, 93, 0.16), rgba(80, 214, 120, 0.08));
-}
-
-.week9-card-border {
-  border-color: rgba(125, 252, 93, 0.35);
-}
-
-.week9-card-hover:hover {
-  border-color: rgba(125, 252, 93, 0.65);
-}
-
-.week9-number-bg {
-  background: linear-gradient(135deg, rgba(125, 252, 93, 0.35), rgba(80, 214, 120, 0.25));
-}
-
-.week9-number-border {
-  border-color: rgba(125, 252, 93, 0.4);
-}
-
-.week9-number-text {
-  color: #7DFC5D;
-}
-
-.week10-card-bg {
-  background: linear-gradient(135deg, rgba(52, 232, 158, 0.16), rgba(0, 173, 181, 0.08));
-}
-
-.week10-card-border {
-  border-color: rgba(52, 232, 158, 0.35);
-}
-
-.week10-card-hover:hover {
-  border-color: rgba(52, 232, 158, 0.65);
-}
-
-.week10-number-bg {
-  background: linear-gradient(135deg, rgba(52, 232, 158, 0.35), rgba(0, 173, 181, 0.25));
-}
-
-.week10-number-border {
-  border-color: rgba(52, 232, 158, 0.4);
-}
-
-.week10-number-text {
-  color: #34E89E;
-}
 
 .syllabus-prose > h3:nth-of-type(4n),
 .kaynaklar-prose > h3:nth-of-type(4n) {

@@ -26,7 +26,7 @@ const weeks = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
 const getWeekTheme = (weekNum: string) => {
   const num = parseInt(weekNum);
 
-  // Week 1 - Neon Green (#39FF14)
+  // Week groups with distinct palette (8/9/10 unified emerald)
   if (num === 1) {
     return {
       number: {
@@ -78,71 +78,37 @@ const getWeekTheme = (weekNum: string) => {
     };
   }
 
-  if (num === 8) {
+  if (num >= 8 && num <= 10) {
     return {
       number: {
-        bg: 'week8-number-bg',
-        border: 'week8-number-border group-hover:week8-number-border',
-        text: 'week8-number-text',
+        bg: 'bg-gradient-to-br from-emeraldgreen-400/30 to-emeraldgreen-500/20',
+        border: 'border-emeraldgreen-400/30 group-hover:border-emeraldgreen-300/50',
+        text: 'text-emeraldgreen-300',
       },
-      cardBg: 'week8-card-bg',
-      cardBorder: 'week8-card-border',
-      cardHoverBorder: 'week8-card-hover',
-      overlay: 'from-emeraldgreen-400/30 via-emeraldgreen-400/15 to-transparent',
-      arrowHover: 'group-hover:week8-number-text',
-      hoverShadow: '0 0 20px rgba(46,204,113,0.28), 0 0 35px rgba(26,188,156,0.15)',
-      gradientColor: 'rgba(46,204,113,',
+      cardBg: 'bg-gradient-to-br from-emeraldgreen-500/10 via-transparent to-emeraldgreen-400/5',
+      cardBorder: 'border-emeraldgreen-500/25',
+      cardHoverBorder: 'hover:border-emeraldgreen-400/60',
+      overlay: 'from-emeraldgreen-500/25 via-emeraldgreen-400/15 to-transparent',
+      arrowHover: 'group-hover:text-emeraldgreen-300',
+      hoverShadow: '0 0 20px rgba(40,215,125,0.28), 0 0 35px rgba(40,215,125,0.15)',
+      gradientColor: 'rgba(40,215,125,',
     };
   }
 
-  if (num === 9) {
-    return {
-      number: {
-        bg: 'week9-number-bg',
-        border: 'week9-number-border group-hover:week9-number-border',
-        text: 'week9-number-text',
-      },
-      cardBg: 'week9-card-bg',
-      cardBorder: 'week9-card-border',
-      cardHoverBorder: 'week9-card-hover',
-      overlay: 'from-neon/30 via-neon/15 to-transparent',
-      arrowHover: 'group-hover:week9-number-text',
-      hoverShadow: '0 0 20px rgba(125,252,93,0.28), 0 0 35px rgba(80,214,120,0.16)',
-      gradientColor: 'rgba(125,252,93,',
-    };
-  }
-
-  if (num === 10) {
-    return {
-      number: {
-        bg: 'week10-number-bg',
-        border: 'week10-number-border group-hover:week10-number-border',
-        text: 'week10-number-text',
-      },
-      cardBg: 'week10-card-bg',
-      cardBorder: 'week10-card-border',
-      cardHoverBorder: 'week10-card-hover',
-      overlay: 'from-emeraldgreen-400/30 via-emeraldgreen-300/15 to-transparent',
-      arrowHover: 'group-hover:week10-number-text',
-      hoverShadow: '0 0 20px rgba(52,232,158,0.28), 0 0 35px rgba(0,173,181,0.15)',
-      gradientColor: 'rgba(52,232,158,',
-    };
-  }
-
-  // Weeks 11-12 - Emerald Green (#28D77D)
+  // Weeks 11-12 - Royal purple
   return {
     number: {
-      bg: 'bg-gradient-to-br from-emeraldgreen-400/30 to-emeraldgreen-500/20',
-      border: 'border-emeraldgreen-400/30 group-hover:border-emeraldgreen-300/50',
-      text: 'text-emeraldgreen-300',
+      bg: 'bg-gradient-to-br from-primary/30 to-accent/25',
+      border: 'border-primary/30 group-hover:border-primary/50',
+      text: 'text-primary',
     },
-    cardBg: 'bg-gradient-to-br from-emeraldgreen-500/10 via-transparent to-emeraldgreen-400/5',
-    cardBorder: 'border-emeraldgreen-500/25',
-    cardHoverBorder: 'hover:border-emeraldgreen-400/60',
-    overlay: 'from-emeraldgreen-500/25 via-emeraldgreen-400/15 to-transparent',
-    arrowHover: 'group-hover:text-emeraldgreen-300',
-    hoverShadow: '0 0 20px rgba(40,215,125,0.3), 0 0 35px rgba(40,215,125,0.15)',
-    gradientColor: 'rgba(40,215,125,',
+    cardBg: 'bg-gradient-to-br from-primary/15 via-transparent to-accent/10',
+    cardBorder: 'border-primary/25',
+    cardHoverBorder: 'hover:border-primary/50',
+    overlay: 'from-primary/25 via-accent/20 to-transparent',
+    arrowHover: 'group-hover:text-primary',
+    hoverShadow: '0 0 20px rgba(92,3,188,0.28), 0 0 35px rgba(229,54,171,0.15)',
+    gradientColor: 'rgba(92,3,188,',
   };
 };
 
@@ -230,10 +196,12 @@ export default function WeeksIndexPage() {
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl font-bold text-white mb-4 mesh-heading">Haftalık Ders Akışı</h1>
-        <p className="text-slate-400 text-lg mb-12">
-          Dönem boyunca işleyeceğimiz konular, ödevler ve materyaller.
-        </p>
+        <div className="mb-10 border-b border-primary/30 pb-8">
+          <h1 className="text-4xl font-bold text-white mb-3">Haftalık Ders Akışı</h1>
+          <p className="text-slate-400 text-lg">
+            Dönem boyunca işleyeceğimiz konular, ödevler ve materyaller.
+          </p>
+        </div>
 
         <div ref={containerRef} className="flex flex-col gap-4" style={{ perspective: '1000px' }}>
           {weeks.map((weekNum) => {
