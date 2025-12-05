@@ -159,12 +159,12 @@ export default function WeeksIndexPage() {
   const getBlurAndBrightness = (weekNum: string) => {
     const cardElement = cardRefs.current[weekNum];
     if (!cardElement || !containerRef.current) {
-      return { blur: 0.6, brightness: 0.8, focused: false };
+      return { blur: 0.3, brightness: 0.85, focused: false };
     }
 
     // Default state - slight blur
     if (mouseY === null) {
-      return { blur: 0.6, brightness: 0.8, focused: false };
+      return { blur: 0.3, brightness: 0.85, focused: false };
     }
 
     const containerRect = containerRef.current.getBoundingClientRect();
@@ -178,13 +178,13 @@ export default function WeeksIndexPage() {
     if (distance <= focusRadius) {
       // Within focus radius - reduce blur based on proximity
       const normalizedDistance = distance / focusRadius;
-      const blur = normalizedDistance * 0.6; // 0 at center, 0.6 at edge
-      const brightness = 1 - (normalizedDistance * 0.15); // 1.0 at center, 0.85 at edge
+      const blur = normalizedDistance * 0.3; // 0 at center, 0.3 at edge
+      const brightness = 1 - (normalizedDistance * 0.1); // 1.0 at center, 0.9 at edge
       return { blur, brightness, focused: true };
     }
     
     // Outside focus radius - keep default blur (don't increase)
-    return { blur: 0.6, brightness: 0.8, focused: false };
+    return { blur: 0.3, brightness: 0.85, focused: false };
   };
 
   return (

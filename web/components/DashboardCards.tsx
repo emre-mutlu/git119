@@ -40,8 +40,18 @@ export default function DashboardCards() {
           <Link
             key={card.href}
             href={card.href}
-            className="bg-dark/70 backdrop-blur-md border border-primary/20 hover:border-accent/50 p-6 rounded-xl group shadow-lg shadow-black/10 hover:shadow-accent/20 flex flex-col cursor-pointer"
-            style={{ transition: 'all 0.15s ease-out' }}
+            className="bg-dark/70 backdrop-blur-md border border-primary/20 p-6 rounded-xl group shadow-lg shadow-black/10 flex flex-col cursor-pointer transition-all duration-150 ease-out hover:scale-[1.01]"
+            style={{ 
+              ['--card-color' as string]: card.color,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = card.color;
+              e.currentTarget.style.boxShadow = `0 0 20px ${card.color}30, 0 10px 40px ${card.color}15`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = '';
+              e.currentTarget.style.boxShadow = '';
+            }}
           >
             <div className="flex items-center gap-4 mb-4">
               <div
