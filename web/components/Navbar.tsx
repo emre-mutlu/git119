@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BookOpen, Calendar, Layers, Home } from 'lucide-react';
 
 const glitchPalettes = [
@@ -89,12 +89,12 @@ export default function Navbar() {
     triggerGlitchRef.current?.();
   };
 
-  const logoStyle = {
-    ['--glitch-gradient-start' as '--glitch-gradient-start']: glitchColors.gradientStart,
-    ['--glitch-gradient-end' as '--glitch-gradient-end']: glitchColors.gradientEnd,
-    ['--glitch-before-color' as '--glitch-before-color']: glitchColors.before,
-    ['--glitch-after-color' as '--glitch-after-color']: glitchColors.after,
-  } satisfies CSSProperties;
+  const logoStyle: React.CSSProperties & Record<string, string> = {
+    '--glitch-gradient-start': glitchColors.gradientStart,
+    '--glitch-gradient-end': glitchColors.gradientEnd,
+    '--glitch-before-color': glitchColors.before,
+    '--glitch-after-color': glitchColors.after,
+  };
 
   const logoClassName = `font-mono text-4xl tracking-tight font-black text-transparent bg-clip-text logo-glitch ${
     isGlitchActive ? 'logo-glitch-active' : ''
