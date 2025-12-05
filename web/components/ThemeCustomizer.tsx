@@ -71,10 +71,27 @@ const applyVariablesToDocument = (values: Partial<Record<ThemeVariable, string>>
 
 const randomLabelText = 'Rastgele';
 
-export default function ThemeCustomizer() {
+export default function ThemeCustomizer({ 
+  isOpen: externalIsOpen, 
+  onClose 
+}: { 
+  isOpen?: boolean; 
+  onClose?: () => void;
+} = {}) {
   const pathname = usePathname();
   const isHome = pathname === '/';
-  const [isOpen, setIsOpen] = useState(false);
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
+  
+  // Use external state if provided, otherwise use internal
+  const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
+  const toggleOpen = () => {
+    if (onClose && isOpen) {
+      onClose();
+    } else if (!onClose) {
+      setInternalIsOpen((prev) => !prev);
+    }
+  };
+
   const [selections, setSelections] = useState<Record<ThemeVariable, string>>(() => ({ ...defaultHexMap }));
   const [randomLabelColors, setRandomLabelColors] = useState<string[]>(() => randomizeLabelColors('Rastgele'));
 
@@ -88,8 +105,9 @@ export default function ThemeCustomizer() {
   };
 
   useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
+    if (onClose) onClose();
+    else setInternalIsOpen(false);
+  }, [pathname, onClose]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -142,16 +160,15 @@ export default function ThemeCustomizer() {
   };
 
   const panel = (
-    <div className="w-80 rounded-2xl border border-white/10 bg-dark/90 p-4 shadow-2xl backdrop-blur-xl">
-      <div className="mb-4 flex items-center justify-between">
+    <div className="w-72 rounded-xl border border-white/20 bg-dark/30 backdrop-blur-2xl p-3 shadow-2xl">
+      <div className="mb-3 flex items-center justify-between">
         <div>
-          <p className="text-sm font-semibold text-white">Renk Paleti</p>
-          <p className="text-xs text-slate-400">Var olan renklerle temayı anında güncelleyin.</p>
+          <p className="text-xs font-semibold text-white">Renk Paleti</p>
         </div>
-        <div className="flex items-center gap-3 text-xs font-semibold">
+        <div className="flex items-center gap-2 text-xs font-semibold">
           <button
             type="button"
-            className="px-2.5 py-1 rounded-full border border-white/10 text-slate-200 hover:text-white hover:border-white/30 transition"
+            className="px-2 py-0.5 rounded-full border border-white/10 text-slate-200 hover:text-white hover:border-white/30 transition text-[10px]"
             onClick={handleRandomize}
           >
             <span className="inline-flex gap-0.5">
@@ -164,7 +181,7 @@ export default function ThemeCustomizer() {
           </button>
           <button
             type="button"
-            className="text-neon hover:text-white transition"
+            className="text-neon hover:text-white transition text-[10px]"
             onClick={handleReset}
           >
             Sıfırla
@@ -172,29 +189,29 @@ export default function ThemeCustomizer() {
           <button
             type="button"
             className="text-slate-500 hover:text-white transition"
-            onClick={() => setIsOpen(false)}
+            onClick={onClose || toggleOpen}
             aria-label="Paneli kapat"
           >
-            <X size={14} />
+            <X size={12} />
           </button>
         </div>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-2.5">
         {controls.map((ctrl) => (
-          <div key={ctrl.variable} className="space-y-2">
-            <div className="flex items-center justify-between text-xs text-slate-300">
+          <div key={ctrl.variable} className="space-y-1.5">
+            <div className="flex items-center justify-between text-[10px] text-slate-300">
               <span className="font-semibold text-white">{ctrl.label}</span>
-              <span>{ctrl.description}</span>
+              <span className="text-slate-400">{ctrl.description}</span>
             </div>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-4 gap-1.5">
               {colorOptions.map((option) => (
                 <button
                   key={`${ctrl.variable}-${option.hex}`}
                   type="button"
                   onClick={() => applyColor(ctrl.variable, option.hex)}
-                  className={`h-10 rounded-lg border border-white/10 transition-transform focus:outline-none ${
-                    selections[ctrl.variable] === option.hex ? activeButtonClass : 'hover:border-white/40'
+                  className={`h-8 rounded-md border border-white/10 transition-transform focus:outline-none ${
+                    selections[ctrl.variable] === option.hex ? activeButtonClass : 'hover:border-white/40 hover:scale-105'
                   }`}
                   style={{ backgroundColor: option.hex }}
                   aria-label={`${ctrl.label} ${option.name}`}
@@ -209,22 +226,22 @@ export default function ThemeCustomizer() {
 
   if (isHome) {
     return (
-      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-sm">
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-xs">
         <button
           type="button"
-          onClick={() => setIsOpen((prev) => !prev)}
-          className="flex items-center justify-center gap-2 w-full rounded-full bg-dark/85 px-4 py-3 text-sm font-semibold text-slate-100 border border-white/10 shadow-lg backdrop-blur-md hover:bg-dark/90 transition neon-glow-button"
+          onClick={toggleOpen}
+          className="flex items-center justify-center gap-2 w-full rounded-full bg-dark/30 backdrop-blur-2xl px-4 py-2.5 text-xs font-semibold text-slate-100 border border-white/20 shadow-lg hover:bg-dark/40 transition neon-glow-button"
         >
-          <Palette size={16} />
+          <Palette size={14} />
           Tema Aracı
-          {isOpen && <X size={14} className="ml-1" />}
+          {isOpen && <X size={12} className="ml-1" />}
         </button>
         <div
           className={`transition-all duration-250 origin-bottom ${
             isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-2 pointer-events-none'
           }`}
         >
-          {isOpen && <div className="mt-3 w-full rounded-2xl border border-white/10 bg-dark/92 shadow-2xl backdrop-blur-xl">{panel}</div>}
+          {isOpen && <div className="mt-2">{panel}</div>}
         </div>
       </div>
     );
@@ -234,15 +251,15 @@ export default function ThemeCustomizer() {
     <div className="fixed top-1/2 right-0 -translate-y-1/2 z-50 flex flex-row-reverse items-center gap-2">
       <button
         type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
-        className={`rounded-l-2xl border border-white/10 bg-dark/80 px-3 py-5 text-slate-100 shadow-lg backdrop-blur-md flex flex-col items-center gap-2 transition-all neon-glow-button ${
+        onClick={toggleOpen}
+        className={`rounded-l-xl border border-white/20 bg-dark/30 backdrop-blur-2xl px-2.5 py-4 text-slate-100 shadow-lg flex flex-col items-center gap-2 transition-all neon-glow-button ${
           isOpen ? '' : 'translate-x-2'
         }`}
         aria-label="Tema aracını aç"
       >
-        <Palette size={16} />
+        <Palette size={14} />
         <span
-          className="text-[10px] tracking-[0.4em] uppercase"
+          className="text-[9px] tracking-[0.35em] uppercase"
           style={{ writingMode: 'vertical-rl' }}
         >
           Tema

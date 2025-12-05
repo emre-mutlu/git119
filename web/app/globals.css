@@ -80,7 +80,6 @@ body {
   text-shadow: 0 0 14px rgba(92, 3, 188, 0.35);
   transition: text-shadow 0.2s ease;
   color: transparent;
-  background-image: linear-gradient(120deg, var(--glitch-gradient-start), var(--glitch-gradient-end));
   -webkit-background-clip: text;
   background-clip: text;
 }
@@ -312,12 +311,12 @@ body {
   --mesh-b: rgb(var(--color-accent) / 0.5);
   --mesh-c: rgb(var(--color-neon) / 0.38);
   background:
-    radial-gradient(155% 135% at 20% 78%, var(--mesh-a) 0%, transparent 70%),
-    radial-gradient(155% 135% at 80% 82%, var(--mesh-b) 0%, transparent 70%),
-    radial-gradient(140% 120% at 50% 18%, var(--mesh-c) 0%, transparent 66%),
+    radial-gradient(165% 135% at 18% 82%, var(--mesh-a) 0%, transparent 68%),
+    radial-gradient(155% 125% at 82% 78%, var(--mesh-b) 0%, transparent 70%),
+    radial-gradient(140% 115% at 50% 12%, var(--mesh-c) 0%, transparent 64%),
     repeating-linear-gradient(135deg,
-      rgba(255,255,255,0.06) 0,
-      rgba(255,255,255,0.06) 1px,
+      rgba(255,255,255,0.03) 0,
+      rgba(255,255,255,0.03) 1px,
       rgba(0,0,0,0) 2px,
       rgba(0,0,0,0) 6px);
   backdrop-filter: blur(12px);
@@ -326,7 +325,7 @@ body {
   margin-right: -1rem;
   padding: 1rem 1.1rem 1.1rem;
   border-radius: 0.75rem;
-  text-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.9);
   border: 1px solid rgba(255,255,255,0.08);
   box-shadow: 0 20px 55px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);
 }

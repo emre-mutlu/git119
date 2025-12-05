@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
-import { BookOpen, Calendar, Layers, Home } from 'lucide-react';
+import { BookOpen, Calendar, Layers, Home, Palette } from 'lucide-react';
 import { iconColorMap } from '@/lib/iconColors';
 
 const glitchPalettes = [
@@ -40,7 +40,7 @@ const navigationItems = [
   { name: 'Kaynaklar', href: '/Kaynaklar/Kaynakca', icon: Layers, colorKey: 'kaynaklar' as const },
 ];
 
-export default function Navbar() {
+export default function Navbar({ onThemeToggle }: { onThemeToggle?: () => void }) {
   const pathname = usePathname();
   const [isGlitchActive, setIsGlitchActive] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
@@ -153,6 +153,8 @@ export default function Navbar() {
     backgroundImage: 'linear-gradient(120deg, #39FF14 0%, #39FF14 65%, #5C03BC 65%, #5C03BC 100%)',
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 100%',
+    WebkitBackgroundClip: 'text',
+    backgroundClip: 'text',
   };
 
   // Show glitch if: random trigger OR hover OR proximity fade-in
@@ -217,8 +219,17 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          {/* Mobile: Theme + Menu buttons */}
+          <div className="md:hidden flex items-center gap-2">
+            {onThemeToggle && (
+              <button
+                className="text-slate-200 hover:text-white focus:outline-none p-2 rounded-lg border border-white/10 hover:border-white/20 transition"
+                onClick={onThemeToggle}
+                aria-label="Tema aracını aç"
+              >
+                <Palette size={20} />
+              </button>
+            )}
             <button
               className="text-slate-200 hover:text-white focus:outline-none p-2 rounded-lg border border-white/10 hover:border-white/20 transition"
               onClick={() => setIsMenuOpen((prev) => !prev)}

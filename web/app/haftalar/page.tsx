@@ -196,8 +196,8 @@ export default function WeeksIndexPage() {
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-3xl mx-auto">
-        <div className="mb-10 border-b border-primary/30 pb-8">
-          <h1 className="text-4xl font-bold text-white mb-3">Haftalık Ders Akışı</h1>
+        <div className="mb-10">
+          <h1 className="text-4xl font-bold text-white mb-3">GİT 119 - Haftalık Ders Akışı</h1>
           <p className="text-slate-400 text-lg">
             Dönem boyunca işleyeceğimiz konular, ödevler ve materyaller.
           </p>
