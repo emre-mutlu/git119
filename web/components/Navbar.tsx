@@ -16,7 +16,7 @@ export default function Navbar() {
 
   return (
     <>
-    <nav className="bg-dark text-slate-200 shadow-md sticky top-0 z-50">
+    <nav className="bg-dark/80 backdrop-blur-md text-slate-200 shadow-md sticky top-0 z-50 border-b border-white/5">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           {/* Logo / Brand */}
@@ -41,8 +41,8 @@ export default function Navbar() {
                   href={item.href}
                   className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ease-in-out ${
                     isActive
-                      ? 'bg-primary/20 text-accent'
-                      : 'text-slate-400 hover:text-white hover:bg-primary/10'
+                      ? 'bg-primary/20 backdrop-blur-sm text-accent border border-white/10'
+                      : 'text-slate-400 hover:text-white hover:bg-primary/10 hover:backdrop-blur-sm hover:border hover:border-white/5'
                   }`}
                 >
                   <Icon size={16} className={isActive ? 'text-accent' : 'text-slate-500 group-hover:text-slate-300'} />

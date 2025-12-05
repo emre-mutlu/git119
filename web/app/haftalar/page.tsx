@@ -22,6 +22,48 @@ const weekTitles: { [key: string]: string } = {
 
 const weeks = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
+// Get color scheme for week number box
+const getWeekBoxColors = (weekNum: string) => {
+  const num = parseInt(weekNum);
+  
+  if (num === 1) {
+    // Week 1: Keep original (primary/accent - red/lime)
+    return {
+      bg: 'bg-gradient-to-br from-primary/30 to-accent/20',
+      border: 'border-primary/30 group-hover:border-accent/50',
+      text: 'text-accent',
+    };
+  } else if (num >= 2 && num <= 4) {
+    // Weeks 2-4: Orange (blazingflame)
+    return {
+      bg: 'bg-gradient-to-br from-blazingflame-400/30 to-blazingflame-500/20',
+      border: 'border-blazingflame-400/30 group-hover:border-blazingflame-300/50',
+      text: 'text-blazingflame-300',
+    };
+  } else if (num >= 5 && num <= 7) {
+    // Weeks 5-7: Blue (ocean)
+    return {
+      bg: 'bg-gradient-to-br from-ocean-400/30 to-ocean-500/20',
+      border: 'border-ocean-400/30 group-hover:border-ocean-300/50',
+      text: 'text-ocean-300',
+    };
+  } else if (num >= 8 && num <= 10) {
+    // Weeks 8-10: Green (emerald)
+    return {
+      bg: 'bg-gradient-to-br from-emeraldgreen-400/30 to-emeraldgreen-500/20',
+      border: 'border-emeraldgreen-400/30 group-hover:border-emeraldgreen-300/50',
+      text: 'text-emeraldgreen-300',
+    };
+  } else {
+    // Weeks 11-12: Purple (lavender)
+    return {
+      bg: 'bg-gradient-to-br from-lavender-400/30 to-lavender-500/20',
+      border: 'border-lavender-400/30 group-hover:border-lavender-300/50',
+      text: 'text-lavender-300',
+    };
+  }
+};
+
 // Generate random but consistent rotations for each week
 const generateRotations = () => {
   const rotations: { [key: string]: { rotateX: number; rotateY: number; translateY: number } } = {};
@@ -74,12 +116,12 @@ export default function WeeksIndexPage() {
 
   const getBlurAndBrightness = (weekNum: string) => {
     if (mouseY === null || !containerRef.current) {
-      return { blur: 1, brightness: 0.9, scale: 1 };
+      return { blur: 0.25, brightness: 0.9, scale: 1 };
     }
 
     const cardElement = cardRefs.current[weekNum];
     if (!cardElement) {
-      return { blur: 1, brightness: 0.9, scale: 1 };
+      return { blur: 0.25, brightness: 0.9, scale: 1 };
     }
 
     const containerRect = containerRef.current.getBoundingClientRect();
@@ -91,8 +133,9 @@ export default function WeeksIndexPage() {
     const maxDistance = 700; // Max distance for full blur (increased by 200px)
     
     // Calculate blur based on distance (0 at mouse position, max at maxDistance)
+    // Reduced to 1/4: max blur 0.375px instead of 1.5px
     const normalizedDistance = Math.min(distance / maxDistance, 1);
-    const blur = normalizedDistance * 1.5; // Max blur of 1.5px
+    const blur = normalizedDistance * 0.375; // Max blur of 0.375px (1.5/4)
     const brightness = 1 - (normalizedDistance * 0.2); // 0.8 to 1.0 brightness
     
     // Scale up slightly when very close to mouse
@@ -116,6 +159,7 @@ export default function WeeksIndexPage() {
             const { blur, brightness, scale } = getBlurAndBrightness(weekNum);
             const rotation = rotations[weekNum];
             const isHovered = hoveredWeek === weekNum;
+            const boxColors = getWeekBoxColors(weekNum);
 
             return (
               <Link key={weekNum} href={href} className="group block">
@@ -123,7 +167,7 @@ export default function WeeksIndexPage() {
                   ref={(el) => { cardRefs.current[weekNum] = el; }}
                   onMouseEnter={() => setHoveredWeek(weekNum)}
                   onMouseLeave={() => setHoveredWeek(null)}
-                  className="relative bg-dark backdrop-blur-sm border border-primary/20 hover:border-accent/50 p-5 rounded-xl transition-all duration-300 overflow-hidden hover:shadow-[0_0_30px_rgba(229,54,171,0.3),0_0_60px_rgba(92,3,188,0.2)]"
+                  className="relative bg-dark/60 backdrop-blur-md border border-primary/20 hover:border-accent/50 p-5 rounded-xl transition-all duration-300 overflow-hidden hover:shadow-[0_0_30px_rgba(229,54,171,0.3),0_0_60px_rgba(92,3,188,0.2)] shadow-lg shadow-black/10"
                   style={{
                     filter: `blur(${blur}px) brightness(${brightness})`,
                     transform: isHovered 
@@ -137,8 +181,8 @@ export default function WeeksIndexPage() {
                   
                   <div className="relative flex items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
-                      <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-primary/30 to-accent/20 rounded-lg flex items-center justify-center border border-primary/30 group-hover:border-accent/50 transition-colors">
-                        <span className="text-xl font-bold text-accent">{parseInt(weekNum)}</span>
+                      <div className={`flex-shrink-0 w-14 h-14 ${boxColors.bg} rounded-lg flex items-center justify-center border ${boxColors.border} transition-colors`}>
+                        <span className={`text-xl font-bold ${boxColors.text}`}>{parseInt(weekNum)}</span>
                       </div>
                       <div>
                         <span className="text-xs text-slate-500 uppercase tracking-wider">Hafta {parseInt(weekNum)}</span>

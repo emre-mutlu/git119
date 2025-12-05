@@ -10,7 +10,7 @@ export default function Home() {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-primary/10 border border-primary/30 rounded-full px-3 py-1 mb-6 backdrop-blur-sm">
+            <div className="inline-flex items-center space-x-2 bg-primary/10 backdrop-blur-md border border-primary/30 rounded-full px-3 py-1 mb-6 shadow-lg shadow-primary/5">
               <span className="flex w-2 h-2 bg-accent rounded-full animate-pulse"></span>
               <span className="text-accent text-xs font-medium tracking-wide uppercase">2025 Bahar Dönemi</span>
             </div>
@@ -21,11 +21,11 @@ export default function Home() {
               git.119 dersi kapsamında Adobe Photoshop, Illustrator ve Üretken Yapay Zeka araçlarını kullanarak yaratıcılığınızı dijital dünyaya taşıyın.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/Mufredat/Syllabus" className="px-6 py-3 bg-primary hover:bg-primary/80 text-white font-semibold rounded-lg shadow-lg shadow-primary/30 transition-all duration-200 flex items-center group">
+              <Link href="/Mufredat/Syllabus" className="px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg shadow-lg shadow-primary/30 transition-all duration-200 flex items-center group border border-white/10">
                 Syllabus'ı İncele
                 <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link href="/haftalar" className="px-6 py-3 bg-dark hover:bg-primary/20 text-slate-200 font-medium rounded-lg border border-primary/30 hover:border-accent/50 transition-all duration-200">
+              <Link href="/haftalar" className="px-6 py-3 bg-dark/50 backdrop-blur-md hover:bg-primary/20 text-slate-200 font-medium rounded-lg border border-primary/30 hover:border-accent/50 transition-all duration-200 shadow-lg shadow-black/10">
                 Haftalık Programa Git
               </Link>
             </div>
@@ -44,7 +44,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
           {/* Card 1: Haftalık Akış */}
-          <div className="bg-dark border border-primary/20 hover:border-accent/40 p-6 rounded-xl transition-all duration-200 group">
+          <div className="bg-dark/50 backdrop-blur-md border border-primary/20 hover:border-accent/40 p-6 rounded-xl transition-all duration-200 group shadow-lg shadow-black/5 hover:shadow-accent/10">
             <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
               <Calendar className="text-accent" size={24} />
             </div>
@@ -58,7 +58,7 @@ export default function Home() {
           </div>
 
           {/* Card 2: Müfredat */}
-          <div className="bg-dark border border-primary/20 hover:border-accent/40 p-6 rounded-xl transition-all duration-200 group">
+          <div className="bg-dark/50 backdrop-blur-md border border-primary/20 hover:border-accent/40 p-6 rounded-xl transition-all duration-200 group shadow-lg shadow-black/5 hover:shadow-accent/10">
             <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
               <BookOpen className="text-accent" size={24} />
             </div>
@@ -72,7 +72,7 @@ export default function Home() {
           </div>
 
           {/* Card 3: Kaynaklar */}
-          <div className="bg-dark border border-primary/20 hover:border-accent/40 p-6 rounded-xl transition-all duration-200 group">
+          <div className="bg-dark/50 backdrop-blur-md border border-primary/20 hover:border-accent/40 p-6 rounded-xl transition-all duration-200 group shadow-lg shadow-black/5 hover:shadow-accent/10">
             <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
               <Layers className="text-accent" size={24} />
             </div>
