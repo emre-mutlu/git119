@@ -1,11 +1,10 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import { Outfit, Josefin_Slab, Roboto_Condensed, Rokkitt } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import ThemeCustomizer from "@/components/ThemeCustomizer";
 
 const outfit = Outfit({ subsets: ["latin"], variable: '--font-outfit' });
 const josefinSlab = Josefin_Slab({ subsets: ['latin'], variable: '--font-josefin' });
@@ -17,7 +16,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [isThemeOpen, setIsThemeOpen] = useState(false);
 
   useEffect(() => {
     // Fix viewport on iOS
@@ -36,9 +34,8 @@ export default function RootLayout({
       </head>
       <body className={`${outfit.variable} ${josefinSlab.variable} ${robotoCondensed.variable} ${rokkitt.variable} font-sans bg-slate-950 text-slate-200 antialiased overflow-x-hidden`}>
         <div className="min-h-screen w-full overflow-x-hidden">
-          <Navbar onThemeToggle={() => setIsThemeOpen(!isThemeOpen)} />
+          <Navbar />
           {children}
-          <ThemeCustomizer isOpen={isThemeOpen} onClose={() => setIsThemeOpen(false)} />
         </div>
       </body>
     </html>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Palette, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 type ThemeVariable = '--color-primary' | '--color-accent' | '--color-neon';
