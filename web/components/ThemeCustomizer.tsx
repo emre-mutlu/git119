@@ -27,7 +27,7 @@ const colorOptions = [
 
 const defaultHexMap: Record<ThemeVariable, string> = {
   '--color-primary': '#5C03BC',
-  '--color-accent': '#E536AB',
+  '--color-accent': '#28D77D',
   '--color-neon': '#39FF14',
 };
 

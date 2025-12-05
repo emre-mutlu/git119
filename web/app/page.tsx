@@ -18,7 +18,12 @@ export default function Home() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-accent">Dijital Tasarıma</span> Giriş
             </h1>
             <p className="text-lg md:text-xl text-slate-400 mb-8 leading-relaxed">
-              git.119 dersi kapsamında Adobe Photoshop, Illustrator ve Üretken Yapay Zeka araçlarını kullanarak yaratıcılığınızı dijital dünyaya taşıyın.
+              <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-accent">git.119</span>{' '}
+              dersi kapsamında{' '}
+              <span className="font-semibold text-ocean-300">Adobe Photoshop</span>,{' '}
+              <span className="font-semibold text-blazingflame-300">Illustrator</span> ve{' '}
+              <span className="font-semibold text-emeraldgreen-300">Üretken Yapay Zeka</span>{' '}
+              araçlarını kullanarak yaratıcılığınızı dijital dünyaya taşıyın.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/Mufredat/Syllabus" className="px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg transition-all duration-200 flex items-center group border border-white/10 transform-gpu neon-glow-button">
@@ -40,7 +45,7 @@ export default function Home() {
       </header>
 
       {/* Dashboard Grid */}
-      <main className="container mx-auto px-4 py-16 -mt-8 md:-mt-16 relative z-20">
+      <main className="container mx-auto px-4 py-16 mt-12 md:mt-16 relative z-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
           {/* Card 1: Haftalık Akış */}

@@ -2,7 +2,35 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { BookOpen, Calendar, Layers, Home } from 'lucide-react';
+
+const glitchPalettes = [
+  {
+    gradientStart: '#5C03BC',
+    gradientEnd: '#28D77D',
+    before: 'rgba(57, 255, 20, 0.95)',
+    after: 'rgba(40, 215, 125, 0.95)',
+  },
+  {
+    gradientStart: '#3B0CA3',
+    gradientEnd: '#39FF14',
+    before: 'rgba(57, 255, 20, 0.9)',
+    after: 'rgba(40, 215, 125, 0.75)',
+  },
+  {
+    gradientStart: '#32154D',
+    gradientEnd: '#28D77D',
+    before: 'rgba(57, 255, 20, 0.85)',
+    after: 'rgba(92, 3, 188, 0.8)',
+  },
+  {
+    gradientStart: '#28D77D',
+    gradientEnd: '#5C03BC',
+    before: 'rgba(57, 255, 20, 0.9)',
+    after: 'rgba(138, 98, 255, 0.85)',
+  },
+];
 
 const navigationItems = [
   { name: 'Ana Sayfa', href: '/', icon: Home },
@@ -13,6 +41,64 @@ const navigationItems = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [isGlitchActive, setIsGlitchActive] = useState(false);
+  const [glitchColors, setGlitchColors] = useState(glitchPalettes[0]);
+  const triggerTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const activeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const triggerGlitchRef = useRef<() => void>();
+
+  useEffect(() => {
+    const scheduleNext = () => {
+      if (triggerTimeoutRef.current) {
+        clearTimeout(triggerTimeoutRef.current);
+      }
+      const delay = Math.random() * 30000;
+      triggerTimeoutRef.current = setTimeout(() => {
+        triggerGlitchRef.current?.();
+      }, delay);
+    };
+
+    const triggerGlitch = () => {
+      if (activeTimeoutRef.current) {
+        clearTimeout(activeTimeoutRef.current);
+      }
+      const palette = glitchPalettes[Math.floor(Math.random() * glitchPalettes.length)];
+      setGlitchColors(palette);
+      setIsGlitchActive(true);
+      const duration = 900 + Math.random() * 1200;
+      activeTimeoutRef.current = setTimeout(() => {
+        setIsGlitchActive(false);
+        scheduleNext();
+      }, duration);
+    };
+
+    triggerGlitchRef.current = triggerGlitch;
+    scheduleNext();
+
+    return () => {
+      if (triggerTimeoutRef.current) {
+        clearTimeout(triggerTimeoutRef.current);
+      }
+      if (activeTimeoutRef.current) {
+        clearTimeout(activeTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleLogoInteraction = () => {
+    triggerGlitchRef.current?.();
+  };
+
+  const logoStyle: CSSProperties = {
+    '--glitch-gradient-start': glitchColors.gradientStart,
+    '--glitch-gradient-end': glitchColors.gradientEnd,
+    '--glitch-before-color': glitchColors.before,
+    '--glitch-after-color': glitchColors.after,
+  };
+
+  const logoClassName = `font-mono text-4xl tracking-tight font-black text-transparent bg-clip-text logo-glitch ${
+    isGlitchActive ? 'logo-glitch-active' : ''
+  }`;
 
   return (
     <>
@@ -20,10 +106,11 @@ export default function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           {/* Logo / Brand */}
-          <Link href="/" className="flex items-center group select-none relative">
+          <Link href="/" className="flex items-center group select-none relative" onMouseEnter={handleLogoInteraction}>
             <span 
               data-text="git.119"
-              className="font-mono text-4xl tracking-tight font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent logo-glitch"
+              className={logoClassName}
+              style={logoStyle}
             >
               git.119
             </span>
