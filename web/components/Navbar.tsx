@@ -43,6 +43,7 @@ const navigationItems = [
 export default function Navbar() {
   const pathname = usePathname();
   const [isGlitchActive, setIsGlitchActive] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
   const [glitchColors, setGlitchColors] = useState(glitchPalettes[0]);
   const triggerTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const activeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -86,8 +87,13 @@ export default function Navbar() {
     };
   }, []);
 
-  const handleLogoInteraction = () => {
+  const handleLogoMouseEnter = () => {
+    setIsHovering(true);
     triggerGlitchRef.current?.();
+  };
+
+  const handleLogoMouseLeave = () => {
+    setIsHovering(false);
   };
 
   const logoStyle: React.CSSProperties & Record<string, string> = {
@@ -97,8 +103,11 @@ export default function Navbar() {
     '--glitch-after-color': glitchColors.after,
   };
 
+  // Show glitch if: random trigger is active OR currently hovering
+  const showGlitch = isGlitchActive || isHovering;
+
   const logoClassName = `font-rokkitt text-4xl tracking-tight font-normal text-transparent bg-clip-text logo-glitch ${
-    isGlitchActive ? 'logo-glitch-active' : ''
+    showGlitch ? 'logo-glitch-active' : ''
   }`;
 
   return (
@@ -107,7 +116,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           {/* Logo / Brand */}
-          <Link href="/" className="flex items-center group select-none relative" onMouseEnter={handleLogoInteraction}>
+          <Link href="/" className="flex items-center group select-none relative" onMouseEnter={handleLogoMouseEnter} onMouseLeave={handleLogoMouseLeave}>
             <span 
               data-text="git119"
               className={logoClassName}

@@ -26,21 +26,21 @@ const weeks = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
 const getWeekTheme = (weekNum: string) => {
   const num = parseInt(weekNum);
 
-  // Week 1 - Yellow (Altın Sarısı #F3C969)
+  // Week 1 - Neon Green (#39FF14)
   if (num === 1) {
     return {
       number: {
-        bg: 'bg-gradient-to-br from-yellow/30 to-yellow/20',
-        border: 'border-yellow/30 group-hover:border-yellow/50',
-        text: 'text-yellow',
+        bg: 'bg-gradient-to-br from-neon/30 to-neon/20',
+        border: 'border-neon/30 group-hover:border-neon/50',
+        text: 'text-neon',
       },
-      cardBg: 'bg-gradient-to-br from-yellow/10 via-transparent to-yellow/5',
-      cardBorder: 'border-yellow/25',
-      cardHoverBorder: 'hover:border-yellow/60',
-      overlay: 'from-yellow/25 via-yellow/15 to-transparent',
-      arrowHover: 'group-hover:text-yellow',
-      hoverShadow: '0 0 20px rgba(255,255,0,0.3), 0 0 35px rgba(255,255,0,0.15)',
-      gradientColor: 'rgba(255,255,0,',
+      cardBg: 'bg-gradient-to-br from-neon/10 via-transparent to-neon/5',
+      cardBorder: 'border-neon/25',
+      cardHoverBorder: 'hover:border-neon/60',
+      overlay: 'from-neon/25 via-neon/15 to-transparent',
+      arrowHover: 'group-hover:text-neon',
+      hoverShadow: '0 0 20px rgba(57,255,20,0.3), 0 0 35px rgba(57,255,20,0.15)',
+      gradientColor: 'rgba(57,255,20,',
     };
   }
 
@@ -79,37 +79,37 @@ const getWeekTheme = (weekNum: string) => {
   }
 
   if (num >= 8 && num <= 10) {
-    // Neon green (#39FF14) for weeks 8-10
+    // Yellow for weeks 8-10
     return {
       number: {
-        bg: 'bg-gradient-to-br from-neon/30 to-neon/20',
-        border: 'border-neon/30 group-hover:border-neon/50',
-        text: 'text-neon',
+        bg: 'bg-gradient-to-br from-yellow/30 to-yellow/20',
+        border: 'border-yellow/30 group-hover:border-yellow/50',
+        text: 'text-yellow',
       },
-      cardBg: 'bg-gradient-to-br from-neon/10 via-transparent to-neon/5',
-      cardBorder: 'border-neon/20',
-      cardHoverBorder: 'hover:border-neon/60',
-      overlay: 'from-neon/30 via-neon/15 to-transparent',
-      arrowHover: 'group-hover:text-neon',
-      hoverShadow: '0 0 20px rgba(57,255,20,0.3), 0 0 35px rgba(57,255,20,0.15)',
-      gradientColor: 'rgba(57,255,20,',
+      cardBg: 'bg-gradient-to-br from-yellow/10 via-transparent to-yellow/5',
+      cardBorder: 'border-yellow/20',
+      cardHoverBorder: 'hover:border-yellow/60',
+      overlay: 'from-yellow/30 via-yellow/15 to-transparent',
+      arrowHover: 'group-hover:text-yellow',
+      hoverShadow: '0 0 20px rgba(255,255,0,0.3), 0 0 35px rgba(255,255,0,0.15)',
+      gradientColor: 'rgba(255,255,0,',
     };
   }
 
-  // Weeks 11-12 - Primary/Accent (Purple/Pink)
+  // Weeks 11-12 - Emerald Green (#28D77D)
   return {
     number: {
-      bg: 'bg-gradient-to-br from-primary/30 to-accent/20',
-      border: 'border-primary/30 group-hover:border-accent/50',
-      text: 'text-accent',
+      bg: 'bg-gradient-to-br from-emeraldgreen-400/30 to-emeraldgreen-500/20',
+      border: 'border-emeraldgreen-400/30 group-hover:border-emeraldgreen-300/50',
+      text: 'text-emeraldgreen-300',
     },
-    cardBg: 'bg-gradient-to-br from-primary/10 via-transparent to-accent/5',
-    cardBorder: 'border-primary/25',
-    cardHoverBorder: 'hover:border-accent/60',
-    overlay: 'from-primary/25 via-accent/15 to-transparent',
-    arrowHover: 'group-hover:text-accent',
-    hoverShadow: '0 0 20px rgba(229,54,171,0.3), 0 0 35px rgba(229,54,171,0.15)',
-    gradientColor: 'rgba(229,54,171,',
+    cardBg: 'bg-gradient-to-br from-emeraldgreen-500/10 via-transparent to-emeraldgreen-400/5',
+    cardBorder: 'border-emeraldgreen-500/25',
+    cardHoverBorder: 'hover:border-emeraldgreen-400/60',
+    overlay: 'from-emeraldgreen-500/25 via-emeraldgreen-400/15 to-transparent',
+    arrowHover: 'group-hover:text-emeraldgreen-300',
+    hoverShadow: '0 0 20px rgba(40,215,125,0.3), 0 0 35px rgba(40,215,125,0.15)',
+    gradientColor: 'rgba(40,215,125,',
   };
 };
 
