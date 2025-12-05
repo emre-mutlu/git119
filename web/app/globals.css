@@ -311,15 +311,16 @@ body {
   --gradient-color-2: rgba(229,54,171,0.35);
   background:
     radial-gradient(120% 90% at 15% 105%, var(--gradient-color-1) 0%, transparent 60%),
-    radial-gradient(110% 80% at 85% 95%, var(--gradient-color-2) 0%, transparent 55%);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+    radial-gradient(110% 80% at 85% 95%, var(--gradient-color-2) 0%, transparent 55%),
+    linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 70%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   margin-left: -1rem;
   margin-right: -1rem;
-  padding: 0.85rem 1rem 0.95rem;
-  border-radius: 0;
-  text-shadow: none;
-  border: none;
+  padding: 0.95rem 1.05rem 1.05rem;
+  border-radius: 0.65rem;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 /* Different color combinations for each heading */

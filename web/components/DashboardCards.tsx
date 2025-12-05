@@ -33,14 +33,14 @@ export default function DashboardCards() {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 max-w-7xl mx-auto">
       {cards.map((card) => {
         const Icon = card.icon;
         return (
           <Link
             key={card.href}
             href={card.href}
-            className="bg-dark/70 backdrop-blur-md border border-primary/20 p-6 rounded-xl group shadow-xl shadow-black/30 flex flex-col cursor-pointer transition-all duration-150 ease-out hover:scale-[1.01]"
+            className="bg-dark/70 backdrop-blur-md border border-primary/20 p-7 rounded-xl group shadow-xl shadow-black/30 flex flex-col cursor-pointer transition-all duration-150 ease-out hover:scale-[1.01]"
             style={{ 
               ['--card-color' as string]: card.color,
               filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.4))',

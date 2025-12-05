@@ -109,7 +109,7 @@ export default function Home() {
       </header>
 
       {/* Dashboard Grid */}
-      <main className="bg-[#0D0620] flex-1 flex items-center relative z-20">
+      <main className="bg-[#0D0620] flex-1 flex items-center relative z-20 min-h-[360px] py-12">
         <div className="container mx-auto px-4">
           <DashboardCards />
         </div>
