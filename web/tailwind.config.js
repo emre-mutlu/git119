@@ -11,33 +11,41 @@ module.exports = {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
-        // Custom color palette
-        dark: '#0E0725',
-        primary: '#5C03BC',
-        accent: '#E536AB',
-        neon: '#39FF14',
-        yellow: '#FFFF00',
+        // Custom color palette (driven by CSS variables for live theming)
+        dark: 'rgb(14 7 37)',
+        primary: {
+          DEFAULT: 'rgb(var(--color-primary) / <alpha-value>)',
+        },
+        accent: {
+          DEFAULT: 'rgb(var(--color-accent) / <alpha-value>)',
+        },
+        neon: {
+          DEFAULT: 'rgb(var(--color-neon) / <alpha-value>)',
+        },
+        yellow: {
+          DEFAULT: 'rgb(var(--color-yellow) / <alpha-value>)',
+        },
         
         // Extended Palette
         blazingflame: {
-          300: '#fd8868',
-          400: '#fd6035',
-          500: '#fc3903',
+          300: 'rgb(253 136 104)',
+          400: 'rgb(253 96 53)',
+          500: 'rgb(252 57 3)',
         },
         ocean: {
-          300: '#66bdff',
-          400: '#33a7ff',
-          500: '#0091ff',
+          300: 'rgb(102 189 255)',
+          400: 'rgb(51 167 255)',
+          500: 'rgb(0 145 255)',
         },
         emeraldgreen: {
-          300: '#7ee7b1',
-          400: '#53df97',
-          500: '#28d77d',
+          300: 'rgb(126 231 177)',
+          400: 'rgb(83 223 151)',
+          500: 'rgb(40 215 125)',
         },
         lavender: {
-          300: '#bf9fc6',
-          400: '#aa80b3',
-          500: '#95609f',
+          300: 'rgb(191 159 198)',
+          400: 'rgb(170 128 179)',
+          500: 'rgb(149 96 159)',
         },
       },
       fontFamily: {

@@ -157,12 +157,12 @@ export default function WeeksIndexPage() {
 
   const getBlurAndBrightness = (weekNum: string) => {
     if (mouseY === null || !containerRef.current) {
-      return { blur: 0.25, brightness: 0.9, scale: 1 };
+      return { blur: 0.25, brightness: 0.9 };
     }
 
     const cardElement = cardRefs.current[weekNum];
     if (!cardElement) {
-      return { blur: 0.25, brightness: 0.9, scale: 1 };
+      return { blur: 0.25, brightness: 0.9 };
     }
 
     const containerRect = containerRef.current.getBoundingClientRect();
@@ -178,11 +178,8 @@ export default function WeeksIndexPage() {
     const normalizedDistance = Math.min(distance / maxDistance, 1);
     const blur = normalizedDistance * 0.375; // Max blur of 0.375px (1.5/4)
     const brightness = 1 - (normalizedDistance * 0.2); // 0.8 to 1.0 brightness
-    
-    // Scale up slightly when very close to mouse
-    const scale = distance < 100 ? 1.02 : 1;
 
-    return { blur, brightness, scale };
+    return { blur, brightness };
   };
 
   return (
@@ -197,11 +194,13 @@ export default function WeeksIndexPage() {
           {weeks.map((weekNum) => {
             const href = `/Haftalar/Hafta_${weekNum}/Ders_Plani`;
             const title = weekTitles[weekNum] || 'Ders Planı';
-            const { blur, brightness, scale } = getBlurAndBrightness(weekNum);
+            const { blur, brightness } = getBlurAndBrightness(weekNum);
             const rotation = rotations[weekNum];
             const isHovered = hoveredWeek === weekNum;
             const weekTheme = getWeekTheme(weekNum);
             const number = weekTheme.number;
+            const contentFilter = { filter: `blur(${blur}px) brightness(${brightness})` };
+            const scaleValue = isHovered ? 1.02 : 1;
 
             return (
               <Link key={weekNum} href={href} className="group block">
@@ -211,10 +210,9 @@ export default function WeeksIndexPage() {
                   onMouseLeave={() => setHoveredWeek(null)}
                   className={`relative bg-dark/60 ${weekTheme.cardBg} backdrop-blur-md border ${weekTheme.cardBorder} ${weekTheme.cardHoverBorder} p-5 rounded-xl transition-all duration-300 overflow-hidden shadow-lg shadow-black/10`}
                   style={{
-                    filter: `blur(${blur}px) brightness(${brightness})`,
                     transform: isHovered 
-                      ? `scale(${scale}) rotateX(0deg) rotateY(0deg) translateY(0px)` 
-                      : `scale(${scale}) rotateX(${rotation.rotateX}deg) rotateY(${rotation.rotateY}deg) translateY(${rotation.translateY}px)`,
+                      ? `scale(${scaleValue}) rotateX(0deg) rotateY(0deg) translateY(0px)` 
+                      : `scale(${scaleValue}) rotateX(${rotation.rotateX}deg) rotateY(${rotation.rotateY}deg) translateY(${rotation.translateY}px)`,
                     transformStyle: 'preserve-3d',
                     boxShadow: isHovered ? weekTheme.hoverShadow : undefined,
                   }}
@@ -222,7 +220,7 @@ export default function WeeksIndexPage() {
                   {/* Gradient overlay on hover */}
                   <div className={`absolute inset-0 bg-gradient-to-r ${weekTheme.overlay} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                   
-                  <div className="relative flex items-center justify-between gap-4">
+                  <div className="relative flex items-center justify-between gap-4" style={contentFilter}>
                     <div className="flex items-center gap-4">
                       <div className={`flex-shrink-0 w-14 h-14 ${number.bg} rounded-lg flex items-center justify-center border ${number.border} transition-colors`}>
                         <span className={`text-xl font-bold ${number.text}`}>{parseInt(weekNum)}</span>

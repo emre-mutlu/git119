@@ -1,15 +1,16 @@
 import Link from 'next/link';
 import { ArrowRight, Calendar, BookOpen, FileText, Layers, Files } from 'lucide-react';
+import ThemeCustomizer from '@/components/ThemeCustomizer';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-dark text-slate-200 font-sans selection:bg-accent/30">
       
       {/* Hero Section */}
-      <header className="relative overflow-hidden bg-dark pt-24 pb-16 md:pt-32 md:pb-24 border-b border-primary/20">
+      <header className="relative overflow-hidden bg-dark pt-24 pb-20 md:pt-36 md:pb-32 border-b border-primary/20">
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="max-w-4xl md:max-w-5xl mx-auto text-center">
             <div className="inline-flex items-center space-x-2 bg-primary/10 backdrop-blur-md border border-primary/30 rounded-full px-3 py-1 mb-6 shadow-lg shadow-primary/5">
               <span className="flex w-2 h-2 bg-accent rounded-full animate-pulse"></span>
               <span className="text-accent text-xs font-medium tracking-wide uppercase">2025 Bahar Dönemi</span>
@@ -40,7 +41,7 @@ export default function Home() {
       </header>
 
       {/* Dashboard Grid */}
-      <main className="container mx-auto px-4 py-16">
+      <main className="container mx-auto px-4 py-16 mt-12 md:mt-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
           {/* Card 1: Haftalık Akış */}
@@ -52,7 +53,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-bold text-white">Haftalık Akış</h3>
               </div>
-              <Link href="/haftalar" className="text-accent text-sm font-semibold hover:text-white flex items-center gap-1">
+              <Link href="/haftalar" className="text-accent text-base font-semibold hover:text-white flex items-center gap-1">
                 Programa Bak <ArrowRight size={14} />
               </Link>
             </div>
@@ -70,7 +71,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-bold text-white">Müfredat</h3>
               </div>
-              <Link href="/Mufredat/Syllabus" className="text-accent text-sm font-semibold hover:text-white flex items-center gap-1">
+              <Link href="/Mufredat/Syllabus" className="text-accent text-base font-semibold hover:text-white flex items-center gap-1">
                 Syllabus'ı İncele <ArrowRight size={14} />
               </Link>
             </div>
@@ -88,7 +89,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-bold text-white">Kaynaklar</h3>
               </div>
-              <Link href="/Kaynaklar/Kaynakca" className="text-accent text-sm font-semibold hover:text-white flex items-center gap-1">
+              <Link href="/Kaynaklar/Kaynakca" className="text-accent text-base font-semibold hover:text-white flex items-center gap-1">
                 Kütüphaneye Git <ArrowRight size={14} />
               </Link>
             </div>
@@ -99,6 +100,7 @@ export default function Home() {
 
         </div>
       </main>
+      <ThemeCustomizer />
     </div>
   );
 }

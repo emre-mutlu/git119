@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { Outfit, Josefin_Slab, Space_Grotesk } from "next/font/google";
+import { Outfit, Josefin_Slab } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
 const outfit = Outfit({ subsets: ["latin"], variable: '--font-outfit' });
 const josefinSlab = Josefin_Slab({ subsets: ['latin'], variable: '--font-josefin' });
-const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-heading' });
 
 export const metadata: Metadata = {
   title: "GİT 119 | Dijital Tasarıma Giriş",
@@ -19,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" className="dark">
-      <body className={`${outfit.variable} ${josefinSlab.variable} ${spaceGrotesk.variable} font-sans bg-slate-950 text-slate-200 antialiased`}>
+      <body className={`${outfit.variable} ${josefinSlab.variable} font-sans bg-slate-950 text-slate-200 antialiased`}>
         <Navbar />
         {children}
       </body>
