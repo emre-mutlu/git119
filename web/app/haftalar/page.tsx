@@ -78,21 +78,54 @@ const getWeekTheme = (weekNum: string) => {
     };
   }
 
-  if (num >= 8 && num <= 10) {
-    // Yellow for weeks 8-10
+  if (num === 8) {
     return {
       number: {
-        bg: 'bg-gradient-to-br from-yellow/30 to-yellow/20',
-        border: 'border-yellow/30 group-hover:border-yellow/50',
-        text: 'text-yellow',
+        bg: 'week8-number-bg',
+        border: 'week8-number-border group-hover:week8-number-border',
+        text: 'week8-number-text',
       },
-      cardBg: 'bg-gradient-to-br from-yellow/10 via-transparent to-yellow/5',
-      cardBorder: 'border-yellow/20',
-      cardHoverBorder: 'hover:border-yellow/60',
-      overlay: 'from-yellow/30 via-yellow/15 to-transparent',
-      arrowHover: 'group-hover:text-yellow',
-      hoverShadow: '0 0 20px rgba(255,255,0,0.3), 0 0 35px rgba(255,255,0,0.15)',
-      gradientColor: 'rgba(255,255,0,',
+      cardBg: 'week8-card-bg',
+      cardBorder: 'week8-card-border',
+      cardHoverBorder: 'week8-card-hover',
+      overlay: 'from-emeraldgreen-400/30 via-emeraldgreen-400/15 to-transparent',
+      arrowHover: 'group-hover:week8-number-text',
+      hoverShadow: '0 0 20px rgba(46,204,113,0.28), 0 0 35px rgba(26,188,156,0.15)',
+      gradientColor: 'rgba(46,204,113,',
+    };
+  }
+
+  if (num === 9) {
+    return {
+      number: {
+        bg: 'week9-number-bg',
+        border: 'week9-number-border group-hover:week9-number-border',
+        text: 'week9-number-text',
+      },
+      cardBg: 'week9-card-bg',
+      cardBorder: 'week9-card-border',
+      cardHoverBorder: 'week9-card-hover',
+      overlay: 'from-neon/30 via-neon/15 to-transparent',
+      arrowHover: 'group-hover:week9-number-text',
+      hoverShadow: '0 0 20px rgba(125,252,93,0.28), 0 0 35px rgba(80,214,120,0.16)',
+      gradientColor: 'rgba(125,252,93,',
+    };
+  }
+
+  if (num === 10) {
+    return {
+      number: {
+        bg: 'week10-number-bg',
+        border: 'week10-number-border group-hover:week10-number-border',
+        text: 'week10-number-text',
+      },
+      cardBg: 'week10-card-bg',
+      cardBorder: 'week10-card-border',
+      cardHoverBorder: 'week10-card-hover',
+      overlay: 'from-emeraldgreen-400/30 via-emeraldgreen-300/15 to-transparent',
+      arrowHover: 'group-hover:week10-number-text',
+      hoverShadow: '0 0 20px rgba(52,232,158,0.28), 0 0 35px rgba(0,173,181,0.15)',
+      gradientColor: 'rgba(52,232,158,',
     };
   }
 
@@ -192,41 +225,12 @@ export default function WeeksIndexPage() {
     return { x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) };
   };
 
-  const getBlurAndBrightness = (weekNum: string) => {
-    const cardElement = cardRefs.current[weekNum];
-    if (!cardElement || !containerRef.current) {
-      return { blur: 0.3, brightness: 0.85, focused: false };
-    }
-
-    // Default state - slight blur
-    if (mouseY === null) {
-      return { blur: 0.3, brightness: 0.85 };
-    }
-
-    const containerRect = containerRef.current.getBoundingClientRect();
-    const cardRect = cardElement.getBoundingClientRect();
-    const cardCenterY = cardRect.top - containerRect.top + cardRect.height / 2;
-    
-    // Calculate distance from mouse to card center
-    const distance = Math.abs(mouseY - cardCenterY);
-    const focusRadius = 60; // Only cards within this radius get clearer - responds immediately at card edge
-    
-    if (distance <= focusRadius) {
-      // Within focus radius - reduce blur based on proximity
-      const normalizedDistance = distance / focusRadius;
-      const blur = normalizedDistance * 0.3; // 0 at center, 0.3 at edge
-      const brightness = 1 - (normalizedDistance * 0.1); // 1.0 at center, 0.9 at edge
-      return { blur, brightness };
-    }
-    
-    // Outside focus radius - keep default blur (don't increase)
-    return { blur: 0.3, brightness: 0.85 };
-  };
+  const getBlurAndBrightness = () => ({ blur: 0, brightness: 1 });
 
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl font-bold text-white mb-4">Haftalık Ders Akışı</h1>
+        <h1 className="text-4xl font-bold text-white mb-4 mesh-heading">Haftalık Ders Akışı</h1>
         <p className="text-slate-400 text-lg mb-12">
           Dönem boyunca işleyeceğimiz konular, ödevler ve materyaller.
         </p>
@@ -235,13 +239,12 @@ export default function WeeksIndexPage() {
           {weeks.map((weekNum) => {
             const href = `/Haftalar/Hafta_${weekNum}/Ders_Plani`;
             const title = weekTitles[weekNum] || 'Ders Planı';
-            const { blur, brightness } = getBlurAndBrightness(weekNum);
+            const { blur, brightness } = getBlurAndBrightness();
             const rotation = rotations[weekNum];
             const isHovered = hoveredWeek === weekNum;
             const weekTheme = getWeekTheme(weekNum);
             const number = weekTheme.number;
-            const filterValue = blur > 0.02 ? `blur(${blur}px) brightness(${brightness})` : `brightness(${brightness})`;
-            const contentFilter = { filter: filterValue, textRendering: 'optimizeLegibility' as const };
+            const contentFilter = { filter: 'none', textRendering: 'optimizeLegibility' as const };
             const scaleValue = isHovered ? 1.02 : 1;
             const gradientPos = isHovered ? getGradientPosition(weekNum) : { x: 50, y: 50 };
 
