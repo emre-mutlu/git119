@@ -110,9 +110,10 @@ export default function Navbar() {
       const dx = e.clientX - cx;
       const dy = e.clientY - cy;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      const radius = 220;
-      const value = Math.max(0, Math.min(1, 1 - dist / radius));
-      setProximity(value);
+      const radius = 110; // tighter hotspot
+      const raw = Math.max(0, Math.min(1, 1 - dist / radius));
+      const eased = Math.pow(raw, 1.1); // softer decay
+      setProximity(eased);
     };
     window.addEventListener('mousemove', handleMove);
     return () => window.removeEventListener('mousemove', handleMove);
@@ -124,6 +125,7 @@ export default function Navbar() {
     '--glitch-before-color': glitchColors.before,
     '--glitch-after-color': glitchColors.after,
     '--glitch-proximity': proximity.toFixed(3),
+    '--glitch-speed-scale': (0.6 + 0.4 * proximity).toFixed(3),
   };
 
   // Show glitch if: random trigger OR hover OR proximity fade-in

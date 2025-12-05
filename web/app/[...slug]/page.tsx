@@ -35,7 +35,7 @@ export default async function MarkdownPage({ params }: PageProps) {
   const proseBase = `prose prose-invert prose-lg mx-auto
     prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-accent
     prose-h1:text-3xl prose-h1:md:text-4xl
-    prose-h2:text-2xl prose-h2:border-b prose-h2:border-primary/30 prose-h2:pb-3
+    prose-h2:text-2xl
     prose-h3:text-xl
     prose-h4:text-lg
     prose-p:text-slate-300 prose-p:leading-relaxed prose-p:text-base
@@ -50,6 +50,8 @@ export default async function MarkdownPage({ params }: PageProps) {
     prose-th:text-white prose-th:bg-primary/20 prose-th:p-4
     prose-td:text-slate-400 prose-td:p-4`;
   const articleClassName = `${proseBase} ${isSyllabus ? 'syllabus-prose' : ''} ${isKaynaklar ? 'kaynaklar-prose' : ''}`;
+  const title = typeof data.title === 'string' ? data.title : undefined;
+  const description = typeof data.description === 'string' ? data.description : undefined;
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
@@ -66,10 +68,10 @@ export default async function MarkdownPage({ params }: PageProps) {
       
       <article className={articleClassName}>
         {/* If there's a title in frontmatter, display it differently or let markdown h1 handle it */}
-        {data.title && (
+        {title && (
            <div className="mb-10 border-b border-primary/30 pb-8">
-             <h1 className="!mb-4">{data.title}</h1>
-             {data.description && <p className="text-xl text-slate-400">{data.description}</p>}
+             <h1 className="!mb-4">{title}</h1>
+             {description && <p className="text-xl text-slate-400">{description}</p>}
            </div>
         )}
         

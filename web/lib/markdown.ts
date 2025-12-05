@@ -26,7 +26,7 @@ function mapUrlToPath(urlSegment: string): string {
 }
 
 export interface MarkdownContent {
-  data: { [key: string]: any };
+  data: Record<string, unknown>;
   content: string;
   slug: string;
 }
@@ -99,7 +99,6 @@ export function getAllMarkdownSlugs(dirPath: string = '', allSlugs: string[] = [
  * @returns An array of MarkdownContent objects.
  */
 export function getCategoryMarkdownContent(categoryPath: string): MarkdownContent[] {
-    const fullCategoryPath = path.join(CONTENT_BASE_DIR, categoryPath);
     const slugs = getAllMarkdownSlugs(categoryPath);
     
     return slugs.map(slug => {

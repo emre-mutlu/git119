@@ -30,6 +30,9 @@ const defaultHexMap: Record<ThemeVariable, string> = {
   '--color-neon': '#39FF14',
 };
 
+const randomizeLabelColors = (label: string) =>
+  label.split('').map((char) => (char.trim().length === 0 ? 'inherit' : colorOptions[Math.floor(Math.random() * colorOptions.length)].hex));
+
 const activeButtonClass = 'ring-2 ring-offset-2 ring-offset-dark ring-white/80 scale-105';
 
 const hexToRgbTriplet = (hex: string) => {
@@ -66,11 +69,14 @@ const applyVariablesToDocument = (values: Partial<Record<ThemeVariable, string>>
   });
 };
 
+const randomLabelText = 'Rastgele';
+
 export default function ThemeCustomizer() {
   const pathname = usePathname();
   const isHome = pathname === '/';
   const [isOpen, setIsOpen] = useState(false);
   const [selections, setSelections] = useState<Record<ThemeVariable, string>>(() => ({ ...defaultHexMap }));
+  const [randomLabelColors, setRandomLabelColors] = useState<string[]>(() => randomizeLabelColors('Rastgele'));
 
   const commitSelections = (builder: (prev: Record<ThemeVariable, string>) => Record<ThemeVariable, string>) => {
     setSelections((prev: Record<ThemeVariable, string>) => {
@@ -112,6 +118,7 @@ export default function ThemeCustomizer() {
       }
     });
     setSelections(current);
+    setRandomLabelColors(randomizeLabelColors(randomLabelText));
   }, []);
 
   const applyColor = (variable: ThemeVariable, hex: string) => {
@@ -131,6 +138,7 @@ export default function ThemeCustomizer() {
       });
       return randomSelections;
     });
+    setRandomLabelColors(randomizeLabelColors(randomLabelText));
   };
 
   const panel = (
@@ -146,7 +154,13 @@ export default function ThemeCustomizer() {
             className="px-2.5 py-1 rounded-full border border-white/10 text-slate-200 hover:text-white hover:border-white/30 transition"
             onClick={handleRandomize}
           >
-            Rastgele
+            <span className="inline-flex gap-0.5">
+              {randomLabelText.split('').map((ch, idx) => (
+                <span key={`${ch}-${idx}`} style={{ color: randomLabelColors[idx] ?? 'inherit' }}>
+                  {ch}
+                </span>
+              ))}
+            </span>
           </button>
           <button
             type="button"

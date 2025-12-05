@@ -200,7 +200,7 @@ export default function WeeksIndexPage() {
 
     // Default state - slight blur
     if (mouseY === null) {
-      return { blur: 0.3, brightness: 0.85, focused: false };
+      return { blur: 0.3, brightness: 0.85 };
     }
 
     const containerRect = containerRef.current.getBoundingClientRect();
@@ -216,11 +216,11 @@ export default function WeeksIndexPage() {
       const normalizedDistance = distance / focusRadius;
       const blur = normalizedDistance * 0.3; // 0 at center, 0.3 at edge
       const brightness = 1 - (normalizedDistance * 0.1); // 1.0 at center, 0.9 at edge
-      return { blur, brightness, focused: true };
+      return { blur, brightness };
     }
     
     // Outside focus radius - keep default blur (don't increase)
-    return { blur: 0.3, brightness: 0.85, focused: false };
+    return { blur: 0.3, brightness: 0.85 };
   };
 
   return (
@@ -235,7 +235,7 @@ export default function WeeksIndexPage() {
           {weeks.map((weekNum) => {
             const href = `/Haftalar/Hafta_${weekNum}/Ders_Plani`;
             const title = weekTitles[weekNum] || 'Ders Planı';
-            const { blur, brightness, focused } = getBlurAndBrightness(weekNum);
+            const { blur, brightness } = getBlurAndBrightness(weekNum);
             const rotation = rotations[weekNum];
             const isHovered = hoveredWeek === weekNum;
             const weekTheme = getWeekTheme(weekNum);

@@ -75,7 +75,7 @@ export default function Home() {
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/Mufredat/Syllabus" className="relative overflow-hidden px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg flex items-center group border border-white/10 transform-gpu neon-glow-button wave-button" style={{ transition: 'all 0.15s ease-out' }}>
                 <span className="relative z-10 flex items-center">
-                  Syllabus'ı İncele
+                  Syllabus’ı İncele
                   <ArrowRight size={18} className="ml-2 group-hover:translate-x-1" style={{ transition: 'transform 0.15s ease-out' }} />
                 </span>
               </Link>
