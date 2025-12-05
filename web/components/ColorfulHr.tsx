@@ -1,12 +1,15 @@
 'use client';
 
-const emerald = '#28d77d';
-
 export default function ColorfulHr() {
   return (
     <hr
       className="my-8 border-0 w-full"
-      style={{ backgroundColor: emerald, height: '0.5px', opacity: 0.8 }}
+      style={{
+        height: '1px',
+        opacity: 0.95,
+        backgroundImage:
+          'linear-gradient(90deg, rgb(var(--color-primary)), rgb(var(--color-accent)), rgb(var(--color-neon)))',
+      }}
     />
   );
 }

@@ -72,7 +72,7 @@ body {
   align-items: center;
   isolation: isolate;
   text-shadow: 0 0 14px rgba(92, 3, 188, 0.35);
-  animation: logoPulse 6s ease-in-out infinite;
+  transition: text-shadow 0.2s ease;
 }
 
 .logo-glitch::before,
@@ -82,22 +82,30 @@ body {
   inset: 0;
   pointer-events: none;
   mix-blend-mode: screen;
-  opacity: 0.7;
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
 .logo-glitch::before {
-  color: rgba(57, 255, 20, 0.75);
-  animation: glitchShift 2.4s steps(2, end) infinite;
+  color: rgba(57, 255, 20, 0.85);
 }
 
 .logo-glitch::after {
-  color: rgba(229, 54, 171, 0.8);
-  animation: glitchSlice 1.8s steps(3, end) infinite;
+  color: rgba(229, 54, 171, 0.9);
 }
 
-.logo-glitch:hover::before,
+.logo-glitch:hover {
+  animation: logoPulse 3s ease-in-out infinite;
+}
+
+.logo-glitch:hover::before {
+  opacity: 1;
+  animation: glitchShift 1.2s steps(2, end) infinite;
+}
+
 .logo-glitch:hover::after {
   opacity: 1;
+  animation: glitchSlice 0.9s steps(3, end) infinite;
 }
 
 @keyframes glitchShift {
@@ -158,4 +166,63 @@ body {
   50% {
     text-shadow: 0 0 22px rgba(229, 54, 171, 0.45);
   }
+}
+
+.neon-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: rgb(var(--color-neon));
+  box-shadow: 0 0 16px rgb(var(--color-neon) / 0.65);
+}
+
+.neon-glow-button {
+  box-shadow: 0 12px 35px rgb(var(--color-neon) / 0.2), inset 0 0 0 rgb(var(--color-neon) / 0);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.neon-glow-button:hover {
+  box-shadow: 0 16px 40px rgb(var(--color-neon) / 0.3);
+  transform: translateY(-1px);
+}
+
+.syllabus-prose h2 {
+  position: relative;
+  padding-bottom: 0.85rem;
+  margin-bottom: 2.25rem;
+  font-family: var(--font-josefin), serif;
+  letter-spacing: 0.05em;
+}
+
+.syllabus-prose h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 140px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgb(var(--color-primary)), rgb(var(--color-neon)));
+}
+
+.syllabus-prose h3 {
+  font-family: var(--font-josefin), serif;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 0.95rem;
+  color: rgb(var(--color-neon));
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.syllabus-prose h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.35rem;
+  width: 85px;
+  height: 1px;
+  background: rgb(var(--color-neon));
+  opacity: 0.6;
 }

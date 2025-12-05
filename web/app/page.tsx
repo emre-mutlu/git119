@@ -11,7 +11,7 @@ export default function Home() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl md:max-w-5xl mx-auto text-center">
             <div className="inline-flex items-center space-x-2 bg-primary/10 backdrop-blur-md border border-primary/30 rounded-full px-3 py-1 mb-6 shadow-lg shadow-primary/5">
-              <span className="flex w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+              <span className="neon-dot animate-pulse"></span>
               <span className="text-accent text-xs font-medium tracking-wide uppercase">2025 Bahar Dönemi</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
@@ -21,7 +21,7 @@ export default function Home() {
               git.119 dersi kapsamında Adobe Photoshop, Illustrator ve Üretken Yapay Zeka araçlarını kullanarak yaratıcılığınızı dijital dünyaya taşıyın.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/Mufredat/Syllabus" className="px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg shadow-lg shadow-primary/30 transition-all duration-200 flex items-center group border border-white/10 transform-gpu">
+              <Link href="/Mufredat/Syllabus" className="px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg transition-all duration-200 flex items-center group border border-white/10 transform-gpu neon-glow-button">
                 Syllabus'ı İncele
                 <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
@@ -40,7 +40,7 @@ export default function Home() {
       </header>
 
       {/* Dashboard Grid */}
-      <main className="container mx-auto px-4 py-16 mt-12 md:mt-16">
+      <main className="container mx-auto px-4 py-16 -mt-8 md:-mt-16 relative z-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
           {/* Card 1: Haftalık Akış */}

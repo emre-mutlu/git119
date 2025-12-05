@@ -18,7 +18,7 @@ const colorOptions = [
   { name: 'Mor', hex: '#5C03BC' },
   { name: 'Pembe', hex: '#E536AB' },
   { name: 'Neon Yeşil', hex: '#39FF14' },
-  { name: 'Güneş Sarısı', hex: '#FFFF00' },
+  { name: 'Altın Sarısı', hex: '#F3C969' },
   { name: 'Turuncu', hex: '#FC3903' },
   { name: 'Okyanus', hex: '#0091FF' },
   { name: 'Zümrüt', hex: '#28D77D' },
@@ -73,6 +73,15 @@ export default function ThemeCustomizer() {
   const [isOpen, setIsOpen] = useState(false);
   const [selections, setSelections] = useState<Record<ThemeVariable, string>>(() => ({ ...defaultHexMap }));
 
+  const commitSelections = (builder: (prev: Record<ThemeVariable, string>) => Record<ThemeVariable, string>) => {
+    setSelections((prev: Record<ThemeVariable, string>) => {
+      const next = builder(prev);
+      applyVariablesToDocument(next);
+      persistSelections(next);
+      return next;
+    });
+  };
+
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
@@ -107,18 +116,22 @@ export default function ThemeCustomizer() {
   }, []);
 
   const applyColor = (variable: ThemeVariable, hex: string) => {
-    setSelections((prev: Record<ThemeVariable, string>) => {
-      const next = { ...prev, [variable]: hex };
-      applyVariablesToDocument({ [variable]: hex });
-      persistSelections(next);
-      return next;
-    });
+    commitSelections((prev) => ({ ...prev, [variable]: hex }));
   };
 
   const handleReset = () => {
-    setSelections({ ...defaultHexMap });
-    applyVariablesToDocument(defaultHexMap);
-    persistSelections(defaultHexMap);
+    commitSelections(() => ({ ...defaultHexMap }));
+  };
+
+  const handleRandomize = () => {
+    commitSelections((prev) => {
+      const randomSelections = { ...prev } as Record<ThemeVariable, string>;
+      controls.forEach((ctrl) => {
+        const randomColor = colorOptions[Math.floor(Math.random() * colorOptions.length)].hex;
+        randomSelections[ctrl.variable] = randomColor;
+      });
+      return randomSelections;
+    });
   };
 
   const panel = (
@@ -128,10 +141,17 @@ export default function ThemeCustomizer() {
           <p className="text-sm font-semibold text-white">Renk Paleti</p>
           <p className="text-xs text-slate-400">Var olan renklerle temayı anında güncelleyin.</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 text-xs font-semibold">
           <button
             type="button"
-            className="text-xs font-semibold text-neon hover:text-white transition"
+            className="px-2.5 py-1 rounded-full border border-white/10 text-slate-200 hover:text-white hover:border-white/30 transition"
+            onClick={handleRandomize}
+          >
+            Rastgele
+          </button>
+          <button
+            type="button"
+            className="text-neon hover:text-white transition"
             onClick={handleReset}
           >
             Sıfırla
@@ -180,7 +200,7 @@ export default function ThemeCustomizer() {
         <button
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
-          className="flex items-center gap-2 rounded-full bg-dark/80 px-4 py-2 text-sm font-semibold text-slate-100 border border-white/10 shadow-lg backdrop-blur-md hover:bg-dark/90 transition"
+          className="flex items-center gap-2 rounded-full bg-dark/80 px-4 py-2 text-sm font-semibold text-slate-100 border border-white/10 shadow-lg backdrop-blur-md hover:bg-dark/90 transition neon-glow-button"
         >
           <Palette size={16} />
           Tema Aracı
@@ -196,7 +216,7 @@ export default function ThemeCustomizer() {
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className={`rounded-l-2xl border border-white/10 bg-dark/80 px-3 py-5 text-slate-100 shadow-lg backdrop-blur-md flex flex-col items-center gap-2 transition-all ${
+        className={`rounded-l-2xl border border-white/10 bg-dark/80 px-3 py-5 text-slate-100 shadow-lg backdrop-blur-md flex flex-col items-center gap-2 transition-all neon-glow-button ${
           isOpen ? '' : 'translate-x-2'
         }`}
         aria-label="Tema aracını aç"
