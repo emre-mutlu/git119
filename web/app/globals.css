@@ -312,9 +312,14 @@ body {
   --mesh-b: rgb(var(--color-accent) / 0.5);
   --mesh-c: rgb(var(--color-neon) / 0.38);
   background:
-    radial-gradient(140% 110% at 12% 96%, var(--mesh-a) 0%, transparent 55%),
-    radial-gradient(135% 105% at 88% 108%, var(--mesh-b) 0%, transparent 58%),
-    radial-gradient(120% 95% at 55% -5%, var(--mesh-c) 0%, transparent 60%);
+    radial-gradient(165% 135% at 18% 82%, var(--mesh-a) 0%, transparent 68%),
+    radial-gradient(155% 125% at 82% 78%, var(--mesh-b) 0%, transparent 70%),
+    radial-gradient(140% 115% at 50% 12%, var(--mesh-c) 0%, transparent 64%),
+    repeating-linear-gradient(135deg,
+      rgba(255,255,255,0.03) 0,
+      rgba(255,255,255,0.03) 1px,
+      rgba(0,0,0,0) 2px,
+      rgba(0,0,0,0) 6px);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   margin-left: -1rem;
