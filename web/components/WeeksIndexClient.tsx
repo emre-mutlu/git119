@@ -178,7 +178,7 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
     return { x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) };
   };
 
-  const getBlurAndBrightness = () => ({ blur: 0, brightness: 1 });
+
 
   return (
     <div className="container mx-auto px-4 py-16">
@@ -194,7 +194,6 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
           {weeksData.map((week) => {
             const weekNum = week.weekNum;
             const title = week.title;
-            const { blur, brightness } = getBlurAndBrightness();
             const rotation = rotations[weekNum];
             const isHovered = hoveredWeek === weekNum;
             const weekTheme = getWeekTheme(weekNum);

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import type { Metadata } from "next";
+
 import { Outfit, Josefin_Slab, Roboto_Condensed, Rokkitt } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";

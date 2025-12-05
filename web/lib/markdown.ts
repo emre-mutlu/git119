@@ -32,11 +32,11 @@ export interface MarkdownMeta {
   order?: number;
   category?: string;
   duration?: string;
-  [key: string]: any;
+  [key: string]: unknown; // Daha güvenli bir genel tip
 }
 
 export interface MarkdownContent {
-  data: MarkdownMeta;
+  data: MarkdownMeta; // MarkdownMeta kullan
   content: string;
   slug: string;
 }
