@@ -24,38 +24,53 @@ const weeks = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
 
 // Color groups for every 4 weeks
 const colorGroups = {
-  // Week 1-4: Red (Illustrator)
+  // Week 1-4: Orange/Tuscan (Illustrator)
   group1: {
-    border: 'border-red-500/30',
-    hoverBorder: 'hover:border-red-400/60',
-    gradient: 'from-red-500/20 to-red-600/10',
-    numberBg: 'bg-red-500/20',
-    numberBorder: 'border-red-500/40 group-hover:border-red-400/60',
-    numberColor: 'text-red-400',
-    shadow: '0_0_30px_rgba(255,0,0,0.3),0_0_60px_rgba(255,51,51,0.2)',
+    border: 'border-tuscan-500/30',
+    hoverBorder: 'hover:border-tuscan-400/60',
+    gradient: 'from-tuscan-500/20 to-tuscan-600/10',
+    numberBg: 'bg-tuscan-500/20',
+    numberBorder: 'border-tuscan-500/40 group-hover:border-tuscan-400/60',
+    numberColor: 'text-tuscan-400',
+    boxShadow: 'shadow-tuscan-500/50',
+    hoverBgGlow: 'group-hover:bg-tuscan-500/10',
     label: 'Adobe Illustrator',
   },
   // Week 5-8: Blue (Photoshop)
   group2: {
-    border: 'border-blue-500/30',
-    hoverBorder: 'hover:border-blue-400/60',
-    gradient: 'from-blue-500/20 to-blue-600/10',
-    numberBg: 'bg-blue-500/20',
-    numberBorder: 'border-blue-500/40 group-hover:border-blue-400/60',
-    numberColor: 'text-blue-400',
-    shadow: '0_0_30px_rgba(0,0,255,0.3),0_0_60px_rgba(51,51,255,0.2)',
+    border: 'border-ocean-500/30',
+    hoverBorder: 'hover:border-ocean-400/60',
+    gradient: 'from-ocean-500/20 to-ocean-600/10',
+    numberBg: 'bg-ocean-500/20',
+    numberBorder: 'border-ocean-500/40 group-hover:border-ocean-400/60',
+    numberColor: 'text-ocean-400',
+    boxShadow: 'shadow-ocean-500/50',
+    hoverBgGlow: 'group-hover:bg-ocean-500/10',
     label: 'Adobe Photoshop',
   },
-  // Week 9-12: Lime (AI & Final)
+  // Week 9-10: Emerald (AI)
   group3: {
-    border: 'border-lime-500/30',
-    hoverBorder: 'hover:border-lime-400/60',
-    gradient: 'from-lime-500/20 to-lime-600/10',
-    numberBg: 'bg-lime-500/20',
-    numberBorder: 'border-lime-500/40 group-hover:border-lime-400/60',
-    numberColor: 'text-lime-400',
-    shadow: '0_0_30px_rgba(0,255,0,0.3),0_0_60px_rgba(51,255,51,0.2)',
-    label: 'AI & Final',
+    border: 'border-darkemerald-500/30',
+    hoverBorder: 'hover:border-darkemerald-400/60',
+    gradient: 'from-darkemerald-500/20 to-darkemerald-600/10',
+    numberBg: 'bg-darkemerald-500/20',
+    numberBorder: 'border-darkemerald-500/40 group-hover:border-darkemerald-400/60',
+    numberColor: 'text-darkemerald-400',
+    boxShadow: 'shadow-darkemerald-500/50',
+    hoverBgGlow: 'group-hover:bg-darkemerald-500/10',
+    label: 'AI & Tools',
+  },
+  // Week 11-12: Purple (Final)
+  group4: {
+    border: 'border-midnightviolet-500/30',
+    hoverBorder: 'hover:border-midnightviolet-400/60',
+    gradient: 'from-midnightviolet-500/20 to-midnightviolet-600/10',
+    numberBg: 'bg-midnightviolet-500/20',
+    numberBorder: 'border-midnightviolet-500/40 group-hover:border-midnightviolet-400/60',
+    numberColor: 'text-midnightviolet-400',
+    boxShadow: 'shadow-midnightviolet-500/50',
+    hoverBgGlow: 'group-hover:bg-midnightviolet-500/10',
+    label: 'Final Project',
   },
 };
 
@@ -63,7 +78,8 @@ const getColorGroup = (weekNum: string) => {
   const num = parseInt(weekNum);
   if (num <= 4) return colorGroups.group1;
   if (num <= 8) return colorGroups.group2;
-  return colorGroups.group3;
+  if (num <= 10) return colorGroups.group3;
+  return colorGroups.group4;
 };
 
 // Generate random but consistent rotations for each week
@@ -148,7 +164,7 @@ export default function WeeksIndexPage() {
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl font-bold text-white mb-4">Haftalık Ders Akışı</h1>
+        <h1 className="text-4xl font-bold text-lavender-300 mb-4">Haftalık Ders Akışı</h1>
         <p className="text-slate-400 text-lg mb-12">
           Dönem boyunca işleyeceğimiz konular, ödevler ve materyaller.
         </p>
@@ -168,14 +184,13 @@ export default function WeeksIndexPage() {
                   ref={(el) => { cardRefs.current[weekNum] = el; }}
                   onMouseEnter={() => setHoveredWeek(weekNum)}
                   onMouseLeave={() => setHoveredWeek(null)}
-                  className={`relative bg-neutral-800/80 backdrop-blur-sm border ${colors.border} ${colors.hoverBorder} p-5 rounded-xl transition-all duration-300 overflow-hidden`}
+                  className={`relative bg-neutral-800/80 backdrop-blur-sm border ${colors.border} ${colors.hoverBorder} p-5 rounded-xl transition-all duration-300 overflow-hidden ${colors.hoverBgGlow}`}
                   style={{
                     filter: `blur(${blur}px) brightness(${brightness})`,
                     transform: isHovered 
                       ? `scale(${scale}) rotateX(0deg) rotateY(0deg) translateY(0px)` 
                       : `scale(${scale}) rotateX(${rotation.rotateX}deg) rotateY(${rotation.rotateY}deg) translateY(${rotation.translateY}px)`,
                     transformStyle: 'preserve-3d',
-                    boxShadow: isHovered ? colors.shadow.split(',').map(s => s.trim()).join(', ') : 'none',
                   }}
                 >
                   {/* Gradient overlay on hover */}

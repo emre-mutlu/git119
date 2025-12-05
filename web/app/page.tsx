@@ -15,17 +15,17 @@ export default function Home() {
               <span className="text-accent text-xs font-medium tracking-wide uppercase">2025 Bahar Dönemi</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-accent">Dijital Tasarıma</span> Giriş
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-lavender-400 via-midnightviolet-400 to-crimson-400">Dijital Tasarıma</span> Giriş
             </h1>
             <p className="text-lg md:text-xl text-slate-400 mb-8 leading-relaxed">
               git.119 dersi kapsamında Adobe Photoshop, Illustrator ve Üretken Yapay Zeka araçlarını kullanarak yaratıcılığınızı dijital dünyaya taşıyın.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/Mufredat/Syllabus" className="px-6 py-3 bg-primary hover:bg-primary/80 text-white font-semibold rounded-lg shadow-lg shadow-primary/30 transition-all duration-200 flex items-center group">
+              <Link href="/Mufredat/Syllabus" className="px-6 py-3 bg-ocean-500 hover:bg-ocean-600 text-white font-semibold rounded-lg shadow-lg shadow-ocean-500/30 transition-all duration-200 flex items-center group">
                 Syllabus'ı İncele
                 <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link href="/haftalar" className="px-6 py-3 bg-dark hover:bg-primary/20 text-slate-200 font-medium rounded-lg border border-primary/30 hover:border-accent/50 transition-all duration-200">
+              <Link href="/haftalar" className="px-6 py-3 bg-dark hover:bg-ocean-500/20 text-slate-200 font-medium rounded-lg border border-ocean-400/30 hover:border-ocean-400/50 transition-all duration-200">
                 Haftalık Programa Git
               </Link>
             </div>
@@ -48,7 +48,7 @@ export default function Home() {
             <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
               <Calendar className="text-accent" size={24} />
             </div>
-            <h3 className="text-xl font-bold text-white mb-2">Haftalık Akış</h3>
+            <h3 className="text-xl font-bold text-lavender-300 mb-2">Haftalık Akış</h3>
             <p className="text-slate-400 text-sm mb-4">
               Her haftanın ders planına, ödevlerine ve materyallerine buradan ulaşabilirsiniz.
             </p>
@@ -62,7 +62,7 @@ export default function Home() {
             <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
               <BookOpen className="text-accent" size={24} />
             </div>
-            <h3 className="text-xl font-bold text-white mb-2">Müfredat</h3>
+            <h3 className="text-xl font-bold text-lavender-300 mb-2">Müfredat</h3>
             <p className="text-slate-400 text-sm mb-4">
               Dersin amaçları, hedefleri, değerlendirme kriterleri ve haftalık konular.
             </p>
@@ -76,7 +76,7 @@ export default function Home() {
             <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
               <Layers className="text-accent" size={24} />
             </div>
-            <h3 className="text-xl font-bold text-white mb-2">Kaynaklar</h3>
+            <h3 className="text-xl font-bold text-lavender-300 mb-2">Kaynaklar</h3>
             <p className="text-slate-400 text-sm mb-4">
               Ders için önerilen kitaplar, video eğitimler ve faydalı web siteleri.
             </p>
