@@ -93,7 +93,8 @@ body {
   pointer-events: none;
   mix-blend-mode: screen;
   opacity: 0;
-  transition: opacity 0.15s cubic-bezier(0.4, 0, 1, 1);
+  /* Fast fade out (0.4s) with a slight hold at the beginning to simulate "flash then fade" */
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .logo-glitch::before {
@@ -324,16 +325,17 @@ body {
   opacity: 0.7;
 }
 
-/* Glassmorphism heading style for syllabus and kaynaklar - mesh gradient */
+/* Glassmorphism heading style for syllabus and kaynaklar - scattered gradient fading upward */
 .syllabus-prose > h2,
 .syllabus-prose > h3,
 .kaynaklar-prose > h2,
 .kaynaklar-prose > h3 {
+  --gradient-color-1: rgba(92,3,188,0.4);
+  --gradient-color-2: rgba(229,54,171,0.3);
   background: 
-    radial-gradient(ellipse at 20% 80%, rgba(92,3,188,0.25) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(229,54,171,0.2) 0%, transparent 50%),
-    radial-gradient(ellipse at 40% 40%, rgba(57,255,20,0.15) 0%, transparent 40%),
-    linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(14,7,37,0.5) 100%);
+    radial-gradient(ellipse 120% 80% at 10% 100%, var(--gradient-color-1) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 70% at 90% 100%, var(--gradient-color-2) 0%, transparent 55%),
+    linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 70%);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   margin-left: -1rem;
@@ -348,6 +350,68 @@ body {
   border-top: 1px solid rgba(255,255,255,0.1);
   border-left: 1px solid rgba(255,255,255,0.05);
   border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Different color combinations for each heading */
+.syllabus-prose > h2:nth-of-type(6n+1),
+.kaynaklar-prose > h2:nth-of-type(6n+1) {
+  --gradient-color-1: rgba(92,3,188,0.4);
+  --gradient-color-2: rgba(229,54,171,0.3);
+}
+
+.syllabus-prose > h2:nth-of-type(6n+2),
+.kaynaklar-prose > h2:nth-of-type(6n+2) {
+  --gradient-color-1: rgba(57,255,20,0.3);
+  --gradient-color-2: rgba(40,215,125,0.35);
+}
+
+.syllabus-prose > h2:nth-of-type(6n+3),
+.kaynaklar-prose > h2:nth-of-type(6n+3) {
+  --gradient-color-1: rgba(0,145,255,0.35);
+  --gradient-color-2: rgba(92,3,188,0.3);
+}
+
+.syllabus-prose > h2:nth-of-type(6n+4),
+.kaynaklar-prose > h2:nth-of-type(6n+4) {
+  --gradient-color-1: rgba(252,57,3,0.35);
+  --gradient-color-2: rgba(255,200,0,0.3);
+}
+
+.syllabus-prose > h2:nth-of-type(6n+5),
+.kaynaklar-prose > h2:nth-of-type(6n+5) {
+  --gradient-color-1: rgba(229,54,171,0.35);
+  --gradient-color-2: rgba(0,145,255,0.3);
+}
+
+.syllabus-prose > h2:nth-of-type(6n),
+.kaynaklar-prose > h2:nth-of-type(6n) {
+  --gradient-color-1: rgba(40,215,125,0.35);
+  --gradient-color-2: rgba(57,255,20,0.25);
+}
+
+/* H3 variations */
+.syllabus-prose > h3:nth-of-type(4n+1),
+.kaynaklar-prose > h3:nth-of-type(4n+1) {
+  --gradient-color-1: rgba(0,145,255,0.3);
+  --gradient-color-2: rgba(229,54,171,0.25);
+}
+
+.syllabus-prose > h3:nth-of-type(4n+2),
+.kaynaklar-prose > h3:nth-of-type(4n+2) {
+  --gradient-color-1: rgba(92,3,188,0.35);
+  --gradient-color-2: rgba(57,255,20,0.25);
+}
+
+.syllabus-prose > h3:nth-of-type(4n+3),
+.kaynaklar-prose > h3:nth-of-type(4n+3) {
+  --gradient-color-1: rgba(252,57,3,0.3);
+  --gradient-color-2: rgba(229,54,171,0.25);
+}
+
+.syllabus-prose > h3:nth-of-type(4n),
+.kaynaklar-prose > h3:nth-of-type(4n) {
+  --gradient-color-1: rgba(40,215,125,0.3);
+  --gradient-color-2: rgba(0,145,255,0.25);
 }
 
 /* Logo condensed font */

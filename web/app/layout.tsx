@@ -7,7 +7,7 @@ import ThemeCustomizer from "@/components/ThemeCustomizer";
 const outfit = Outfit({ subsets: ["latin"], variable: '--font-outfit' });
 const josefinSlab = Josefin_Slab({ subsets: ['latin'], variable: '--font-josefin' });
 const robotoCondensed = Roboto_Condensed({ subsets: ['latin'], weight: ['700', '900'], variable: '--font-roboto-condensed' });
-const rokkitt = Rokkitt({ subsets: ['latin'], weight: ['400'], variable: '--font-rokkitt' });
+const rokkitt = Rokkitt({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-rokkitt' });
 
 export const metadata: Metadata = {
   title: "GİT 119 | Dijital Tasarıma Giriş",

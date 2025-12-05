@@ -67,7 +67,8 @@ export default function Navbar() {
       const palette = glitchPalettes[Math.floor(Math.random() * glitchPalettes.length)];
       setGlitchColors(palette);
       setIsGlitchActive(true);
-      const duration = 900 + Math.random() * 1200;
+      // Random duration between 200ms and 1000ms (1 second max)
+      const duration = 200 + Math.random() * 800;
       activeTimeoutRef.current = setTimeout(() => {
         setIsGlitchActive(false);
         scheduleNext();
@@ -106,7 +107,7 @@ export default function Navbar() {
   // Show glitch if: random trigger is active OR currently hovering
   const showGlitch = isGlitchActive || isHovering;
 
-  const logoClassName = `font-rokkitt text-4xl tracking-tight font-normal text-transparent bg-clip-text logo-glitch ${
+  const logoClassName = `font-rokkitt text-4xl tracking-tight font-[550] text-transparent bg-clip-text logo-glitch ${
     showGlitch ? 'logo-glitch-active' : ''
   }`;
 
