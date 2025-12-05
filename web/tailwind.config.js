@@ -52,7 +52,7 @@ module.exports = {
         sans: ['var(--font-outfit)', 'system-ui', 'sans-serif'],
         josefin: ['var(--font-josefin)', 'serif'],
         mono: ['Courier New', 'Courier', 'monospace'],
-        'inter-tight': ['var(--font-inter-tight)', 'system-ui', 'sans-serif'],
+        rokkitt: ['var(--font-rokkitt)', 'serif'],
       },
     },
   },

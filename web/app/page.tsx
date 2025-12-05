@@ -74,13 +74,13 @@ export default function Home() {
               dersi kapsamında <span className="font-bold text-slate-200">Adobe Photoshop</span>, <span className="font-bold text-slate-200">Illustrator</span> ve <span className="font-bold text-slate-200">Üretken Yapay Zeka</span> araçlarını kullanarak yaratıcılığınızı dijital dünyaya taşıyın.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/Mufredat/Syllabus" className="relative overflow-hidden px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg flex items-center group border border-white/10 transform-gpu neon-glow-button wave-button hover:-translate-y-1" style={{ transition: 'all 0.3s cubic-bezier(0.37, 0, 0.63, 1)' }}>
+              <Link href="/Mufredat/Syllabus" className="relative overflow-hidden px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg flex items-center group border border-white/10 transform-gpu neon-glow-button wave-button hover:-translate-y-1" style={{ transition: 'all 0.2s cubic-bezier(0.22, 1, 0.36, 1)' }}>
                 <span className="relative z-10 flex items-center">
                   Syllabus'ı İncele
                   <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
-              <Link href="/haftalar" className="relative overflow-hidden px-6 py-3 bg-dark/50 backdrop-blur-md hover:bg-primary/20 text-slate-200 font-medium rounded-lg border border-primary/30 hover:border-accent/50 shadow-lg shadow-black/10 transform-gpu wave-button-secondary hover:-translate-y-1" style={{ transition: 'all 0.3s cubic-bezier(0.37, 0, 0.63, 1)' }}>
+              <Link href="/haftalar" className="relative overflow-hidden px-6 py-3 bg-dark/50 backdrop-blur-md hover:bg-primary/20 text-slate-200 font-medium rounded-lg border border-primary/30 hover:border-accent/50 shadow-lg shadow-black/10 transform-gpu wave-button-secondary hover:-translate-y-1" style={{ transition: 'all 0.2s cubic-bezier(0.22, 1, 0.36, 1)' }}>
                 <span className="relative z-10">Haftalık Programa Git</span>
               </Link>
             </div>
