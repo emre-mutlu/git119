@@ -54,25 +54,25 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="bg-dark text-slate-200 font-sans selection:bg-accent/30 min-h-screen flex flex-col">
+    <div className="bg-dark text-slate-200 font-sans selection:bg-accent/30 h-[calc(100vh-5rem)] flex flex-col">
       
       {/* Hero Section */}
-      <header className="relative overflow-hidden bg-dark flex flex-col justify-center border-b border-primary/20 py-12 md:py-16">
+      <header className="relative overflow-hidden bg-dark flex-[2] flex items-center border-b border-primary/20">
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl md:max-w-5xl mx-auto text-center space-y-4 md:space-y-6">
+          <div className="max-w-4xl md:max-w-5xl mx-auto text-center">
             <div className="inline-flex items-center space-x-2 bg-primary/10 backdrop-blur-md border border-primary/30 rounded-full px-3 py-1 mb-6 shadow-lg shadow-primary/5">
               <span className="neon-dot animate-pulse"></span>
               <span className="text-accent text-xs font-medium tracking-wide uppercase">2025 Bahar Dönemi</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-accent">Dijital Tasarıma</span> Giriş
             </h1>
-            <p className="text-base md:text-xl text-slate-400 leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-400 mb-8 leading-relaxed">
               <span className="font-black text-slate-200">git119</span>{' '}
               dersi kapsamında <span className="font-bold text-slate-200">Adobe Photoshop</span>, <span className="font-bold text-slate-200">Illustrator</span> ve <span className="font-bold text-slate-200">Üretken Yapay Zeka</span> araçlarını kullanarak yaratıcılığınızı dijital dünyaya taşıyın.
             </p>
-            <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+            <div className="flex flex-wrap justify-center gap-4">
               <Link href="/Mufredat/Syllabus" className="relative overflow-hidden px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg flex items-center group border border-white/10 transform-gpu neon-glow-button wave-button" style={{ transition: 'all 0.15s ease-out' }}>
                 <span className="relative z-10 flex items-center">
                   Syllabus’ı İncele
@@ -109,7 +109,7 @@ export default function Home() {
       </header>
 
       {/* Dashboard Grid */}
-      <main className="bg-[#0D0620] flex-1 relative z-20 min-h-[360px] py-10 md:py-14">
+      <main className="bg-[#0D0620] flex-1 flex items-center relative z-20 min-h-[360px] py-12">
         <div className="container mx-auto px-4">
           <DashboardCards />
         </div>

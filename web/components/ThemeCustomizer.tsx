@@ -85,9 +85,11 @@ export default function ThemeCustomizer({
   // Use external state if provided, otherwise use internal
   const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
   const toggleOpen = () => {
-    if (onClose && isOpen) {
+    if (externalIsOpen !== undefined && onClose) {
+      // If using external state, just call onClose to toggle
       onClose();
-    } else if (!onClose) {
+    } else {
+      // Otherwise use internal state
       setInternalIsOpen((prev) => !prev);
     }
   };

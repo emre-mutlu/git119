@@ -217,23 +217,19 @@ export default function WeeksIndexPage() {
             const gradientPos = isHovered ? getGradientPosition(weekNum) : { x: 50, y: 50 };
 
             return (
-              <Link key={weekNum} href={href} className="group block" onClick={handleWeekClick}>
+              <Link key={weekNum} href={href} className="group block week-card-link" onClick={handleWeekClick}>
                 <div 
                   ref={(el) => { cardRefs.current[weekNum] = el; }}
                   onMouseEnter={() => setHoveredWeek(weekNum)}
                   onMouseLeave={() => setHoveredWeek(null)}
-                  className={`relative bg-dark/60 ${weekTheme.cardBg} backdrop-blur-md border ${weekTheme.cardBorder} ${weekTheme.cardHoverBorder} p-5 rounded-xl overflow-hidden shadow-lg shadow-black/10`}
+                  className={`week-card relative bg-dark/60 ${weekTheme.cardBg} backdrop-blur-md border ${weekTheme.cardBorder} ${weekTheme.cardHoverBorder} p-5 rounded-xl overflow-hidden shadow-lg shadow-black/10`}
                   style={{
-                    transform: isHovered 
-                      ? `scale(${scaleValue}) rotateX(0deg) rotateY(0deg) translateY(0px)` 
-                      : `scale(${scaleValue}) rotateX(${rotation.rotateX}deg) rotateY(${rotation.rotateY}deg) translateY(${rotation.translateY}px)`,
-                    transformStyle: 'preserve-3d',
+                    ['--rotate-x' as string]: `${rotation.rotateX}deg`,
+                    ['--rotate-y' as string]: `${rotation.rotateY}deg`,
+                    ['--translate-y' as string]: `${rotation.translateY}px`,
+                    ['--scale' as string]: scaleValue,
                     boxShadow: isHovered ? weekTheme.hoverShadow : undefined,
-                    backfaceVisibility: 'hidden',
-                    WebkitBackfaceVisibility: 'hidden',
-                    willChange: 'transform, filter',
                     outline: '1px solid transparent',
-                    transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
                   }}
                 >
                   {/* Gradient overlay on hover - follows mouse */}

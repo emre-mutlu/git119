@@ -80,6 +80,9 @@ body {
   text-shadow: 0 0 14px rgba(92, 3, 188, 0.35);
   transition: text-shadow 0.2s ease;
   color: transparent;
+  background-image: linear-gradient(135deg, #39FF14 0%, #39FF14 80%, #5C03BC 80%, #5C03BC 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   -webkit-background-clip: text;
   background-clip: text;
 }
@@ -313,18 +316,13 @@ body {
   background:
     radial-gradient(165% 135% at 18% 82%, var(--mesh-a) 0%, transparent 68%),
     radial-gradient(155% 125% at 82% 78%, var(--mesh-b) 0%, transparent 70%),
-    radial-gradient(140% 115% at 50% 12%, var(--mesh-c) 0%, transparent 64%),
-    repeating-linear-gradient(135deg,
-      rgba(255,255,255,0.03) 0,
-      rgba(255,255,255,0.03) 1px,
-      rgba(0,0,0,0) 2px,
-      rgba(0,0,0,0) 6px);
+    radial-gradient(140% 115% at 50% 12%, var(--mesh-c) 0%, transparent 64%);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   margin-left: -1rem;
   margin-right: -1rem;
   padding: 1rem 1.1rem 1.1rem;
-  border-radius: 0.75rem;
+  border-radius: 0;
   text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.9);
   border: 1px solid rgba(255,255,255,0.08);
   box-shadow: 0 20px 55px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);
@@ -462,3 +460,39 @@ body {
 .animate-blob-float {
   animation: blobFloat ease-in-out infinite;
 }
+
+/* Mobile touch optimization for week cards */
+.week-card-link {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+.week-card {
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Mobile: simple transforms only */
+@media (max-width: 767px) {
+  .week-card {
+    transform: none !important;
+  }
+  .week-card-link:active .week-card {
+    transform: scale(0.98) !important;
+  }
+}
+
+/* Desktop: 3D transforms */
+@media (min-width: 768px) {
+  .week-card {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform, filter;
+    transform: scale(var(--scale, 1)) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) translateY(var(--translate-y, 0px));
+  }
+  .week-card:hover {
+    transform: scale(var(--scale, 1.02)) rotateX(0deg) rotateY(0deg) translateY(0px) !important;
+  }
+}
+

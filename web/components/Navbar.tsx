@@ -150,7 +150,7 @@ export default function Navbar({ onThemeToggle }: { onThemeToggle?: () => void }
     '--glitch-after-color': glitchColors.after,
     '--glitch-proximity': proximity.toFixed(3),
     '--glitch-speed-scale': (0.5 + 0.35 * proximity).toFixed(3),
-    backgroundImage: 'linear-gradient(120deg, #39FF14 0%, #39FF14 65%, #5C03BC 65%, #5C03BC 100%)',
+    backgroundImage: 'linear-gradient(135deg, #39FF14 0%, #39FF14 80%, #5C03BC 80%, #5C03BC 100%)',
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 100%',
     WebkitBackgroundClip: 'text',
@@ -249,30 +249,32 @@ export default function Navbar({ onThemeToggle }: { onThemeToggle?: () => void }
         </div>
         {/* Mobile Menu */}
         <div
-          className={`md:hidden transition-all duration-200 origin-top ${
-            isMenuOpen ? 'max-h-96 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
+          className={`md:hidden transition-all duration-200 ease-in-out ${
+            isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
           } overflow-hidden`}
         >
-          <div className="mt-2 rounded-xl border border-white/10 bg-dark/85 backdrop-blur-xl shadow-lg">
-            <div className="flex flex-col divide-y divide-white/5">
-              {navigationItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
-                const iconColor = iconColorMap[item.colorKey];
-                return (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors ${
-                      isActive ? 'text-white bg-white/5' : 'text-slate-300 hover:text-white hover:bg-white/5'
-                    }`}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <Icon size={18} style={{ color: isActive ? iconColor : undefined }} />
-                    <span>{item.name}</span>
-                  </Link>
-                );
-              })}
+          <div className="pb-2">
+            <div className="mt-2 rounded-xl border border-white/10 bg-dark/85 backdrop-blur-xl shadow-lg">
+              <div className="flex flex-col divide-y divide-white/5">
+                {navigationItems.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+                  const iconColor = iconColorMap[item.colorKey];
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={`flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors ${
+                        isActive ? 'text-white bg-white/5' : 'text-slate-300 hover:text-white hover:bg-white/5'
+                      }`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <Icon size={18} style={{ color: isActive ? iconColor : undefined }} />
+                      <span>{item.name}</span>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
