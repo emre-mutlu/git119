@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { BookOpen, Calendar, Layers, Home } from 'lucide-react';
 
 const glitchPalettes = [
@@ -32,6 +32,21 @@ const glitchPalettes = [
   },
 ];
 
+const iconColors = [
+  '#5C03BC', // mor
+  '#E536AB', // pembe
+  '#39FF14', // neon yeşil
+  '#FC3903', // turuncu
+  '#0091FF', // okyanus
+  '#28D77D', // zümrüt
+  '#95609F', // lavanta
+];
+
+function getRandomIconColors() {
+  const shuffled = [...iconColors].sort(() => Math.random() - 0.5);
+  return [shuffled[0], shuffled[1], shuffled[2], shuffled[3]];
+}
+
 const navigationItems = [
   { name: 'Ana Sayfa', href: '/', icon: Home },
   { name: 'Müfredat', href: '/Mufredat/Syllabus', icon: BookOpen },
@@ -46,6 +61,8 @@ export default function Navbar() {
   const triggerTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const activeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const triggerGlitchRef = useRef<() => void>();
+  
+  const navIconColors = useMemo(() => getRandomIconColors(), []);
 
   useEffect(() => {
     const scheduleNext = () => {
@@ -102,7 +119,7 @@ export default function Navbar() {
 
   return (
     <>
-    <nav className="bg-dark/80 backdrop-blur-md backdrop-saturate-150 backdrop-brightness-110 text-slate-200 shadow-md sticky top-0 z-50 border-b border-white/5">
+    <nav className="bg-dark/60 backdrop-blur-lg backdrop-saturate-200 backdrop-brightness-125 text-slate-200 shadow-md sticky top-0 z-50 border-b border-white/5">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           {/* Logo / Brand */}
@@ -118,9 +135,10 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-1">
-            {navigationItems.map((item) => {
+            {navigationItems.map((item, index) => {
               const Icon = item.icon;
               const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+              const iconColor = navIconColors[index];
               
               return (
                 <Link
@@ -128,12 +146,13 @@ export default function Navbar() {
                   href={item.href}
                   className={`group flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ease-in-out border ${
                     isActive
-                      ? 'bg-primary/20 backdrop-blur-sm text-accent border-white/10 shadow-inner shadow-primary/10'
-                      : 'text-slate-400 border-transparent hover:text-white hover:bg-primary/10 hover:backdrop-blur-sm hover:border-white/5'
+                      ? 'bg-primary/20 backdrop-blur-sm border-white/10 shadow-inner shadow-primary/10'
+                      : 'border-transparent hover:bg-primary/10 hover:backdrop-blur-sm hover:border-white/5'
                   }`}
+                  style={{ color: isActive ? iconColor : `${iconColor}80` }}
                 >
-                  <Icon size={16} className={isActive ? 'text-accent' : 'text-slate-500 group-hover:text-slate-300'} />
-                  <span>{item.name}</span>
+                  <Icon size={16} className="group-hover:brightness-125 transition-all" style={{ color: 'inherit' }} />
+                  <span className="group-hover:brightness-125 transition-all">{item.name}</span>
                 </Link>
               );
             })}

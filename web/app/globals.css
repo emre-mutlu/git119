@@ -245,3 +245,30 @@ body {
   background: #0091FF;
   opacity: 0.85;
 }
+
+/* Dashboard Card Wave Gradient Effect */
+.wave-gradient {
+  animation: waveGradient 3s ease-in-out infinite;
+}
+
+@keyframes waveGradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.dashboard-card {
+  background: linear-gradient(135deg, rgba(14, 7, 37, 0.7) 0%, rgba(14, 7, 37, 0.8) 100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+  background: linear-gradient(135deg, rgba(20, 10, 50, 0.85) 0%, rgba(30, 15, 60, 0.9) 100%);
+}
