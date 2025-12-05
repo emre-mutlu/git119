@@ -22,7 +22,6 @@ const colorOptions = [
   { name: 'Turuncu', hex: '#FC3903' },
   { name: 'Okyanus', hex: '#0091FF' },
   { name: 'Zümrüt', hex: '#28D77D' },
-  { name: 'Lavanta', hex: '#95609F' },
 ];
 
 const defaultHexMap: Record<ThemeVariable, string> = {

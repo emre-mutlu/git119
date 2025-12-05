@@ -13,7 +13,6 @@ const blobColors = [
   { color: 'rgba(252,57,3,', name: 'blazingflame' }, // #FC3903
   { color: 'rgba(0,145,255,', name: 'ocean' },       // #0091FF
   { color: 'rgba(40,215,125,', name: 'emeraldgreen' },// #28D77D
-  { color: 'rgba(149,96,159,', name: 'lavender' },   // #95609F
 ];
 
 interface Blob {
@@ -70,7 +69,7 @@ export default function Home() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-accent">Dijital Tasarıma</span> Giriş
             </h1>
             <p className="text-lg md:text-xl text-slate-400 mb-8 leading-relaxed">
-              <span className="font-black text-slate-200">git.119</span>{' '}
+              <span className="font-black text-slate-200">git119</span>{' '}
               dersi kapsamında <span className="font-bold text-slate-200">Adobe Photoshop</span>, <span className="font-bold text-slate-200">Illustrator</span> ve <span className="font-bold text-slate-200">Üretken Yapay Zeka</span> araçlarını kullanarak yaratıcılığınızı dijital dünyaya taşıyın.
             </p>
             <div className="flex flex-wrap justify-center gap-4">

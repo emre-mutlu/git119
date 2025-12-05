@@ -97,7 +97,7 @@ export default function Navbar() {
     '--glitch-after-color': glitchColors.after,
   };
 
-  const logoClassName = `font-rokkitt text-4xl tracking-tight font-normal text-transparent bg-clip-text logo-glitch ${
+  const logoClassName = `font-rokkitt text-4xl tracking-tight font-medium text-transparent bg-clip-text logo-glitch ${
     isGlitchActive ? 'logo-glitch-active' : ''
   }`;
 
@@ -109,11 +109,11 @@ export default function Navbar() {
           {/* Logo / Brand */}
           <Link href="/" className="flex items-center group select-none relative" onMouseEnter={handleLogoInteraction}>
             <span 
-              data-text="git.119"
+              data-text="git119"
               className={logoClassName}
               style={logoStyle}
             >
-              git.119
+              git119
             </span>
           </Link>
 

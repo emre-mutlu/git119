@@ -300,7 +300,7 @@ body {
   }
 }
 
-/* Kaynaklar page styles - white headings, no underlines */
+/* Kaynaklar page styles - white headings with underlines like syllabus */
 .kaynaklar-prose h2,
 .kaynaklar-prose h3,
 .kaynaklar-prose h4,
@@ -308,6 +308,20 @@ body {
 .kaynaklar-prose h6 {
   color: white;
   margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.kaynaklar-prose h2::after,
+.kaynaklar-prose h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: rgb(92, 3, 188);
+  opacity: 0.7;
 }
 
 /* Glassmorphism heading style for syllabus and kaynaklar */
@@ -315,12 +329,13 @@ body {
 .syllabus-prose > h3,
 .kaynaklar-prose > h2,
 .kaynaklar-prose > h3 {
-  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(92,3,188,0.15) 100%);
+  background: linear-gradient(to bottom, rgba(92,3,188,0.15) 0%, rgba(0,0,0,0.6) 100%);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   margin-left: -1rem;
   margin-right: -1rem;
   padding: 0.75rem 1rem;
+  padding-bottom: 0.85rem;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
   border-bottom-left-radius: 0;

@@ -6,7 +6,6 @@ export const iconColorPalette = [
   '#FC3903', // turuncu
   '#0091FF', // okyanus
   '#28D77D', // zümrüt
-  '#95609F', // lavanta
 ];
 
 // Fixed colors for each navigation item - no randomization to prevent color changes on click

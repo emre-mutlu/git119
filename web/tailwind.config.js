@@ -42,11 +42,6 @@ module.exports = {
           400: 'rgb(83 223 151)',
           500: 'rgb(40 215 125)',
         },
-        lavender: {
-          300: 'rgb(191 159 198)',
-          400: 'rgb(170 128 179)',
-          500: 'rgb(149 96 159)',
-        },
       },
       fontFamily: {
         sans: ['var(--font-outfit)', 'system-ui', 'sans-serif'],

@@ -40,13 +40,14 @@ export default function DashboardCards() {
           <Link
             key={card.href}
             href={card.href}
-            className="bg-dark/70 backdrop-blur-md border border-primary/20 p-6 rounded-xl group shadow-lg shadow-black/10 flex flex-col cursor-pointer transition-all duration-150 ease-out hover:scale-[1.01]"
+            className="bg-dark/70 backdrop-blur-md border border-primary/20 p-6 rounded-xl group shadow-xl shadow-black/30 flex flex-col cursor-pointer transition-all duration-150 ease-out hover:scale-[1.01]"
             style={{ 
               ['--card-color' as string]: card.color,
+              filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.4))',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.borderColor = card.color;
-              e.currentTarget.style.boxShadow = `0 0 20px ${card.color}30, 0 10px 40px ${card.color}15`;
+              e.currentTarget.style.boxShadow = `0 0 20px ${card.color}30, 0 15px 50px ${card.color}20`;
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.borderColor = '';
