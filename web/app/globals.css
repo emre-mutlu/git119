@@ -202,12 +202,10 @@ body {
 .syllabus-prose h2 {
   position: relative;
   padding-bottom: 0.85rem;
-  margin-bottom: 2.25rem;
+  margin-bottom: 1rem;
   font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
   letter-spacing: -0.01em;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
+  color: rgb(229, 54, 171);
 }
 
 .syllabus-prose h2::after {
@@ -216,9 +214,9 @@ body {
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 2px;
+  height: 1px;
   border-radius: 999px;
-  background: #0091FF;
+  background: rgb(229, 54, 171);
 }
 
 .syllabus-prose h3 {
@@ -226,13 +224,10 @@ body {
   text-transform: none;
   letter-spacing: 0.08em;
   font-size: 0.95rem;
-  color: rgb(var(--color-neon));
+  color: rgb(229, 54, 171);
   margin-top: 1.75rem;
   margin-bottom: 0.5rem;
   position: relative;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
 }
 
 .syllabus-prose h3::after {
@@ -242,33 +237,65 @@ body {
   bottom: -0.35rem;
   width: 100%;
   height: 1px;
-  background: #0091FF;
+  background: rgb(229, 54, 171);
   opacity: 0.85;
 }
 
-/* Dashboard Card Wave Gradient Effect */
-.wave-gradient {
-  animation: waveGradient 3s ease-in-out infinite;
+.syllabus-prose h4 {
+  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
+  color: rgb(229, 54, 171);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.syllabus-prose h4::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.25rem;
+  width: 100%;
+  height: 1px;
+  background: rgb(229, 54, 171);
+  opacity: 0.7;
+}
+
+/* Button Wave Gradient Effect */
+.wave-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(57, 255, 20, 0.15) 50%, transparent 100%);
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.wave-button:hover::before {
+  opacity: 1;
+  animation: waveGradient 2s linear infinite;
+}
+
+.wave-button-secondary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(92, 3, 188, 0.2) 50%, transparent 100%);
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.wave-button-secondary:hover::before {
+  opacity: 1;
+  animation: waveGradient 2s linear infinite;
 }
 
 @keyframes waveGradient {
   0% {
-    background-position: 0% 0%;
-  }
-  50% {
-    background-position: 100% 100%;
+    background-position: 200% 0%;
   }
   100% {
-    background-position: 0% 0%;
+    background-position: -200% 0%;
   }
-}
-
-.dashboard-card {
-  background: linear-gradient(135deg, rgba(14, 7, 37, 0.7) 0%, rgba(14, 7, 37, 0.8) 100%);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.dashboard-card:hover {
-  transform: translateY(-4px);
-  background: linear-gradient(135deg, rgba(20, 10, 50, 0.85) 0%, rgba(30, 15, 60, 0.9) 100%);
 }

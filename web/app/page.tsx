@@ -23,12 +23,14 @@ export default function Home() {
               dersi kapsamında <span className="font-bold text-slate-200">Adobe Photoshop</span>, <span className="font-bold text-slate-200">Illustrator</span> ve <span className="font-bold text-slate-200">Üretken Yapay Zeka</span> araçlarını kullanarak yaratıcılığınızı dijital dünyaya taşıyın.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/Mufredat/Syllabus" className="px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg transition-all duration-200 flex items-center group border border-white/10 transform-gpu neon-glow-button">
-                Syllabus'ı İncele
-                <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+              <Link href="/Mufredat/Syllabus" className="relative overflow-hidden px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg transition-all duration-200 flex items-center group border border-white/10 transform-gpu neon-glow-button wave-button">
+                <span className="relative z-10 flex items-center">
+                  Syllabus'ı İncele
+                  <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </span>
               </Link>
-              <Link href="/haftalar" className="px-6 py-3 bg-dark/50 backdrop-blur-md hover:bg-primary/20 text-slate-200 font-medium rounded-lg border border-primary/30 hover:border-accent/50 transition-all duration-200 shadow-lg shadow-black/10 transform-gpu">
-                Haftalık Programa Git
+              <Link href="/haftalar" className="relative overflow-hidden px-6 py-3 bg-dark/50 backdrop-blur-md hover:bg-primary/20 text-slate-200 font-medium rounded-lg border border-primary/30 hover:border-accent/50 transition-all duration-200 shadow-lg shadow-black/10 transform-gpu wave-button-secondary">
+                <span className="relative z-10">Haftalık Programa Git</span>
               </Link>
             </div>
           </div>
