@@ -45,6 +45,7 @@ export default function Navbar() {
   const [isGlitchActive, setIsGlitchActive] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [proximity, setProximity] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [glitchColors, setGlitchColors] = useState(glitchPalettes[0]);
   const triggerTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const activeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -214,13 +215,52 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Mobile Menu Button (Placeholder for now) */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <button className="text-slate-400 hover:text-white focus:outline-none">
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+            <button
+              className="text-slate-200 hover:text-white focus:outline-none p-2 rounded-lg border border-white/10 hover:border-white/20 transition"
+              onClick={() => setIsMenuOpen((prev) => !prev)}
+              aria-label="Menüyü aç"
+            >
+              {isMenuOpen ? (
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
             </button>
+          </div>
+        </div>
+        {/* Mobile Menu */}
+        <div
+          className={`md:hidden transition-all duration-200 origin-top ${
+            isMenuOpen ? 'max-h-96 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
+          } overflow-hidden`}
+        >
+          <div className="mt-2 rounded-xl border border-white/10 bg-dark/85 backdrop-blur-xl shadow-lg">
+            <div className="flex flex-col divide-y divide-white/5">
+              {navigationItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+                const iconColor = iconColorMap[item.colorKey];
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors ${
+                      isActive ? 'text-white bg-white/5' : 'text-slate-300 hover:text-white hover:bg-white/5'
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Icon size={18} style={{ color: isActive ? iconColor : undefined }} />
+                    <span>{item.name}</span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
