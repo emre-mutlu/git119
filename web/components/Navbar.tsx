@@ -130,15 +130,19 @@ export default function Navbar() {
                   href={item.href}
                   className={`group flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ease-in-out border ${
                     isActive
-                      ? 'bg-primary/20 backdrop-blur-sm text-white border-white/10 shadow-inner shadow-primary/10'
-                      : 'text-white/90 border-transparent hover:text-white hover:bg-primary/10 hover:backdrop-blur-sm hover:border-white/5'
+                      ? 'backdrop-blur-sm text-white border-white/10 shadow-inner'
+                      : 'text-slate-400 border-transparent hover:text-slate-200 hover:bg-primary/10 hover:backdrop-blur-sm hover:border-white/5'
                   }`}
-                  style={isActive ? { textShadow: `0 0 10px ${iconColor}40` } : undefined}
+                  style={isActive ? { 
+                    backgroundColor: `${iconColor}20`,
+                    boxShadow: `inset 0 2px 4px ${iconColor}15`,
+                    textShadow: `0 0 10px ${iconColor}40`
+                  } : undefined}
                 >
                   <Icon 
                     size={16} 
                     style={{ color: isActive ? iconColor : undefined, filter: isActive ? `drop-shadow(0 0 4px ${iconColor}60)` : undefined }} 
-                    className={isActive ? '' : 'text-slate-400 group-hover:text-slate-300'} 
+                    className={isActive ? '' : 'text-slate-500 group-hover:text-slate-400'} 
                   />
                   <span>{item.name}</span>
                 </Link>

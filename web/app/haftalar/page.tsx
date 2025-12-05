@@ -224,7 +224,7 @@ export default function WeeksIndexPage() {
                     WebkitBackfaceVisibility: 'hidden',
                     willChange: 'transform, filter',
                     outline: '1px solid transparent',
-                    transition: 'all 0.4s cubic-bezier(0.85, 0, 0.15, 1)',
+                    transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
                   }}
                 >
                   {/* Gradient overlay on hover */}

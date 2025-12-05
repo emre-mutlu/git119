@@ -40,7 +40,8 @@ export default function DashboardCards() {
           <Link
             key={card.href}
             href={card.href}
-            className="bg-dark/70 backdrop-blur-md border border-primary/20 hover:border-accent/50 p-6 rounded-xl transition-all duration-200 group shadow-lg shadow-black/10 hover:shadow-accent/20 flex flex-col cursor-pointer"
+            className="bg-dark/70 backdrop-blur-md border border-primary/20 hover:border-accent/50 p-6 rounded-xl group shadow-lg shadow-black/10 hover:shadow-accent/20 flex flex-col cursor-pointer hover:-translate-y-1"
+            style={{ transition: 'all 0.3s cubic-bezier(0.7, 0, 0.84, 0)' }}
           >
             <div className="flex items-center gap-4 mb-4">
               <div
