@@ -3,10 +3,10 @@ import { ArrowRight, Calendar, BookOpen, Layers } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="bg-dark text-slate-200 font-sans selection:bg-accent/30">
+    <div className="bg-dark text-slate-200 font-sans selection:bg-accent/30 h-[calc(100vh-5rem)] flex flex-col">
       
       {/* Hero Section */}
-      <header className="relative overflow-hidden bg-dark pt-16 pb-12 md:pt-24 md:pb-16 border-b border-primary/20">
+      <header className="relative overflow-hidden bg-dark flex-[2] flex items-center border-b border-primary/20">
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl md:max-w-5xl mx-auto text-center">
@@ -18,7 +18,7 @@ export default function Home() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-accent">Dijital Tasarıma</span> Giriş
             </h1>
             <p className="text-lg md:text-xl text-slate-400 mb-8 leading-relaxed">
-              <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-accent">git.119</span>{' '}
+              <span className="font-black text-slate-200">git.119</span>{' '}
               dersi kapsamında Adobe Photoshop, Illustrator ve Üretken Yapay Zeka araçlarını kullanarak yaratıcılığınızı dijital dünyaya taşıyın.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
@@ -41,7 +41,7 @@ export default function Home() {
       </header>
 
       {/* Dashboard Grid */}
-      <main className="bg-dark/80 py-10 relative z-20">
+      <main className="bg-[#080318] flex-1 flex items-center relative z-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             
