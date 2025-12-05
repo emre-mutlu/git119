@@ -1,9 +1,12 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { Palette, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 type ThemeVariable = '--color-primary' | '--color-accent' | '--color-neon';
+
+const STORAGE_KEY = 'git119-theme-preferences';
 
 const controls: { label: string; description: string; variable: ThemeVariable }[] = [
   { label: 'Primary', description: 'Ana gradient ve kart tonları', variable: '--color-primary' },
@@ -51,12 +54,47 @@ const rgbTripletToHex = (triplet: string) => {
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`.toUpperCase();
 };
 
+const persistSelections = (values: Record<ThemeVariable, string>) => {
+  if (typeof window === 'undefined') return;
+  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(values));
+};
+
+const applyVariablesToDocument = (values: Partial<Record<ThemeVariable, string>>) => {
+  if (typeof window === 'undefined') return;
+  (Object.entries(values) as [ThemeVariable, string | undefined][]).forEach(([variable, hex]) => {
+    if (!hex) return;
+    document.documentElement.style.setProperty(variable, hexToRgbTriplet(hex));
+  });
+};
+
 export default function ThemeCustomizer() {
+  const pathname = usePathname();
+  const isHome = pathname === '/';
   const [isOpen, setIsOpen] = useState(false);
   const [selections, setSelections] = useState<Record<ThemeVariable, string>>(() => ({ ...defaultHexMap }));
 
   useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
     if (typeof window === 'undefined') return;
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored) as Partial<Record<ThemeVariable, string>>;
+        const hydrated: Record<ThemeVariable, string> = { ...defaultHexMap };
+        (Object.entries(parsed) as [ThemeVariable, string][]).forEach(([variable, value]) => {
+          if (value) hydrated[variable] = value;
+        });
+        setSelections(hydrated);
+        applyVariablesToDocument(hydrated);
+        return;
+      } catch {
+        // fall through to computed styles
+      }
+    }
+
     const root = document.documentElement;
     const current: Record<ThemeVariable, string> = { ...defaultHexMap };
     controls.forEach((ctrl) => {
@@ -69,71 +107,115 @@ export default function ThemeCustomizer() {
   }, []);
 
   const applyColor = (variable: ThemeVariable, hex: string) => {
-    setSelections((prev) => ({ ...prev, [variable]: hex }));
-    if (typeof window === 'undefined') return;
-    document.documentElement.style.setProperty(variable, hexToRgbTriplet(hex));
-  };
-
-  const handleReset = () => {
-    (Object.entries(defaultHexMap) as [ThemeVariable, string][]).forEach(([variable, hex]) => {
-      applyColor(variable, hex);
+    setSelections((prev: Record<ThemeVariable, string>) => {
+      const next = { ...prev, [variable]: hex };
+      applyVariablesToDocument({ [variable]: hex });
+      persistSelections(next);
+      return next;
     });
   };
 
+  const handleReset = () => {
+    setSelections({ ...defaultHexMap });
+    applyVariablesToDocument(defaultHexMap);
+    persistSelections(defaultHexMap);
+  };
+
+  const panel = (
+    <div className="w-80 rounded-2xl border border-white/10 bg-dark/90 p-4 shadow-2xl backdrop-blur-xl">
+      <div className="mb-4 flex items-center justify-between">
+        <div>
+          <p className="text-sm font-semibold text-white">Renk Paleti</p>
+          <p className="text-xs text-slate-400">Var olan renklerle temayı anında güncelleyin.</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            className="text-xs font-semibold text-neon hover:text-white transition"
+            onClick={handleReset}
+          >
+            Sıfırla
+          </button>
+          <button
+            type="button"
+            className="text-slate-500 hover:text-white transition"
+            onClick={() => setIsOpen(false)}
+            aria-label="Paneli kapat"
+          >
+            <X size={14} />
+          </button>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        {controls.map((ctrl) => (
+          <div key={ctrl.variable} className="space-y-2">
+            <div className="flex items-center justify-between text-xs text-slate-300">
+              <span className="font-semibold text-white">{ctrl.label}</span>
+              <span>{ctrl.description}</span>
+            </div>
+            <div className="grid grid-cols-4 gap-2">
+              {colorOptions.map((option) => (
+                <button
+                  key={`${ctrl.variable}-${option.hex}`}
+                  type="button"
+                  onClick={() => applyColor(ctrl.variable, option.hex)}
+                  className={`h-10 rounded-lg border border-white/10 transition-transform focus:outline-none ${
+                    selections[ctrl.variable] === option.hex ? activeButtonClass : 'hover:border-white/40'
+                  }`}
+                  style={{ backgroundColor: option.hex }}
+                  aria-label={`${ctrl.label} ${option.name}`}
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  if (isHome) {
+    return (
+      <div className="fixed bottom-6 right-6 z-50">
+        <button
+          type="button"
+          onClick={() => setIsOpen((prev) => !prev)}
+          className="flex items-center gap-2 rounded-full bg-dark/80 px-4 py-2 text-sm font-semibold text-slate-100 border border-white/10 shadow-lg backdrop-blur-md hover:bg-dark/90 transition"
+        >
+          <Palette size={16} />
+          Tema Aracı
+          {isOpen && <X size={14} className="ml-1" />}
+        </button>
+        {isOpen && <div className="mt-3">{panel}</div>}
+      </div>
+    );
+  }
+
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed top-1/2 right-0 -translate-y-1/2 z-50 flex flex-row-reverse items-center gap-2">
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex items-center gap-2 rounded-full bg-dark/80 px-4 py-2 text-sm font-semibold text-slate-100 border border-white/10 shadow-lg backdrop-blur-md hover:bg-dark/90 transition"
+        className={`rounded-l-2xl border border-white/10 bg-dark/80 px-3 py-5 text-slate-100 shadow-lg backdrop-blur-md flex flex-col items-center gap-2 transition-all ${
+          isOpen ? '' : 'translate-x-2'
+        }`}
+        aria-label="Tema aracını aç"
       >
         <Palette size={16} />
-        Tema Aracı
-        {isOpen && <X size={14} className="ml-1" />}
+        <span
+          className="text-[10px] tracking-[0.4em] uppercase"
+          style={{ writingMode: 'vertical-rl' }}
+        >
+          Tema
+        </span>
       </button>
-
-      {isOpen && (
-        <div className="mt-3 w-80 rounded-2xl border border-white/10 bg-dark/90 p-4 shadow-2xl backdrop-blur-xl">
-          <div className="mb-4 flex items-center justify-between">
-            <div>
-              <p className="text-sm font-semibold text-white">Renk Paleti</p>
-              <p className="text-xs text-slate-400">Var olan renklerle temayı anında güncelleyin.</p>
-            </div>
-            <button
-              type="button"
-              className="text-xs font-semibold text-neon hover:text-white transition"
-              onClick={handleReset}
-            >
-              Sıfırla
-            </button>
-          </div>
-
-          <div className="space-y-4">
-            {controls.map((ctrl) => (
-              <div key={ctrl.variable} className="space-y-2">
-                <div className="flex items-center justify-between text-xs text-slate-300">
-                  <span className="font-semibold text-white">{ctrl.label}</span>
-                  <span>{ctrl.description}</span>
-                </div>
-                <div className="grid grid-cols-4 gap-2">
-                  {colorOptions.map((option) => (
-                    <button
-                      key={`${ctrl.variable}-${option.hex}`}
-                      type="button"
-                      onClick={() => applyColor(ctrl.variable, option.hex)}
-                      className={`h-10 rounded-lg border border-white/10 transition-transform focus:outline-none ${
-                        selections[ctrl.variable] === option.hex ? activeButtonClass : 'hover:border-white/40'
-                      }`}
-                      style={{ backgroundColor: option.hex }}
-                      aria-label={`${ctrl.label} ${option.name}`}
-                    />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      <div
+        className={`transition-all duration-300 ${
+          isOpen ? 'opacity-100 translate-x-0 pointer-events-auto' : 'opacity-0 translate-x-6 pointer-events-none'
+        }`}
+      >
+        {panel}
+      </div>
     </div>
   );
 }

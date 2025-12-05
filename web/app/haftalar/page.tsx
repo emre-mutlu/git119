@@ -174,9 +174,8 @@ export default function WeeksIndexPage() {
     const maxDistance = 700; // Max distance for full blur (increased by 200px)
     
     // Calculate blur based on distance (0 at mouse position, max at maxDistance)
-    // Reduced to 1/4: max blur 0.375px instead of 1.5px
     const normalizedDistance = Math.min(distance / maxDistance, 1);
-    const blur = normalizedDistance * 0.375; // Max blur of 0.375px (1.5/4)
+    const blur = normalizedDistance * 0.25; // Softer blur for cleaner edges
     const brightness = 1 - (normalizedDistance * 0.2); // 0.8 to 1.0 brightness
 
     return { blur, brightness };
@@ -199,7 +198,8 @@ export default function WeeksIndexPage() {
             const isHovered = hoveredWeek === weekNum;
             const weekTheme = getWeekTheme(weekNum);
             const number = weekTheme.number;
-            const contentFilter = { filter: `blur(${blur}px) brightness(${brightness})` };
+            const filterValue = blur > 0.02 ? `blur(${blur}px) brightness(${brightness})` : `brightness(${brightness})`;
+            const contentFilter = { filter: filterValue, textRendering: 'optimizeLegibility' as const };
             const scaleValue = isHovered ? 1.02 : 1;
 
             return (
@@ -215,6 +215,10 @@ export default function WeeksIndexPage() {
                       : `scale(${scaleValue}) rotateX(${rotation.rotateX}deg) rotateY(${rotation.rotateY}deg) translateY(${rotation.translateY}px)`,
                     transformStyle: 'preserve-3d',
                     boxShadow: isHovered ? weekTheme.hoverShadow : undefined,
+                    backfaceVisibility: 'hidden',
+                    WebkitBackfaceVisibility: 'hidden',
+                    willChange: 'transform, filter',
+                    outline: '1px solid transparent',
                   }}
                 >
                   {/* Gradient overlay on hover */}

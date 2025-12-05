@@ -1,13 +1,12 @@
 import Link from 'next/link';
-import { ArrowRight, Calendar, BookOpen, FileText, Layers, Files } from 'lucide-react';
-import ThemeCustomizer from '@/components/ThemeCustomizer';
+import { ArrowRight, Calendar, BookOpen, Layers } from 'lucide-react';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-dark text-slate-200 font-sans selection:bg-accent/30">
       
       {/* Hero Section */}
-      <header className="relative overflow-hidden bg-dark pt-24 pb-20 md:pt-36 md:pb-32 border-b border-primary/20">
+      <header className="relative overflow-hidden bg-dark pt-28 pb-24 md:pt-48 md:pb-40 border-b border-primary/20">
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl md:max-w-5xl mx-auto text-center">
@@ -45,62 +44,58 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
           {/* Card 1: Haftalık Akış */}
-          <div className="bg-dark/50 backdrop-blur-md border border-primary/20 hover:border-accent/40 p-6 rounded-xl transition-all duration-200 group shadow-lg shadow-black/5 hover:shadow-accent/10">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center group-hover:bg-primary/30 transition-colors">
-                  <Calendar className="text-accent" size={24} />
-                </div>
-                <h3 className="text-xl font-bold text-white">Haftalık Akış</h3>
+          <div className="bg-dark/50 backdrop-blur-md border border-primary/20 hover:border-accent/40 p-6 rounded-xl transition-all duration-200 group shadow-lg shadow-black/5 hover:shadow-accent/10 flex flex-col">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center group-hover:bg-primary/30 transition-colors">
+                <Calendar className="text-accent" size={24} />
               </div>
-              <Link href="/haftalar" className="text-accent text-base font-semibold hover:text-white flex items-center gap-1">
-                Programa Bak <ArrowRight size={14} />
-              </Link>
+              <h3 className="text-xl font-bold text-white">Haftalık Akış</h3>
             </div>
-            <p className="text-slate-400 text-sm">
+            <p className="text-slate-400 text-sm flex-1">
               Her haftanın ders planına, ödevlerine ve materyallerine buradan ulaşabilirsiniz.
             </p>
+            <Link href="/haftalar" className="mt-6 inline-flex items-center gap-2 text-accent text-sm font-semibold hover:text-white">
+              Programa Bak
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
 
           {/* Card 2: Müfredat */}
-          <div className="bg-dark/50 backdrop-blur-md border border-primary/20 hover:border-accent/40 p-6 rounded-xl transition-all duration-200 group shadow-lg shadow-black/5 hover:shadow-accent/10">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center group-hover:bg-primary/30 transition-colors">
-                  <BookOpen className="text-accent" size={24} />
-                </div>
-                <h3 className="text-xl font-bold text-white">Müfredat</h3>
+          <div className="bg-dark/50 backdrop-blur-md border border-primary/20 hover:border-accent/40 p-6 rounded-xl transition-all duration-200 group shadow-lg shadow-black/5 hover:shadow-accent/10 flex flex-col">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center group-hover:bg-primary/30 transition-colors">
+                <BookOpen className="text-accent" size={24} />
               </div>
-              <Link href="/Mufredat/Syllabus" className="text-accent text-base font-semibold hover:text-white flex items-center gap-1">
-                Syllabus'ı İncele <ArrowRight size={14} />
-              </Link>
+              <h3 className="text-xl font-bold text-white">Müfredat</h3>
             </div>
-            <p className="text-slate-400 text-sm">
+            <p className="text-slate-400 text-sm flex-1">
               Dersin amaçları, hedefleri, değerlendirme kriterleri ve haftalık konular.
             </p>
+            <Link href="/Mufredat/Syllabus" className="mt-6 inline-flex items-center gap-2 text-accent text-sm font-semibold hover:text-white">
+              Syllabus'ı İncele
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
 
           {/* Card 3: Kaynaklar */}
-          <div className="bg-dark/50 backdrop-blur-md border border-primary/20 hover:border-accent/40 p-6 rounded-xl transition-all duration-200 group shadow-lg shadow-black/5 hover:shadow-accent/10">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center group-hover:bg-primary/30 transition-colors">
-                  <Layers className="text-accent" size={24} />
-                </div>
-                <h3 className="text-xl font-bold text-white">Kaynaklar</h3>
+          <div className="bg-dark/50 backdrop-blur-md border border-primary/20 hover:border-accent/40 p-6 rounded-xl transition-all duration-200 group shadow-lg shadow-black/5 hover:shadow-accent/10 flex flex-col">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center group-hover:bg-primary/30 transition-colors">
+                <Layers className="text-accent" size={24} />
               </div>
-              <Link href="/Kaynaklar/Kaynakca" className="text-accent text-base font-semibold hover:text-white flex items-center gap-1">
-                Kütüphaneye Git <ArrowRight size={14} />
-              </Link>
+              <h3 className="text-xl font-bold text-white">Kaynaklar</h3>
             </div>
-            <p className="text-slate-400 text-sm">
+            <p className="text-slate-400 text-sm flex-1">
               Ders için önerilen kitaplar, video eğitimler ve faydalı web siteleri.
             </p>
+            <Link href="/Kaynaklar/Kaynakca" className="mt-6 inline-flex items-center gap-2 text-accent text-sm font-semibold hover:text-white">
+              Kütüphaneye Git
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
 
         </div>
       </main>
-      <ThemeCustomizer />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit, Josefin_Slab } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import ThemeCustomizer from "@/components/ThemeCustomizer";
 
 const outfit = Outfit({ subsets: ["latin"], variable: '--font-outfit' });
 const josefinSlab = Josefin_Slab({ subsets: ['latin'], variable: '--font-josefin' });
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className={`${outfit.variable} ${josefinSlab.variable} font-sans bg-slate-950 text-slate-200 antialiased`}>
         <Navbar />
         {children}
+        <ThemeCustomizer />
       </body>
     </html>
   );

@@ -66,30 +66,96 @@ body {
   border-color: rgb(51 65 85 / 0.5);
 }
 
-.logo-shine {
+.logo-glitch {
   position: relative;
   display: inline-flex;
   align-items: center;
   isolation: isolate;
-  text-shadow: 0 0 15px rgba(229, 54, 171, 0.25);
-  transition: transform 0.4s ease, text-shadow 0.4s ease;
+  text-shadow: 0 0 14px rgba(92, 3, 188, 0.35);
+  animation: logoPulse 6s ease-in-out infinite;
 }
 
-.logo-shine::after {
-  content: '';
+.logo-glitch::before,
+.logo-glitch::after {
+  content: attr(data-text);
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.7) 50%, transparent 70%);
-  transform: translateX(-140%);
-  transition: transform 0.6s ease;
-  mix-blend-mode: screen;
   pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.7;
 }
 
-.logo-shine:hover {
-  text-shadow: 0 0 25px rgba(57, 255, 20, 0.35);
+.logo-glitch::before {
+  color: rgba(57, 255, 20, 0.75);
+  animation: glitchShift 2.4s steps(2, end) infinite;
 }
 
-.logo-shine:hover::after {
-  transform: translateX(140%);
+.logo-glitch::after {
+  color: rgba(229, 54, 171, 0.8);
+  animation: glitchSlice 1.8s steps(3, end) infinite;
+}
+
+.logo-glitch:hover::before,
+.logo-glitch:hover::after {
+  opacity: 1;
+}
+
+@keyframes glitchShift {
+  0% {
+    clip-path: inset(80% 0 0 0);
+    transform: translate(-3px, -1px);
+  }
+  20% {
+    clip-path: inset(10% 0 65% 0);
+    transform: translate(3px, 1px);
+  }
+  40% {
+    clip-path: inset(40% 0 40% 0);
+    transform: translate(2px, -2px);
+  }
+  60% {
+    clip-path: inset(5% 0 75% 0);
+    transform: translate(-2px, 2px);
+  }
+  80% {
+    clip-path: inset(60% 0 10% 0);
+    transform: translate(2px, 0);
+  }
+  100% {
+    clip-path: inset(0 0 80% 0);
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes glitchSlice {
+  0% {
+    clip-path: inset(0 0 82% 0);
+    transform: translate(2px, 1px);
+  }
+  25% {
+    clip-path: inset(45% 0 35% 0);
+    transform: translate(-2px, -1px);
+  }
+  50% {
+    clip-path: inset(15% 0 55% 0);
+    transform: translate(3px, 0);
+  }
+  75% {
+    clip-path: inset(65% 0 5% 0);
+    transform: translate(-3px, 1px);
+  }
+  100% {
+    clip-path: inset(5% 0 70% 0);
+    transform: translate(0, -1px);
+  }
+}
+
+@keyframes logoPulse {
+  0%,
+  100% {
+    text-shadow: 0 0 14px rgba(92, 3, 188, 0.35);
+  }
+  50% {
+    text-shadow: 0 0 22px rgba(229, 54, 171, 0.45);
+  }
 }

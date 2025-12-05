@@ -2,13 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Book, CalendarDays, FolderOpen, Home } from 'lucide-react';
+import { BookOpen, Calendar, Layers, Home } from 'lucide-react';
 
 const navigationItems = [
   { name: 'Ana Sayfa', href: '/', icon: Home },
-  { name: 'Müfredat', href: '/Mufredat/Syllabus', icon: Book },
-  { name: 'Haftalık Akış', href: '/haftalar', icon: CalendarDays },
-  { name: 'Kaynaklar', href: '/Kaynaklar/Kaynakca', icon: FolderOpen },
+  { name: 'Müfredat', href: '/Mufredat/Syllabus', icon: BookOpen },
+  { name: 'Haftalık Akış', href: '/haftalar', icon: Calendar },
+  { name: 'Kaynaklar', href: '/Kaynaklar/Kaynakca', icon: Layers },
 ];
 
 export default function Navbar() {
@@ -23,7 +23,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center group select-none relative">
             <span 
               data-text="git.119"
-              className="font-mono text-4xl tracking-tight font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent logo-shine"
+              className="font-mono text-4xl tracking-tight font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent logo-glitch"
             >
               git.119
             </span>
