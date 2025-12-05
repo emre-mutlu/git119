@@ -45,48 +45,56 @@ export default function Home() {
           
           {/* Card 1: Haftalık Akış */}
           <div className="bg-dark/50 backdrop-blur-md border border-primary/20 hover:border-accent/40 p-6 rounded-xl transition-all duration-200 group shadow-lg shadow-black/5 hover:shadow-accent/10">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center group-hover:bg-primary/30 transition-colors">
-                <Calendar className="text-accent" size={24} />
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center group-hover:bg-primary/30 transition-colors">
+                  <Calendar className="text-accent" size={24} />
+                </div>
+                <h3 className="text-xl font-bold text-white">Haftalık Akış</h3>
               </div>
-              <h3 className="text-xl font-bold text-white">Haftalık Akış</h3>
-            </div>
-            <p className="text-slate-400 text-sm mb-4">
-              Her haftanın ders planına, ödevlerine ve materyallerine buradan ulaşabilirsiniz.
-            </p>
-            <div className="flex justify-end">
-              <Link href="/haftalar" className="text-accent text-sm font-medium hover:text-white flex items-center">
-                Programa Bak <ArrowRight size={14} className="ml-1" />
+              <Link href="/haftalar" className="text-accent text-sm font-semibold hover:text-white flex items-center gap-1">
+                Programa Bak <ArrowRight size={14} />
               </Link>
             </div>
+            <p className="text-slate-400 text-sm">
+              Her haftanın ders planına, ödevlerine ve materyallerine buradan ulaşabilirsiniz.
+            </p>
           </div>
 
           {/* Card 2: Müfredat */}
           <div className="bg-dark/50 backdrop-blur-md border border-primary/20 hover:border-accent/40 p-6 rounded-xl transition-all duration-200 group shadow-lg shadow-black/5 hover:shadow-accent/10">
-            <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
-              <BookOpen className="text-accent" size={24} />
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center group-hover:bg-primary/30 transition-colors">
+                  <BookOpen className="text-accent" size={24} />
+                </div>
+                <h3 className="text-xl font-bold text-white">Müfredat</h3>
+              </div>
+              <Link href="/Mufredat/Syllabus" className="text-accent text-sm font-semibold hover:text-white flex items-center gap-1">
+                Syllabus'ı İncele <ArrowRight size={14} />
+              </Link>
             </div>
-            <h3 className="text-xl font-bold text-white mb-2">Müfredat</h3>
-            <p className="text-slate-400 text-sm mb-4">
+            <p className="text-slate-400 text-sm">
               Dersin amaçları, hedefleri, değerlendirme kriterleri ve haftalık konular.
             </p>
-            <Link href="/Mufredat/Syllabus" className="text-accent text-sm font-medium hover:text-white flex items-center">
-              Syllabus'ı İncele <ArrowRight size={14} className="ml-1" />
-            </Link>
           </div>
 
           {/* Card 3: Kaynaklar */}
           <div className="bg-dark/50 backdrop-blur-md border border-primary/20 hover:border-accent/40 p-6 rounded-xl transition-all duration-200 group shadow-lg shadow-black/5 hover:shadow-accent/10">
-            <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
-              <Layers className="text-accent" size={24} />
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center group-hover:bg-primary/30 transition-colors">
+                  <Layers className="text-accent" size={24} />
+                </div>
+                <h3 className="text-xl font-bold text-white">Kaynaklar</h3>
+              </div>
+              <Link href="/Kaynaklar/Kaynakca" className="text-accent text-sm font-semibold hover:text-white flex items-center gap-1">
+                Kütüphaneye Git <ArrowRight size={14} />
+              </Link>
             </div>
-            <h3 className="text-xl font-bold text-white mb-2">Kaynaklar</h3>
-            <p className="text-slate-400 text-sm mb-4">
+            <p className="text-slate-400 text-sm">
               Ders için önerilen kitaplar, video eğitimler ve faydalı web siteleri.
             </p>
-            <Link href="/Kaynaklar/Kaynakca" className="text-accent text-sm font-medium hover:text-white flex items-center">
-              Kütüphaneye Git <ArrowRight size={14} className="ml-1" />
-            </Link>
           </div>
 
         </div>

@@ -22,46 +22,87 @@ const weekTitles: { [key: string]: string } = {
 
 const weeks = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
-// Get color scheme for week number box
-const getWeekBoxColors = (weekNum: string) => {
+// Color + glow presets per week group
+const getWeekTheme = (weekNum: string) => {
   const num = parseInt(weekNum);
-  
+
   if (num === 1) {
-    // Week 1: Keep original (primary/accent - red/lime)
     return {
-      bg: 'bg-gradient-to-br from-primary/30 to-accent/20',
-      border: 'border-primary/30 group-hover:border-accent/50',
-      text: 'text-accent',
+      number: {
+        bg: 'bg-gradient-to-br from-primary/30 to-accent/20',
+        border: 'border-primary/30 group-hover:border-accent/50',
+        text: 'text-accent',
+      },
+      cardBg: 'bg-gradient-to-br from-primary/10 via-transparent to-accent/5',
+      cardBorder: 'border-primary/25',
+      cardHoverBorder: 'hover:border-accent/60',
+      overlay: 'from-primary/25 via-accent/15 to-transparent',
+      arrowHover: 'group-hover:text-accent',
+      hoverShadow: '0 0 32px rgba(92,3,188,0.35), 0 0 48px rgba(229,54,171,0.25)',
     };
-  } else if (num >= 2 && num <= 4) {
-    // Weeks 2-4: Orange (blazingflame)
+  }
+
+  if (num >= 2 && num <= 4) {
     return {
-      bg: 'bg-gradient-to-br from-blazingflame-400/30 to-blazingflame-500/20',
-      border: 'border-blazingflame-400/30 group-hover:border-blazingflame-300/50',
-      text: 'text-blazingflame-300',
+      number: {
+        bg: 'bg-gradient-to-br from-blazingflame-400/30 to-blazingflame-500/20',
+        border: 'border-blazingflame-400/30 group-hover:border-blazingflame-300/50',
+        text: 'text-blazingflame-300',
+      },
+      cardBg: 'bg-gradient-to-br from-blazingflame-500/10 via-transparent to-blazingflame-400/5',
+      cardBorder: 'border-blazingflame-500/20',
+      cardHoverBorder: 'hover:border-blazingflame-400/60',
+      overlay: 'from-blazingflame-500/30 via-blazingflame-400/15 to-transparent',
+      arrowHover: 'group-hover:text-blazingflame-300',
+      hoverShadow: '0 0 32px rgba(252,57,3,0.35), 0 0 52px rgba(253,96,53,0.25)',
     };
-  } else if (num >= 5 && num <= 7) {
-    // Weeks 5-7: Blue (ocean)
+  }
+
+  if (num >= 5 && num <= 7) {
     return {
-      bg: 'bg-gradient-to-br from-ocean-400/30 to-ocean-500/20',
-      border: 'border-ocean-400/30 group-hover:border-ocean-300/50',
-      text: 'text-ocean-300',
+      number: {
+        bg: 'bg-gradient-to-br from-ocean-400/30 to-ocean-500/20',
+        border: 'border-ocean-400/30 group-hover:border-ocean-300/50',
+        text: 'text-ocean-300',
+      },
+      cardBg: 'bg-gradient-to-br from-ocean-500/10 via-transparent to-ocean-400/5',
+      cardBorder: 'border-ocean-500/20',
+      cardHoverBorder: 'hover:border-ocean-400/60',
+      overlay: 'from-ocean-500/30 via-ocean-400/15 to-transparent',
+      arrowHover: 'group-hover:text-ocean-300',
+      hoverShadow: '0 0 32px rgba(0,145,255,0.35), 0 0 52px rgba(51,167,255,0.25)',
     };
-  } else if (num >= 8 && num <= 10) {
-    // Weeks 8-10: Green (emerald)
+  }
+
+  if (num >= 8 && num <= 10) {
     return {
-      bg: 'bg-gradient-to-br from-emeraldgreen-400/30 to-emeraldgreen-500/20',
-      border: 'border-emeraldgreen-400/30 group-hover:border-emeraldgreen-300/50',
-      text: 'text-emeraldgreen-300',
+      number: {
+        bg: 'bg-gradient-to-br from-emeraldgreen-400/30 to-emeraldgreen-500/20',
+        border: 'border-emeraldgreen-400/30 group-hover:border-emeraldgreen-300/50',
+        text: 'text-emeraldgreen-300',
+      },
+      cardBg: 'bg-gradient-to-br from-emeraldgreen-500/10 via-transparent to-emeraldgreen-400/5',
+      cardBorder: 'border-emeraldgreen-500/20',
+      cardHoverBorder: 'hover:border-emeraldgreen-400/60',
+      overlay: 'from-emeraldgreen-500/30 via-emeraldgreen-400/15 to-transparent',
+      arrowHover: 'group-hover:text-emeraldgreen-300',
+      hoverShadow: '0 0 32px rgba(40,215,125,0.35), 0 0 52px rgba(83,223,151,0.25)',
     };
-  } else {
-    // Weeks 11-12: Purple (lavender)
-    return {
+  }
+
+  return {
+    number: {
       bg: 'bg-gradient-to-br from-lavender-400/30 to-lavender-500/20',
       border: 'border-lavender-400/30 group-hover:border-lavender-300/50',
       text: 'text-lavender-300',
-    };
-  }
+    },
+    cardBg: 'bg-gradient-to-br from-lavender-500/10 via-transparent to-lavender-400/5',
+    cardBorder: 'border-lavender-500/20',
+    cardHoverBorder: 'hover:border-lavender-400/60',
+    overlay: 'from-lavender-500/30 via-lavender-400/15 to-transparent',
+    arrowHover: 'group-hover:text-lavender-300',
+    hoverShadow: '0 0 32px rgba(149,96,159,0.35), 0 0 52px rgba(170,128,179,0.25)',
+  };
 };
 
 // Generate random but consistent rotations for each week
@@ -159,7 +200,8 @@ export default function WeeksIndexPage() {
             const { blur, brightness, scale } = getBlurAndBrightness(weekNum);
             const rotation = rotations[weekNum];
             const isHovered = hoveredWeek === weekNum;
-            const boxColors = getWeekBoxColors(weekNum);
+            const weekTheme = getWeekTheme(weekNum);
+            const number = weekTheme.number;
 
             return (
               <Link key={weekNum} href={href} className="group block">
@@ -167,22 +209,23 @@ export default function WeeksIndexPage() {
                   ref={(el) => { cardRefs.current[weekNum] = el; }}
                   onMouseEnter={() => setHoveredWeek(weekNum)}
                   onMouseLeave={() => setHoveredWeek(null)}
-                  className="relative bg-dark/60 backdrop-blur-md border border-primary/20 hover:border-accent/50 p-5 rounded-xl transition-all duration-300 overflow-hidden hover:shadow-[0_0_30px_rgba(229,54,171,0.3),0_0_60px_rgba(92,3,188,0.2)] shadow-lg shadow-black/10"
+                  className={`relative bg-dark/60 ${weekTheme.cardBg} backdrop-blur-md border ${weekTheme.cardBorder} ${weekTheme.cardHoverBorder} p-5 rounded-xl transition-all duration-300 overflow-hidden shadow-lg shadow-black/10`}
                   style={{
                     filter: `blur(${blur}px) brightness(${brightness})`,
                     transform: isHovered 
                       ? `scale(${scale}) rotateX(0deg) rotateY(0deg) translateY(0px)` 
                       : `scale(${scale}) rotateX(${rotation.rotateX}deg) rotateY(${rotation.rotateY}deg) translateY(${rotation.translateY}px)`,
                     transformStyle: 'preserve-3d',
+                    boxShadow: isHovered ? weekTheme.hoverShadow : undefined,
                   }}
                 >
                   {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className={`absolute inset-0 bg-gradient-to-r ${weekTheme.overlay} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                   
                   <div className="relative flex items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
-                      <div className={`flex-shrink-0 w-14 h-14 ${boxColors.bg} rounded-lg flex items-center justify-center border ${boxColors.border} transition-colors`}>
-                        <span className={`text-xl font-bold ${boxColors.text}`}>{parseInt(weekNum)}</span>
+                      <div className={`flex-shrink-0 w-14 h-14 ${number.bg} rounded-lg flex items-center justify-center border ${number.border} transition-colors`}>
+                        <span className={`text-xl font-bold ${number.text}`}>{parseInt(weekNum)}</span>
                       </div>
                       <div>
                         <span className="text-xs text-slate-500 uppercase tracking-wider">Hafta {parseInt(weekNum)}</span>
@@ -191,7 +234,7 @@ export default function WeeksIndexPage() {
                         </h2>
                       </div>
                     </div>
-                    <ArrowRight size={20} className="text-slate-600 group-hover:text-accent group-hover:translate-x-1 transition-all flex-shrink-0" />
+                    <ArrowRight size={20} className={`text-slate-600 ${weekTheme.arrowHover} group-hover:translate-x-1 transition-all flex-shrink-0`} />
                   </div>
                 </div>
               </Link>

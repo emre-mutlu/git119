@@ -23,8 +23,8 @@ export default function ColorfulHr() {
 
   return (
     <hr 
-      className="my-8 border-0 h-[1px] opacity-70" 
-      style={{ backgroundColor: color }}
+      className="my-8 border-0 w-full" 
+      style={{ backgroundColor: color, height: '0.5px', opacity: 0.7 }}
     />
   );
 }
