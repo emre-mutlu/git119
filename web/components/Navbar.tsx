@@ -150,7 +150,9 @@ export default function Navbar() {
     '--glitch-after-color': glitchColors.after,
     '--glitch-proximity': proximity.toFixed(3),
     '--glitch-speed-scale': (0.5 + 0.35 * proximity).toFixed(3),
-    backgroundImage: 'linear-gradient(120deg, #39FF14 0%, #39FF14 62%, #5C03BC 62%, #5C03BC 100%)',
+    backgroundImage: 'linear-gradient(120deg, #39FF14 0%, #39FF14 65%, #5C03BC 65%, #5C03BC 100%)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100% 100%',
   };
 
   // Show glitch if: random trigger OR hover OR proximity fade-in
