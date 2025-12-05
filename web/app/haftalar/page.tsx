@@ -22,6 +22,50 @@ const weekTitles: { [key: string]: string } = {
 
 const weeks = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
+// Color groups for every 4 weeks
+const colorGroups = {
+  // Week 1-4: Fiery Terracotta (orange-red)
+  group1: {
+    border: 'border-terracotta-500/30',
+    hoverBorder: 'hover:border-terracotta-400/60',
+    gradient: 'from-terracotta-500/20 to-tuscan-500/10',
+    numberBg: 'from-terracotta-500/30 to-tuscan-500/20',
+    numberBorder: 'border-terracotta-500/30 group-hover:border-terracotta-400/60',
+    numberColor: 'text-terracotta-400',
+    shadow: '0_0_30px_rgba(226,72,29,0.3),0_0_60px_rgba(240,180,15,0.2)',
+    label: 'Adobe Illustrator',
+  },
+  // Week 5-8: Mint Leaf (green)
+  group2: {
+    border: 'border-mint-500/30',
+    hoverBorder: 'hover:border-mint-400/60',
+    gradient: 'from-mint-500/20 to-darkemerald-500/10',
+    numberBg: 'from-mint-500/30 to-darkemerald-500/20',
+    numberBorder: 'border-mint-500/30 group-hover:border-mint-400/60',
+    numberColor: 'text-mint-400',
+    shadow: '0_0_30px_rgba(56,199,158,0.3),0_0_60px_rgba(60,195,114,0.2)',
+    label: 'Adobe Photoshop',
+  },
+  // Week 9-12: Crimson Violet (purple)
+  group3: {
+    border: 'border-crimson-500/30',
+    hoverBorder: 'hover:border-crimson-400/60',
+    gradient: 'from-crimson-500/20 to-lavender-500/10',
+    numberBg: 'from-crimson-500/30 to-lavender-500/20',
+    numberBorder: 'border-crimson-500/30 group-hover:border-crimson-400/60',
+    numberColor: 'text-crimson-400',
+    shadow: '0_0_30px_rgba(203,52,158,0.3),0_0_60px_rgba(149,96,159,0.2)',
+    label: 'AI & Final',
+  },
+};
+
+const getColorGroup = (weekNum: string) => {
+  const num = parseInt(weekNum);
+  if (num <= 4) return colorGroups.group1;
+  if (num <= 8) return colorGroups.group2;
+  return colorGroups.group3;
+};
+
 // Generate random but consistent rotations for each week
 const generateRotations = () => {
   const rotations: { [key: string]: { rotateX: number; rotateY: number; translateY: number } } = {};
@@ -116,6 +160,7 @@ export default function WeeksIndexPage() {
             const { blur, brightness, scale } = getBlurAndBrightness(weekNum);
             const rotation = rotations[weekNum];
             const isHovered = hoveredWeek === weekNum;
+            const colors = getColorGroup(weekNum);
 
             return (
               <Link key={weekNum} href={href} className="group block">
@@ -123,22 +168,23 @@ export default function WeeksIndexPage() {
                   ref={(el) => { cardRefs.current[weekNum] = el; }}
                   onMouseEnter={() => setHoveredWeek(weekNum)}
                   onMouseLeave={() => setHoveredWeek(null)}
-                  className="relative bg-dark backdrop-blur-sm border border-primary/20 hover:border-accent/50 p-5 rounded-xl transition-all duration-300 overflow-hidden hover:shadow-[0_0_30px_rgba(244,162,11,0.3),0_0_60px_rgba(224,60,31,0.2)]"
+                  className={`relative bg-onyx-900/80 backdrop-blur-sm border ${colors.border} ${colors.hoverBorder} p-5 rounded-xl transition-all duration-300 overflow-hidden`}
                   style={{
                     filter: `blur(${blur}px) brightness(${brightness})`,
                     transform: isHovered 
                       ? `scale(${scale}) rotateX(0deg) rotateY(0deg) translateY(0px)` 
                       : `scale(${scale}) rotateX(${rotation.rotateX}deg) rotateY(${rotation.rotateY}deg) translateY(${rotation.translateY}px)`,
                     transformStyle: 'preserve-3d',
+                    boxShadow: isHovered ? colors.shadow.split(',').map(s => s.trim()).join(', ') : 'none',
                   }}
                 >
                   {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className={`absolute inset-0 bg-gradient-to-r ${colors.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                   
                   <div className="relative flex items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
-                      <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-primary/30 to-accent/20 rounded-lg flex items-center justify-center border border-primary/30 group-hover:border-accent/50 transition-colors">
-                        <span className="text-xl font-bold text-accent">{parseInt(weekNum)}</span>
+                      <div className={`flex-shrink-0 w-14 h-14 bg-gradient-to-br ${colors.numberBg} rounded-lg flex items-center justify-center border ${colors.numberBorder} transition-colors`}>
+                        <span className={`text-xl font-bold ${colors.numberColor}`}>{parseInt(weekNum)}</span>
                       </div>
                       <div>
                         <span className="text-xs text-slate-500 uppercase tracking-wider">Hafta {parseInt(weekNum)}</span>
@@ -147,7 +193,7 @@ export default function WeeksIndexPage() {
                         </h2>
                       </div>
                     </div>
-                    <ArrowRight size={20} className="text-slate-600 group-hover:text-accent group-hover:translate-x-1 transition-all flex-shrink-0" />
+                    <ArrowRight size={20} className={`text-slate-600 group-hover:${colors.numberColor} group-hover:translate-x-1 transition-all flex-shrink-0`} />
                   </div>
                 </div>
               </Link>
