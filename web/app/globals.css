@@ -4,7 +4,72 @@
 
 :root {
   --foreground-rgb: 226, 232, 240;
-  --background-color: #0E0725;
+  --background-color: #1f0804;
+  
+  /* Oxidized Iron - Warm reds */
+  --color-oxidized-iron-50: #fcebe9;
+  --color-oxidized-iron-100: #f9d8d2;
+  --color-oxidized-iron-200: #f3b1a5;
+  --color-oxidized-iron-300: #ed8a78;
+  --color-oxidized-iron-400: #e7634b;
+  --color-oxidized-iron-500: #e03c1f;
+  --color-oxidized-iron-600: #b43018;
+  --color-oxidized-iron-700: #872412;
+  --color-oxidized-iron-800: #5a180c;
+  --color-oxidized-iron-900: #2d0c06;
+  --color-oxidized-iron-950: #1f0804;
+
+  /* Golden Orange */
+  --color-golden-orange-50: #fef6e7;
+  --color-golden-orange-100: #fdecce;
+  --color-golden-orange-200: #fada9e;
+  --color-golden-orange-300: #f8c76d;
+  --color-golden-orange-400: #f6b53c;
+  --color-golden-orange-500: #f4a20b;
+  --color-golden-orange-600: #c38209;
+  --color-golden-orange-700: #926107;
+  --color-golden-orange-800: #614105;
+  --color-golden-orange-900: #312002;
+  --color-golden-orange-950: #221702;
+
+  /* Dark Khaki - Earthy greens */
+  --color-dark-khaki-50: #f6f8ed;
+  --color-dark-khaki-100: #eef1da;
+  --color-dark-khaki-200: #dce3b5;
+  --color-dark-khaki-300: #cbd590;
+  --color-dark-khaki-400: #b9c76b;
+  --color-dark-khaki-500: #a8b946;
+  --color-dark-khaki-600: #869438;
+  --color-dark-khaki-700: #656f2a;
+  --color-dark-khaki-800: #434a1c;
+  --color-dark-khaki-900: #22250e;
+  --color-dark-khaki-950: #171a0a;
+
+  /* Pacific Cyan */
+  --color-pacific-cyan-50: #e5fbff;
+  --color-pacific-cyan-100: #ccf6ff;
+  --color-pacific-cyan-200: #99eeff;
+  --color-pacific-cyan-300: #66e5ff;
+  --color-pacific-cyan-400: #33ddff;
+  --color-pacific-cyan-500: #00d4ff;
+  --color-pacific-cyan-600: #00aacc;
+  --color-pacific-cyan-700: #007f99;
+  --color-pacific-cyan-800: #005566;
+  --color-pacific-cyan-900: #002a33;
+  --color-pacific-cyan-950: #001e24;
+
+  /* Mint Leaf */
+  --color-mint-leaf-50: #e8fcf7;
+  --color-mint-leaf-100: #d2f9ef;
+  --color-mint-leaf-200: #a4f4e0;
+  --color-mint-leaf-300: #77eed0;
+  --color-mint-leaf-400: #49e9c1;
+  --color-mint-leaf-500: #1ce3b1;
+  --color-mint-leaf-600: #16b68e;
+  --color-mint-leaf-700: #11886a;
+  --color-mint-leaf-800: #0b5b47;
+  --color-mint-leaf-900: #062d23;
+  --color-mint-leaf-950: #042019;
 }
 
 body {
@@ -81,17 +146,17 @@ body {
 
 .glitch-pixel:hover::before {
   opacity: 1;
-  color: #E536AB;
+  color: #e03c1f;
   animation: pixel-glitch-1 0.1s infinite steps(2);
-  text-shadow: 2px 0 #E536AB, -2px 0 #E536AB;
+  text-shadow: 2px 0 #e03c1f, -2px 0 #e03c1f;
 }
 
 .glitch-pixel:hover::after {
   opacity: 1;
-  color: #39FF14;
+  color: #1ce3b1;
   animation: pixel-glitch-2 0.1s infinite steps(2);
   animation-delay: 0.05s;
-  text-shadow: -2px 0 #39FF14, 2px 0 #39FF14;
+  text-shadow: -2px 0 #1ce3b1, 2px 0 #1ce3b1;
 }
 
 @keyframes pixel-glitch-1 {

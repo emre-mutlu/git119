@@ -123,7 +123,7 @@ export default function WeeksIndexPage() {
                   ref={(el) => { cardRefs.current[weekNum] = el; }}
                   onMouseEnter={() => setHoveredWeek(weekNum)}
                   onMouseLeave={() => setHoveredWeek(null)}
-                  className="relative bg-dark backdrop-blur-sm border border-primary/20 hover:border-accent/50 p-5 rounded-xl transition-all duration-300 overflow-hidden hover:shadow-[0_0_30px_rgba(229,54,171,0.3),0_0_60px_rgba(92,3,188,0.2)]"
+                  className="relative bg-dark backdrop-blur-sm border border-primary/20 hover:border-accent/50 p-5 rounded-xl transition-all duration-300 overflow-hidden hover:shadow-[0_0_30px_rgba(244,162,11,0.3),0_0_60px_rgba(224,60,31,0.2)]"
                   style={{
                     filter: `blur(${blur}px) brightness(${brightness})`,
                     transform: isHovered 
