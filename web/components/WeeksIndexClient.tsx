@@ -68,17 +68,17 @@ const getWeekTheme = (weekNum: string) => {
   if (num >= 8 && num <= 10) {
     return {
       number: {
-        bg: 'bg-gradient-to-br from-emeraldgreen-400/30 to-emeraldgreen-500/20',
-        border: 'border-emeraldgreen-400/30 group-hover:border-emeraldgreen-300/50',
-        text: 'text-emeraldgreen-300',
+        bg: 'bg-gradient-to-br from-primary/30 to-primary/20',
+        border: 'border-primary/30 group-hover:border-primary/50',
+        text: 'text-primary',
       },
-      cardBg: 'bg-gradient-to-br from-emeraldgreen-500/10 via-transparent to-emeraldgreen-400/5',
-      cardBorder: 'border-emeraldgreen-500/25',
-      cardHoverBorder: 'hover:border-emeraldgreen-400/60',
-      overlay: 'from-emeraldgreen-500/25 via-emeraldgreen-400/15 to-transparent',
-      arrowHover: 'group-hover:text-emeraldgreen-300',
-      hoverShadow: '0 0 20px rgba(40,215,125,0.28), 0 0 35px rgba(40,215,125,0.15)',
-      gradientColor: 'rgba(40,215,125,',
+      cardBg: 'bg-gradient-to-br from-primary/10 via-transparent to-primary/5',
+      cardBorder: 'border-primary/25',
+      cardHoverBorder: 'hover:border-primary/50',
+      overlay: 'from-primary/25 via-primary/15 to-transparent',
+      arrowHover: 'group-hover:text-primary',
+      hoverShadow: '0 0 20px rgba(92,3,188,0.28), 0 0 35px rgba(0,145,255,0.15)',
+      gradientColor: 'rgba(92,3,188,',
     };
   }
 
@@ -183,10 +183,10 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-3xl mx-auto">
-        <div className="mb-10">
-          <h1 className="text-4xl font-bold text-white mb-3">GİT 119 - Haftalık Ders Akışı</h1>
-          <p className="text-slate-400 text-lg">
-            Dönem boyunca işleyeceğimiz konular, ödevler ve materyaller.
+        <div className="mb-10 mesh-heading"> {/* Added mesh-heading here */}
+          <h1 className="!text-4xl !font-bold !text-white !mb-3">GİT 119 - Ders Kaynakçası</h1> {/* !important to override prose-h1 */}
+          <p className="!text-slate-400 !text-lg"> {/* !important to override prose-p */}
+            Bu belge, "Dijital Tasarıma Giriş" dersi boyunca önerilen tüm kitapları, web sitelerini, ilham kaynaklarını ve video eğitimlerini bir arada toplar.
           </p>
         </div>
 

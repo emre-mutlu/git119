@@ -5,7 +5,6 @@ export const iconColorPalette = [
   '#39FF14', // neon yeşil
   '#FC3903', // turuncu
   '#0091FF', // okyanus
-  '#28D77D', // zümrüt
 ];
 
 // Fixed colors for each navigation item - no randomization to prevent color changes on click
@@ -13,5 +12,5 @@ export const iconColorMap = {
   home: '#E536AB',     // pembe
   syllabus: '#5C03BC', // mor
   haftalar: '#0091FF', // okyanus
-  kaynaklar: '#28D77D', // zümrüt
+  kaynaklar: '#0091FF', // okyanus (was zümrüt)
 };

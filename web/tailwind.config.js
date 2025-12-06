@@ -37,11 +37,6 @@ module.exports = {
           400: 'rgb(51 167 255)',
           500: 'rgb(0 145 255)',
         },
-        emeraldgreen: {
-          300: 'rgb(126 231 177)',
-          400: 'rgb(83 223 151)',
-          500: 'rgb(40 215 125)',
-        },
       },
       fontFamily: {
         sans: ['var(--font-outfit)', 'system-ui', 'sans-serif'],

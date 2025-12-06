@@ -182,9 +182,19 @@ export default function Navbar() {
               ref={logoRef}
               data-text="git119"
               className={logoClassName}
-              style={logoStyle}
+              style={{
+                ...logoStyle,
+                backgroundImage: 'none',
+                backgroundClip: 'unset',
+                WebkitBackgroundClip: 'unset',
+                color: 'transparent' // Main text transparent to show children? No, we want children to have colors.
+              }}
             >
-              git119
+              {/* Main visible logo with flat colors */}
+              <span className="relative z-10">
+                <span className="text-ocean">git</span>
+                <span className="text-neon">119</span>
+              </span>
             </span>
           </Link>
 

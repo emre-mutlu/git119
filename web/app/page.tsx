@@ -12,7 +12,6 @@ const blobColors = [
   { color: 'rgba(57,255,20,', name: 'neon' },        // #39FF14
   { color: 'rgba(252,57,3,', name: 'blazingflame' }, // #FC3903
   { color: 'rgba(0,145,255,', name: 'ocean' },       // #0091FF
-  { color: 'rgba(40,215,125,', name: 'emeraldgreen' },// #28D77D
 ];
 
 interface Blob {
