@@ -115,7 +115,6 @@ const generateRotations = (weeks: WeekMeta[]) => {
 };
 
 export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
-  const [mouseY, setMouseY] = useState<number | null>(null);
   const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
   const [hoveredWeek, setHoveredWeek] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -142,13 +141,11 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
     const handleMouseMove = (e: MouseEvent) => {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
-        setMouseY(e.clientY - rect.top);
         setMousePos({ x: e.clientX, y: e.clientY });
       }
     };
 
     const handleMouseLeave = () => {
-      setMouseY(null);
       setMousePos(null);
     };
 
@@ -171,9 +168,9 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
     const cardElement = cardRefs.current[weekNum];
     if (!cardElement || !mousePos) return { x: 50, y: 50 };
     
-    const rect = cardElement.getBoundingClientRect();
-    const x = ((mousePos.x - rect.left) / rect.width) * 100;
-    const y = ((mousePos.y - rect.top) / rect.height) * 100;
+    const { left, width, top, height } = cardElement.getBoundingClientRect();
+    const x = ((mousePos.x - left) / width) * 100;
+    const y = ((mousePos.y - top) / height) * 100;
     
     return { x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) };
   };
@@ -186,7 +183,7 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
         <div className="mb-10 mesh-heading"> {/* Added mesh-heading here */}
           <h1 className="!text-4xl !font-bold !text-white !mb-3">GİT 119 - Ders Kaynakçası</h1> {/* !important to override prose-h1 */}
           <p className="!text-slate-400 !text-lg"> {/* !important to override prose-p */}
-            Bu belge, "Dijital Tasarıma Giriş" dersi boyunca önerilen tüm kitapları, web sitelerini, ilham kaynaklarını ve video eğitimlerini bir arada toplar.
+            Bu belge, &quot;Dijital Tasarıma Giriş&quot; dersi boyunca önerilen tüm kitapları, web sitelerini, ilham kaynaklarını ve video eğitimlerini bir arada toplar.
           </p>
         </div>
 
