@@ -60,7 +60,7 @@ export default function Navbar() {
       if (triggerTimeoutRef.current) {
         clearTimeout(triggerTimeoutRef.current);
       }
-      const delay = 2000 + Math.random() * 2000; // 2-4 seconds
+      const delay = 2000 + Math.random() * 13000; // 2-15 seconds
       triggerTimeoutRef.current = setTimeout(() => {
         triggerGlitchRef.current?.();
       }, delay);
@@ -73,8 +73,8 @@ export default function Navbar() {
       const palette = glitchPalettes[Math.floor(Math.random() * glitchPalettes.length)];
       setGlitchColors(palette);
       setIsGlitchActive(true);
-      // Random duration between 150ms and 500ms for faster glitches
-      const duration = 150 + Math.random() * 350;
+      // Random duration between 0ms and 1500ms
+      const duration = Math.random() * 1500;
       activeTimeoutRef.current = setTimeout(() => {
         setIsGlitchActive(false);
         scheduleNext();

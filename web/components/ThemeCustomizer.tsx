@@ -161,7 +161,7 @@ export default function ThemeCustomizer({
       
       {/* Panel - positioned directly to the right of palette icon */}
       <div
-        className={`fixed z-50 top-5 right-10 w-56 rounded-xl border border-white/20 bg-dark/98 backdrop-blur-xl p-4 shadow-2xl transition-all duration-200 ease-out origin-top-right ${
+        className={`fixed z-50 top-3 right-14 w-56 rounded-xl border border-white/20 bg-black/95 backdrop-blur-xl p-4 shadow-2xl transition-all duration-200 ease-out origin-top-right ${
           isOpen 
             ? 'opacity-100 scale-100 pointer-events-auto' 
             : 'opacity-0 scale-90 pointer-events-none'
@@ -207,7 +207,13 @@ export default function ThemeCustomizer({
             className="flex-1 px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-slate-200 hover:text-white hover:border-white/30 hover:bg-white/10 transition text-xs font-medium"
             onClick={handleRandomize}
           >
-            Rastgele
+            <span className="inline-flex gap-0.5 items-center">
+              {randomLabelText.split('').map((ch, idx) => (
+                <span key={`${ch}-${idx}`} style={{ color: randomLabelColors[idx] ?? 'inherit' }}>
+                  {ch}
+                </span>
+              ))}
+            </span>
           </button>
           <button
             type="button"
