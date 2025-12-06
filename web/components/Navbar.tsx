@@ -119,7 +119,7 @@ export default function Navbar() {
     '--glitch-after-color': glitchColors.after,
     '--glitch-proximity': proximity.toFixed(3),
     '--glitch-speed-scale': (0.5 + 0.35 * proximity).toFixed(3),
-    backgroundImage: 'linear-gradient(135deg, #28D77D 0%, #28D77D 70%, #5C03BC 100%)', // Updated gradient per request
+    backgroundImage: 'linear-gradient(135deg, rgb(var(--color-accent)) 0%, rgb(var(--color-accent)) 70%, rgb(var(--color-primary)) 100%)', // Updated gradient per request
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 100%',
     WebkitBackgroundClip: 'text',
@@ -161,7 +161,7 @@ export default function Navbar() {
               {/* Main visible logo with flat colors */}
               <span className="relative z-10">
                 <span style={{ color: '#FFFFFF' }}>git</span>
-                <span style={{ color: '#39FF14' }}>119</span>
+                <span style={{ color: 'rgb(var(--color-neon))' }}>119</span>
               </span>
             </span>
           </Link>

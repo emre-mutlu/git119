@@ -7,10 +7,10 @@ export const iconColorPalette = [
   '#0091FF', // okyanus
 ];
 
-// Fixed colors for each navigation item - no randomization to prevent color changes on click
+// Fixed colors for each navigation item - mapped to theme variables for customization
 export const iconColorMap = {
-  home: '#E536AB',     // pembe
-  syllabus: '#5C03BC', // mor
-  haftalar: '#39FF14', // neon yeşil
-  kaynaklar: '#0091FF', // okyanus
+  home: 'rgb(var(--color-accent))',
+  syllabus: 'rgb(var(--color-primary))',
+  haftalar: 'rgb(var(--color-neon))',
+  kaynaklar: 'rgb(var(--color-accent))',
 };

@@ -53,10 +53,10 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="bg-dark text-slate-200 font-sans selection:bg-accent/30 min-h-screen flex flex-col md:h-screen md:overflow-hidden">
+    <div className="bg-dark text-slate-200 font-sans selection:bg-accent/30 h-screen flex flex-col overflow-hidden">
       
       {/* Hero Section */}
-      <header className="relative overflow-hidden bg-dark flex-shrink-0 flex flex-col justify-center border-b border-primary/20 py-16 md:py-0 md:h-[65vh]">
+      <header className="relative overflow-hidden bg-dark flex-shrink-0 flex flex-col justify-center border-b border-primary/20 py-0 h-[65vh]">
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl md:max-w-5xl mx-auto text-center">
@@ -65,7 +65,7 @@ export default function Home() {
               <span className="text-accent text-xs font-medium tracking-wide uppercase">2025 Bahar Dönemi</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#39FF14] to-[#0091FF]">Dijital Tasarıma</span> Giriş
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon to-accent">Dijital Tasarıma</span> Giriş
             </h1>
             <p className="text-lg md:text-xl text-slate-400 mb-8 leading-relaxed">
               <span className="font-black text-slate-200">git119</span>{' '}
@@ -108,7 +108,7 @@ export default function Home() {
       </header>
 
       {/* Dashboard Grid */}
-      <main className="bg-[#0D0620] flex-shrink-0 relative z-20 py-12 pb-24 md:py-0 md:h-[35vh] md:flex md:items-center">
+      <main className="bg-[#0D0620] flex-shrink-0 relative z-20 py-0 h-[35vh] flex items-center">
         <div className="container mx-auto px-4">
           <DashboardCards />
         </div>
