@@ -1,30 +1,38 @@
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function RandomGradients() {
+  const pathname = usePathname();
+
   useEffect(() => {
-    const gradientDirections = [
-      '135deg',  // top-left to bottom-right
-      '225deg',  // top-right to bottom-left
-      '45deg',   // bottom-left to top-right
-      '315deg',  // bottom-right to top-left
-    ];
+    // Wait for DOM updates after navigation
+    const timer = setTimeout(() => {
+      const gradientDirections = [
+        '135deg',  // top-left to bottom-right
+        '225deg',  // top-right to bottom-left
+        '45deg',   // bottom-left to top-right
+        '315deg',  // bottom-right to top-left
+      ];
 
-    // Apply random gradient direction to each mesh-heading element
-    const meshHeadings = document.querySelectorAll('.mesh-heading');
-    meshHeadings.forEach((heading) => {
-      const randomDir = gradientDirections[Math.floor(Math.random() * gradientDirections.length)];
-      (heading as HTMLElement).style.setProperty('--random-gradient-dir', randomDir);
-    });
+      // Apply random gradient direction to each mesh-heading element
+      const meshHeadings = document.querySelectorAll('.mesh-heading');
+      meshHeadings.forEach((heading) => {
+        const randomDir = gradientDirections[Math.floor(Math.random() * gradientDirections.length)];
+        (heading as HTMLElement).style.setProperty('--random-gradient-dir', randomDir);
+      });
 
-    // Apply random gradient direction to each prose h2 and h3 element
-    const proseHeadings = document.querySelectorAll('.syllabus-prose > h2, .syllabus-prose > h3, .kaynaklar-prose > h2, .kaynaklar-prose > h3');
-    proseHeadings.forEach((heading) => {
-      const randomDir = gradientDirections[Math.floor(Math.random() * gradientDirections.length)];
-      (heading as HTMLElement).style.setProperty('--random-gradient-dir', randomDir);
-    });
-  }, []);
+      // Apply random gradient direction to each prose h2 and h3 element
+      const proseHeadings = document.querySelectorAll('.syllabus-prose > h2, .syllabus-prose > h3, .kaynaklar-prose > h2, .kaynaklar-prose > h3');
+      proseHeadings.forEach((heading) => {
+        const randomDir = gradientDirections[Math.floor(Math.random() * gradientDirections.length)];
+        (heading as HTMLElement).style.setProperty('--random-gradient-dir', randomDir);
+      });
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
   return null;
 }

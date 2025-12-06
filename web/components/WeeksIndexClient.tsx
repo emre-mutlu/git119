@@ -112,7 +112,7 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                     style={{
                       background: isHovered 
-                        ? `radial-gradient(circle at ${gradientPos.x}% ${gradientPos.y}%, ${weekTheme.gradientColor}40 0%, transparent 40%)`
+                        ? `radial-gradient(circle at ${gradientPos.x}% ${gradientPos.y}%, ${weekTheme.gradientColor} 0.4) 0%, transparent 40%)`
                         : undefined,
                     }}
                   />
