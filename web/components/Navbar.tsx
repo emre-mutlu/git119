@@ -315,7 +315,6 @@ export default function Navbar() {
       {/* Theme Customizer Overlay/Panel */}
       <ThemeCustomizer isOpen={isThemeOpen} onClose={() => setIsThemeOpen(false)} />
     </nav>
-    <div className="h-[1px] bg-primary sticky top-20 z-50" />
     </>
   );
 }
