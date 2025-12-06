@@ -56,7 +56,7 @@ export default function Home() {
     <div className="bg-dark text-slate-200 font-sans selection:bg-accent/30 min-h-screen flex flex-col md:h-screen md:overflow-hidden">
       
       {/* Hero Section */}
-      <header className="relative overflow-hidden bg-dark flex-shrink-0 flex flex-col justify-center border-b border-primary/20 py-16 md:py-0 md:h-[75vh]">
+      <header className="relative overflow-hidden bg-dark flex-shrink-0 flex flex-col justify-center border-b border-primary/20 py-16 md:py-0 md:h-[65vh]">
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl md:max-w-5xl mx-auto text-center">
@@ -108,7 +108,7 @@ export default function Home() {
       </header>
 
       {/* Dashboard Grid */}
-      <main className="bg-[#0D0620] flex-shrink-0 relative z-20 py-12 pb-24 md:py-0 md:h-[25vh] md:flex md:items-center">
+      <main className="bg-[#0D0620] flex-shrink-0 relative z-20 py-12 pb-24 md:py-0 md:h-[35vh] md:flex md:items-center">
         <div className="container mx-auto px-4">
           <DashboardCards />
         </div>
