@@ -181,7 +181,7 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
       <div className="mb-8">
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">GİT 119 - Haftalık Ders Akışı</h1>
         <p className="text-base text-slate-400 mb-6">
-          Bu belge, "Dijital Tasarıma Giriş" dersi boyunca işleyeceğimiz konuları, ödevleri ve materyalleri bir arada toplar.
+          Bu belge, &quot;Dijital Tasarıma Giriş&quot; dersi boyunca işleyeceğimiz konuları, ödevleri ve materyalleri bir arada toplar.
         </p>
         <hr className="border-slate-700/50" />
       </div>
