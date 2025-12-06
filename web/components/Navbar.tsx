@@ -174,28 +174,31 @@ export default function Navbar() {
               const iconColor = iconColorMap[item.colorKey];
               
               return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`group flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ease-in-out border ${
-                    isActive
-                      ? 'backdrop-blur-sm text-white border-white/10 shadow-inner'
-                      : 'text-slate-400 border-transparent hover:text-slate-200 hover:bg-primary/10 hover:backdrop-blur-sm hover:border-white/5'
-                  }`}
-                  style={isActive ? { 
-                    backgroundColor: `${iconColor}20`,
-                    boxShadow: `inset 0 2px 4px ${iconColor}15`,
-                    textShadow: `0 0 10px ${iconColor}40`
-                  } : undefined}
-                >
-                  <Icon 
-                    size={16} 
-                    style={{ color: isActive ? iconColor : undefined, filter: isActive ? `drop-shadow(0 0 4px ${iconColor}60)` : undefined }} 
-                    className={isActive ? '' : 'text-slate-500 group-hover:text-slate-400'} 
-                  />
-                  <span>{item.name}</span>
-                </Link>
-              );
+                                <Link
+                                  key={item.name}
+                                  href={item.href}
+                                  className={`group flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ease-in-out border ${
+                                    isActive
+                                      ? 'backdrop-blur-sm text-white border-white/10 shadow-inner'
+                                      : 'text-slate-400 border-transparent hover:text-slate-200 hover:bg-primary/10 hover:backdrop-blur-sm hover:border-white/5'
+                                  }`}
+                                  onMouseEnter={(e) => {
+                                    e.currentTarget.style.setProperty('--hover-icon-color', iconColor);
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.currentTarget.style.removeProperty('--hover-icon-color');
+                                  }}
+                                >
+                                  <Icon 
+                                    size={16} 
+                                    style={{
+                                      color: isActive ? iconColor : undefined, 
+                                      filter: isActive ? `drop-shadow(0 0 4px ${iconColor}60)` : undefined 
+                                    }} 
+                                    className={`transition-colors ${isActive ? '' : 'text-slate-500 group-hover:text-[var(--hover-icon-color)]'}`} 
+                                  />
+                                  <span>{item.name}</span>
+                                </Link>              );
             })}
 
             {/* Divider */}

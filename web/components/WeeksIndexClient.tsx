@@ -127,11 +127,7 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
                         <h2 className="text-lg font-semibold text-slate-200 group-hover:text-white transition-colors">
                           {title}
                         </h2>
-                        {week.description && (
-                            <p className="text-sm text-slate-400 mt-1 line-clamp-2 group-hover:text-slate-300 transition-colors">
-                                {week.description}
-                            </p>
-                        )}
+
                       </div>
                     </div>
                     <ArrowRight size={20} className={`text-slate-600 ${weekTheme.arrowHover} group-hover:translate-x-1 transition-all flex-shrink-0`} />

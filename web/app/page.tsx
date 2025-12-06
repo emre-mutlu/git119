@@ -110,7 +110,11 @@ export default function Home() {
       {/* Dashboard Grid */}
       <main className="bg-[#0D0620] flex-shrink-0 relative z-20 py-12 pb-24">
         <div className="container mx-auto px-4">
-          <DashboardCards />
+          <div className="md:grid md:grid-cols-3 md:gap-8">
+            <div className="md:col-span-1 flex items-center justify-center">
+              <DashboardCards />
+            </div>
+          </div>
         </div>
       </main>
     </div>

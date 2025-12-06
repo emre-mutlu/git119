@@ -49,7 +49,13 @@ export default async function MarkdownPage({ params }: PageProps) {
     prose-table:border-primary/30
     prose-th:text-white prose-th:bg-primary/20 prose-th:p-4
     prose-td:text-slate-400 prose-td:p-4`;
-  const articleClassName = `${proseBase} ${isSyllabus ? 'syllabus-prose' : ''} ${isKaynaklar ? 'kaynaklar-prose' : ''}`;
+  
+  const simpleProse = 'prose prose-invert mx-auto mb-8';
+  
+  const articleClassName = isKaynaklar 
+    ? `${simpleProse} kaynaklar-prose`
+    : `${proseBase} ${isSyllabus ? 'syllabus-prose' : ''}`;
+
   const title = typeof data.title === 'string' ? data.title : undefined;
   const description = typeof data.description === 'string' ? data.description : undefined;
 
@@ -69,10 +75,10 @@ export default async function MarkdownPage({ params }: PageProps) {
       <article className={articleClassName}>
         {/* If there's a title in frontmatter, display it differently or let markdown h1 handle it */}
         {title && (
-           <div className="mb-10 pb-8 mesh-heading"> {/* Added mesh-heading and adjusted padding */}
-             <h1 className="!mb-4">{title}</h1>
-             {description && <p className="text-xl text-slate-400">{description}</p>}
-           </div>
+           <>
+             <h1>{title}</h1>
+             {description && <p>{description}</p>}
+           </>
         )}
         
         <MarkdownRenderer content={content} hideHr={isKaynaklar} />
