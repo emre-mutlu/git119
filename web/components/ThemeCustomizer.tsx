@@ -159,9 +159,9 @@ export default function ThemeCustomizer({
         />
       )}
       
-      {/* Panel - positioned near palette icon */}
+      {/* Panel - positioned directly to the right of palette icon */}
       <div
-        className={`fixed z-50 top-[4.5rem] right-4 w-72 rounded-xl border border-white/20 bg-dark/95 backdrop-blur-2xl p-4 shadow-2xl transition-all duration-200 ease-out origin-top-right ${
+        className={`fixed z-50 top-[5.25rem] right-4 w-64 rounded-xl border border-white/20 bg-dark/95 backdrop-blur-2xl p-4 shadow-2xl transition-all duration-200 ease-out origin-top-right ${
           isOpen 
             ? 'opacity-100 scale-100 pointer-events-auto' 
             : 'opacity-0 scale-90 pointer-events-none'
@@ -169,12 +169,12 @@ export default function ThemeCustomizer({
       >
         <div className="mb-3 flex items-center justify-between">
           <div>
-            <p className="text-xs font-semibold text-white">Renk Paleti</p>
+            <p className="text-sm font-semibold text-white">Renk Paleti</p>
           </div>
           <div className="flex items-center gap-2 text-xs font-semibold">
             <button
               type="button"
-              className="px-2 py-1 rounded-md border border-white/10 text-slate-200 hover:text-white hover:border-white/30 hover:bg-white/5 transition text-[10px]"
+              className="px-2.5 py-1 rounded-md bg-white/10 border border-white/20 text-slate-200 hover:text-white hover:border-white/40 hover:bg-white/15 transition text-[11px]"
               onClick={handleRandomize}
             >
               <span className="inline-flex gap-0.5 items-center">
@@ -187,7 +187,7 @@ export default function ThemeCustomizer({
             </button>
             <button
               type="button"
-              className="text-neon hover:text-white transition text-[10px]"
+              className="text-neon hover:text-white transition text-[11px]"
               onClick={handleReset}
             >
               Sıfırla
@@ -206,7 +206,7 @@ export default function ThemeCustomizer({
         <div className="space-y-3">
           {controls.map((ctrl) => (
             <div key={ctrl.variable} className="space-y-1.5">
-              <div className="flex items-center justify-between text-[10px]">
+              <div className="flex items-center justify-between text-[11px]">
                 <span className="font-semibold text-white">{ctrl.label}</span>
                 <span className="text-slate-400">{ctrl.description}</span>
               </div>
@@ -216,7 +216,7 @@ export default function ThemeCustomizer({
                     key={`${ctrl.variable}-${option.hex}`}
                     type="button"
                     onClick={() => applyColor(ctrl.variable, option.hex)}
-                    className={`h-10 rounded-lg border border-white/10 transition-all duration-150 focus:outline-none ${
+                    className={`w-full aspect-square rounded-md border border-white/10 transition-all duration-150 focus:outline-none ${
                       selections[ctrl.variable] === option.hex ? activeButtonClass : 'hover:border-white/40 hover:scale-105'
                     }`}
                     style={{ backgroundColor: option.hex }}
