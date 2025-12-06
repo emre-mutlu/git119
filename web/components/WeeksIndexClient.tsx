@@ -180,9 +180,9 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-3xl mx-auto">
-        <div className="mb-10 mesh-heading"> {/* Added mesh-heading here */}
-          <h1 className="!text-4xl !font-bold !text-white !mb-3">GİT 119 - Ders Kaynakçası</h1> {/* !important to override prose-h1 */}
-          <p className="!text-slate-400 !text-lg"> {/* !important to override prose-p */}
+        <div className="mb-10 border-b border-primary/30 pb-8">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-accent mb-4">GİT 119 - Ders Kaynakçası</h1>
+          <p className="text-base text-slate-300 leading-relaxed">
             Bu belge, &quot;Dijital Tasarıma Giriş&quot; dersi boyunca önerilen tüm kitapları, web sitelerini, ilham kaynaklarını ve video eğitimlerini bir arada toplar.
           </p>
         </div>
@@ -220,7 +220,7 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                     style={{
                       background: isHovered 
-                        ? `radial-gradient(circle at ${gradientPos.x}% ${gradientPos.y}%, ${weekTheme.gradientColor}40 0%, transparent 60%)`
+                        ? `radial-gradient(circle at ${gradientPos.x}% ${gradientPos.y}%, ${weekTheme.gradientColor}40 0%, transparent 40%)`
                         : undefined,
                     }}
                   />

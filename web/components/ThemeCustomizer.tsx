@@ -20,7 +20,6 @@ const colorOptions = [
   { name: 'Altın Sarısı', hex: '#F3C969' },
   { name: 'Turuncu', hex: '#FC3903' },
   { name: 'Okyanus', hex: '#0091FF' },
-  { name: 'Zümrüt', hex: '#28D77D' },
 ];
 
 const defaultHexMap: Record<ThemeVariable, string> = {
@@ -162,7 +161,7 @@ export default function ThemeCustomizer({
       
       {/* Panel */}
       <div
-        className={`fixed z-50 top-20 right-4 w-72 rounded-xl border border-white/20 bg-dark/80 backdrop-blur-2xl p-3 shadow-2xl transition-all duration-300 origin-top-right ${
+        className={`fixed z-50 top-20 right-4 w-64 rounded-xl border border-white/20 bg-dark/80 backdrop-blur-2xl p-3 shadow-2xl transition-all duration-300 origin-top-right ${
           isOpen 
             ? 'opacity-100 scale-100 translate-x-0 pointer-events-auto' 
             : 'opacity-0 scale-95 translate-x-4 pointer-events-none'
