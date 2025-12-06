@@ -204,7 +204,7 @@ export default function ThemeCustomizer({
         <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between gap-2">
           <button
             type="button"
-            className="flex-1 px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-slate-200 hover:text-white hover:border-white/30 hover:bg-white/10 transition text-xs font-medium"
+            className="flex-1 px-3 py-1.5 rounded-md bg-white/10 border border-white/10 text-slate-200 hover:text-white hover:border-white/30 hover:bg-white/15 transition text-xs font-medium"
             onClick={handleRandomize}
           >
             <span className="inline-flex gap-0.5 items-center">
