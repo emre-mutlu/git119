@@ -123,18 +123,6 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
   // Memoize rotations so they stay consistent
   const rotations = useMemo(() => generateRotations(weeksData), [weeksData]);
 
-  // Randomize gradient directions on mount
-  useEffect(() => {
-    const gradientDirections = [
-      'to top left',
-      'to top right',
-      'to bottom left',
-      'to bottom right',
-    ];
-    const randomDir = gradientDirections[Math.floor(Math.random() * gradientDirections.length)];
-    document.documentElement.style.setProperty('--random-gradient-dir', randomDir);
-  }, []);
-
   // Restore scroll position from sessionStorage on mount
   useEffect(() => {
     const savedScrollPos = sessionStorage.getItem('haftalar-scroll-pos');
@@ -189,16 +177,15 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
 
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-10 pb-8 mesh-heading">
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white !mb-4">GİT 119 - Haftalık Ders Akışı</h1>
-          <p className="text-xl text-slate-300 leading-relaxed">
-            Dönem boyunca işleyeceğimiz konular, ödevler ve materyaller.
-          </p>
-        </div>
+    <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="mb-10 pb-8 mesh-heading">
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white !mb-4">GİT 119 - Haftalık Ders Akışı</h1>
+        <p className="text-xl text-slate-400 leading-relaxed">
+          Dönem boyunca işleyeceğimiz konular, ödevler ve materyaller.
+        </p>
+      </div>
 
-        <div ref={containerRef} className="flex flex-col gap-4" style={{ perspective: '1000px' }}>
+      <div ref={containerRef} className="flex flex-col gap-4" style={{ perspective: '1000px' }}>
           {weeksData.map((week) => {
             const weekNum = week.weekNum;
             const title = week.title;
@@ -216,7 +203,7 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
                   ref={(el) => { cardRefs.current[weekNum] = el; }}
                   onMouseEnter={() => setHoveredWeek(weekNum)}
                   onMouseLeave={() => setHoveredWeek(null)}
-                  className={`week-card relative bg-dark/60 ${weekTheme.cardBg} backdrop-blur-md border ${weekTheme.cardBorder} ${weekTheme.cardHoverBorder} p-5 rounded-xl overflow-hidden shadow-lg shadow-black/10`}
+                  className={`week-card relative bg-dark/60 ${weekTheme.cardBg} border ${weekTheme.cardBorder} ${weekTheme.cardHoverBorder} p-5 rounded-xl overflow-hidden shadow-lg shadow-black/10`}
                   style={{
                     ['--rotate-x' as string]: `${rotation.rotateX}deg`,
                     ['--rotate-y' as string]: `${rotation.rotateY}deg`,
@@ -257,9 +244,8 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
                   </div>
                 </div>
               </Link>
-            );
-          })}
-        </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Outfit, Josefin_Slab, Roboto_Condensed, Rokkitt } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import RandomGradients from "@/components/RandomGradients";
 
 const outfit = Outfit({ subsets: ["latin"], variable: '--font-outfit' });
 const josefinSlab = Josefin_Slab({ subsets: ['latin'], variable: '--font-josefin' });
@@ -33,6 +34,7 @@ export default function RootLayout({
         <meta name="description" content="TOBB ETÜ Görsel İletişim Tasarımı Bölümü - Dijital Tasarıma Giriş Dersi Web Sitesi" />
       </head>
       <body className={`${outfit.variable} ${josefinSlab.variable} ${robotoCondensed.variable} ${rokkitt.variable} font-sans bg-slate-950 text-slate-200 antialiased overflow-x-hidden`}>
+        <RandomGradients />
         <div className="min-h-screen w-full overflow-x-hidden">
           <Navbar />
           {children}
