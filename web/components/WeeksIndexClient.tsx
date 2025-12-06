@@ -181,7 +181,6 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
       <article className="prose prose-invert mx-auto mb-8 kaynaklar-prose">
         <h1>GİT 119 - Haftalık Ders Akışı</h1>
         <p>Bu belge, &quot;Dijital Tasarıma Giriş&quot; dersi boyunca işleyeceğimiz konuları, ödevleri ve materyalleri bir arada toplar.</p>
-        <hr />
       </article>
 
       <div ref={containerRef} className="flex flex-col gap-4" style={{ perspective: '1000px' }}>
