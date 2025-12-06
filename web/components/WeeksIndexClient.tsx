@@ -178,14 +178,12 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <article className="prose prose-invert prose-lg mx-auto">
-        <div className="mb-10 pb-8 mesh-heading">
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white !mb-4">GİT 119 - Haftalık Ders Akışı</h1>
-          <p className="text-xl text-slate-400 leading-relaxed">
-            Dönem boyunca işleyeceğimiz konular, ödevler ve materyaller.
-          </p>
-        </div>
-      </article>
+      <div className="mb-10 pb-8">
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">GİT 119 - Haftalık Ders Akışı</h1>
+        <p className="text-xl text-slate-400 leading-relaxed">
+          Dönem boyunca işleyeceğimiz konular, ödevler ve materyaller.
+        </p>
+      </div>
 
       <div ref={containerRef} className="flex flex-col gap-4" style={{ perspective: '1000px' }}>
           {weeksData.map((week) => {
