@@ -161,20 +161,20 @@ export default function ThemeCustomizer({
       
       {/* Panel - positioned directly to the right of palette icon */}
       <div
-        className={`fixed z-50 top-[5.25rem] right-4 w-64 rounded-xl border border-white/20 bg-dark/95 backdrop-blur-2xl p-4 shadow-2xl transition-all duration-200 ease-out origin-top-right ${
+        className={`fixed z-50 top-5 right-4 w-32 rounded-lg border border-white/20 bg-dark/95 backdrop-blur-2xl p-2 shadow-2xl transition-all duration-200 ease-out origin-top-right ${
           isOpen 
             ? 'opacity-100 scale-100 pointer-events-auto' 
             : 'opacity-0 scale-90 pointer-events-none'
         }`}
       >
-        <div className="mb-3 flex items-center justify-between">
+        <div className="mb-2 flex items-center justify-between">
           <div>
-            <p className="text-sm font-semibold text-white">Renk Paleti</p>
+            <p className="text-[10px] font-semibold text-white">Palet</p>
           </div>
-          <div className="flex items-center gap-2 text-xs font-semibold">
+          <div className="flex items-center gap-1 text-xs font-semibold">
             <button
               type="button"
-              className="px-2.5 py-1 rounded-md bg-white/10 border border-white/20 text-slate-200 hover:text-white hover:border-white/40 hover:bg-white/15 transition text-[11px]"
+              className="px-1.5 py-0.5 rounded bg-white/10 border border-white/20 text-slate-200 hover:text-white hover:border-white/40 hover:bg-white/15 transition text-[9px]"
               onClick={handleRandomize}
             >
               <span className="inline-flex gap-0.5 items-center">
@@ -187,7 +187,7 @@ export default function ThemeCustomizer({
             </button>
             <button
               type="button"
-              className="text-neon hover:text-white transition text-[11px]"
+              className="text-neon hover:text-white transition text-[9px]"
               onClick={handleReset}
             >
               Sıfırla
@@ -198,25 +198,24 @@ export default function ThemeCustomizer({
               onClick={onClose}
               aria-label="Paneli kapat"
             >
-              <X size={14} />
+              <X size={12} />
             </button>
           </div>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-2">
           {controls.map((ctrl) => (
-            <div key={ctrl.variable} className="space-y-1.5">
-              <div className="flex items-center justify-between text-[11px]">
+            <div key={ctrl.variable} className="space-y-1">
+              <div className="text-[9px]">
                 <span className="font-semibold text-white">{ctrl.label}</span>
-                <span className="text-slate-400">{ctrl.description}</span>
               </div>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-3 gap-1">
                 {colorOptions.map((option) => (
                   <button
                     key={`${ctrl.variable}-${option.hex}`}
                     type="button"
                     onClick={() => applyColor(ctrl.variable, option.hex)}
-                    className={`w-full aspect-square rounded-md border border-white/10 transition-all duration-150 focus:outline-none ${
+                    className={`w-full aspect-square rounded border border-white/10 transition-all duration-150 focus:outline-none ${
                       selections[ctrl.variable] === option.hex ? activeButtonClass : 'hover:border-white/40 hover:scale-105'
                     }`}
                     style={{ backgroundColor: option.hex }}

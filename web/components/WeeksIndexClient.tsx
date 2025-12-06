@@ -126,14 +126,10 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
   // Randomize gradient directions on mount
   useEffect(() => {
     const gradientDirections = [
-      '135deg',
       'to top left',
-      'to bottom right',
-      '200deg',
-      'to bottom left',
-      '45deg',
       'to top right',
-      '315deg',
+      'to bottom left',
+      'to bottom right',
     ];
     const randomDir = gradientDirections[Math.floor(Math.random() * gradientDirections.length)];
     document.documentElement.style.setProperty('--random-gradient-dir', randomDir);

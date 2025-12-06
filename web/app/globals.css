@@ -70,6 +70,13 @@ body {
   border-color: rgb(51 65 85 / 0.5);
 }
 
+/* Green H1 titles for Syllabus, Kaynaklar, and Haftalar pages */
+.syllabus-prose h1,
+.kaynaklar-prose h1,
+.mesh-heading h1 {
+  color: rgb(var(--color-neon)) !important;
+}
+
 .logo-glitch {
   position: relative;
   display: inline-flex;
@@ -152,7 +159,7 @@ body {
 /* ... (aradaki kodlar aynı kalır) ... */
 
 :root {
-  --random-gradient-dir: 135deg;
+  --random-gradient-dir: to bottom right;
 }
 
 /* Glassmorphism heading style for syllabus and kaynaklar - linear gradient fade up */
