@@ -120,18 +120,20 @@ body {
 /* INTENSE Glitch (Hover or Very Close) */
 .logo-glitch.logo-glitch-active::before {
   opacity: 1;
-  transform: translate(var(--glitch-x, -2px), var(--glitch-y, 0px)) scale(1.02);
+  transform: translate(var(--glitch-x, -3px), var(--glitch-y, 1px)) scale(1.03);
   color: var(--glitch-before-color);
-  text-shadow: 2px 0 var(--glitch-before-color);
+  text-shadow: 3px 0 var(--glitch-before-color), -1px 0 var(--glitch-after-color);
   clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  animation: glitchShake 0.2s cubic-bezier(.25, .46, .45, .94) both infinite;
 }
 
 .logo-glitch.logo-glitch-active::after {
   opacity: 1;
-  transform: translate(var(--glitch-x-alt, 2px), var(--glitch-y-alt, 0px)) scale(1.02);
+  transform: translate(var(--glitch-x-alt, 3px), var(--glitch-y-alt, -1px)) scale(1.03);
   color: var(--glitch-after-color);
-  text-shadow: -2px 0 var(--glitch-after-color);
+  text-shadow: -3px 0 var(--glitch-after-color), 1px 0 var(--glitch-before-color);
   clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  animation: glitchShake 0.2s cubic-bezier(.25, .46, .45, .94) both infinite reverse;
 }
 
 /* SUBTLE Proximity Hint (Approaching) */

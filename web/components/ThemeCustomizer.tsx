@@ -161,62 +161,36 @@ export default function ThemeCustomizer({
       
       {/* Panel - positioned directly to the right of palette icon */}
       <div
-        className={`fixed z-50 top-5 right-10 w-48 rounded-lg border border-white/20 bg-dark/95 backdrop-blur-2xl p-2.5 shadow-2xl transition-all duration-200 ease-out origin-top-right ${
+        className={`fixed z-50 top-5 right-10 w-56 rounded-xl border border-white/20 bg-dark/98 backdrop-blur-xl p-4 shadow-2xl transition-all duration-200 ease-out origin-top-right ${
           isOpen 
             ? 'opacity-100 scale-100 pointer-events-auto' 
             : 'opacity-0 scale-90 pointer-events-none'
         }`}
       >
-        <div className="mb-2 flex items-center justify-between">
-          <div>
-            <p className="text-xs font-semibold text-white">Palet</p>
-          </div>
-          <div className="flex items-center gap-1.5 text-xs font-semibold">
-            <button
-              type="button"
-              className="px-2 py-0.5 rounded bg-white/10 border border-white/20 text-slate-200 hover:text-white hover:border-white/40 hover:bg-white/15 transition text-[10px]"
-              onClick={handleRandomize}
-            >
-              <span className="inline-flex gap-0.5 items-center">
-                {randomLabelText.split('').map((ch, idx) => (
-                  <span key={`${ch}-${idx}`} style={{ color: randomLabelColors[idx] ?? 'inherit' }}>
-                    {ch}
-                  </span>
-                ))}
-              </span>
-            </button>
-            <button
-              type="button"
-              className="text-neon hover:text-white transition text-[10px]"
-              onClick={handleReset}
-            >
-              Sıfırla
-            </button>
-            <button
-              type="button"
-              className="text-slate-500 hover:text-white transition"
-              onClick={onClose}
-              aria-label="Paneli kapat"
-            >
-              <X size={14} />
-            </button>
-          </div>
+        <div className="mb-4 flex items-center justify-between">
+          <p className="text-sm font-semibold text-white">Renk Paleti</p>
+          <button
+            type="button"
+            className="text-slate-400 hover:text-white transition"
+            onClick={onClose}
+            aria-label="Paneli kapat"
+          >
+            <X size={16} />
+          </button>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-3">
           {controls.map((ctrl) => (
-            <div key={ctrl.variable} className="space-y-1">
-              <div className="text-[10px]">
-                <span className="font-semibold text-white">{ctrl.label}</span>
-              </div>
-              <div className="grid grid-cols-3 gap-1">
+            <div key={ctrl.variable} className="space-y-1.5">
+              <div className="text-xs font-medium text-slate-300">{ctrl.label}</div>
+              <div className="grid grid-cols-6 gap-1.5">
                 {colorOptions.map((option) => (
                   <button
                     key={`${ctrl.variable}-${option.hex}`}
                     type="button"
                     onClick={() => applyColor(ctrl.variable, option.hex)}
-                    className={`w-full aspect-square rounded border border-white/10 transition-all duration-150 focus:outline-none ${
-                      selections[ctrl.variable] === option.hex ? activeButtonClass : 'hover:border-white/40 hover:scale-105'
+                    className={`aspect-square rounded-md border border-white/10 transition-all duration-150 focus:outline-none ${
+                      selections[ctrl.variable] === option.hex ? activeButtonClass : 'hover:border-white/40 hover:scale-110'
                     }`}
                     style={{ backgroundColor: option.hex }}
                     aria-label={`${ctrl.label} ${option.name}`}
@@ -225,6 +199,23 @@ export default function ThemeCustomizer({
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between gap-2">
+          <button
+            type="button"
+            className="flex-1 px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-slate-200 hover:text-white hover:border-white/30 hover:bg-white/10 transition text-xs font-medium"
+            onClick={handleRandomize}
+          >
+            Rastgele
+          </button>
+          <button
+            type="button"
+            className="px-3 py-1.5 rounded-md text-neon hover:text-white hover:bg-white/5 transition text-xs font-medium"
+            onClick={handleReset}
+          >
+            Sıfırla
+          </button>
         </div>
       </div>
     </>
