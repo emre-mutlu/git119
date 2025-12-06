@@ -5,10 +5,10 @@ import { useEffect } from 'react';
 export default function RandomGradients() {
   useEffect(() => {
     const gradientDirections = [
-      'to top left',
-      'to top right',
-      'to bottom left',
-      'to bottom right',
+      '135deg',  // top-left to bottom-right
+      '225deg',  // top-right to bottom-left
+      '45deg',   // bottom-left to top-right
+      '315deg',  // bottom-right to top-left
     ];
 
     // Apply random gradient direction to each mesh-heading element

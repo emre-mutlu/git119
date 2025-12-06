@@ -168,7 +168,7 @@ body {
 /* ... (aradaki kodlar aynı kalır) ... */
 
 :root {
-  --random-gradient-dir: to bottom right;
+  --random-gradient-dir: 135deg;
 }
 
 /* Glassmorphism heading style for syllabus and kaynaklar - linear gradient fade up */
@@ -182,8 +182,8 @@ body {
   
   background: linear-gradient(to top, var(--mesh-a) 0%, var(--mesh-b) 40%, transparent 100%);
   
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   margin-left: -1rem;
   margin-right: -1rem;
   padding: 1rem 1.1rem 1.1rem;
@@ -193,7 +193,7 @@ body {
   border-top: none;
   border-left: none;
   border-right: none;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 /* Different color combinations for each heading, tied to palette colors directly */
