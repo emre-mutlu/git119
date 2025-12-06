@@ -11,6 +11,6 @@ export const iconColorPalette = [
 export const iconColorMap = {
   home: '#E536AB',     // pembe
   syllabus: '#5C03BC', // mor
-  haftalar: '#0091FF', // okyanus
-  kaynaklar: '#0091FF', // okyanus (was zümrüt)
+  haftalar: '#39FF14', // neon yeşil
+  kaynaklar: '#0091FF', // okyanus
 };

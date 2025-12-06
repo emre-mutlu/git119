@@ -28,6 +28,15 @@ body {
   font-family: var(--font-josefin), serif;
 }
 
+/* Neon dot indicator */
+.neon-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgb(var(--color-neon));
+  box-shadow: 0 0 8px rgb(var(--color-neon)), 0 0 12px rgb(var(--color-neon));
+}
+
 /* Prose spacing improvements */
 .prose h1 {
   margin-top: 2.5rem;

@@ -161,7 +161,7 @@ export default function ThemeCustomizer({
       
       {/* Panel - positioned directly to the right of palette icon */}
       <div
-        className={`fixed z-50 top-5 right-16 w-52 rounded-lg border border-white/20 bg-dark/95 backdrop-blur-2xl p-2.5 shadow-2xl transition-all duration-200 ease-out origin-top-right ${
+        className={`fixed z-50 top-5 right-10 w-48 rounded-lg border border-white/20 bg-dark/95 backdrop-blur-2xl p-2.5 shadow-2xl transition-all duration-200 ease-out origin-top-right ${
           isOpen 
             ? 'opacity-100 scale-100 pointer-events-auto' 
             : 'opacity-0 scale-90 pointer-events-none'
