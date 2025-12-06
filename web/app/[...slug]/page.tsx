@@ -33,7 +33,7 @@ export default async function MarkdownPage({ params }: PageProps) {
 
   const { content, data } = markdownData;
   const proseBase = `prose prose-invert prose-lg mx-auto
-    prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-accent
+    prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-white
     prose-h1:text-3xl prose-h1:md:text-4xl
     prose-h2:text-2xl
     prose-h3:text-xl
@@ -69,7 +69,7 @@ export default async function MarkdownPage({ params }: PageProps) {
       <article className={articleClassName}>
         {/* If there's a title in frontmatter, display it differently or let markdown h1 handle it */}
         {title && (
-           <div className="mb-10 border-b border-primary/30 pb-8">
+           <div className="mb-10 pb-8 mesh-heading"> {/* Added mesh-heading and adjusted padding */}
              <h1 className="!mb-4">{title}</h1>
              {description && <p className="text-xl text-slate-400">{description}</p>}
            </div>

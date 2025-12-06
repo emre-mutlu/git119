@@ -222,7 +222,7 @@ body {
 .mesh-heading:nth-of-type(5n) {
   --mesh-a: rgba(0,145,255, 0.5);
   --mesh-b: rgba(252,57,3, 0.45);
-  background: linear-gradient(to right, var(--mesh-a) 0%, var(--mesh-b) 50%, transparent 65%);
+  background: linear-gradient(to bottom left, var(--mesh-a) 0%, var(--mesh-b) 50%, transparent 65%);
 }
 
 /* Glassmorphism heading style for syllabus and kaynaklar - linear gradient fade up */
@@ -252,29 +252,39 @@ body {
 }
 
 /* H3 variations */
-.syllabus-prose > h3:nth-of-type(4n+1),
-.kaynaklar-prose > h3:nth-of-type(4n+1) {
-  --mesh-a: rgb(var(--color-primary) / 0.45);
-  --mesh-b: rgb(var(--color-accent) / 0.4);
+.syllabus-prose > h3:nth-of-type(5n+1),
+.kaynaklar-prose > h3:nth-of-type(5n+1), {
+  --mesh-a: rgba(92,3,188, 0.45);
+  --mesh-b: rgba(0,145,255, 0.4);
+  background: linear-gradient(150deg, var(--mesh-a) 0%, var(--mesh-b) 40%, transparent 65%);
 }
 
-.syllabus-prose > h3:nth-of-type(4n+2),
-.kaynaklar-prose > h3:nth-of-type(4n+2) {
-  --mesh-a: rgb(var(--color-neon) / 0.45);
-  --mesh-b: rgb(var(--color-primary) / 0.42);
+.syllabus-prose > h3:nth-of-type(5n+2),
+.kaynaklar-prose > h3:nth-of-type(5n+2), {
+  --mesh-a: rgba(57,255,20, 0.45);
+  --mesh-b: rgba(92,3,188, 0.42);
+  background: linear-gradient(to bottom left, var(--mesh-a) 0%, var(--mesh-b) 35%, transparent 65%);
 }
 
-.syllabus-prose > h3:nth-of-type(4n+3),
-.kaynaklar-prose > h3:nth-of-type(4n+3) {
-  --mesh-a: rgb(var(--color-accent) / 0.45);
-  --mesh-b: rgb(var(--color-neon) / 0.38);
+.syllabus-prose > h3:nth-of-type(5n+3),
+.kaynaklar-prose > h3:nth-of-type(5n+3), {
+  --mesh-a: rgba(229,54,171, 0.45);
+  --mesh-b: rgba(57,255,20, 0.38);
+  background: linear-gradient(to top right, var(--mesh-a) 0%, var(--mesh-b) 45%, transparent 65%);
 }
 
+.syllabus-prose > h3:nth-of-type(5n+4),
+.kaynaklar-prose > h3:nth-of-type(5n+4), {
+  --mesh-a: rgba(252,57,3, 0.45);
+  --mesh-b: rgba(229,54,171, 0.4);
+  background: linear-gradient(75deg, var(--mesh-a) 0%, var(--mesh-b) 30%, transparent 65%);
+}
 
-.syllabus-prose > h3:nth-of-type(4n),
-.kaynaklar-prose > h3:nth-of-type(4n) {
-  --gradient-color-1: rgba(252,57,3,0.3);
-  --gradient-color-2: rgba(0,145,255,0.25);
+.syllabus-prose > h3:nth-of-type(5n),
+.kaynaklar-prose > h3:nth-of-type(5n), {
+  --mesh-a: rgba(0,145,255, 0.45);
+  --mesh-b: rgba(252,57,3, 0.35);
+  background: linear-gradient(to bottom right, var(--mesh-a) 0%, var(--mesh-b) 50%, transparent 65%);
 }
 
 /* Logo condensed font */

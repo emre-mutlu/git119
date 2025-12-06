@@ -180,8 +180,8 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-accent mb-4">GİT 119 - Haftalık Ders Akışı</h1>
+        <div className="mb-10 mesh-heading">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">GİT 119 - Haftalık Ders Akışı</h1>
           <p className="text-base text-slate-300 leading-relaxed">
             Dönem boyunca işleyeceğimiz konular, ödevler ve materyaller.
           </p>
