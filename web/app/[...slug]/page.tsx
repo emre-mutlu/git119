@@ -52,10 +52,13 @@ export default async function MarkdownPage({ params }: PageProps) {
   
   const simpleProse = 'prose prose-invert mx-auto mb-8';
   
-  const articleClassName = isKaynaklar 
-    ? `${simpleProse} kaynaklar-prose`
-    : `${proseBase} ${isSyllabus ? 'syllabus-prose' : ''}`;
-
+    let articleClassName;
+  
+    if (isKaynaklar || isSyllabus) { // isSyllabus de aynı sade stile sahip olacak
+        articleClassName = `${simpleProse} ${isKaynaklar ? 'kaynaklar-prose' : ''} ${isSyllabus ? 'syllabus-prose' : ''}`;
+    } else {
+        articleClassName = `${proseBase}`; // isSyllabus kaldırıldı
+    }
   const title = typeof data.title === 'string' ? data.title : undefined;
   const description = typeof data.description === 'string' ? data.description : undefined;
 

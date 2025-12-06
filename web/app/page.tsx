@@ -53,10 +53,10 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="bg-dark text-slate-200 font-sans selection:bg-accent/30 min-h-screen flex flex-col">
+    <div className="bg-dark text-slate-200 font-sans selection:bg-accent/30 min-h-screen flex flex-col md:h-screen md:overflow-hidden">
       
       {/* Hero Section */}
-      <header className="relative overflow-hidden bg-dark flex-shrink-0 flex items-center border-b border-primary/20 py-16 md:py-24">
+      <header className="relative overflow-hidden bg-dark flex-shrink-0 flex flex-col justify-center border-b border-primary/20 py-16 md:py-0 md:h-[75vh]">
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl md:max-w-5xl mx-auto text-center">
@@ -108,13 +108,9 @@ export default function Home() {
       </header>
 
       {/* Dashboard Grid */}
-      <main className="bg-[#0D0620] flex-shrink-0 relative z-20 py-12 pb-24">
+      <main className="bg-[#0D0620] flex-shrink-0 relative z-20 py-12 pb-24 md:py-0 md:h-[25vh] md:flex md:items-center">
         <div className="container mx-auto px-4">
-          <div className="md:grid md:grid-cols-3 md:gap-8">
-            <div className="md:col-span-1 flex items-center justify-center">
-              <DashboardCards />
-            </div>
-          </div>
+          <DashboardCards />
         </div>
       </main>
     </div>
