@@ -3,43 +3,10 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
-import { BookOpen, Calendar, Layers, Home, Palette } from 'lucide-react';
+import { Palette } from 'lucide-react';
 import { iconColorMap } from '@/lib/iconColors';
 import ThemeCustomizer from './ThemeCustomizer';
-
-const glitchPalettes = [
-  {
-    gradientStart: '#5C03BC',
-    gradientEnd: '#28D77D',
-    before: 'rgba(57, 255, 20, 0.95)',
-    after: 'rgba(40, 215, 125, 0.95)',
-  },
-  {
-    gradientStart: '#3B0CA3',
-    gradientEnd: '#39FF14',
-    before: 'rgba(57, 255, 20, 0.9)',
-    after: 'rgba(40, 215, 125, 0.75)',
-  },
-  {
-    gradientStart: '#32154D',
-    gradientEnd: '#28D77D',
-    before: 'rgba(57, 255, 20, 0.85)',
-    after: 'rgba(92, 3, 188, 0.8)',
-  },
-  {
-    gradientStart: '#28D77D',
-    gradientEnd: '#5C03BC',
-    before: 'rgba(57, 255, 20, 0.9)',
-    after: 'rgba(138, 98, 255, 0.85)',
-  },
-];
-
-const navigationItems = [
-  { name: 'Ana Sayfa', href: '/', icon: Home, colorKey: 'home' as const },
-  { name: 'Müfredat', href: '/Mufredat/Syllabus', icon: BookOpen, colorKey: 'syllabus' as const },
-  { name: 'Haftalık Akış', href: '/haftalar', icon: Calendar, colorKey: 'haftalar' as const },
-  { name: 'Kaynaklar', href: '/Kaynaklar/Kaynakca', icon: Layers, colorKey: 'kaynaklar' as const },
-];
+import { GLITCH_PALETTES, NAVIGATION_ITEMS } from '@/lib/constants';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -48,7 +15,7 @@ export default function Navbar() {
   const [isHovering, setIsHovering] = useState(false);
   const [proximity, setProximity] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [glitchColors, setGlitchColors] = useState(glitchPalettes[0]);
+  const [glitchColors, setGlitchColors] = useState(GLITCH_PALETTES[0]);
   const triggerTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const activeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const triggerGlitchRef = useRef<() => void>();
@@ -70,7 +37,7 @@ export default function Navbar() {
       if (activeTimeoutRef.current) {
         clearTimeout(activeTimeoutRef.current);
       }
-      const palette = glitchPalettes[Math.floor(Math.random() * glitchPalettes.length)];
+      const palette = GLITCH_PALETTES[Math.floor(Math.random() * GLITCH_PALETTES.length)];
       setGlitchColors(palette);
       setIsGlitchActive(true);
       // Random duration between 0ms and 1500ms
@@ -201,7 +168,7 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
-            {navigationItems.map((item) => {
+            {NAVIGATION_ITEMS.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
               const iconColor = iconColorMap[item.colorKey];
@@ -288,7 +255,7 @@ export default function Navbar() {
           <div className="pb-2">
             <div className="mt-2 rounded-xl border border-white/10 bg-dark/85 backdrop-blur-xl shadow-lg">
               <div className="flex flex-col divide-y divide-white/5">
-                {navigationItems.map((item) => {
+                {NAVIGATION_ITEMS.map((item) => {
                   const Icon = item.icon;
                   const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
                   const iconColor = iconColorMap[item.colorKey];
