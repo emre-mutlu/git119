@@ -79,7 +79,15 @@ body {
   letter-spacing: -0.02em;
   text-shadow: 0 0 14px rgba(92, 3, 188, 0.35);
   transition: text-shadow 0.2s ease;
-  /* Removed: color: transparent; background-image; background-clip; */
+  /* Gradient animation setup */
+  background-size: 200% auto;
+  animation: gradientFlow 3s linear infinite;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .logo-glitch::before,
@@ -89,43 +97,55 @@ body {
   inset: 0;
   pointer-events: none;
   mix-blend-mode: screen;
-  opacity: 0; /* Default hidden state */
-  /* Faster flash-then-fade */
-  transition: opacity 0.12s cubic-bezier(0.33, 0, 0.45, 1), transform 0.12s ease-out; /* Add transform for glitch animation */
+  opacity: 0; /* Default hidden */
+  transition: opacity 0.1s ease-out, transform 0.1s ease-out;
 }
 
-/* Glitch effect active state (controlled by JS adding 'logo-glitch-active' class) */
+/* INTENSE Glitch (Hover or Very Close) */
 .logo-glitch.logo-glitch-active::before {
   opacity: 1;
-  transform: translate(var(--glitch-x, -2px), var(--glitch-y, 0px)) scale(var(--glitch-scale, 1.005));
+  transform: translate(var(--glitch-x, -2px), var(--glitch-y, 0px)) scale(1.02);
   color: var(--glitch-before-color);
-  text-shadow: 0 0 5px var(--glitch-before-color);
+  text-shadow: 2px 0 var(--glitch-before-color);
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
 }
 
 .logo-glitch.logo-glitch-active::after {
   opacity: 1;
-  transform: translate(var(--glitch-x-alt, 2px), var(--glitch-y-alt, 0px)) scale(var(--glitch-scale, 1.005));
+  transform: translate(var(--glitch-x-alt, 2px), var(--glitch-y-alt, 0px)) scale(1.02);
   color: var(--glitch-after-color);
-  text-shadow: 0 0 5px var(--glitch-after-color);
+  text-shadow: -2px 0 var(--glitch-after-color);
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
 }
 
-/* Proximity-based glitch */
+/* SUBTLE Proximity Hint (Approaching) */
 .logo-glitch-proximity::before {
-  opacity: calc(var(--glitch-proximity) * 0.7); /* Slightly less opaque for subtle proximity */
-  transform: translate(calc(var(--glitch-proximity) * -1px), calc(var(--glitch-proximity) * 1px));
+  opacity: calc(var(--glitch-proximity) * 0.5); /* Max 50% opacity */
+  transform: translate(calc(var(--glitch-proximity) * -1.5px), 0);
   color: var(--glitch-before-color);
 }
 
 .logo-glitch-proximity::after {
-  opacity: calc(var(--glitch-proximity) * 0.7);
-  transform: translate(calc(var(--glitch-proximity) * 1px), calc(var(--glitch-proximity) * -1px));
+  opacity: calc(var(--glitch-proximity) * 0.5);
+  transform: translate(calc(var(--glitch-proximity) * 1.5px), 0);
   color: var(--glitch-after-color);
 }
 
-/* Glitch effect for hover, more subtle */
+/* Ensure hover always triggers max intensity regardless of proximity calc */
 .logo-glitch:hover::before,
 .logo-glitch:hover::after {
-  opacity: 0.6; /* Slight glow on hover */
+  opacity: 1 !important;
+  /* Add a little extra shake on hover */
+  animation: glitchShake 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+}
+
+@keyframes glitchShake {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 2px) }
+  40% { transform: translate(-2px, -2px) }
+  60% { transform: translate(2px, 2px) }
+  80% { transform: translate(2px, -2px) }
+  100% { transform: translate(0) }
 }
 
 
@@ -170,6 +190,7 @@ body {
 .mesh-heading:nth-of-type(5n+1) {
   --mesh-a: rgba(92,3,188, 0.55);
   --mesh-b: rgba(0,145,255, 0.42);
+  background: linear-gradient(135deg, var(--mesh-a) 0%, var(--mesh-b) 40%, transparent 65%);
 }
 
 .syllabus-prose > h2:nth-of-type(5n+2),
@@ -177,6 +198,7 @@ body {
 .mesh-heading:nth-of-type(5n+2) {
   --mesh-a: rgba(57,255,20, 0.35);
   --mesh-b: rgba(92,3,188, 0.5);
+  background: linear-gradient(to top left, var(--mesh-a) 0%, var(--mesh-b) 35%, transparent 65%);
 }
 
 .syllabus-prose > h2:nth-of-type(5n+3),
@@ -184,6 +206,7 @@ body {
 .mesh-heading:nth-of-type(5n+3) {
   --mesh-a: rgba(229,54,171, 0.5);
   --mesh-b: rgba(57,255,20, 0.3);
+  background: linear-gradient(to bottom right, var(--mesh-a) 0%, var(--mesh-b) 45%, transparent 65%);
 }
 
 .syllabus-prose > h2:nth-of-type(5n+4),
@@ -191,6 +214,7 @@ body {
 .mesh-heading:nth-of-type(5n+4) {
   --mesh-a: rgba(252,57,3, 0.55);
   --mesh-b: rgba(229,54,171, 0.4);
+  background: linear-gradient(200deg, var(--mesh-a) 0%, var(--mesh-b) 30%, transparent 65%);
 }
 
 .syllabus-prose > h2:nth-of-type(5n),
@@ -198,6 +222,7 @@ body {
 .mesh-heading:nth-of-type(5n) {
   --mesh-a: rgba(0,145,255, 0.5);
   --mesh-b: rgba(252,57,3, 0.45);
+  background: linear-gradient(to right, var(--mesh-a) 0%, var(--mesh-b) 50%, transparent 65%);
 }
 
 /* Glassmorphism heading style for syllabus and kaynaklar - linear gradient fade up */
@@ -210,7 +235,7 @@ body {
   --mesh-a: rgba(92,3,188, 0.4); 
   --mesh-b: rgba(0,145,255, 0.1);
   
-  background: linear-gradient(to top, var(--mesh-a) 0%, var(--mesh-b) 25%, transparent 50%);
+  background: linear-gradient(to top, var(--mesh-a) 0%, var(--mesh-b) 40%, transparent 65%);
   
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);

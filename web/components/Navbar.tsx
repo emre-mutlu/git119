@@ -128,9 +128,9 @@ export default function Navbar() {
       const dx = e.clientX - cx;
       const dy = e.clientY - cy;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      const radius = 110; // hotspot radius within nav
+      const radius = 180; // increased radius for smoother approach
       const raw = Math.max(0, Math.min(1, 1 - dist / radius));
-      const eased = Math.pow(raw, 1.05); // slightly softer decay
+      const eased = Math.pow(raw, 3); // cubic curve: stays low for longer, spikes near center
       setProximity(eased);
     };
 
@@ -159,13 +159,14 @@ export default function Navbar() {
     backgroundClip: 'text',
   };
 
-  // Show glitch if: random trigger OR hover OR proximity fade-in
-  const showGlitch = isGlitchActive || isHovering || proximity > 0.05;
-  const proximityClass = proximity > 0.02 ? 'logo-glitch-proximity' : '';
+  // Show intense glitch ONLY on direct hover or very close proximity.
+  // Random triggers (isGlitchActive) are separate.
+  const showGlitch = isHovering || proximity > 0.85; 
+  const proximityClass = proximity > 0.1 ? 'logo-glitch-proximity' : ''; // Subtle hint starts earlier
 
   const logoClassName = [
     'font-rokkitt text-4xl tracking-tight font-[550] text-transparent bg-clip-text logo-glitch',
-    showGlitch ? 'logo-glitch-active' : '',
+    (showGlitch || isGlitchActive) ? 'logo-glitch-active' : '', // Active state for hover OR random
     proximityClass,
   ]
     .filter(Boolean)
