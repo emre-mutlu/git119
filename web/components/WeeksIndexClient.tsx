@@ -178,7 +178,7 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <article className="prose prose-invert prose-lg mx-auto mb-8 kaynaklar-prose">
+      <article className="prose prose-invert mx-auto mb-8 kaynaklar-prose">
         <h1>GİT 119 - Haftalık Ders Akışı</h1>
         <p>Bu belge, &quot;Dijital Tasarıma Giriş&quot; dersi boyunca işleyeceğimiz konuları, ödevleri ve materyalleri bir arada toplar.</p>
         <hr />
