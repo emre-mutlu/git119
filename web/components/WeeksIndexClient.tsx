@@ -178,12 +178,12 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
 
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="max-w-3xl mx-auto">
-        <div className="mb-10 border-b border-primary/30 pb-8">
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-accent mb-4">GİT 119 - Ders Kaynakçası</h1>
+    <div className="container mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="mb-10">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-accent mb-4">GİT 119 - Haftalık Ders Akışı</h1>
           <p className="text-base text-slate-300 leading-relaxed">
-            Bu belge, &quot;Dijital Tasarıma Giriş&quot; dersi boyunca önerilen tüm kitapları, web sitelerini, ilham kaynaklarını ve video eğitimlerini bir arada toplar.
+            Dönem boyunca işleyeceğimiz konular, ödevler ve materyaller.
           </p>
         </div>
 

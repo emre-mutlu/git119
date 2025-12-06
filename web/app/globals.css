@@ -156,47 +156,74 @@ body {
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* Different color combinations for each heading, tied to theme variables so randomize affects them */
-.syllabus-prose > h2:nth-of-type(6n+1),
-.kaynaklar-prose > h2:nth-of-type(6n+1),
-.mesh-heading:nth-of-type(6n+1) {
-  --mesh-a: rgb(var(--color-primary) / 0.55);
-  --mesh-b: rgb(var(--color-accent) / 0.42);
+/* Different color combinations for each heading, tied to palette colors directly */
+/* Palette: 
+   Purple: 92,3,188 (#5C03BC)
+   Pink: 229,54,171 (#E536AB)
+   Neon: 57,255,20 (#39FF14)
+   Orange: 252,57,3 (#FC3903)
+   Ocean: 0,145,255 (#0091FF)
+*/
+
+.syllabus-prose > h2:nth-of-type(5n+1),
+.kaynaklar-prose > h2:nth-of-type(5n+1),
+.mesh-heading:nth-of-type(5n+1) {
+  --mesh-a: rgba(92,3,188, 0.55);
+  --mesh-b: rgba(0,145,255, 0.42);
 }
 
-.syllabus-prose > h2:nth-of-type(6n+2),
-.kaynaklar-prose > h2:nth-of-type(6n+2),
-.mesh-heading:nth-of-type(6n+2) {
-  --mesh-a: rgb(var(--color-neon) / 0.4);
-  --mesh-b: rgb(var(--color-primary) / 0.5);
+.syllabus-prose > h2:nth-of-type(5n+2),
+.kaynaklar-prose > h2:nth-of-type(5n+2),
+.mesh-heading:nth-of-type(5n+2) {
+  --mesh-a: rgba(57,255,20, 0.35);
+  --mesh-b: rgba(92,3,188, 0.5);
 }
 
-.syllabus-prose > h2:nth-of-type(6n+3),
-.kaynaklar-prose > h2:nth-of-type(6n+3),
-.mesh-heading:nth-of-type(6n+3) {
-  --mesh-a: rgb(var(--color-accent) / 0.5);
-  --mesh-b: rgb(var(--color-neon) / 0.35);
+.syllabus-prose > h2:nth-of-type(5n+3),
+.kaynaklar-prose > h2:nth-of-type(5n+3),
+.mesh-heading:nth-of-type(5n+3) {
+  --mesh-a: rgba(229,54,171, 0.5);
+  --mesh-b: rgba(57,255,20, 0.3);
 }
 
-.syllabus-prose > h2:nth-of-type(6n+4),
-.kaynaklar-prose > h2:nth-of-type(6n+4),
-.mesh-heading:nth-of-type(6n+4) {
-  --mesh-a: rgb(var(--color-primary) / 0.55);
-  --mesh-b: rgb(var(--color-neon) / 0.4);
+.syllabus-prose > h2:nth-of-type(5n+4),
+.kaynaklar-prose > h2:nth-of-type(5n+4),
+.mesh-heading:nth-of-type(5n+4) {
+  --mesh-a: rgba(252,57,3, 0.55);
+  --mesh-b: rgba(229,54,171, 0.4);
 }
 
-.syllabus-prose > h2:nth-of-type(6n+5),
-.kaynaklar-prose > h2:nth-of-type(6n+5),
-.mesh-heading:nth-of-type(6n+5) {
-  --mesh-a: rgb(var(--color-accent) / 0.5);
-  --mesh-b: rgb(var(--color-primary) / 0.4);
+.syllabus-prose > h2:nth-of-type(5n),
+.kaynaklar-prose > h2:nth-of-type(5n),
+.mesh-heading:nth-of-type(5n) {
+  --mesh-a: rgba(0,145,255, 0.5);
+  --mesh-b: rgba(252,57,3, 0.45);
 }
 
-.syllabus-prose > h2:nth-of-type(6n),
-.kaynaklar-prose > h2:nth-of-type(6n),
-.mesh-heading:nth-of-type(6n) {
-  --mesh-a: rgb(var(--color-neon) / 0.45);
-  --mesh-b: rgb(var(--color-accent) / 0.5);
+/* Glassmorphism heading style for syllabus and kaynaklar - linear gradient fade up */
+.syllabus-prose > h2,
+.syllabus-prose > h3,
+.kaynaklar-prose > h2,
+.kaynaklar-prose > h3,
+.mesh-heading {
+  /* Default fallback */
+  --mesh-a: rgba(92,3,188, 0.4); 
+  --mesh-b: rgba(0,145,255, 0.1);
+  
+  background: linear-gradient(to top, var(--mesh-a) 0%, var(--mesh-b) 25%, transparent 50%);
+  
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding: 1rem 1.1rem 1.1rem;
+  border-radius: 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.9);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 /* H3 variations */

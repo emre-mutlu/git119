@@ -161,20 +161,20 @@ export default function ThemeCustomizer({
       
       {/* Panel */}
       <div
-        className={`fixed z-50 top-20 right-4 w-64 rounded-xl border border-white/20 bg-dark/80 backdrop-blur-2xl p-3 shadow-2xl transition-all duration-300 origin-top-right ${
+        className={`fixed z-50 top-20 right-4 w-56 rounded-xl border border-white/20 bg-dark/80 backdrop-blur-2xl p-2 shadow-2xl transition-all duration-300 origin-top-right ${
           isOpen 
             ? 'opacity-100 scale-100 translate-x-0 pointer-events-auto' 
             : 'opacity-0 scale-95 translate-x-4 pointer-events-none'
         }`}
       >
-        <div className="mb-2 flex items-center justify-between">
+        <div className="mb-1.5 flex items-center justify-between">
           <div>
-            <p className="text-xs font-semibold text-white">Renk Paleti</p>
+            <p className="text-[10px] font-semibold text-white">Renk Paleti</p>
           </div>
-          <div className="flex items-center gap-1.5 text-xs font-semibold">
+          <div className="flex items-center gap-1 text-[10px] font-semibold">
             <button
               type="button"
-              className="px-1.5 py-0.5 rounded-full border border-white/10 text-slate-200 hover:text-white hover:border-white/30 transition text-[10px] flex-shrink-0"
+              className="px-1 py-0.5 rounded-full border border-white/10 text-slate-200 hover:text-white hover:border-white/30 transition text-[9px] flex-shrink-0"
               onClick={handleRandomize}
             >
               <span className="inline-flex gap-0.5 items-center">
@@ -187,7 +187,7 @@ export default function ThemeCustomizer({
             </button>
             <button
               type="button"
-              className="text-neon hover:text-white transition text-[10px] flex-shrink-0"
+              className="text-neon hover:text-white transition text-[9px] flex-shrink-0"
               onClick={handleReset}
             >
               Sıfırla
@@ -198,15 +198,15 @@ export default function ThemeCustomizer({
               onClick={onClose}
               aria-label="Paneli kapat"
             >
-              <X size={12} />
+              <X size={10} />
             </button>
           </div>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-1.5">
           {controls.map((ctrl) => (
-            <div key={ctrl.variable} className="space-y-1">
-              <div className="flex items-center justify-between text-[10px] text-slate-300">
+            <div key={ctrl.variable} className="space-y-0.5">
+              <div className="flex items-center justify-between text-[9px] text-slate-300">
                 <span className="font-semibold text-white">{ctrl.label}</span>
                 <span className="text-slate-400">{ctrl.description}</span>
               </div>
@@ -216,7 +216,7 @@ export default function ThemeCustomizer({
                     key={`${ctrl.variable}-${option.hex}`}
                     type="button"
                     onClick={() => applyColor(ctrl.variable, option.hex)}
-                    className={`h-7 rounded-md border border-white/10 transition-transform focus:outline-none ${
+                    className={`h-5 rounded-sm border border-white/10 transition-transform focus:outline-none ${
                       selections[ctrl.variable] === option.hex ? activeButtonClass : 'hover:border-white/40 hover:scale-105'
                     }`}
                     style={{ backgroundColor: option.hex }}

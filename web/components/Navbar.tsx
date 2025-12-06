@@ -192,7 +192,7 @@ export default function Navbar() {
             >
               {/* Main visible logo with flat colors */}
               <span className="relative z-10">
-                <span style={{ color: '#0091FF' }}>git</span>
+                <span style={{ color: '#FFFFFF' }}>git</span>
                 <span style={{ color: '#39FF14' }}>119</span>
               </span>
             </span>
