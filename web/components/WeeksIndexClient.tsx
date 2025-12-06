@@ -123,6 +123,22 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
   // Memoize rotations so they stay consistent
   const rotations = useMemo(() => generateRotations(weeksData), [weeksData]);
 
+  // Randomize gradient directions on mount
+  useEffect(() => {
+    const gradientDirections = [
+      '135deg',
+      'to top left',
+      'to bottom right',
+      '200deg',
+      'to bottom left',
+      '45deg',
+      'to top right',
+      '315deg',
+    ];
+    const randomDir = gradientDirections[Math.floor(Math.random() * gradientDirections.length)];
+    document.documentElement.style.setProperty('--random-gradient-dir', randomDir);
+  }, []);
+
   // Restore scroll position from sessionStorage on mount
   useEffect(() => {
     const savedScrollPos = sessionStorage.getItem('haftalar-scroll-pos');
@@ -179,13 +195,11 @@ export default function WeeksIndexClient({ weeksData }: WeeksIndexClientProps) {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-10">
-          <div className="mesh-heading">
-            <h1 className="!mb-4 text-3xl md:text-4xl font-bold tracking-tight text-white">GİT 119 - Haftalık Ders Akışı</h1>
-            <p className="text-base text-slate-300 leading-relaxed">
-              Dönem boyunca işleyeceğimiz konular, ödevler ve materyaller.
-            </p>
-          </div>
+        <div className="mb-10 pb-8 mesh-heading">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white !mb-4">GİT 119 - Haftalık Ders Akışı</h1>
+          <p className="text-xl text-slate-300 leading-relaxed">
+            Dönem boyunca işleyeceğimiz konular, ödevler ve materyaller.
+          </p>
         </div>
 
         <div ref={containerRef} className="flex flex-col gap-4" style={{ perspective: '1000px' }}>
