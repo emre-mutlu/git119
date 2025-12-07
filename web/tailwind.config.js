@@ -19,7 +19,7 @@ module.exports = {
         lime: 'rgb(var(--color-lime) / <alpha-value>)',
         blue: 'rgb(var(--color-blue) / <alpha-value>)',
         ocean: 'rgb(var(--color-ocean) / <alpha-value>)',
-        emerald: 'rgb(var(--color-emerald) / <alpha-value>)',
+        purple: 'rgb(var(--color-purple) / <alpha-value>)',
         pink: 'rgb(var(--color-pink) / <alpha-value>)',
         
         // Theme aliases (customizable)

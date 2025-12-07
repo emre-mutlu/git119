@@ -11,7 +11,7 @@ const blobColors = [
   { color: 'rgba(0,255,0,', name: 'lime' },        // #00ff00
   { color: 'rgba(0,0,255,', name: 'blue' },        // #0000ff
   { color: 'rgba(0,145,255,', name: 'ocean' },     // #0091ff
-  { color: 'rgba(60,195,114,', name: 'emerald' },  // #3cc372
+  { color: 'rgba(92,3,188,', name: 'purple' },     // #5C03BC
   { color: 'rgba(229,54,171,', name: 'pink' },     // #E536AB
 ];
 
@@ -66,7 +66,7 @@ export default function Home() {
               <span className="text-accent text-xs font-medium tracking-wide uppercase">2025 Bahar Dönemi</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon via-neon/70 to-accent">Dijital Tasarıma</span> Giriş
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon via-neon/50 to-accent">Dijital Tasarıma</span> Giriş
             </h1>
             <p className="text-lg md:text-xl text-slate-400 mb-8 leading-relaxed">
               <span className="font-black text-slate-200">git119</span>{' '}

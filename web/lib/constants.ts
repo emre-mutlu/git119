@@ -10,9 +10,9 @@ export const GLITCH_PALETTES = [
   },
   {
     gradientStart: '#00ff00',
-    gradientEnd: '#3cc372',
+    gradientEnd: '#5C03BC',
     before: 'rgba(0, 255, 0, 0.9)',
-    after: 'rgba(60, 195, 114, 0.75)',
+    after: 'rgba(92, 3, 188, 0.75)',
   },
   {
     gradientStart: '#E536AB',

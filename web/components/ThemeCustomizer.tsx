@@ -19,14 +19,14 @@ const colorOptions = [
   { name: 'Lime', hex: '#00ff00' },
   { name: 'Blue', hex: '#0000ff' },
   { name: 'Ocean', hex: '#0091ff' },
-  { name: 'Emerald', hex: '#3cc372' },
+  { name: 'Purple', hex: '#5C03BC' },
   { name: 'Pink', hex: '#E536AB' },
 ];
 
 const defaultHexMap: Record<ThemeVariable, string> = {
-  '--color-primary': '#ff0000',   // Red
-  '--color-accent': '#00ff00',    // Lime
-  '--color-neon': '#0000ff',      // Blue
+  '--color-primary': '#5C03BC',   // Purple (borders)
+  '--color-accent': '#0091ff',    // Ocean (light blue text)
+  '--color-neon': '#00ff00',      // Lime (green for 119 and dot)
 };
 
 const randomizeLabelColors = (label: string) =>

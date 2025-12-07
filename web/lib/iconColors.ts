@@ -4,7 +4,7 @@ export const iconColorPalette = [
   '#00ff00', // lime
   '#0000ff', // blue
   '#0091ff', // ocean
-  '#3cc372', // emerald
+  '#5C03BC', // purple
   '#E536AB', // pink
 ];
 

@@ -11,13 +11,13 @@
   --color-lime: 0 255 0;         /* #00ff00 */
   --color-blue: 0 0 255;         /* #0000ff */
   --color-ocean: 0 145 255;      /* #0091ff */
-  --color-emerald: 60 195 114;   /* #3cc372 */
+  --color-purple: 92 3 188;      /* #5C03BC */
   --color-pink: 229 54 171;      /* #E536AB */
   
   /* Theme aliases (customizable via theme tool) */
-  --color-primary: var(--color-red);
-  --color-accent: var(--color-lime);
-  --color-neon: var(--color-blue);
+  --color-primary: var(--color-purple);
+  --color-accent: var(--color-ocean);
+  --color-neon: var(--color-lime);
   
   /* Glitch effect colors */
   --glitch-gradient-start: #ff0000;
@@ -213,7 +213,7 @@ body {
    Lime: 0,255,0 (#00ff00)
    Blue: 0,0,255 (#0000ff)
    Ocean: 0,145,255 (#0091ff)
-   Emerald: 60,195,114 (#3cc372)
+   Purple: 92,3,188 (#5C03BC)
    Pink: 229,54,171 (#E536AB)
 */
 
@@ -243,7 +243,7 @@ body {
 .kaynaklar-prose > h3:nth-of-type(5n+3),
 .mesh-heading:nth-of-type(5n+3) {
   --mesh-a: rgba(229,54,171, 0.5);
-  --mesh-b: rgba(60,195,114, 0.3);
+  --mesh-b: rgba(92,3,188, 0.3);
   background: linear-gradient(var(--random-gradient-dir), var(--mesh-a) 0%, var(--mesh-b) 45%, transparent 65%);
 }
 
@@ -262,7 +262,7 @@ body {
 .kaynaklar-prose > h2:nth-of-type(5n),
 .kaynaklar-prose > h3:nth-of-type(5n),
 .mesh-heading:nth-of-type(5n) {
-  --mesh-a: rgba(60,195,114, 0.5);
+  --mesh-a: rgba(92,3,188, 0.5);
   --mesh-b: rgba(255,0,0, 0.45);
   background: linear-gradient(var(--random-gradient-dir), var(--mesh-a) 0%, var(--mesh-b) 50%, transparent 65%);
 }
