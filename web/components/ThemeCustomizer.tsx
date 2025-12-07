@@ -14,18 +14,21 @@ const controls: { label: string; description: string; variable: ThemeVariable }[
 ];
 
 const colorOptions = [
-  { name: 'Mor', hex: '#5C03BC' },
+  { name: 'Kırmızı', hex: '#ff0000' },
+  { name: 'Mavi', hex: '#0000ff' },
+  { name: 'Lime', hex: '#00ff00' },
+  { name: 'Mor (Midnight)', hex: '#b847a3' },
+  { name: 'Slate Blue', hex: '#4400ff' },
+  { name: 'Turuncu', hex: '#fc3903' },
+  { name: 'Okyanus', hex: '#0091ff' },
+  { name: 'Zümrüt', hex: '#3cc372' },
   { name: 'Pembe', hex: '#E536AB' },
-  { name: 'Neon Yeşil', hex: '#39FF14' },
-  { name: 'Altın Sarısı', hex: '#F3C969' },
-  { name: 'Turuncu', hex: '#FC3903' },
-  { name: 'Okyanus', hex: '#0091FF' },
 ];
 
 const defaultHexMap: Record<ThemeVariable, string> = {
-  '--color-primary': '#5C03BC',
-  '--color-accent': '#28D77D',
-  '--color-neon': '#39FF14',
+  '--color-primary': '#ff0000',   // Red
+  '--color-accent': '#00ff00',    // Lime
+  '--color-neon': '#0000ff',      // Blue
 };
 
 const randomizeLabelColors = (label: string) =>
@@ -161,7 +164,7 @@ export default function ThemeCustomizer({
       
       {/* Panel - positioned directly to the right of palette icon */}
       <div
-        className={`fixed z-50 top-3 right-20 w-56 rounded-xl border border-white/20 bg-black/95 backdrop-blur-xl p-4 shadow-2xl transition-all duration-200 ease-out origin-top-right ${
+        className={`fixed z-50 top-3 right-20 w-64 rounded-xl border border-white/20 bg-black/95 backdrop-blur-xl p-4 shadow-2xl transition-all duration-200 ease-out origin-top-right ${
           isOpen 
             ? 'opacity-100 scale-100 pointer-events-auto' 
             : 'opacity-0 scale-90 pointer-events-none'
@@ -183,7 +186,7 @@ export default function ThemeCustomizer({
           {controls.map((ctrl) => (
             <div key={ctrl.variable} className="space-y-1.5">
               <div className="text-xs font-medium text-slate-300">{ctrl.label}</div>
-              <div className="grid grid-cols-6 gap-1.5">
+              <div className="grid grid-cols-3 gap-1.5">
                 {colorOptions.map((option) => (
                   <button
                     key={`${ctrl.variable}-${option.hex}`}
@@ -194,6 +197,7 @@ export default function ThemeCustomizer({
                     }`}
                     style={{ backgroundColor: option.hex }}
                     aria-label={`${ctrl.label} ${option.name}`}
+                    title={option.name}
                   />
                 ))}
               </div>
