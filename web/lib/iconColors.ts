@@ -1,10 +1,11 @@
-// Shared icon colors - fixed colors for consistency across navigation
+// Core 6 Colors Palette
 export const iconColorPalette = [
-  '#5C03BC', // mor
-  '#E536AB', // pembe
-  '#39FF14', // neon yeşil
-  '#FC3903', // turuncu
-  '#0091FF', // okyanus
+  '#ff0000', // red
+  '#00ff00', // lime
+  '#0000ff', // blue
+  '#0091ff', // ocean
+  '#3cc372', // emerald
+  '#E536AB', // pink
 ];
 
 // Fixed colors for each navigation item - mapped to theme variables for customization

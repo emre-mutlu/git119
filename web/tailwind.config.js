@@ -12,32 +12,20 @@ module.exports = {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
-        // Custom color palette (driven by CSS variables for live theming)
         dark: 'rgb(14 7 37)',
-        primary: {
-          DEFAULT: 'rgb(var(--color-primary) / <alpha-value>)',
-        },
-        accent: {
-          DEFAULT: 'rgb(var(--color-accent) / <alpha-value>)',
-        },
-        neon: {
-          DEFAULT: 'rgb(var(--color-neon) / <alpha-value>)',
-        },
-        yellow: {
-          DEFAULT: 'rgb(var(--color-yellow) / <alpha-value>)',
-        },
         
-        // Extended Palette
-        blazingflame: {
-          300: 'rgb(253 136 104)',
-          400: 'rgb(253 96 53)',
-          500: 'rgb(252 57 3)',
-        },
-        ocean: {
-          300: 'rgb(102 189 255)',
-          400: 'rgb(51 167 255)',
-          500: 'rgb(0 145 255)',
-        },
+        // Core 6 Colors
+        red: 'rgb(var(--color-red) / <alpha-value>)',
+        lime: 'rgb(var(--color-lime) / <alpha-value>)',
+        blue: 'rgb(var(--color-blue) / <alpha-value>)',
+        ocean: 'rgb(var(--color-ocean) / <alpha-value>)',
+        emerald: 'rgb(var(--color-emerald) / <alpha-value>)',
+        pink: 'rgb(var(--color-pink) / <alpha-value>)',
+        
+        // Theme aliases (customizable)
+        primary: 'rgb(var(--color-primary) / <alpha-value>)',
+        accent: 'rgb(var(--color-accent) / <alpha-value>)',
+        neon: 'rgb(var(--color-neon) / <alpha-value>)',
       },
       fontFamily: {
         sans: ['var(--font-outfit)', 'system-ui', 'sans-serif'],

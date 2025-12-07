@@ -209,7 +209,7 @@ export default function Navbar() {
               onClick={() => setIsThemeOpen(!isThemeOpen)}
               className={`p-2 rounded-md transition-all duration-200 border ${
                 isThemeOpen 
-                  ? 'text-white bg-white/10 border-white/20 shadow-[0_0_15px_rgba(57,255,20,0.3)]' 
+                  ? 'text-white bg-white/10 border-white/20 shadow-[0_0_15px_rgba(0,255,0,0.3)]' 
                   : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5 hover:border-white/10'
               }`}
               aria-label="Temayı Özelleştir"

@@ -3,28 +3,28 @@ import { iconColorMap } from '@/lib/iconColors';
 
 export const GLITCH_PALETTES = [
   {
-    gradientStart: '#5C03BC',
-    gradientEnd: '#28D77D',
-    before: 'rgba(57, 255, 20, 0.95)',
-    after: 'rgba(40, 215, 125, 0.95)',
+    gradientStart: '#ff0000',
+    gradientEnd: '#0091ff',
+    before: 'rgba(0, 0, 255, 0.95)',
+    after: 'rgba(0, 145, 255, 0.95)',
   },
   {
-    gradientStart: '#3B0CA3',
-    gradientEnd: '#39FF14',
-    before: 'rgba(57, 255, 20, 0.9)',
-    after: 'rgba(40, 215, 125, 0.75)',
+    gradientStart: '#00ff00',
+    gradientEnd: '#3cc372',
+    before: 'rgba(0, 255, 0, 0.9)',
+    after: 'rgba(60, 195, 114, 0.75)',
   },
   {
-    gradientStart: '#32154D',
-    gradientEnd: '#28D77D',
-    before: 'rgba(57, 255, 20, 0.85)',
-    after: 'rgba(92, 3, 188, 0.8)',
+    gradientStart: '#E536AB',
+    gradientEnd: '#0000ff',
+    before: 'rgba(0, 0, 255, 0.85)',
+    after: 'rgba(229, 54, 171, 0.8)',
   },
   {
-    gradientStart: '#28D77D',
-    gradientEnd: '#5C03BC',
-    before: 'rgba(57, 255, 20, 0.9)',
-    after: 'rgba(138, 98, 255, 0.85)',
+    gradientStart: '#0091ff',
+    gradientEnd: '#ff0000',
+    before: 'rgba(255, 0, 0, 0.9)',
+    after: 'rgba(0, 145, 255, 0.85)',
   },
 ];
 

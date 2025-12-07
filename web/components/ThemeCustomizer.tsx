@@ -13,16 +13,14 @@ const controls: { label: string; description: string; variable: ThemeVariable }[
   { label: 'Highlight', description: 'Pulse ve ikon parlaklıkları', variable: '--color-neon' },
 ];
 
+// Core 6 Colors
 const colorOptions = [
-  { name: 'Kırmızı', hex: '#ff0000' },
-  { name: 'Mavi', hex: '#0000ff' },
+  { name: 'Red', hex: '#ff0000' },
   { name: 'Lime', hex: '#00ff00' },
-  { name: 'Mor (Midnight)', hex: '#b847a3' },
-  { name: 'Slate Blue', hex: '#4400ff' },
-  { name: 'Turuncu', hex: '#fc3903' },
-  { name: 'Okyanus', hex: '#0091ff' },
-  { name: 'Zümrüt', hex: '#3cc372' },
-  { name: 'Pembe', hex: '#E536AB' },
+  { name: 'Blue', hex: '#0000ff' },
+  { name: 'Ocean', hex: '#0091ff' },
+  { name: 'Emerald', hex: '#3cc372' },
+  { name: 'Pink', hex: '#E536AB' },
 ];
 
 const defaultHexMap: Record<ThemeVariable, string> = {
@@ -171,12 +169,12 @@ export default function ThemeCustomizer({
         }`}
       >
         <div className="mb-4 flex items-center justify-between">
-          <p className="text-sm font-semibold text-white">Renk Paleti</p>
+          <p className="text-sm font-semibold text-white">Color Palette</p>
           <button
             type="button"
             className="text-slate-400 hover:text-white transition"
             onClick={onClose}
-            aria-label="Paneli kapat"
+            aria-label="Close panel"
           >
             <X size={16} />
           </button>

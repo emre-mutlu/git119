@@ -22,7 +22,7 @@ export const getWeekTheme = (weekNum: string) => {
     };
   }
 
-  // Weeks 2-4: Accent Theme (formerly blazingflame)
+  // Weeks 2-4: Accent Theme
   if (num >= 2 && num <= 4) {
     return {
       number: {

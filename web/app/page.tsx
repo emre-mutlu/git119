@@ -5,13 +5,14 @@ import { ArrowRight } from 'lucide-react';
 import DashboardCards from '@/components/DashboardCards';
 import { useState, useEffect } from 'react';
 
-// Color palette for animated blobs
+// Core 6 Colors for animated blobs
 const blobColors = [
-  { color: 'rgba(92,3,188,', name: 'primary' },      // #5C03BC
-  { color: 'rgba(229,54,171,', name: 'accent' },     // #E536AB
-  { color: 'rgba(57,255,20,', name: 'neon' },        // #39FF14
-  { color: 'rgba(252,57,3,', name: 'blazingflame' }, // #FC3903
-  { color: 'rgba(0,145,255,', name: 'ocean' },       // #0091FF
+  { color: 'rgba(255,0,0,', name: 'red' },         // #ff0000
+  { color: 'rgba(0,255,0,', name: 'lime' },        // #00ff00
+  { color: 'rgba(0,0,255,', name: 'blue' },        // #0000ff
+  { color: 'rgba(0,145,255,', name: 'ocean' },     // #0091ff
+  { color: 'rgba(60,195,114,', name: 'emerald' },  // #3cc372
+  { color: 'rgba(229,54,171,', name: 'pink' },     // #E536AB
 ];
 
 interface Blob {
