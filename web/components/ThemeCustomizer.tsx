@@ -8,9 +8,9 @@ type ThemeVariable = '--color-primary' | '--color-accent' | '--color-neon';
 const STORAGE_KEY = 'git119-theme-preferences';
 
 const controls: { label: string; description: string; variable: ThemeVariable }[] = [
-  { label: 'Primary', description: 'Ana gradient ve kart tonları', variable: '--color-primary' },
-  { label: 'Accent', description: 'Vurgular ve ikon renkleri', variable: '--color-accent' },
-  { label: 'Highlight', description: 'Pulse ve ikon parlaklıkları', variable: '--color-neon' },
+  { label: 'Buttons & Cards', description: 'Buton arka planları, kart kenarlıkları, pulse efekti', variable: '--color-primary' },
+  { label: 'Text & Borders', description: 'Vurgu metinleri, kenarlıklar, badge', variable: '--color-accent' },
+  { label: 'Title Gradient', description: 'Ana başlık gradient rengi', variable: '--color-neon' },
 ];
 
 // Core 6 Colors

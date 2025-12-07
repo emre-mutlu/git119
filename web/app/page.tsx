@@ -66,7 +66,7 @@ export default function Home() {
               <span className="text-accent text-xs font-medium tracking-wide uppercase">2025 Bahar Dönemi</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon to-accent">Dijital Tasarıma</span> Giriş
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon via-neon/70 to-accent">Dijital Tasarıma</span> Giriş
             </h1>
             <p className="text-lg md:text-xl text-slate-400 mb-8 leading-relaxed">
               <span className="font-black text-slate-200">git119</span>{' '}
