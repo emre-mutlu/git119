@@ -7,10 +7,10 @@ type ThemeVariable = '--color-primary' | '--color-accent' | '--color-neon';
 
 const STORAGE_KEY = 'git119-theme-preferences';
 
-const controls: { label: string; description: string; variable: ThemeVariable }[] = [
-  { label: 'Buttons & Cards', description: 'Buton arka planları, kart kenarlıkları, pulse efekti', variable: '--color-primary' },
-  { label: 'Text & Borders', description: 'Vurgu metinleri, kenarlıklar, badge', variable: '--color-accent' },
-  { label: 'Title Gradient', description: 'Ana başlık gradient rengi', variable: '--color-neon' },
+const controls: { label: string; variable: ThemeVariable }[] = [
+  { label: 'Color 1', variable: '--color-primary' },
+  { label: 'Color 2', variable: '--color-accent' },
+  { label: 'Color 3', variable: '--color-neon' },
 ];
 
 // Core 6 Colors
@@ -152,46 +152,48 @@ export default function ThemeCustomizer({
 
   return (
     <>
-      {/* Backdrop for mobile or clicking outside */}
+      {/* Backdrop - close on click outside */}
       {isOpen && (
         <div 
-          className="fixed inset-0 z-40 bg-transparent" 
+          className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm" 
           onClick={onClose}
         />
       )}
       
-      {/* Panel - positioned directly to the right of palette icon */}
+      {/* Compact Panel - positioned below navbar */}
       <div
-        className={`fixed z-50 top-3 right-20 w-64 rounded-xl border border-white/20 bg-black/95 backdrop-blur-xl p-4 shadow-2xl transition-all duration-200 ease-out origin-top-right ${
+        className={`fixed z-50 top-[88px] right-4 w-56 rounded-lg border border-white/30 bg-black/80 backdrop-blur-xl backdrop-saturate-150 p-3 shadow-2xl transition-all duration-200 ease-out origin-top-right ${
           isOpen 
             ? 'opacity-100 scale-100 pointer-events-auto' 
-            : 'opacity-0 scale-90 pointer-events-none'
+            : 'opacity-0 scale-95 pointer-events-none'
         }`}
       >
-        <div className="mb-4 flex items-center justify-between">
-          <p className="text-sm font-semibold text-white">Color Palette</p>
+        <div className="mb-2 flex items-center justify-between">
+          <p className="text-xs font-semibold text-white">Theme</p>
           <button
             type="button"
             className="text-slate-400 hover:text-white transition"
             onClick={onClose}
             aria-label="Close panel"
           >
-            <X size={16} />
+            <X size={14} />
           </button>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-2">
           {controls.map((ctrl) => (
-            <div key={ctrl.variable} className="space-y-1.5">
-              <div className="text-xs font-medium text-slate-300">{ctrl.label}</div>
-              <div className="grid grid-cols-3 gap-1.5">
+            <div key={ctrl.variable} className="space-y-1">
+              <div className="text-[10px] font-medium text-slate-400 uppercase tracking-wide">{ctrl.label}</div>
+              <div className="grid grid-cols-6 gap-1">
                 {colorOptions.map((option) => (
                   <button
                     key={`${ctrl.variable}-${option.hex}`}
                     type="button"
                     onClick={() => applyColor(ctrl.variable, option.hex)}
-                    className={`aspect-square rounded-md border border-white/10 transition-all duration-150 focus:outline-none ${
-                      selections[ctrl.variable] === option.hex ? activeButtonClass : 'hover:border-white/40 hover:scale-110'
+                    className={`aspect-square rounded border transition-all duration-150 focus:outline-none ${
+                      selections[ctrl.variable] === option.hex 
+                        ? 'ring-1 ring-white/60 ring-offset-1 ring-offset-black/50 scale-110 border-white/40' 
+                        : 'border-white/20 hover:border-white/50 hover:scale-105'
                     }`}
                     style={{ backgroundColor: option.hex }}
                     aria-label={`${ctrl.label} ${option.name}`}
@@ -203,13 +205,13 @@ export default function ThemeCustomizer({
           ))}
         </div>
 
-        <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between gap-2">
+        <div className="mt-3 pt-2 border-t border-white/20 flex items-center justify-between gap-1.5">
           <button
             type="button"
-            className="flex-1 px-3 py-1.5 rounded-md bg-white/10 border border-white/10 text-slate-200 hover:text-white hover:border-white/30 hover:bg-white/15 transition text-xs font-medium"
+            className="flex-1 px-2 py-1 rounded bg-white/10 border border-white/20 text-slate-200 hover:text-white hover:border-white/40 hover:bg-white/15 transition text-[10px] font-medium"
             onClick={handleRandomize}
           >
-            <span className="inline-flex gap-0.5 items-center">
+            <span className="inline-flex gap-0.5 items-center justify-center">
               {randomLabelText.split('').map((ch, idx) => (
                 <span key={`${ch}-${idx}`} style={{ color: randomLabelColors[idx] ?? 'inherit' }}>
                   {ch}
@@ -219,10 +221,10 @@ export default function ThemeCustomizer({
           </button>
           <button
             type="button"
-            className="px-3 py-1.5 rounded-md text-neon hover:text-white hover:bg-white/5 transition text-xs font-medium"
+            className="px-2 py-1 rounded text-neon hover:text-white hover:bg-white/10 transition text-[10px] font-medium"
             onClick={handleReset}
           >
-            Sıfırla
+            Reset
           </button>
         </div>
       </div>
