@@ -99,6 +99,9 @@ export default function Home() {
                 height: `${blob.size}px`,
                 backgroundColor: `${blob.color}0.15)`,
                 filter: 'blur(80px)',
+                WebkitFilter: 'blur(80px)', // Safari specific
+                transform: 'translate3d(0, 0, 0)', // Force GPU acceleration
+                willChange: 'transform',
                 animationDuration: `${blob.duration}s`,
                 animationDelay: `${blob.delay}s`,
                 transition: 'background-color 3s ease-in-out',
