@@ -14,4 +14,5 @@ export const iconColorMap = {
   syllabus: 'rgb(var(--color-primary))',
   haftalar: 'rgb(var(--color-neon))',
   kaynaklar: 'rgb(var(--color-accent))',
+  portal: 'rgb(var(--color-yellow))',
 };

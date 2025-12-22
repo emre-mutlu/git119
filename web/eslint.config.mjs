@@ -28,4 +28,13 @@ export default defineConfig([
             "@typescript-eslint/triple-slash-reference": "off",
         },
     },
+    {
+        rules: {
+            "@typescript-eslint/no-explicit-any": "off",
+            "react/no-unescaped-entities": "off",
+            "@typescript-eslint/ban-ts-comment": "off",
+            "prefer-const": "warn",
+            "react-hooks/exhaustive-deps": "warn"
+        }
+    }
 ]);

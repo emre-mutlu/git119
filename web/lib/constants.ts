@@ -1,4 +1,4 @@
-import { BookOpen, Calendar, Layers, Home } from 'lucide-react';
+import { BookOpen, Calendar, Layers, Home, GraduationCap } from 'lucide-react';
 import { iconColorMap } from '@/lib/iconColors';
 
 export const GLITCH_PALETTES = [
@@ -33,4 +33,5 @@ export const NAVIGATION_ITEMS = [
   { name: 'Müfredat', href: '/Mufredat/Syllabus', icon: BookOpen, colorKey: 'syllabus' as keyof typeof iconColorMap },
   { name: 'Haftalık Akış', href: '/haftalar', icon: Calendar, colorKey: 'haftalar' as keyof typeof iconColorMap },
   { name: 'Kaynaklar', href: '/Kaynaklar/Kaynakca', icon: Layers, colorKey: 'kaynaklar' as keyof typeof iconColorMap },
+  { name: 'AcademiaOS', href: '/portal', icon: GraduationCap, colorKey: 'portal' as keyof typeof iconColorMap },
 ];

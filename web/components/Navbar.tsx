@@ -18,7 +18,7 @@ export default function Navbar() {
   const [glitchColors, setGlitchColors] = useState(GLITCH_PALETTES[0]);
   const triggerTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const activeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const triggerGlitchRef = useRef<() => void>();
+  const triggerGlitchRef = useRef<(() => void) | null>(null);
   const logoRef = useRef<HTMLSpanElement | null>(null);
   const navRef = useRef<HTMLElement | null>(null);
 
