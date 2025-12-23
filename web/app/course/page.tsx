@@ -433,24 +433,28 @@ function CourseDetailContent() {
                       const count = stats.distribution[letter] || 0;
                       const percent = students.length > 0 ? (count / students.length) * 100 : 0;
                       
-                      // Renk Belirleme
-                      let barColor = 'bg-gray-400';
-                      if (['AA', 'BA', 'BB'].includes(letter)) barColor = 'bg-green-500';
-                      else if (['CB', 'CC', 'DC'].includes(letter)) barColor = 'bg-yellow-500';
-                      else if (['DD', 'FF'].includes(letter)) barColor = 'bg-red-500';
+                      // Renk Belirleme (Gradient)
+                      let barClass = 'from-gray-500 to-gray-400';
+                      if (['AA', 'BA', 'BB'].includes(letter)) barClass = 'from-green-500 to-emerald-400';
+                      else if (['CB', 'CC', 'DC'].includes(letter)) barClass = 'from-yellow-500 to-orange-400';
+                      else if (['DD', 'FF'].includes(letter)) barClass = 'from-red-600 to-pink-600';
 
                       return (
                         <div key={letter} className="flex items-center gap-4 group">
-                          <span className={`w-10 font-bold text-base ${letter === 'FF' ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'}`}>{letter}</span>
-                          <div className="flex-1 h-4 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden relative shadow-inner">
+                          <span className={`w-10 font-bold font-rokkitt text-xl ${letter === 'FF' ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'}`}>{letter}</span>
+                          
+                          <div className="flex-1 h-5 bg-gray-100 dark:bg-gray-800/50 rounded-full overflow-hidden shadow-[inset_0_1px_3px_rgba(0,0,0,0.2)] border border-gray-200 dark:border-gray-700/50 relative">
                             <div 
-                              className={`h-full ${barColor} transition-all duration-700 ease-out relative`}
+                              className={`h-full bg-gradient-to-r ${barClass} transition-all duration-1000 ease-out relative shadow-[0_0_10px_rgba(0,0,0,0.2)]`}
                               style={{ width: `${percent}%` }}
-                            />
+                            >
+                                <div className="absolute inset-0 bg-white/10"></div>
+                            </div>
                           </div>
+                          
                           <div className="w-20 text-right flex flex-col items-end leading-none">
-                            <span className="text-base font-bold text-gray-900 dark:text-white">{count}</span>
-                            <span className="text-xs font-medium text-gray-500 dark:text-gray-400 mt-1">%{Math.round(percent)}</span>
+                            <span className="text-lg font-mono font-bold text-gray-900 dark:text-white">{count}</span>
+                            <span className="text-xs font-bold text-gray-400 mt-0.5">%{Math.round(percent)}</span>
                           </div>
                         </div>
                       );
@@ -472,16 +476,24 @@ function CourseDetailContent() {
                       const percent = (avg / (assign.max_score || 100)) * 100;
                       
                       return (
-                        <div key={assign.id}>
+                        <div key={assign.id} className="group">
                           <div className="flex justify-between items-end mb-2">
-                            <span className="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase truncate max-w-[250px]" title={assign.name}>{assign.name}</span>
-                            <span className="text-base font-black text-gray-900 dark:text-white">{avg.toFixed(1)}</span>
+                            <span className="text-sm font-rokkitt font-bold text-gray-700 dark:text-gray-200 tracking-wide truncate max-w-[250px] group-hover:text-purple-400 transition-colors" title={assign.name}>{assign.name}</span>
+                            <span className="text-base font-mono font-bold text-gray-900 dark:text-white">{avg.toFixed(1)}</span>
                           </div>
-                          <div className="h-3 bg-gray-100/80 dark:bg-gray-800 rounded-full overflow-hidden shadow-inner">
+                          
+                          {/* Modern Glass Bar Track */}
+                          <div className="h-4 bg-gray-100 dark:bg-gray-800/50 rounded-full overflow-hidden shadow-[inset_0_1px_3px_rgba(0,0,0,0.2)] border border-gray-200 dark:border-gray-700/50 backdrop-blur-sm relative">
+                             {/* Gradient Progress Bar with Glow */}
                              <div 
-                              className="h-full bg-purple-500 transition-all duration-700 shadow-[0_0_10px_rgba(168,85,247,0.4)]"
+                              className="h-full bg-gradient-to-r from-purple-600 to-blue-500 relative transition-all duration-1000 ease-out flex items-center justify-end pr-1 shadow-[0_0_15px_rgba(168,85,247,0.5)]"
                               style={{ width: `${percent}%` }}
-                            />
+                            >
+                              {/* Shimmer Effect */}
+                              <div className="absolute inset-0 bg-white/20 animate-[pulse_2s_infinite]"></div>
+                              {/* Inner White Line for 3D effect */}
+                              <div className="absolute top-[1px] bottom-[1px] left-0 right-0 bg-gradient-to-b from-white/20 to-transparent rounded-full pointer-events-none"></div>
+                            </div>
                           </div>
                         </div>
                       );
