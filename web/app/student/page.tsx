@@ -177,36 +177,38 @@ export default function StudentPortal() {
                   </div>
                 </div>
                 
-                <div className="p-4 space-y-3">
-                  {/* @ts-ignore */}
-                  {item.assignments.map((assign: any) => (
-                    <div key={assign.id} className="flex justify-between items-center text-sm">
-                      <span className="text-gray-600 dark:text-gray-400">
-                        {assign.name} 
-                        <span className="text-xs text-gray-300 ml-1">(%{Math.round(assign.weight * 100)})</span>
-                      </span>
-                      <span className="font-mono font-bold text-gray-900 dark:text-white">
-                        {item.scores[assign.id] !== undefined ? item.scores[assign.id] : '-'}
-                      </span>
+                <div className="p-4 space-y-4">
+                  {item.feedback && (
+                    <div className="p-4 bg-blue-50/80 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-800/30">
+                        <div className="flex items-center gap-2 mb-2 text-blue-600 dark:text-blue-400">
+                            <MessageSquare size={16} className="fill-current opacity-50" />
+                            <span className="text-xs font-bold uppercase tracking-widest">Hoca Notu</span>
+                        </div>
+                        <p className="text-sm text-gray-700 dark:text-gray-300 italic leading-relaxed">
+                            "{item.feedback}"
+                        </p>
                     </div>
-                  ))}
+                  )}
+
+                  <div className="space-y-3">
+                    {/* @ts-ignore */}
+                    {item.assignments.map((assign: any) => (
+                      <div key={assign.id} className="flex justify-between items-center text-sm">
+                        <span className="text-gray-600 dark:text-gray-400">
+                          {assign.name} 
+                          <span className="text-xs text-gray-300 ml-1">(%{Math.round(assign.weight * 100)})</span>
+                        </span>
+                        <span className="font-mono font-bold text-gray-900 dark:text-white">
+                          {item.scores[assign.id] !== undefined ? item.scores[assign.id] : '-'}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                   
                   <div className="pt-3 border-t dark:border-gray-800 flex justify-between items-center mt-2">
                     <span className="font-bold text-gray-900 dark:text-white">Ortalama</span>
                     <span className="font-mono font-black text-lg text-blue-600 dark:text-blue-400">{item.average}</span>
                   </div>
-
-                  {item.feedback && (
-                    <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-800/30">
-                        <div className="flex items-center gap-2 mb-2 text-blue-600 dark:text-blue-400">
-                            <MessageSquare size={16} />
-                            <span className="text-xs font-bold uppercase tracking-wide">Hoca Notu</span>
-                        </div>
-                        <p className="text-sm text-gray-700 dark:text-gray-300 italic">
-                            "{item.feedback}"
-                        </p>
-                    </div>
-                  )}
                 </div>
               </div>
             ))}

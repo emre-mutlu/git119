@@ -333,23 +333,23 @@ function CourseDetailContent() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
       {/* Üst Menü */}
-      <nav className="h-20 border-b dark:border-gray-800 bg-gray-50 dark:bg-gray-900 px-8 flex justify-between items-center sticky top-0 z-10">
-        <div className="flex items-center gap-4">
-          <button onClick={() => router.push('/portal')} className="p-2 hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-gray-300 rounded-full transition">
-            <ChevronLeft size={20} />
+      <nav className="border-b dark:border-gray-800 bg-gray-50 dark:bg-gray-900 px-8 py-5 flex justify-between items-center sticky top-0 z-10">
+        <div className="flex items-center gap-4 h-full">
+          <button onClick={() => router.push('/portal')} className="p-2.5 hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-gray-300 rounded-full transition flex items-center justify-center">
+            <ChevronLeft size={22} />
           </button>
           <div className="flex flex-col justify-center">
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white leading-none mb-1">{course.name}</h1>
-            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium leading-none">
-                {course.semester.replace('GUZ', 'GÜZ')}
+            <h1 className="text-xl font-bold text-gray-900 dark:text-white leading-tight">{course.name}</h1>
+            <p className="text-xs text-gray-500 dark:text-gray-400 font-bold tracking-wide mt-0.5">
+                {course.semester.replace('GUZ', 'GÜZ').replace('2025-GÜZ', '2025 GÜZ')}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <button 
             onClick={handleExportCSV}
-            className="p-2 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition"
+            className="p-2.5 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-xl transition flex items-center justify-center"
             title="Excel/CSV Olarak İndir"
           >
             <Download size={20} />
