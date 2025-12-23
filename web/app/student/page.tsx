@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import { User, ChevronLeft, GraduationCap, MessageSquare, Mail, Key } from 'lucide-react';
+import { ChevronLeft, GraduationCap, MessageSquare, Mail } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { calculateStudentGrade } from '@/lib/calculator';
 import { sendOTPEmail } from '@/lib/otp-service';
@@ -16,13 +16,12 @@ export default function StudentPortal() {
   const router = useRouter();
   const [studentNo, setStudentNo] = useState('');
   const [otp, setOtp] = useState('');
-  const [step, setStep] = useState<'request' | 'verify'>('request'); // Step control
+  const [step, setStep] = useState<'request' | 'verify'>('request');
   const [loading, setLoading] = useState(false);
   const [studentData, setStudentData] = useState<any>(null);
   const [error, setError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
 
-  // 1. ADIM: KOD GÖNDERME
   const handleRequestOTP = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!studentNo.trim()) return;
@@ -32,7 +31,6 @@ export default function StudentPortal() {
     setSuccessMsg('');
 
     try {
-      // Öğrenciyi ve e-postasını bul
       const { data: student, error: studentError } = await supabase
         .from('students')
         .select('*')
@@ -44,14 +42,12 @@ export default function StudentPortal() {
       }
 
       if (!student.email) {
-        throw new Error('Sistemde kayıtlı e-postanız bulunmuyor. Lütfen hocanıza danışın.');
+        throw new Error('Sistemde kayıtlı e-postanız bulunmuyor.');
       }
 
-      // Rastgele 6 haneli kod üret
       const generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
-      const expiry = new Date(Date.now() + 10 * 60 * 1000).toISOString(); // 10 dk geçerli
+      const expiry = new Date(Date.now() + 10 * 60 * 1000).toISOString();
 
-      // Kodu veritabanına kaydet
       const { error: updateError } = await supabase
         .from('students')
         .update({ otp_code: generatedOtp, otp_expiry: expiry })
@@ -59,15 +55,12 @@ export default function StudentPortal() {
 
       if (updateError) throw new Error('Onay kodu oluşturulamadı.');
 
-      // E-posta gönder
       const sent = await sendOTPEmail(student.email, student.full_name, generatedOtp);
       
-      if (sent) {
-        setStep('verify');
-        setSuccessMsg(`${student.email.substring(0, 3)}...${student.email.split('@')[0].slice(-2)}@${student.email.split('@')[1]} adresine bir onay kodu gönderildi.`);
-      } else {
-        throw new Error('E-posta gönderilirken bir hata oluştu. Lütfen biraz sonra tekrar deneyin.');
-      }
+      // Google Script no-cors modunda true döner, e-postanın ulaşıp ulaşmadığını 
+      // Gmail Gönderilenler klasöründen kontrol edebilirsiniz.
+      setStep('verify');
+      setSuccessMsg(`Onay kodu e-posta adresinize gönderildi.`);
 
     } catch (err: any) {
       setError(err.message);
@@ -76,7 +69,6 @@ export default function StudentPortal() {
     }
   };
 
-  // 2. ADIM: KOD DOĞRULAMA VE NOTLARI GETİRME
   const handleVerifyOTP = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!otp.trim()) return;
@@ -85,7 +77,6 @@ export default function StudentPortal() {
     setError('');
 
     try {
-      // Öğrenciyi ve kodu kontrol et
       const { data: student } = await supabase
         .from('students')
         .select('*')
@@ -97,16 +88,12 @@ export default function StudentPortal() {
       }
 
       if (new Date() > new Date(student.otp_expiry)) {
-        throw new Error('Onay kodunun süresi dolmuş. Lütfen yeni bir kod isteyin.');
+        throw new Error('Onay kodunun süresi dolmuş.');
       }
 
-      // Giriş Başarılı: Notları Getir
       const { data: enrollments } = await supabase
         .from('enrollments')
-        .select(`
-          *,
-          courses (id, code, name, semester)
-        `)
+        .select(`*, courses (id, code, name, semester)`)
         .eq('student_id', student.id);
 
       if (!enrollments || enrollments.length === 0) {
@@ -114,7 +101,6 @@ export default function StudentPortal() {
       }
 
       const reportCard = [];
-
       for (const enrollment of enrollments) {
         const course = enrollment.courses;
         // @ts-ignore
@@ -123,14 +109,11 @@ export default function StudentPortal() {
         const { data: assignments } = await supabase
           .from('assignments')
           // @ts-ignore
-          .select('*')
-          // @ts-ignore
-          .eq('course_id', course.id);
+          .select('*').eq('course_id', course.id);
 
         const { data: scores } = await supabase
           .from('scores')
-          .select('*')
-          .eq('student_id', student.id)
+          .select('*').eq('student_id', student.id)
           // @ts-ignore
           .in('assignment_id', assignments.map((a: any) => a.id));
 
@@ -143,20 +126,15 @@ export default function StudentPortal() {
         const result = calculateStudentGrade(scoresMap, assignments || []);
 
         reportCard.push({
-          course,
-          assignments,
-          scores: scoresMap,
-          average: result.total,
-          letter: result.letter,
+          course, assignments, scores: scoresMap,
+          average: result.total, letter: result.letter,
           feedback: enrollment.feedback
         });
       }
 
-      // Güvenlik için kullanılan OTP kodunu sıfırla
       await supabase.from('students').update({ otp_code: null }).eq('id', student.id);
-
       setStudentData({ student, reportCard });
-      setStep('request'); // Reset step for future use if needed
+      setStep('request');
 
     } catch (err: any) {
       setError(err.message);
@@ -167,8 +145,6 @@ export default function StudentPortal() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col items-center justify-center p-4">
-      
-      {/* Geri Dön Butonu */}
       <button 
         onClick={() => router.push('/')}
         className="fixed top-6 left-6 p-2 text-gray-400 hover:text-gray-900 dark:hover:text-white transition z-50"
@@ -185,56 +161,47 @@ export default function StudentPortal() {
               </div>
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Öğrenci Not Portalı</h1>
               <p className="text-gray-500 dark:text-gray-400 mt-2">
-                {step === 'request' 
-                  ? 'Giriş yapmak için okul numaranı gir.' 
-                  : 'E-postana gelen onay kodunu gir.'}
+                {step === 'request' ? 'Numaranızı girin' : 'E-postanıza gelen kodu girin'}
               </p>
             </div>
 
             {step === 'request' ? (
-              <form onSubmit={handleRequestOTP} className="relative group">
+              <form onSubmit={handleRequestOTP}>
                 <input
                   type="text"
-                  placeholder="Öğrenci Numaranız (Örn: 2024001)"
+                  placeholder="Öğrenci Numarası"
                   value={studentNo}
                   onChange={(e) => setStudentNo(e.target.value)}
-                  className="w-full px-5 py-4 pl-12 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm text-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition dark:text-white placeholder-gray-400"
+                  className="w-full px-5 py-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm text-lg outline-none focus:ring-2 focus:ring-blue-500 transition dark:text-white text-center"
                   autoFocus
                 />
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors" size={20} />
                 
                 <button 
                   type="submit"
                   disabled={loading || !studentNo}
-                  className="w-full mt-4 py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2"
+                  className="w-full mt-4 py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 disabled:opacity-50 transition shadow-lg flex items-center justify-center gap-2"
                 >
-                  {loading ? '...' : (
-                    <>
-                      Kod Gönder
-                      <Mail size={18} />
-                    </>
-                  )}
+                  {loading ? '...' : <><Mail size={18} /> Kod Gönder</>}
                 </button>
               </form>
             ) : (
-              <form onSubmit={handleVerifyOTP} className="relative group">
+              <form onSubmit={handleVerifyOTP}>
                 <input
                   type="text"
-                  placeholder="6 Haneli Onay Kodu"
+                  placeholder="000000"
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
-                  className="w-full px-5 py-4 pl-12 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm text-center text-2xl font-black tracking-[0.5em] focus:ring-2 focus:ring-blue-500 outline-none transition dark:text-white placeholder-gray-400"
+                  className="w-full px-5 py-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm text-center text-3xl font-mono font-bold tracking-[0.2em] outline-none focus:ring-2 focus:ring-blue-500 transition dark:text-white"
                   maxLength={6}
                   autoFocus
                 />
-                <Key className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                 
                 <button 
                   type="submit"
                   disabled={loading || otp.length < 6}
-                  className="w-full mt-4 py-4 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 disabled:opacity-50 transition shadow-lg shadow-green-500/20"
+                  className="w-full mt-4 py-4 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 disabled:opacity-50 transition shadow-lg"
                 >
-                  {loading ? '...' : 'Giriş Yap ve Notları Gör'}
+                  {loading ? '...' : 'Notları Gör'}
                 </button>
 
                 <button 
@@ -248,31 +215,16 @@ export default function StudentPortal() {
             )}
 
             <div className="mt-6 min-h-[60px]">
-                {error && (
-                  <div className="p-4 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-xl text-center font-medium animate-in slide-in-from-top-2">
-                    {error}
-                  </div>
-                )}
-                {successMsg && (
-                  <div className="p-4 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-xl text-center font-medium animate-in slide-in-from-top-2">
-                    {successMsg}
-                  </div>
-                )}
+                {error && <div className="p-4 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-xl text-center font-medium animate-in slide-in-from-top-2">{error}</div>}
+                {successMsg && <div className="p-4 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-xl text-center font-medium animate-in slide-in-from-top-2">{successMsg}</div>}
             </div>
           </div>
         ) : (
-          /* NOT KARTI ALANI */
           <div className="w-full space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 text-center">
               <h2 className="text-xl font-bold text-gray-900 dark:text-white">{studentData.student.full_name}</h2>
               <p className="text-gray-500 dark:text-gray-400 text-sm">{studentData.student.student_no}</p>
-              
-              <button 
-                onClick={() => setStudentData(null)}
-                className="mt-4 text-xs text-blue-600 font-bold hover:underline"
-              >
-                Oturumu Kapat
-              </button>
+              <button onClick={() => setStudentData(null)} className="mt-4 text-xs text-blue-600 font-bold hover:underline">Oturumu Kapat</button>
             </div>
 
             {studentData.reportCard.map((item: any) => (
@@ -282,13 +234,7 @@ export default function StudentPortal() {
                     <h3 className="font-bold text-gray-900 dark:text-white">{item.course.name}</h3>
                     <p className="text-xs text-gray-500 dark:text-gray-400">{item.course.semester}</p>
                   </div>
-                  <div className={`px-3 py-1.5 rounded-lg text-sm font-black ${
-                    item.letter === 'AA' ? 'bg-green-100 text-green-600' : 
-                    item.letter === 'FF' ? 'bg-red-100 text-red-600' : 
-                    'bg-blue-100 text-blue-600'
-                  }`}>
-                    {item.letter}
-                  </div>
+                  <div className={`px-3 py-1.5 rounded-lg text-sm font-black ${item.letter === 'AA' ? 'bg-green-100 text-green-600' : item.letter === 'FF' ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`}>{item.letter}</div>
                 </div>
                 
                 <div className="p-4 space-y-4">
@@ -298,27 +244,18 @@ export default function StudentPortal() {
                             <MessageSquare size={16} className="fill-current opacity-50" />
                             <span className="text-xs font-bold uppercase tracking-widest">Hoca Notu</span>
                         </div>
-                        <p className="text-sm text-gray-700 dark:text-gray-300 italic leading-relaxed">
-                            "{item.feedback}"
-                        </p>
+                        <p className="text-sm text-gray-700 dark:text-gray-300 italic leading-relaxed">"{item.feedback}"</p>
                     </div>
                   )}
-
                   <div className="space-y-3">
                     {/* @ts-ignore */}
                     {item.assignments.map((assign: any) => (
                       <div key={assign.id} className="flex justify-between items-center text-sm">
-                        <span className="text-gray-600 dark:text-gray-400">
-                          {assign.name} 
-                          <span className="text-xs text-gray-300 ml-1">(%{Math.round(assign.weight * 100)})</span>
-                        </span>
-                        <span className="font-mono font-bold text-gray-900 dark:text-white">
-                          {item.scores[assign.id] !== undefined ? item.scores[assign.id] : '-'}
-                        </span>
+                        <span className="text-gray-600 dark:text-gray-400">{assign.name} <span className="text-xs text-gray-300 ml-1">(%{Math.round(assign.weight * 100)})</span></span>
+                        <span className="font-mono font-bold text-gray-900 dark:text-white">{item.scores[assign.id] !== undefined ? item.scores[assign.id] : '-'}</span>
                       </div>
                     ))}
                   </div>
-                  
                   <div className="pt-3 border-t dark:border-gray-800 flex justify-between items-center mt-2">
                     <span className="font-bold text-gray-900 dark:text-white">Ortalama</span>
                     <span className="font-mono font-black text-lg text-blue-600 dark:text-blue-400">{item.average}</span>
