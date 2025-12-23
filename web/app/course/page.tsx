@@ -396,24 +396,24 @@ function CourseDetailContent() {
         </nav>
 
         {/* Ana İçerik */}
-        <main className="p-8">
+        <main className="p-6 h-[calc(100vh-100px)] overflow-hidden">
           {showAnalysis && stats ? (
-            <div className="space-y-8 animate-in fade-in zoom-in-95 duration-200 pb-10">
+            <div className="h-full flex flex-col gap-6 animate-in fade-in zoom-in-95 duration-200">
               {/* 1. ÖZET KARTLARI */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="bg-white dark:bg-gray-900 p-5 rounded-xl border dark:border-gray-800 shadow-sm">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 flex-shrink-0">
+                <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border dark:border-gray-800 shadow-sm">
                   <p className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">Sınıf Ortalaması</p>
                   <p className="text-3xl font-black text-blue-600 dark:text-blue-400">{stats.avg}</p>
                 </div>
-                <div className="bg-white dark:bg-gray-900 p-5 rounded-xl border dark:border-gray-800 shadow-sm">
+                <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border dark:border-gray-800 shadow-sm">
                   <p className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">En Yüksek / Düşük</p>
                   <p className="text-3xl font-black text-gray-900 dark:text-white">{stats.max} <span className="text-gray-300 text-xl font-normal">/</span> {stats.min}</p>
                 </div>
-                <div className="bg-white dark:bg-gray-900 p-5 rounded-xl border dark:border-gray-800 shadow-sm">
+                <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border dark:border-gray-800 shadow-sm">
                   <p className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">Öğrenci Sayısı</p>
                   <p className="text-3xl font-black text-gray-900 dark:text-white">{students.length}</p>
                 </div>
-                <div className="bg-white dark:bg-gray-900 p-5 rounded-xl border dark:border-gray-800 shadow-sm">
+                <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border dark:border-gray-800 shadow-sm">
                   <p className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">Başarı Oranı</p>
                   <p className="text-3xl font-black text-green-600 dark:text-green-400">
                     %{Math.round((students.filter(s => s.letter_grade !== 'FF').length / students.length) * 100)}
@@ -421,40 +421,39 @@ function CourseDetailContent() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-0 flex-1">
                 {/* 2. HARF NOTU DAĞILIMI */}
-                <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col min-h-0">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2 flex-shrink-0">
                     <span className="w-1 h-6 bg-blue-500 rounded-full"></span>
                     Harf Notu Dağılımı
                   </h3>
-                  <div className="space-y-4 flex-1">
+                  <div className="space-y-3 overflow-y-auto pr-2 custom-scrollbar flex-1">
                     {['AA', 'BA', 'BB', 'CB', 'CC', 'DC', 'DD', 'FF'].map(letter => {
                       const count = stats.distribution[letter] || 0;
                       const percent = students.length > 0 ? (count / students.length) * 100 : 0;
                       
-                      // Renk Belirleme (Gradient)
                       let barClass = 'from-gray-500 to-gray-400';
                       if (['AA', 'BA', 'BB'].includes(letter)) barClass = 'from-green-500 to-emerald-400';
                       else if (['CB', 'CC', 'DC'].includes(letter)) barClass = 'from-yellow-500 to-orange-400';
                       else if (['DD', 'FF'].includes(letter)) barClass = 'from-red-600 to-pink-600';
 
                       return (
-                        <div key={letter} className="flex items-center gap-4 group">
-                          <span className={`w-10 font-bold font-rokkitt text-xl ${letter === 'FF' ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'}`}>{letter}</span>
+                        <div key={letter} className="flex items-center gap-3 group">
+                          <span className={`w-8 font-bold text-base ${letter === 'FF' ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'}`}>{letter}</span>
                           
-                          <div className="flex-1 h-5 bg-gray-100 dark:bg-gray-800/50 rounded-full overflow-hidden shadow-[inset_0_1px_3px_rgba(0,0,0,0.2)] border border-gray-200 dark:border-gray-700/50 relative">
+                          <div className="flex-1 h-4 bg-gray-100 dark:bg-gray-800/50 rounded-full overflow-hidden border border-gray-200 dark:border-gray-700/50 relative">
                             <div 
-                              className={`h-full bg-gradient-to-r ${barClass} transition-all duration-1000 ease-out relative shadow-[0_0_10px_rgba(0,0,0,0.2)]`}
+                              className={`h-full bg-gradient-to-r ${barClass} transition-all duration-1000 ease-out relative`}
                               style={{ width: `${percent}%` }}
                             >
                                 <div className="absolute inset-0 bg-white/10"></div>
                             </div>
                           </div>
                           
-                          <div className="w-20 text-right flex flex-col items-end leading-none">
-                            <span className="text-lg font-mono font-bold text-gray-900 dark:text-white">{count}</span>
-                            <span className="text-xs font-bold text-gray-400 mt-0.5">%{Math.round(percent)}</span>
+                          <div className="w-14 text-right flex items-baseline justify-end gap-1">
+                            <span className="text-base font-bold text-gray-900 dark:text-white">{count}</span>
+                            <span className="text-[10px] font-bold text-gray-400">%{Math.round(percent)}</span>
                           </div>
                         </div>
                       );
@@ -463,36 +462,39 @@ function CourseDetailContent() {
                 </div>
 
                 {/* 3. ÖDEV PERFORMANSI */}
-                <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col min-h-0">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2 flex-shrink-0">
                     <span className="w-1 h-6 bg-purple-500 rounded-full"></span>
                     Ödev Bazlı Başarı
                   </h3>
-                  <div className="space-y-6 flex-1 overflow-y-auto max-h-[400px] pr-2 custom-scrollbar">
-                    {assignments.map(assign => {
-                      // Bu ödevin ortalamasını hesapla
+                  <div className="space-y-5 overflow-y-auto pr-2 custom-scrollbar flex-1">
+                    {assignments.map((assign, idx) => {
                       const scores = students.map(s => s.scores[assign.id] || 0);
                       const avg = scores.length > 0 ? scores.reduce((a, b) => a + b, 0) / scores.length : 0;
                       const percent = (avg / (assign.max_score || 100)) * 100;
                       
+                      // Dynamic Gradients for Assignments
+                      const gradients = [
+                        'from-purple-600 to-blue-500',
+                        'from-blue-600 to-cyan-500',
+                        'from-indigo-600 to-purple-500',
+                        'from-violet-600 to-fuchsia-500'
+                      ];
+                      const barGradient = gradients[idx % gradients.length];
+                      
                       return (
                         <div key={assign.id} className="group">
-                          <div className="flex justify-between items-end mb-2">
-                            <span className="text-sm font-rokkitt font-bold text-gray-700 dark:text-gray-200 tracking-wide truncate max-w-[250px] group-hover:text-purple-400 transition-colors" title={assign.name}>{assign.name}</span>
-                            <span className="text-base font-mono font-bold text-gray-900 dark:text-white">{avg.toFixed(1)}</span>
+                          <div className="flex justify-between items-end mb-1.5">
+                            <span className="text-sm font-bold text-gray-700 dark:text-gray-200 tracking-tight truncate max-w-[250px] group-hover:text-purple-400 transition-colors" title={assign.name}>{assign.name}</span>
+                            <span className="text-sm font-black text-gray-900 dark:text-white">{avg.toFixed(1)}</span>
                           </div>
                           
-                          {/* Modern Glass Bar Track */}
-                          <div className="h-4 bg-gray-100 dark:bg-gray-800/50 rounded-full overflow-hidden shadow-[inset_0_1px_3px_rgba(0,0,0,0.2)] border border-gray-200 dark:border-gray-700/50 backdrop-blur-sm relative">
-                             {/* Gradient Progress Bar with Glow */}
+                          <div className="h-3 bg-gray-100 dark:bg-gray-800/50 rounded-full overflow-hidden border border-gray-200 dark:border-gray-700/50 backdrop-blur-sm relative">
                              <div 
-                              className="h-full bg-gradient-to-r from-purple-600 to-blue-500 relative transition-all duration-1000 ease-out flex items-center justify-end pr-1 shadow-[0_0_15px_rgba(168,85,247,0.5)]"
+                              className={`h-full bg-gradient-to-r ${barGradient} relative transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(168,85,247,0.3)]`}
                               style={{ width: `${percent}%` }}
                             >
-                              {/* Shimmer Effect */}
-                              <div className="absolute inset-0 bg-white/20 animate-[pulse_2s_infinite]"></div>
-                              {/* Inner White Line for 3D effect */}
-                              <div className="absolute top-[1px] bottom-[1px] left-0 right-0 bg-gradient-to-b from-white/20 to-transparent rounded-full pointer-events-none"></div>
+                              <div className="absolute inset-0 bg-white/10 animate-[pulse_3s_infinite]"></div>
                             </div>
                           </div>
                         </div>
@@ -503,78 +505,77 @@ function CourseDetailContent() {
               </div>
 
               {/* 4. RİSKLİ ÖĞRENCİLER */}
-              <div className="bg-white dark:bg-gray-900 rounded-xl border dark:border-gray-800 shadow-sm overflow-hidden">
-                 <div className="p-6 border-b dark:border-gray-800 bg-red-50/30 dark:bg-red-900/10">
-                    <h3 className="text-xl font-bold text-red-700 dark:text-red-400 flex items-center gap-2">
+              <div className="bg-white dark:bg-gray-900 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col min-h-0 max-h-[30%] flex-shrink-0">
+                 <div className="p-4 border-b dark:border-gray-800 bg-red-50/30 dark:bg-red-900/10 flex-shrink-0">
+                    <h3 className="text-lg font-bold text-red-700 dark:text-red-400 flex items-center gap-2">
                         <span className="w-1 h-6 bg-red-500 rounded-full"></span>
                         Risk Grubu (FF/DD veya &lt;50)
                     </h3>
                  </div>
-                 <div className="p-0">
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-left">
-                            <thead className="bg-gray-50 dark:bg-gray-800 text-sm uppercase text-gray-500 font-bold">
+                 <div className="overflow-y-auto custom-scrollbar flex-1">
+                    <table className="w-full text-left">
+                        <thead className="bg-gray-50 dark:bg-gray-800 text-sm uppercase text-gray-500 font-bold sticky top-0 z-10">
+                            <tr>
+                                <th className="p-3 pl-6">Öğrenci</th>
+                                <th className="p-3 text-center">Ortalama</th>
+                                <th className="p-3 text-center">Harf</th>
+                                <th className="p-3 text-center">Eksik Ödev</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+                            {students
+                                .filter(s => s.average < 50 || ['FF', 'DD'].includes(s.letter_grade))
+                                .sort((a, b) => a.average - b.average)
+                                .map(student => {
+                                    const missingCount = assignments.filter(a => !student.scores[a.id] || student.scores[a.id] === 0).length;
+                                    return (
+                                        <tr key={student.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                                            <td className="p-3 pl-6 text-base font-bold text-gray-900 dark:text-white">
+                                                {student.full_name} <span className="text-gray-500 dark:text-gray-400 font-medium ml-2 text-sm">({student.student_no})</span>
+                                            </td>
+                                            <td className="p-3 text-center text-lg font-black text-gray-900 dark:text-white">{student.average}</td>
+                                            <td className="p-3 text-center">
+                                                <span className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg text-sm font-black">
+                                                    {student.letter_grade}
+                                                </span>
+                                            </td>
+                                            <td className="p-3 text-center text-gray-600 dark:text-gray-400 text-base">
+                                                {missingCount > 0 ? <span className="text-red-500 dark:text-red-400 font-black">{missingCount} Ödev Eksik</span> : "-"}
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            {students.filter(s => s.average < 50 || ['FF', 'DD'].includes(s.letter_grade)).length === 0 && (
                                 <tr>
-                                    <th className="p-4">Öğrenci</th>
-                                    <th className="p-4 text-center">Ortalama</th>
-                                    <th className="p-4 text-center">Harf</th>
-                                    <th className="p-4 text-center">Eksik Ödev</th>
+                                    <td colSpan={4} className="p-8 text-center text-gray-500">
+                                        Harika! Risk grubunda öğrenci bulunmuyor.
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
-                                {students
-                                    .filter(s => s.average < 50 || ['FF', 'DD'].includes(s.letter_grade))
-                                    .sort((a, b) => a.average - b.average)
-                                    .map(student => {
-                                        // Eksik (0 olan) ödev sayısı
-                                        const missingCount = assignments.filter(a => !student.scores[a.id] || student.scores[a.id] === 0).length;
-                                        return (
-                                            <tr key={student.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50">
-                                                <td className="p-4 text-base font-bold text-gray-900 dark:text-white">
-                                                    {student.full_name} <span className="text-gray-500 dark:text-gray-400 font-medium ml-2 text-sm">({student.student_no})</span>
-                                                </td>
-                                                <td className="p-4 text-center text-lg font-black text-gray-900 dark:text-white">{student.average}</td>
-                                                <td className="p-4 text-center">
-                                                    <span className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg text-sm font-black">
-                                                        {student.letter_grade}
-                                                    </span>
-                                                </td>
-                                                <td className="p-4 text-center text-gray-600 dark:text-gray-400 text-base">
-                                                    {missingCount > 0 ? <span className="text-red-500 dark:text-red-400 font-black">{missingCount} Ödev Eksik</span> : "-"}
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
-                                {students.filter(s => s.average < 50 || ['FF', 'DD'].includes(s.letter_grade)).length === 0 && (
-                                    <tr>
-                                        <td colSpan={4} className="p-8 text-center text-gray-500">
-                                            Harika! Risk grubunda öğrenci bulunmuyor.
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
+                            )}
+                        </tbody>
+                    </table>
                  </div>
               </div>
             </div>
           ) : (
-            <GradeTable 
-              students={sortedStudents} 
-              assignments={assignments} 
-              onScoreChange={handleScoreChange} 
-              onCalculateTarget={(s, pos) => {
-                setSelectedStudentForTarget(s);
-                setPopoverPosition(pos);
-              }}
-              onSort={handleSort}
-              sortConfig={sortConfig}
-              onFeedbackClick={(s, pos) => {
-                  setSelectedStudentForFeedback(s);
-                  setFeedbackPosition(pos);
-              }}
-              lastEditedStudentId={lastEditedStudentId}
-            />
+            <div className="h-full">
+              <GradeTable 
+                students={sortedStudents} 
+                assignments={assignments} 
+                onScoreChange={handleScoreChange} 
+                onCalculateTarget={(s, pos) => {
+                  setSelectedStudentForTarget(s);
+                  setPopoverPosition(pos);
+                }}
+                onSort={handleSort}
+                sortConfig={sortConfig}
+                onFeedbackClick={(s, pos) => {
+                    setSelectedStudentForFeedback(s);
+                    setFeedbackPosition(pos);
+                }}
+                lastEditedStudentId={lastEditedStudentId}
+              />
+            </div>
           )}
         </main>
 
