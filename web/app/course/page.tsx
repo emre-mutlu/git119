@@ -424,11 +424,11 @@ function CourseDetailContent() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-0 flex-1">
                 {/* 2. HARF NOTU DAĞILIMI */}
                 <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col min-h-0">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3 flex-shrink-0">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3 flex-shrink-0 pl-1">
                     <span className="w-1.5 h-6 bg-blue-500 rounded-full"></span>
                     Harf Notu Dağılımı
                   </h3>
-                  <div className="space-y-3 overflow-y-auto pr-2 custom-scrollbar flex-1 mb-6">
+                  <div className="flex-1 flex flex-col justify-between pl-1">
                     {['AA', 'BA', 'BB', 'CB', 'CC', 'DC', 'DD', 'FF'].map(letter => {
                       const count = stats.distribution[letter] || 0;
                       const percent = students.length > 0 ? (count / students.length) * 100 : 0;
@@ -439,19 +439,26 @@ function CourseDetailContent() {
                       else if (['DD', 'FF'].includes(letter)) barClass = 'from-red-600 to-pink-600';
 
                       return (
-                        <div key={letter} className="flex items-center gap-4 group">
-                          <span className={`w-8 font-bold text-base ${letter === 'FF' ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'} text-left`}>{letter}</span>
-                          <div className="flex-1 h-4 bg-gray-100 dark:bg-gray-800/50 rounded-full overflow-hidden border border-gray-200 dark:border-gray-700/50 relative">
-                            <div 
-                              className={`h-full bg-gradient-to-r ${barClass} relative`}
-                              style={{ width: `${percent}%` }}
-                            >
-                                <div className="absolute inset-0 bg-white/10"></div>
-                            </div>
+                        <div key={letter} className="flex flex-col gap-1 group">
+                          <div className="flex items-center justify-between">
+                             <div className="flex items-center gap-4 w-full">
+                                <span className={`w-8 font-bold text-base ${letter === 'FF' ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'} text-left`}>{letter}</span>
+                                <div className="flex-1 h-3 bg-gray-50 dark:bg-gray-800/30 rounded-full overflow-hidden border border-gray-100 dark:border-gray-800/50 relative">
+                                    <div 
+                                    className={`h-full bg-gradient-to-r ${barClass} transition-all duration-1000 ease-out relative`}
+                                    style={{ width: `${percent}%` }}
+                                    >
+                                        <div className="absolute inset-0 bg-white/10"></div>
+                                    </div>
+                                </div>
+                                <span className="w-6 text-base font-bold text-gray-900 dark:text-white text-right">{count}</span>
+                             </div>
                           </div>
-                          <div className="w-14 text-right flex flex-col items-end leading-none justify-center">
-                            <span className="text-base font-bold text-gray-900 dark:text-white">{count}</span>
-                            <span className="text-[10px] font-medium text-gray-400 mt-0.5">%{Math.round(percent)}</span>
+                          {/* Yüzde Barın Altında */}
+                          <div className="pl-12 pr-6">
+                             <span className="text-[10px] font-medium text-gray-400 block text-right">
+                                {Math.round(percent) > 0 ? `%${Math.round(percent)}` : ''}
+                             </span>
                           </div>
                         </div>
                       );
@@ -459,7 +466,7 @@ function CourseDetailContent() {
                   </div>
                   
                   {/* Yeni Alt Metrik Alanı */}
-                  <div className="mt-auto pt-6 border-t dark:border-gray-800 grid grid-cols-3 gap-4 flex-shrink-0 text-left">
+                  <div className="mt-auto pt-4 border-t dark:border-gray-800 grid grid-cols-3 gap-4 flex-shrink-0 text-left pl-1">
                     <div>
                         <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter text-left">Standart Sapma</p>
                         <p className="text-lg font-black text-gray-700 dark:text-gray-200 text-left">
@@ -488,12 +495,12 @@ function CourseDetailContent() {
 
                 {/* 3. ÖDEV PERFORMANSI */}
                 <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col min-h-0">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3 flex-shrink-0">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3 flex-shrink-0 pl-1">
                     <span className="w-1.5 h-6 bg-purple-500 rounded-full"></span>
                     Ödev Bazlı Başarı
                   </h3>
-                  <div className="space-y-5 overflow-y-auto pr-2 custom-scrollbar flex-1">
-                    {assignments.map((assign, idx) => {
+                  <div className="flex-1 flex flex-col justify-between pl-1 overflow-hidden">
+                    {assignments.slice(0, 8).map((assign, idx) => { // Limit to 8 to prevent overflow without scroll
                       const scores = students.map(s => s.scores[assign.id] || 0);
                       const avg = scores.length > 0 ? scores.reduce((a, b) => a + b, 0) / scores.length : 0;
                       const percent = (avg / (assign.max_score || 100)) * 100;
@@ -509,22 +516,27 @@ function CourseDetailContent() {
                       
                       return (
                         <div key={assign.id} className="group text-left">
-                          <div className="flex justify-between items-end mb-1.5">
-                            <span className="text-sm font-bold text-gray-700 dark:text-gray-200 tracking-tight truncate max-w-[250px] group-hover:text-purple-400 transition-colors text-left" title={assign.name}>{assign.name}</span>
-                            <span className="text-sm font-black text-gray-900 dark:text-white">{avg.toFixed(1)}</span>
+                          <div className="flex justify-between items-end mb-1">
+                            <span className="text-xs font-bold text-gray-700 dark:text-gray-200 tracking-tight truncate max-w-[250px] group-hover:text-purple-400 transition-colors text-left" title={assign.name}>{assign.name}</span>
+                            <span className="text-xs font-black text-gray-900 dark:text-white">{avg.toFixed(1)}</span>
                           </div>
                           
-                          <div className="h-3 bg-gray-100 dark:bg-gray-800/50 rounded-full overflow-hidden border border-gray-200 dark:border-gray-700/50 backdrop-blur-sm relative">
+                          <div className="h-2.5 bg-gray-50 dark:bg-gray-800/30 rounded-full overflow-hidden border border-gray-100 dark:border-gray-800/50 backdrop-blur-sm relative">
                              <div 
-                              className={`h-full bg-gradient-to-r ${barGradient} relative shadow-[0_0_10px_rgba(168,85,247,0.3)]`}
+                              className={`h-full bg-gradient-to-r ${barGradient} relative transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(168,85,247,0.3)]`}
                               style={{ width: `${percent}%` }}
                             >
-                              <div className="absolute inset-0 bg-white/10"></div>
+                              <div className="absolute inset-0 bg-white/10 animate-[pulse_3s_infinite]"></div>
                             </div>
                           </div>
                         </div>
                       );
                     })}
+                    {assignments.length > 8 && (
+                        <div className="text-center pt-2">
+                            <span className="text-xs text-gray-400 italic">...ve {assignments.length - 8} ödev daha</span>
+                        </div>
+                    )}
                   </div>
                 </div>
               </div>
