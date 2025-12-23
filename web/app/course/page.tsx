@@ -417,7 +417,7 @@ function CourseDetailContent() {
               <div className="bg-white dark:bg-gray-900 p-8 rounded-xl border dark:border-gray-800 shadow-sm">
                 <h3 className="font-bold text-gray-900 dark:text-white mb-6">Harf Notu Dağılımı</h3>
                 <div className="space-y-4">
-                  {['AA', 'BA', 'BB', 'CB', 'CC', 'DC', 'DD', 'FD', 'FF'].map(letter => {
+                  {['AA', 'BA', 'BB', 'CB', 'CC', 'DC', 'DD', 'FF'].map(letter => {
                     const count = stats.distribution[letter] || 0;
                     const percent = students.length > 0 ? (count / students.length) * 100 : 0;
                     return (

@@ -2,7 +2,7 @@ import { Assignment, Score } from './types';
 
 export const GRADE_SCALE = {
   AA: 90, BA: 85, BB: 80, CB: 75,
-  CC: 70, DC: 65, DD: 60, FD: 55, FF: 0
+  CC: 70, DC: 65, DD: 60, FF: 50
 };
 
 /**
