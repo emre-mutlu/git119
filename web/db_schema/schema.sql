@@ -33,6 +33,7 @@ CREATE TABLE enrollments (
     id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
     course_id uuid REFERENCES courses(id) ON DELETE CASCADE NOT NULL,
     student_id uuid REFERENCES students(id) ON DELETE CASCADE NOT NULL,
+    feedback text, -- Hoca Notu
     UNIQUE(course_id, student_id) -- Bir öğrenci aynı derse iki kere kaydedilemez
 );
 

@@ -31,6 +31,7 @@ function CourseDetailContent() {
   const [selectedStudentForTarget, setSelectedStudentForTarget] = useState<StudentRow | null>(null);
   const [popoverPosition, setPopoverPosition] = useState<{ x: number; y: number } | null>(null);
   const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null);
+  const [lastEditedStudentId, setLastEditedStudentId] = useState<string | null>(null);
   
   // Feedback State
   const [selectedStudentForFeedback, setSelectedStudentForFeedback] = useState<StudentRow | null>(null);
@@ -166,6 +167,7 @@ function CourseDetailContent() {
   const handleScoreChange = (studentId: string, assignmentId: string, value: string) => {
     const numVal = parseFloat(value) || 0;
     setHasChanges(true);
+    setLastEditedStudentId(studentId);
 
     setStudents(prev => prev.map(s => {
       if (studentId !== s.id) return s;
@@ -331,14 +333,16 @@ function CourseDetailContent() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
       {/* Üst Menü */}
-      <nav className="border-b dark:border-gray-800 bg-gray-50 dark:bg-gray-900 px-8 py-4 flex justify-between items-center sticky top-0 z-10">
+      <nav className="h-20 border-b dark:border-gray-800 bg-gray-50 dark:bg-gray-900 px-8 flex justify-between items-center sticky top-0 z-10">
         <div className="flex items-center gap-4">
           <button onClick={() => router.push('/portal')} className="p-2 hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-gray-300 rounded-full transition">
             <ChevronLeft size={20} />
           </button>
-          <div>
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white">{course.name}</h1>
-            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">{course.semester}</p>
+          <div className="flex flex-col justify-center">
+            <h1 className="text-xl font-bold text-gray-900 dark:text-white leading-none mb-1">{course.name}</h1>
+            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium leading-none">
+                {course.semester.replace('GUZ', 'GÜZ')}
+            </p>
           </div>
         </div>
 
@@ -438,6 +442,7 @@ function CourseDetailContent() {
                 setSelectedStudentForFeedback(s);
                 setFeedbackPosition(pos);
             }}
+            lastEditedStudentId={lastEditedStudentId}
           />
         )}
       </main>

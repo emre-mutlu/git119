@@ -45,8 +45,7 @@ export default function StudentPortal() {
       const { data: enrollments } = await supabase
         .from('enrollments')
         .select(`
-          course_id,
-          feedback,
+          *,
           courses (id, code, name, semester)
         `)
         .eq('student_id', student.id);

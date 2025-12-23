@@ -9,9 +9,10 @@ interface GradeTableProps {
   onSort?: (key: string) => void;
   sortConfig?: { key: string; direction: 'asc' | 'desc' } | null;
   onFeedbackClick?: (student: StudentRow, position: { x: number; y: number }) => void;
+  lastEditedStudentId?: string | null;
 }
 
-export default function GradeTable({ students, assignments, onScoreChange, onCalculateTarget, onSort, sortConfig, onFeedbackClick }: GradeTableProps) {
+export default function GradeTable({ students, assignments, onScoreChange, onCalculateTarget, onSort, sortConfig, onFeedbackClick, lastEditedStudentId }: GradeTableProps) {
   
   const renderSortIcon = (key: string) => {
     if (!sortConfig || sortConfig.key !== key) return <ArrowUpDown size={14} className="opacity-30" />;
@@ -55,58 +56,82 @@ export default function GradeTable({ students, assignments, onScoreChange, onCal
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
-            {students.map((student) => (
-              <tr key={student.id} className="hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition-colors group">
-                <td className="p-4 text-sm text-gray-500 dark:text-gray-400 font-mono">{student.student_no}</td>
-                <td className="p-4 text-sm font-medium text-gray-900 dark:text-gray-100">{student.full_name}</td>
-                
-                {assignments.map((assign) => (
-                  <td key={assign.id} className="p-2 text-center">
-                    <input
-                      type="text"
-                      inputMode="decimal"
-                      value={student.scores[assign.id] ?? 0}
-                      onChange={(e) => onScoreChange(student.id, assign.id, e.target.value)}
-                      className="w-16 p-2 text-sm text-center border-0 rounded-md bg-transparent focus:bg-white dark:focus:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none transition group-hover:bg-white/50 dark:group-hover:bg-gray-800/50 dark:text-gray-200 font-medium"
-                    />
-                  </td>
-                ))}
+            {students.map((student, index) => {
+              const isActive = student.id === lastEditedStudentId;
+              const isEven = index % 2 === 0;
+              
+              return (
+                <tr 
+                    key={student.id} 
+                    className={`
+                        transition-colors group border-l-4
+                        ${isActive 
+                            ? 'bg-blue-50 dark:bg-blue-900/20 border-l-blue-500' 
+                            : isEven 
+                                ? 'bg-white dark:bg-gray-900 border-l-transparent' 
+                                : 'bg-gray-50/50 dark:bg-gray-800/30 border-l-transparent'
+                        }
+                        hover:bg-blue-50/50 dark:hover:bg-blue-900/10
+                    `}
+                >
+                    <td className="p-4 text-sm text-gray-500 dark:text-gray-400 font-mono">{student.student_no}</td>
+                    <td className="p-4 text-sm font-medium text-gray-900 dark:text-gray-100">{student.full_name}</td>
+                    
+                    {assignments.map((assign) => (
+                      <td key={assign.id} className="p-2 text-center">
+                        <input
+                          type="text"
+                          inputMode="decimal"
+                          value={student.scores[assign.id] ?? 0}
+                          onChange={(e) => onScoreChange(student.id, assign.id, e.target.value)}
+                          className={`
+                            w-16 p-2 text-sm text-center border-0 rounded-md 
+                            bg-transparent focus:bg-white dark:focus:bg-gray-800 
+                            focus:ring-2 focus:ring-blue-500 focus:outline-none 
+                            transition group-hover:bg-white/50 dark:group-hover:bg-gray-800/50 
+                            dark:text-gray-200 font-medium
+                            ${isActive ? 'bg-white/50 dark:bg-gray-800/50' : ''}
+                          `}
+                        />
+                      </td>
+                    ))}
 
-                <td className="p-4 text-sm text-center font-bold text-gray-900 dark:text-white bg-blue-50/30 dark:bg-blue-900/10 border-l border-blue-100 dark:border-blue-900/30">
-                  {student.average}
-                </td>
-                <td className="p-4 text-center">
-                  <button 
-                    onClick={(e) => {
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      onCalculateTarget?.(student, { x: rect.left, y: rect.top + rect.height / 2 });
-                    }}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all hover:scale-110 active:scale-95 shadow-sm ${
-                    student.letter_grade === 'FF' ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50' : 
-                    student.letter_grade === 'AA' ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-900/50' :
-                    'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-900/50'
-                  }`}>
-                    {student.letter_grade}
-                  </button>
-                </td>
-                <td className="p-2 text-center">
-                  <button 
-                    onClick={(e) => {
-                        const rect = e.currentTarget.getBoundingClientRect();
-                        onFeedbackClick?.(student, { x: rect.left, y: rect.top + rect.height / 2 });
-                    }}
-                    className={`p-2 rounded-lg transition-all ${
-                        student.feedback 
-                            ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/30 dark:text-blue-400' 
-                            : 'text-gray-300 hover:text-gray-500 dark:text-gray-600 dark:hover:text-gray-400'
-                    }`}
-                    title={student.feedback ? "Notu Düzenle" : "Not Ekle"}
-                  >
-                    <MessageSquare size={16} className={student.feedback ? "fill-current" : ""} />
-                  </button>
-                </td>
-              </tr>
-            ))}
+                    <td className="p-4 text-sm text-center font-bold text-gray-900 dark:text-white bg-blue-50/30 dark:bg-blue-900/10 border-l border-blue-100 dark:border-blue-900/30">
+                      {student.average}
+                    </td>
+                    <td className="p-4 text-center">
+                      <button 
+                        onClick={(e) => {
+                          const rect = e.currentTarget.getBoundingClientRect();
+                          onCalculateTarget?.(student, { x: rect.left, y: rect.top + rect.height / 2 });
+                        }}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all hover:scale-110 active:scale-95 shadow-sm ${
+                        student.letter_grade === 'FF' ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50' : 
+                        student.letter_grade === 'AA' ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-900/50' :
+                        'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-900/50'
+                      }`}>
+                        {student.letter_grade}
+                      </button>
+                    </td>
+                    <td className="p-2 text-center">
+                      <button 
+                        onClick={(e) => {
+                            const rect = e.currentTarget.getBoundingClientRect();
+                            onFeedbackClick?.(student, { x: rect.left, y: rect.top + rect.height / 2 });
+                        }}
+                        className={`p-2 rounded-lg transition-all ${
+                            student.feedback 
+                                ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/30 dark:text-blue-400' 
+                                : 'text-gray-300 hover:text-gray-500 dark:text-gray-600 dark:hover:text-gray-400'
+                        }`}
+                        title={student.feedback ? "Notu Düzenle" : "Not Ekle"}
+                      >
+                        <MessageSquare size={16} className={student.feedback ? "fill-current" : ""} />
+                      </button>
+                    </td>
+                  </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
