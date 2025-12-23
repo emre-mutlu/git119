@@ -86,7 +86,7 @@ export default function StudentPortal() {
 
     try {
       // Öğrenciyi ve kodu kontrol et
-      const { data: student, error: studentError } = await supabase
+      const { data: student } = await supabase
         .from('students')
         .select('*')
         .eq('student_no', studentNo.trim())

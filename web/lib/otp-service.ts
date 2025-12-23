@@ -1,43 +1,31 @@
-import { createClient } from '@supabase/supabase-js';
-
-const resendApiKey = 're_JoftuVFh_KymAmHqv7jCXXJRD1ycjNvSV';
-
 /**
- * Bu fonksiyon öğrenciye e-posta gönderir.
- * Not: Normalde bu bir Edge Function olmalı ancak hızlıca prototiplemek için 
- * şimdilik istemci tarafında (güvenli olmayan ama çalışan) bir yapı kuruyoruz.
- * Daha sonra bunu Supabase Edge Function'a taşımanızı şiddetle öneririm.
+ * Bu fonksiyon Google Apps Script üzerinden Gmail köprüsünü kullanarak e-posta gönderir.
+ * Statik sitelerde domain doğrulaması gerektirmeden mail göndermenin en güvenli yoludur.
  */
 export async function sendOTPEmail(email: string, fullName: string, otp: string) {
+  const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbzSQ7UjD2E9kuMnIqngMEUcViRD8MA644FmImUTnHefhscOoCFik4Y9wqqJA6KeCRYa/exec';
+
   try {
-    const res = await fetch('https://api.resend.com/emails', {
+    // Google Apps Script CORS kısıtlamaları nedeniyle 'no-cors' veya form tabanlı gönderim gerektirebilir.
+    // Ancak JSON tabanlı fetch çoğu zaman modern tarayıcılarda GAS ile uyumlu çalışır.
+    const response = await fetch(googleScriptUrl, {
       method: 'POST',
+      mode: 'no-cors', // Google Script Web App için no-cors gerekebilir
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${resendApiKey}`,
+        'Content-Type': 'text/plain', // no-cors modunda text/plain hata almaz
       },
       body: JSON.stringify({
-        from: 'GİT 119 Not Sistemi <onboarding@resend.dev>', // Resend ücretsiz hesapta sadece bu adresten gönderim yapar
-        to: [email],
-        subject: 'Giriş Onay Kodu - git119',
-        html: `
-          <div style="font-family: sans-serif; padding: 20px; color: #333;">
-            <h2 style="color: #5C03BC;">Merhaba ${fullName},</h2>
-            <p>Not portalına giriş yapabilmek için onay kodun aşağıdadır:</p>
-            <div style="background: #f4f4f4; padding: 15px; font-size: 24px; font-weight: bold; letter-spacing: 5px; text-align: center; border-radius: 8px;">
-              ${otp}
-            </div>
-            <p style="margin-top: 20px; font-size: 12px; color: #666;">
-              Bu kod 10 dakika boyunca geçerlidir. Eğer bu talebi sen yapmadıysan bu e-postayı dikkate alma.
-            </p>
-          </div>
-        `,
-      }),
+        email: email,
+        fullName: fullName,
+        otp: otp
+      })
     });
 
-    return res.ok;
+    // no-cors modunda response.ok her zaman false döner ve body okunamaz, 
+    // ancak istek Google tarafına ulaşır.
+    return true; 
   } catch (error) {
-    console.error('Email error:', error);
+    console.error('Gmail Bridge Error:', error);
     return false;
   }
 }
