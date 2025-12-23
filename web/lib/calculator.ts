@@ -39,6 +39,8 @@ export function calculateStudentGrade(
     // Normal ağırlıklı ortalama
     // Eğer ağırlıklar toplamı 1 değilse (örn: 0.4 + 0.4 = 0.8), 100 üzerinden normalize et.
     finalScore = (totalWeightedScore / totalWeight) * (totalWeight < 1 ? 1 : 1); 
+    // Basitleştirilmiş: Direkt ağırlık çarpımı (Python'daki gibi)
+    finalScore = totalWeightedScore; 
   }
 
   // Yuvarlama
