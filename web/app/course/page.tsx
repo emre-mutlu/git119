@@ -51,7 +51,6 @@ function CourseDetailContent() {
   async function fetchData() {
     setLoading(true);
     try {
-      // 1. DERS BİLGİSİ
       const { data: courseData, error: courseError } = await supabase
         .from('courses')
         .select('*')
@@ -61,7 +60,6 @@ function CourseDetailContent() {
       if (courseError) throw new Error("Ders bulunamadı: " + courseError.message);
       setCourse(courseData);
 
-      // 2. ÖDEVLER
       const { data: assignData, error: assignError } = await supabase
         .from('assignments')
         .select('*')
@@ -72,8 +70,6 @@ function CourseDetailContent() {
       const assignList = assignData || [];
       setAssignments(assignList);
 
-      // 3. KAYITLAR (ENROLLMENTS)
-      // '*' ile çekiyoruz ki feedback sütunu yoksa bile hata vermesin.
       const { data: enrollmentData, error: enrollError } = await supabase
         .from('enrollments')
         .select('*') 
@@ -90,8 +86,6 @@ function CourseDetailContent() {
           return;
       }
 
-      // 4. ÖĞRENCİLER
-      // ID listesini alıp öğrencileri çekiyoruz
       const studentIds = enrollmentData.map((e: any) => e.student_id);
       
       const { data: studentsData, error: studentsError } = await supabase
@@ -103,18 +97,15 @@ function CourseDetailContent() {
           console.error("Student Fetch Error:", studentsError);
       }
 
-      // 5. NOTLAR
       const { data: scoresData } = await supabase
         .from('scores')
         .select('*')
         .in('student_id', studentIds)
         .in('assignment_id', assignList.map((a: any) => a.id));
 
-      // 6. VERİ BİRLEŞTİRME (Mapping)
       const formattedStudents = enrollmentData.map((enrollment: any) => {
         const studentInfo = studentsData?.find((s: any) => s.id === enrollment.student_id);
 
-        // Eğer öğrenci bilgisi bulunamazsa, ID'yi göstererek hata ayıklamayı kolaylaştır
         if (!studentInfo) {
             return {
                 id: enrollment.student_id,
@@ -147,7 +138,6 @@ function CourseDetailContent() {
         };
       });
 
-      // Varsayılan Sıralama: Numara
       formattedStudents.sort((a: any, b: any) => a.student_no.localeCompare(b.student_no));
       setStudents(formattedStudents);
 
@@ -159,7 +149,6 @@ function CourseDetailContent() {
     }
   }
 
-  // Not Değişikliği (Merkezi Yönetim)
   const handleScoreChange = (studentId: string, assignmentId: string, value: string) => {
     const numVal = parseFloat(value) || 0;
     setHasChanges(true);
@@ -173,7 +162,6 @@ function CourseDetailContent() {
     }));
   };
 
-  // Ağırlık Ayarlarını Kaydet
   const handleWeightSave = async (updatedAssignments: Assignment[]) => {
     setIsSaving(true);
     try {
@@ -191,7 +179,6 @@ function CourseDetailContent() {
       
       setAssignments(updatedAssignments);
       
-      // Tüm öğrencilerin notlarını yeni ağırlıklara göre yeniden hesapla
       setStudents(prev => prev.map(s => {
         const result = calculateStudentGrade(s.scores, updatedAssignments);
         return { ...s, average: result.total, letter_grade: result.letter };
@@ -208,15 +195,12 @@ function CourseDetailContent() {
   const handleFeedbackSave = async (feedback: string) => {
     if (!selectedStudentForFeedback) return;
     
-    // Sakla (Eski veri - hata durumunda geri dönmek için)
     const oldFeedback = students.find(s => s.id === selectedStudentForFeedback.id)?.feedback;
 
-    // Optimistic Update (Arayüzde anında göster)
     setStudents(prev => prev.map(s => 
         s.id === selectedStudentForFeedback.id ? { ...s, feedback } : s
     ));
 
-    // Veritabanına kaydet
     const { error } = await supabase
         .from('enrollments')
         .update({ feedback })
@@ -226,14 +210,12 @@ function CourseDetailContent() {
     if (error) {
         console.error("Feedback Save Error:", error);
         alert("Not kaydedilemedi: " + error.message);
-        // Hata durumunda geri al
         setStudents(prev => prev.map(s => 
             s.id === selectedStudentForFeedback.id ? { ...s, feedback: oldFeedback } : s
         ));
     }
   };
 
-  // Kaydetme İşlemi
   const saveChanges = async () => {
     setIsSaving(true);
     try {
@@ -259,11 +241,9 @@ function CourseDetailContent() {
     }
   };
 
-  // --- CSV Export Function ---
   const handleExportCSV = () => {
     if (students.length === 0) return;
 
-    // 1. CSV Başlıkları
     const headers = [
         "Öğrenci No",
         "Ad Soyad",
@@ -274,7 +254,6 @@ function CourseDetailContent() {
         "Hoca Notu"
     ];
 
-    // 2. Veri Satırları
     const rows = students.map(s => {
         const scores = assignments.map(a => s.scores[a.id] || 0);
         return [
@@ -288,12 +267,10 @@ function CourseDetailContent() {
         ].join(",");
     });
 
-    // 3. Dosyayı Oluştur
     const csvContent = "\uFEFF" + [headers.join(","), ...rows].join("\n"); 
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
     
-    // 4. İndirmeyi Tetikle
     const link = document.createElement("a");
     link.setAttribute("href", url);
     link.setAttribute("download", `${course.code}_Notlar_${new Date().toISOString().split('T')[0]}.csv`);
@@ -301,9 +278,7 @@ function CourseDetailContent() {
     link.click();
     document.body.removeChild(link);
   };
-  // ---------------------------
 
-  // --- SORTING LOGIC ---
   const handleSort = (key: string) => {
     let direction: 'asc' | 'desc' = 'asc';
     if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
@@ -319,12 +294,10 @@ function CourseDetailContent() {
     let valA = (a as any)[key];
     let valB = (b as any)[key];
 
-    // Sayısal karşılaştırma (average)
     if (key === 'average') {
         valA = Number(valA);
         valB = Number(valB);
     } else {
-        // String karşılaştırma (isim, no)
         valA = valA ? valA.toString().toLowerCase() : '';
         valB = valB ? valB.toString().toLowerCase() : '';
     }
@@ -333,7 +306,6 @@ function CourseDetailContent() {
     if (valA > valB) return direction === 'asc' ? 1 : -1;
     return 0;
   });
-  // ---------------------
 
   if (loading) return <div className="p-20 text-center text-gray-500">Yükleniyor...</div>;
   if (!course) return <div className="p-20 text-center">Ders bulunamadı.</div>;
@@ -342,7 +314,7 @@ function CourseDetailContent() {
     <AdminGuard>
       <div className="min-h-screen bg-white dark:bg-gray-950 pt-20">
         {/* Üst Menü */}
-        <nav className="border-b dark:border-gray-800 bg-gray-50 dark:bg-gray-900 px-8 py-5 flex justify-between items-center sticky top-20 z-10">
+        <nav className="border-b dark:border-gray-800 bg-gray-50 dark:bg-gray-900 px-8 py-5 flex justify-between items-center sticky top-20 z-10 h-20">
           <div className="flex items-center gap-4 h-full">
             <button onClick={() => router.push('/portal')} className="p-2.5 hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-gray-300 rounded-full transition flex items-center justify-center">
               <ChevronLeft size={22} />
@@ -356,39 +328,17 @@ function CourseDetailContent() {
           </div>
 
           <div className="flex items-center gap-2">
-            <button 
-              onClick={handleExportCSV}
-              className="p-2.5 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-xl transition flex items-center justify-center"
-              title="Excel/CSV Olarak İndir"
-            >
+            <button onClick={handleExportCSV} className="p-2.5 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-xl transition flex items-center justify-center" title="Excel/CSV Olarak İndir">
               <Download size={20} />
             </button>
-
-            <button 
-              onClick={() => setIsSettingsOpen(true)}
-              className="p-2 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition"
-              title="Ders Ayarları"
-            >
+            <button onClick={() => setIsSettingsOpen(true)} className="p-2 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition" title="Ders Ayarları">
               <Settings size={20} />
             </button>
-
-            <button 
-              onClick={() => setShowAnalysis(!showAnalysis)}
-              className={`flex items-center gap-2 px-4 py-2 text-sm font-medium border rounded-lg transition ${ 
-                showAnalysis ? 'bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-900/30 dark:border-blue-800 dark:text-blue-400' : 'bg-white text-gray-700 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700'
-              }`}
-            >
+            <button onClick={() => setShowAnalysis(!showAnalysis)} className={`flex items-center gap-2 px-4 py-2 text-sm font-medium border rounded-lg transition ${showAnalysis ? 'bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-900/30 dark:border-blue-800 dark:text-blue-400' : 'bg-white text-gray-700 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700'}`}>
               <LayoutDashboard size={16} />
               {showAnalysis ? 'Tabloya Dön' : 'Analiz'}
             </button>
-            
-            <button 
-              onClick={saveChanges}
-              disabled={!hasChanges || isSaving}
-              className={`flex items-center gap-2 px-4 py-2 text-sm font-medium text-white rounded-lg transition ${ 
-                !hasChanges ? 'bg-gray-300 dark:bg-gray-700 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
-              }`}
-            >
+            <button onClick={saveChanges} disabled={!hasChanges || isSaving} className={`flex items-center gap-2 px-4 py-2 text-sm font-medium text-white rounded-lg transition ${!hasChanges ? 'bg-gray-300 dark:bg-gray-700 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}>
               <Save size={16} />
               {isSaving ? 'Kaydediliyor...' : hasChanges ? 'Kaydet' : 'Kaydedildi'}
             </button>
@@ -396,11 +346,11 @@ function CourseDetailContent() {
         </nav>
 
         {/* Ana İçerik */}
-        <main className="p-4 lg:p-6 h-auto lg:h-[calc(100vh-180px)] overflow-visible lg:overflow-hidden">
+        <main className="px-6 h-[calc(100vh-160px)] overflow-hidden">
           {showAnalysis && stats ? (
-            <div className="h-full flex flex-col gap-6">
+            <div className="h-full flex flex-col gap-4 py-4 animate-in fade-in duration-200">
               {/* 1. ÖZET KARTLARI */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 flex-shrink-0 pt-4">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 flex-shrink-0">
                 <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border dark:border-gray-800 shadow-sm border-b-4 border-b-blue-500">
                   <p className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">Sınıf Ortalaması</p>
                   <p className="text-3xl font-black text-blue-600 dark:text-blue-400">{stats.avg}</p>
@@ -423,40 +373,34 @@ function CourseDetailContent() {
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-0 flex-1">
                 {/* 2. HARF NOTU DAĞILIMI */}
-                <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col min-h-0">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3 flex-shrink-0 pl-1">
+                <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col min-h-0 overflow-hidden">
+                  <div className="flex items-center gap-3 mb-6 flex-shrink-0">
                     <span className="w-1.5 h-6 bg-blue-500 rounded-full"></span>
-                    Harf Notu Dağılımı
-                  </h3>
-                  <div className="flex-1 flex flex-col justify-between pl-1">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">Harf Notu Dağılımı</h3>
+                  </div>
+                  
+                  <div className="flex-1 flex flex-col justify-between overflow-hidden mb-4 pl-[1.125rem]">
                     {['AA', 'BA', 'BB', 'CB', 'CC', 'DC', 'DD', 'FF'].map(letter => {
                       const count = stats.distribution[letter] || 0;
                       const percent = students.length > 0 ? (count / students.length) * 100 : 0;
-                      
                       let barClass = 'from-gray-500 to-gray-400';
                       if (['AA', 'BA', 'BB'].includes(letter)) barClass = 'from-green-500 to-emerald-400';
                       else if (['CB', 'CC', 'DC'].includes(letter)) barClass = 'from-yellow-500 to-orange-400';
                       else if (['DD', 'FF'].includes(letter)) barClass = 'from-red-600 to-pink-600';
 
                       return (
-                        <div key={letter} className="flex flex-col gap-1 group">
-                          <div className="flex items-center justify-between">
-                             <div className="flex items-center gap-4 w-full">
-                                <span className={`w-8 font-bold text-base ${letter === 'FF' ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'} text-left`}>{letter}</span>
-                                <div className="flex-1 h-3 bg-gray-50 dark:bg-gray-800/30 rounded-full overflow-hidden border border-gray-100 dark:border-gray-800/50 relative">
-                                    <div 
-                                    className={`h-full bg-gradient-to-r ${barClass} transition-all duration-1000 ease-out relative`}
-                                    style={{ width: `${percent}%` }}
-                                    >
-                                        <div className="absolute inset-0 bg-white/10"></div>
-                                    </div>
+                        <div key={letter} className="flex flex-col gap-0.5 group">
+                          <div className="flex items-center gap-4 w-full">
+                            <span className={`w-8 font-bold text-base ${letter === 'FF' ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'}`}>{letter}</span>
+                            <div className="flex-1 h-3 bg-gray-50 dark:bg-gray-800/30 rounded-full overflow-hidden border border-gray-100 dark:border-gray-800/50 relative">
+                                <div className={`h-full bg-gradient-to-r ${barClass} relative shadow-[0_0_10px_rgba(0,0,0,0.1)]`} style={{ width: `${percent}%` }}>
+                                    <div className="absolute inset-0 bg-white/10"></div>
                                 </div>
-                                <span className="w-6 text-base font-bold text-gray-900 dark:text-white text-right">{count}</span>
-                             </div>
+                            </div>
+                            <span className="w-6 text-base font-bold text-gray-900 dark:text-white text-right">{count}</span>
                           </div>
-                          {/* Yüzde Barın Altında */}
-                          <div className="pl-12 pr-6">
-                             <span className="text-[10px] font-medium text-gray-400 block text-right">
+                          <div className="pl-12">
+                             <span className="text-[10px] font-bold text-gray-400 block text-left leading-none">
                                 {Math.round(percent) > 0 ? `%${Math.round(percent)}` : ''}
                              </span>
                           </div>
@@ -465,11 +409,10 @@ function CourseDetailContent() {
                     })}
                   </div>
                   
-                  {/* Yeni Alt Metrik Alanı */}
-                  <div className="mt-auto pt-4 border-t dark:border-gray-800 grid grid-cols-3 gap-4 flex-shrink-0 text-left pl-1">
+                  <div className="mt-auto pt-4 border-t dark:border-gray-800 grid grid-cols-3 gap-4 flex-shrink-0 pl-[1.125rem]">
                     <div>
-                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter text-left">Standart Sapma</p>
-                        <p className="text-lg font-black text-gray-700 dark:text-gray-200 text-left">
+                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Standart Sapma</p>
+                        <p className="text-lg font-black text-gray-700 dark:text-gray-200">
                             {(() => {
                                 const avg = parseFloat(stats.avg);
                                 const squareDiffs = students.map(s => Math.pow(s.average - avg, 2));
@@ -479,14 +422,14 @@ function CourseDetailContent() {
                         </p>
                     </div>
                     <div>
-                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter text-left">En Sık Not</p>
-                        <p className="text-lg font-black text-blue-500 text-left">
+                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">En Sık Not</p>
+                        <p className="text-lg font-black text-blue-500">
                             {Object.entries(stats.distribution).sort((a: any, b: any) => b[1] - a[1])[0]?.[0] || "-"}
                         </p>
                     </div>
                     <div>
-                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter text-left">Geçme/Kalma</p>
-                        <p className="text-lg font-black text-gray-700 dark:text-gray-200 text-left">
+                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Geçme/Kalma</p>
+                        <p className="text-lg font-black text-gray-700 dark:text-gray-200">
                             {students.filter(s => s.letter_grade !== 'FF').length} <span className="text-gray-400 font-normal">/</span> {students.filter(s => s.letter_grade === 'FF').length}
                         </p>
                     </div>
@@ -494,47 +437,36 @@ function CourseDetailContent() {
                 </div>
 
                 {/* 3. ÖDEV PERFORMANSI */}
-                <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col min-h-0">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3 flex-shrink-0 pl-1">
+                <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col min-h-0 overflow-hidden">
+                  <div className="flex items-center gap-3 mb-6 flex-shrink-0">
                     <span className="w-1.5 h-6 bg-purple-500 rounded-full"></span>
-                    Ödev Bazlı Başarı
-                  </h3>
-                  <div className="flex-1 flex flex-col justify-between pl-1 overflow-hidden">
-                    {assignments.slice(0, 8).map((assign, idx) => { // Limit to 8 to prevent overflow without scroll
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">Ödev Bazlı Başarı</h3>
+                  </div>
+                  <div className="flex-1 flex flex-col justify-between pl-[1.125rem] overflow-hidden">
+                    {assignments.slice(0, 8).map((assign, idx) => {
                       const scores = students.map(s => s.scores[assign.id] || 0);
                       const avg = scores.length > 0 ? scores.reduce((a, b) => a + b, 0) / scores.length : 0;
                       const percent = (avg / (assign.max_score || 100)) * 100;
-                      
-                      const gradients = [
-                        'from-purple-600 to-blue-500',
-                        'from-blue-600 to-cyan-500',
-                        'from-indigo-600 to-purple-500',
-                        'from-violet-600 to-fuchsia-500',
-                        'from-emerald-600 to-teal-500'
-                      ];
+                      const gradients = ['from-purple-600 to-blue-500', 'from-blue-600 to-cyan-500', 'from-indigo-600 to-purple-500', 'from-violet-600 to-fuchsia-500', 'from-emerald-600 to-teal-500'];
                       const barGradient = gradients[idx % gradients.length];
                       
                       return (
-                        <div key={assign.id} className="group text-left">
-                          <div className="flex justify-between items-end mb-1">
-                            <span className="text-xs font-bold text-gray-700 dark:text-gray-200 tracking-tight truncate max-w-[250px] group-hover:text-purple-400 transition-colors text-left" title={assign.name}>{assign.name}</span>
-                            <span className="text-xs font-black text-gray-900 dark:text-white">{avg.toFixed(1)}</span>
+                        <div key={assign.id} className="group flex flex-col gap-1">
+                          <div className="flex justify-between items-end">
+                            <span className="text-sm font-bold text-gray-700 dark:text-gray-200 tracking-tight truncate max-w-[250px] group-hover:text-purple-400 transition-colors" title={assign.name}>{assign.name}</span>
+                            <span className="text-sm font-black text-gray-900 dark:text-white">{avg.toFixed(1)}</span>
                           </div>
-                          
-                          <div className="h-2.5 bg-gray-50 dark:bg-gray-800/30 rounded-full overflow-hidden border border-gray-100 dark:border-gray-800/50 backdrop-blur-sm relative">
-                             <div 
-                              className={`h-full bg-gradient-to-r ${barGradient} relative transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(168,85,247,0.3)]`}
-                              style={{ width: `${percent}%` }}
-                            >
-                              <div className="absolute inset-0 bg-white/10 animate-[pulse_3s_infinite]"></div>
+                          <div className="h-3 bg-gray-50 dark:bg-gray-800/30 rounded-full overflow-hidden border border-gray-100 dark:border-gray-800/50 backdrop-blur-sm relative">
+                             <div className={`h-full bg-gradient-to-r ${barGradient} relative shadow-[0_0_10px_rgba(0,0,0,0.1)]`} style={{ width: `${percent}%` }}>
+                              <div className="absolute inset-0 bg-white/10"></div>
                             </div>
                           </div>
                         </div>
                       );
                     })}
                     {assignments.length > 8 && (
-                        <div className="text-center pt-2">
-                            <span className="text-xs text-gray-400 italic">...ve {assignments.length - 8} ödev daha</span>
+                        <div className="text-center pt-1">
+                            <span className="text-[10px] text-gray-400 italic">...ve {assignments.length - 8} ödev daha</span>
                         </div>
                     )}
                   </div>
@@ -542,18 +474,16 @@ function CourseDetailContent() {
               </div>
 
               {/* 4. RİSKLİ ÖĞRENCİLER */}
-              <div className="bg-white dark:bg-gray-900 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col min-h-0 max-h-[35%] flex-shrink-0 mb-4">
-                 <div className="p-4 border-b dark:border-gray-800 bg-red-50/30 dark:bg-red-900/10 flex-shrink-0">
-                    <h3 className="text-lg font-bold text-red-700 dark:text-red-400 flex items-center gap-3">
-                        <span className="w-1.5 h-6 bg-red-500 rounded-full"></span>
-                        Risk Grubu (FF/DD veya &lt;50)
-                    </h3>
+              <div className="bg-white dark:bg-gray-900 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col min-h-0 max-h-[32%] flex-shrink-0 mb-2 overflow-hidden">
+                 <div className="p-4 border-b dark:border-gray-800 bg-red-50/30 dark:bg-red-900/10 flex-shrink-0 flex items-center gap-3">
+                    <span className="w-1.5 h-6 bg-red-500 rounded-full"></span>
+                    <h3 className="text-lg font-bold text-red-700 dark:text-red-400">Risk Grubu (FF/DD veya &lt;50)</h3>
                  </div>
                  <div className="overflow-y-auto custom-scrollbar flex-1">
                     <table className="w-full text-left border-separate border-spacing-0">
                         <thead className="bg-gray-50 dark:bg-gray-800 text-sm uppercase text-gray-500 font-bold sticky top-0 z-10">
                             <tr>
-                                <th className="p-3 pl-6 border-b dark:border-gray-700 text-left">Öğrenci</th>
+                                <th className="p-3 pl-8 border-b dark:border-gray-700">Öğrenci</th>
                                 <th className="p-3 text-center border-b dark:border-gray-700">Ortalama</th>
                                 <th className="p-3 text-center border-b dark:border-gray-700">Harf</th>
                                 <th className="p-3 text-center border-b dark:border-gray-700">Eksik Ödev</th>
@@ -567,7 +497,7 @@ function CourseDetailContent() {
                                     const missingCount = assignments.filter(a => !student.scores[a.id] || student.scores[a.id] === 0).length;
                                     return (
                                         <tr key={student.id} className="hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition-colors odd:bg-white dark:odd:bg-gray-900 even:bg-gray-50/50 dark:even:bg-gray-800/30">
-                                            <td className="p-3 pl-6 text-base font-bold text-gray-900 dark:text-white">
+                                            <td className="p-3 pl-8 text-base font-bold text-gray-900 dark:text-white">
                                                 {student.full_name} <span className="text-gray-500 dark:text-gray-400 font-medium ml-2 text-sm">({student.student_no})</span>
                                             </td>
                                             <td className="p-3 text-center text-lg font-black text-gray-900 dark:text-white">{student.average}</td>
@@ -584,7 +514,7 @@ function CourseDetailContent() {
                                 })}
                             {students.filter(s => s.average < 50 || ['FF', 'DD'].includes(s.letter_grade)).length === 0 && (
                                 <tr>
-                                    <td colSpan={4} className="p-8 text-center text-gray-500">
+                                    <td colSpan={4} className="p-8 text-center text-gray-500 font-bold">
                                         Harika! Risk grubunda öğrenci bulunmuyor.
                                     </td>
                                 </tr>
@@ -616,12 +546,7 @@ function CourseDetailContent() {
           )}
         </main>
 
-        <WeightSettingsModal 
-          isOpen={isSettingsOpen} 
-          onClose={() => setIsSettingsOpen(false)} 
-          assignments={assignments} 
-          onSave={handleWeightSave} 
-        />
+        <WeightSettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} assignments={assignments} onSave={handleWeightSave} />
 
         <TargetScorePopover
           isOpen={!!selectedStudentForTarget}
