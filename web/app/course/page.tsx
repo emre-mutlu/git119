@@ -396,24 +396,24 @@ function CourseDetailContent() {
         </nav>
 
         {/* Ana İçerik */}
-        <main className="p-6 h-[calc(100vh-100px)] overflow-hidden">
+        <main className="px-6 pb-6 h-[calc(100vh-180px)] overflow-hidden">
           {showAnalysis && stats ? (
             <div className="h-full flex flex-col gap-6 animate-in fade-in zoom-in-95 duration-200">
               {/* 1. ÖZET KARTLARI */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 flex-shrink-0">
-                <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border dark:border-gray-800 shadow-sm">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 flex-shrink-0 pt-4">
+                <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border dark:border-gray-800 shadow-sm border-b-4 border-b-blue-500">
                   <p className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">Sınıf Ortalaması</p>
                   <p className="text-3xl font-black text-blue-600 dark:text-blue-400">{stats.avg}</p>
                 </div>
-                <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border dark:border-gray-800 shadow-sm">
+                <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border dark:border-gray-800 shadow-sm border-b-4 border-b-purple-500">
                   <p className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">En Yüksek / Düşük</p>
                   <p className="text-3xl font-black text-gray-900 dark:text-white">{stats.max} <span className="text-gray-300 text-xl font-normal">/</span> {stats.min}</p>
                 </div>
-                <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border dark:border-gray-800 shadow-sm">
+                <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border dark:border-gray-800 shadow-sm border-b-4 border-b-emerald-500">
                   <p className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">Öğrenci Sayısı</p>
                   <p className="text-3xl font-black text-gray-900 dark:text-white">{students.length}</p>
                 </div>
-                <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border dark:border-gray-800 shadow-sm">
+                <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border dark:border-gray-800 shadow-sm border-b-4 border-b-orange-500">
                   <p className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">Başarı Oranı</p>
                   <p className="text-3xl font-black text-green-600 dark:text-green-400">
                     %{Math.round((students.filter(s => s.letter_grade !== 'FF').length / students.length) * 100)}
@@ -428,7 +428,7 @@ function CourseDetailContent() {
                     <span className="w-1 h-6 bg-blue-500 rounded-full"></span>
                     Harf Notu Dağılımı
                   </h3>
-                  <div className="space-y-3 overflow-y-auto pr-2 custom-scrollbar flex-1">
+                  <div className="space-y-3 overflow-y-auto pr-2 custom-scrollbar flex-1 mb-6">
                     {['AA', 'BA', 'BB', 'CB', 'CC', 'DC', 'DD', 'FF'].map(letter => {
                       const count = stats.distribution[letter] || 0;
                       const percent = students.length > 0 ? (count / students.length) * 100 : 0;
@@ -441,7 +441,6 @@ function CourseDetailContent() {
                       return (
                         <div key={letter} className="flex items-center gap-3 group">
                           <span className={`w-8 font-bold text-base ${letter === 'FF' ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'}`}>{letter}</span>
-                          
                           <div className="flex-1 h-4 bg-gray-100 dark:bg-gray-800/50 rounded-full overflow-hidden border border-gray-200 dark:border-gray-700/50 relative">
                             <div 
                               className={`h-full bg-gradient-to-r ${barClass} transition-all duration-1000 ease-out relative`}
@@ -450,14 +449,39 @@ function CourseDetailContent() {
                                 <div className="absolute inset-0 bg-white/10"></div>
                             </div>
                           </div>
-                          
-                          <div className="w-14 text-right flex items-baseline justify-end gap-1">
+                          <div className="w-8 text-right">
                             <span className="text-base font-bold text-gray-900 dark:text-white">{count}</span>
-                            <span className="text-[10px] font-bold text-gray-400">%{Math.round(percent)}</span>
                           </div>
                         </div>
                       );
                     })}
+                  </div>
+                  
+                  {/* Yeni Alt Metrik Alanı */}
+                  <div className="mt-auto pt-6 border-t dark:border-gray-800 grid grid-cols-3 gap-4 flex-shrink-0">
+                    <div>
+                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Standart Sapma</p>
+                        <p className="text-lg font-black text-gray-700 dark:text-gray-200">
+                            {(() => {
+                                const avg = parseFloat(stats.avg);
+                                const squareDiffs = students.map(s => Math.pow(s.average - avg, 2));
+                                const avgSquareDiff = squareDiffs.reduce((a, b) => a + b, 0) / students.length;
+                                return Math.sqrt(avgSquareDiff).toFixed(1);
+                            })()}
+                        </p>
+                    </div>
+                    <div>
+                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">En Sık Not</p>
+                        <p className="text-lg font-black text-blue-500">
+                            {Object.entries(stats.distribution).sort((a: any, b: any) => b[1] - a[1])[0]?.[0] || "-"}
+                        </p>
+                    </div>
+                    <div>
+                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Geçme/Kalma</p>
+                        <p className="text-lg font-black text-gray-700 dark:text-gray-200">
+                            {students.filter(s => s.letter_grade !== 'FF').length} <span className="text-gray-400 font-normal">/</span> {students.filter(s => s.letter_grade === 'FF').length}
+                        </p>
+                    </div>
                   </div>
                 </div>
 
@@ -473,12 +497,12 @@ function CourseDetailContent() {
                       const avg = scores.length > 0 ? scores.reduce((a, b) => a + b, 0) / scores.length : 0;
                       const percent = (avg / (assign.max_score || 100)) * 100;
                       
-                      // Dynamic Gradients for Assignments
                       const gradients = [
                         'from-purple-600 to-blue-500',
                         'from-blue-600 to-cyan-500',
                         'from-indigo-600 to-purple-500',
-                        'from-violet-600 to-fuchsia-500'
+                        'from-violet-600 to-fuchsia-500',
+                        'from-emerald-600 to-teal-500'
                       ];
                       const barGradient = gradients[idx % gradients.length];
                       
@@ -505,7 +529,7 @@ function CourseDetailContent() {
               </div>
 
               {/* 4. RİSKLİ ÖĞRENCİLER */}
-              <div className="bg-white dark:bg-gray-900 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col min-h-0 max-h-[30%] flex-shrink-0">
+              <div className="bg-white dark:bg-gray-900 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col min-h-0 max-h-[35%] flex-shrink-0 mb-4">
                  <div className="p-4 border-b dark:border-gray-800 bg-red-50/30 dark:bg-red-900/10 flex-shrink-0">
                     <h3 className="text-lg font-bold text-red-700 dark:text-red-400 flex items-center gap-2">
                         <span className="w-1 h-6 bg-red-500 rounded-full"></span>
@@ -513,13 +537,13 @@ function CourseDetailContent() {
                     </h3>
                  </div>
                  <div className="overflow-y-auto custom-scrollbar flex-1">
-                    <table className="w-full text-left">
+                    <table className="w-full text-left border-separate border-spacing-0">
                         <thead className="bg-gray-50 dark:bg-gray-800 text-sm uppercase text-gray-500 font-bold sticky top-0 z-10">
                             <tr>
-                                <th className="p-3 pl-6">Öğrenci</th>
-                                <th className="p-3 text-center">Ortalama</th>
-                                <th className="p-3 text-center">Harf</th>
-                                <th className="p-3 text-center">Eksik Ödev</th>
+                                <th className="p-3 pl-6 border-b dark:border-gray-700">Öğrenci</th>
+                                <th className="p-3 text-center border-b dark:border-gray-700">Ortalama</th>
+                                <th className="p-3 text-center border-b dark:border-gray-700">Harf</th>
+                                <th className="p-3 text-center border-b dark:border-gray-700">Eksik Ödev</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
@@ -529,7 +553,7 @@ function CourseDetailContent() {
                                 .map(student => {
                                     const missingCount = assignments.filter(a => !student.scores[a.id] || student.scores[a.id] === 0).length;
                                     return (
-                                        <tr key={student.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                                        <tr key={student.id} className="hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition-colors odd:bg-white dark:odd:bg-gray-900 even:bg-gray-50/50 dark:even:bg-gray-800/30">
                                             <td className="p-3 pl-6 text-base font-bold text-gray-900 dark:text-white">
                                                 {student.full_name} <span className="text-gray-500 dark:text-gray-400 font-medium ml-2 text-sm">({student.student_no})</span>
                                             </td>
