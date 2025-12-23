@@ -327,11 +327,32 @@ body {
   }
 }
 
-.animate-blob-float {
-  animation: blobFloat ease-in-out infinite;
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-/* Mobile touch optimization for week cards */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.1);
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.3);
+}
+
+/* For Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.1) transparent;
+}
+
 .week-card-link {
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;

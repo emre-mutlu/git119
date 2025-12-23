@@ -477,9 +477,9 @@ function CourseDetailContent() {
                             <span className="text-xs font-bold text-gray-600 dark:text-gray-300 uppercase truncate max-w-[200px]" title={assign.name}>{assign.name}</span>
                             <span className="text-sm font-black text-gray-900 dark:text-white">{avg.toFixed(1)}</span>
                           </div>
-                          <div className="h-2.5 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                          <div className="h-2.5 bg-gray-100/80 dark:bg-gray-800 rounded-full overflow-hidden shadow-inner">
                              <div 
-                              className="h-full bg-purple-500 transition-all duration-700"
+                              className="h-full bg-purple-500 transition-all duration-700 shadow-[0_0_10px_rgba(168,85,247,0.4)]"
                               style={{ width: `${percent}%` }}
                             />
                           </div>
