@@ -1,16 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase';
 import { ChevronLeft, GraduationCap, MessageSquare, Mail } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { calculateStudentGrade } from '@/lib/calculator';
 import { sendOTPEmail } from '@/lib/otp-service';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
 
 export default function StudentPortal() {
   const router = useRouter();
@@ -144,10 +139,10 @@ export default function StudentPortal() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col items-center justify-center p-4 pt-20">
       <button 
         onClick={() => router.push('/')}
-        className="fixed top-6 left-6 p-2 text-gray-400 hover:text-gray-900 dark:hover:text-white transition z-50"
+        className="fixed top-24 left-6 p-2 text-gray-400 hover:text-gray-900 dark:hover:text-white transition z-50"
       >
         <ChevronLeft size={24} />
       </button>

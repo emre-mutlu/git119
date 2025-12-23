@@ -1,21 +1,22 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase';
 import { BookOpen, Upload, ChevronRight, Trash2, Plus } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { importGraderCSV } from '@/lib/csv-importer';
 import CreateCourseModal from '@/components/create-course-modal';
 import AdminGuard from '@/components/AdminGuard';
+import { Course } from '@/lib/types';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+// Extend Course type for local usage with student count
+interface CourseWithCount extends Course {
+  studentCount: number;
+}
 
 export default function Dashboard() {
   const router = useRouter();
-  const [courses, setCourses] = useState<any[]>([]);
+  const [courses, setCourses] = useState<CourseWithCount[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -30,12 +31,15 @@ export default function Dashboard() {
       .select('*, enrollments(count)')
       .order('created_at', { ascending: false });
     
-    if (!error) {
-      const formatted = data?.map((c: any) => ({
-        ...c,
+    if (!error && data) {
+      const formatted: CourseWithCount[] = data.map((c: any) => ({
+        id: c.id,
+        code: c.code,
+        name: c.name,
+        semester: c.semester,
         studentCount: c.enrollments?.[0]?.count || 0
       }));
-      setCourses(formatted || []);
+      setCourses(formatted);
     }
     setLoading(false);
   }
@@ -99,7 +103,7 @@ export default function Dashboard() {
 
   return (
     <AdminGuard>
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-950 p-8">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-950 px-8 pb-8 pt-24">
         <header className="flex justify-between items-center mb-12">
           <div>
             <h1 className="text-4xl font-black text-gray-900 dark:text-white tracking-tight">Academia<span className="text-blue-600">OS</span></h1>

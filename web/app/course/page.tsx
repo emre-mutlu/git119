@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, Suspense } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ChevronLeft, Save, LayoutDashboard, Settings, Download } from 'lucide-react';
 import GradeTable from '@/components/grade-table';
@@ -11,11 +11,6 @@ import FeedbackPopover from '@/components/feedback-popover';
 import AdminGuard from '@/components/AdminGuard';
 import { StudentRow, Assignment } from '@/lib/types';
 import { calculateStudentGrade } from '@/lib/calculator';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
 
 function CourseDetailContent() {
   const searchParams = useSearchParams();
@@ -345,9 +340,9 @@ function CourseDetailContent() {
 
   return (
     <AdminGuard>
-      <div className="min-h-screen bg-white dark:bg-gray-950">
+      <div className="min-h-screen bg-white dark:bg-gray-950 pt-20">
         {/* Üst Menü */}
-        <nav className="border-b dark:border-gray-800 bg-gray-50 dark:bg-gray-900 px-8 py-5 flex justify-between items-center sticky top-0 z-10">
+        <nav className="border-b dark:border-gray-800 bg-gray-50 dark:bg-gray-900 px-8 py-5 flex justify-between items-center sticky top-20 z-10">
           <div className="flex items-center gap-4 h-full">
             <button onClick={() => router.push('/portal')} className="p-2.5 hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-gray-300 rounded-full transition flex items-center justify-center">
               <ChevronLeft size={22} />
