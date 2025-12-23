@@ -5,60 +5,30 @@ import { ArrowRight } from 'lucide-react';
 import DashboardCards from '@/components/DashboardCards';
 import { useState, useEffect } from 'react';
 
-// Core 6 Colors for animated blobs
-const blobColors = [
-  { color: 'rgba(255,0,0,', name: 'red' },         // #ff0000
-  { color: 'rgba(0,255,0,', name: 'lime' },        // #00ff00
-  { color: 'rgba(0,0,255,', name: 'blue' },        // #0000ff
-  { color: 'rgba(0,145,255,', name: 'ocean' },     // #0091ff
-  { color: 'rgba(92,3,188,', name: 'purple' },     // #5C03BC
-  { color: 'rgba(229,54,171,', name: 'pink' },     // #E536AB
-];
-
-interface Blob {
-  id: number;
-  x: number;
-  y: number;
-  size: number;
-  color: string;
-  duration: number;
-  delay: number;
-}
-
-const generateBlobs = (): Blob[] => {
-  return Array.from({ length: 5 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100 - 20,
-    y: Math.random() * 100 - 20,
-    size: 300 + Math.random() * 300,
-    color: blobColors[Math.floor(Math.random() * blobColors.length)].color,
-    duration: 15 + Math.random() * 15,
-    delay: Math.random() * 5,
-  }));
-};
-
 export default function Home() {
-  const [blobs, setBlobs] = useState<Blob[]>([]);
-
-  useEffect(() => {
-    setBlobs(generateBlobs());
-    
-    // Change blob colors periodically
-    const interval = setInterval(() => {
-      setBlobs(prev => prev.map(blob => ({
-        ...blob,
-        color: blobColors[Math.floor(Math.random() * blobColors.length)].color,
-      })));
-    }, 8000);
-
-    return () => clearInterval(interval);
-  }, []);
+  // Static blobs with varied properties for CSS animation
+  // Using transform-based animation classes defined in globals.css or tailwind config is more performant than updating top/left via JS
+  const blobs = [
+    { color: 'bg-purple-600', left: '10%', top: '20%', size: 'w-96 h-96', anim: 'animate-blob-float', delay: '0s' },
+    { color: 'bg-blue-500', left: '70%', top: '50%', size: 'w-80 h-80', anim: 'animate-blob-float-reverse', delay: '2s' },
+    { color: 'bg-pink-500', left: '40%', top: '30%', size: 'w-72 h-72', anim: 'animate-blob-float', delay: '4s' },
+    { color: 'bg-cyan-400', left: '20%', top: '60%', size: 'w-64 h-64', anim: 'animate-blob-float-reverse', delay: '1s' },
+  ];
 
   return (
-    <div className="bg-dark text-slate-200 font-sans selection:bg-accent/30 h-screen overflow-hidden flex flex-col pt-20">
+    <div className="bg-dark text-slate-200 font-sans selection:bg-accent/30 h-screen overflow-hidden flex flex-col pt-20 relative">
       
+      {/* Noise Texture for Banding Fix - Low Opacity Static Image */}
+      <div 
+        className="absolute inset-0 z-[1] opacity-[0.04] pointer-events-none mix-blend-overlay" 
+        style={{ 
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: 'repeat' 
+        }}
+      ></div>
+
       {/* Hero Section - %70 */}
-      <header className="relative overflow-hidden flex-shrink-0 flex flex-col justify-center border-b border-primary/20 flex-[7]">
+      <header className="relative overflow-hidden flex-shrink-0 flex flex-col justify-center border-b border-primary/20 flex-[7] z-[2]">
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl md:max-w-5xl mx-auto text-center">
@@ -103,26 +73,20 @@ export default function Home() {
         </div>
         
         {/* Animated Background Blobs */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {blobs.map((blob) => (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+          {blobs.map((blob, i) => (
             <div
-              key={blob.id}
-              className="absolute rounded-full animate-blob-float"
+              key={i}
+              className={`absolute rounded-full mix-blend-screen filter blur-[80px] opacity-40 ${blob.color} ${blob.anim} will-change-transform`}
               style={{
-                left: `${blob.x}%`,
-                top: `${blob.y}%`,
-                width: `${blob.size}px`,
-                height: `${blob.size}px`,
-                backgroundColor: `${blob.color}0.15)`,
-                filter: 'blur(80px)',
-                WebkitFilter: 'blur(80px)', // Safari specific
-                transform: 'translate3d(0, 0, 0)', // Force GPU acceleration
-                willChange: 'transform',
-                animationDuration: `${blob.duration}s`,
-                animationDelay: `${blob.delay}s`,
-                transition: 'background-color 3s ease-in-out',
+                left: blob.left,
+                top: blob.top,
+                width: blob.size.split(' ')[0].replace('w-', '') === '96' ? '24rem' : '20rem',
+                height: blob.size.split(' ')[1].replace('h-', '') === '96' ? '24rem' : '20rem',
+                animationDuration: '10s',
+                animationDelay: blob.delay,
               }}
-            />
+            ></div>
           ))}
         </div>
       </header>

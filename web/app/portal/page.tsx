@@ -110,20 +110,23 @@ export default function Dashboard() {
             <p className="text-gray-500 dark:text-gray-400 mt-1 font-medium">Akademik Not Yönetim Sistemi</p>
           </div>
           
-          <div className="relative flex items-center gap-4">
+          <div className="relative flex items-center gap-2 md:gap-4">
             <button 
               onClick={() => setIsCreateModalOpen(true)}
-              className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-all font-bold flex items-center gap-2"
+              className="p-3 md:px-6 md:py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-all font-bold flex items-center gap-2"
+              title="Ders Oluştur"
             >
               <Plus size={20} />
-              Ders Oluştur
+              <span className="hidden md:inline">Ders Oluştur</span>
             </button>
 
             <button 
               onClick={() => router.push('/student')}
-              className="px-6 py-3 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 shadow-sm transition-all font-bold"
+              className="p-3 md:px-6 md:py-3 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 shadow-sm transition-all font-bold flex items-center gap-2"
+              title="Öğrenci Girişi"
             >
-              Öğrenci Girişi
+              <span className="md:hidden"><BookOpen size={20} /></span>
+              <span className="hidden md:inline">Öğrenci Girişi</span>
             </button>
 
             <div className="relative">
@@ -134,9 +137,12 @@ export default function Dashboard() {
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                 disabled={uploading}
               />
-              <button className={`flex items-center gap-2 px-6 py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-700 transition-all ${uploading ? 'opacity-50' : ''}`}>
+              <button 
+                className={`flex items-center gap-2 p-3 md:px-6 md:py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-700 transition-all ${uploading ? 'opacity-50' : ''}`}
+                title="CSV Yükle"
+              >
                 {uploading ? <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-500"></div> : <Upload size={20} />}
-                <span className="font-bold">{uploading ? 'Yükleniyor...' : 'CSV Yükle'}</span>
+                <span className="hidden md:inline font-bold">{uploading ? 'Yükleniyor...' : 'CSV Yükle'}</span>
               </button>
             </div>
           </div>

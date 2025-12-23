@@ -142,7 +142,7 @@ export default function StudentPortal() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col items-center justify-center p-4 pt-20">
       <button 
         onClick={() => router.push('/')}
-        className="fixed top-24 left-6 p-2 text-gray-400 hover:text-gray-900 dark:hover:text-white transition z-50"
+        className="fixed top-24 left-4 md:left-8 p-2 text-gray-400 hover:text-gray-900 dark:hover:text-white transition z-50 bg-white/50 dark:bg-black/20 backdrop-blur-sm rounded-full"
       >
         <ChevronLeft size={24} />
       </button>

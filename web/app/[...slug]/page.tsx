@@ -63,7 +63,7 @@ export default async function MarkdownPage({ params }: PageProps) {
   const description = typeof data.description === 'string' ? data.description : undefined;
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto px-4 pb-8 pt-24 max-w-4xl">
       {/* Back to weeks button for week pages */}
       {isWeekPage && (
         <Link 

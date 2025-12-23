@@ -396,9 +396,9 @@ function CourseDetailContent() {
         </nav>
 
         {/* Ana İçerik */}
-        <main className="px-6 pb-6 h-[calc(100vh-180px)] overflow-hidden">
+        <main className="p-4 lg:p-6 h-auto lg:h-[calc(100vh-180px)] overflow-visible lg:overflow-hidden">
           {showAnalysis && stats ? (
-            <div className="h-full flex flex-col gap-6 animate-in fade-in zoom-in-95 duration-200">
+            <div className="h-full flex flex-col gap-6">
               {/* 1. ÖZET KARTLARI */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 flex-shrink-0 pt-4">
                 <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border dark:border-gray-800 shadow-sm border-b-4 border-b-blue-500">
@@ -443,14 +443,15 @@ function CourseDetailContent() {
                           <span className={`w-8 font-bold text-base ${letter === 'FF' ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'} text-left`}>{letter}</span>
                           <div className="flex-1 h-4 bg-gray-100 dark:bg-gray-800/50 rounded-full overflow-hidden border border-gray-200 dark:border-gray-700/50 relative">
                             <div 
-                              className={`h-full bg-gradient-to-r ${barClass} transition-all duration-1000 ease-out relative`}
+                              className={`h-full bg-gradient-to-r ${barClass} relative`}
                               style={{ width: `${percent}%` }}
                             >
                                 <div className="absolute inset-0 bg-white/10"></div>
                             </div>
                           </div>
-                          <div className="w-8 text-right">
+                          <div className="w-14 text-right flex flex-col items-end leading-none justify-center">
                             <span className="text-base font-bold text-gray-900 dark:text-white">{count}</span>
+                            <span className="text-[10px] font-medium text-gray-400 mt-0.5">%{Math.round(percent)}</span>
                           </div>
                         </div>
                       );
@@ -515,10 +516,10 @@ function CourseDetailContent() {
                           
                           <div className="h-3 bg-gray-100 dark:bg-gray-800/50 rounded-full overflow-hidden border border-gray-200 dark:border-gray-700/50 backdrop-blur-sm relative">
                              <div 
-                              className={`h-full bg-gradient-to-r ${barGradient} relative transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(168,85,247,0.3)]`}
+                              className={`h-full bg-gradient-to-r ${barGradient} relative shadow-[0_0_10px_rgba(168,85,247,0.3)]`}
                               style={{ width: `${percent}%` }}
                             >
-                              <div className="absolute inset-0 bg-white/10 animate-[pulse_3s_infinite]"></div>
+                              <div className="absolute inset-0 bg-white/10"></div>
                             </div>
                           </div>
                         </div>
