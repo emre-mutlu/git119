@@ -8,6 +8,7 @@ import GradeTable from '@/components/grade-table';
 import WeightSettingsModal from '@/components/weight-settings-modal';
 import TargetScorePopover from '@/components/target-score-popover';
 import FeedbackPopover from '@/components/feedback-popover';
+import AdminGuard from '@/components/AdminGuard';
 import { StudentRow, Assignment } from '@/lib/types';
 import { calculateStudentGrade } from '@/lib/calculator';
 
@@ -331,156 +332,158 @@ function CourseDetailContent() {
   if (!course) return <div className="p-20 text-center">Ders bulunamadı.</div>;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950">
-      {/* Üst Menü */}
-      <nav className="border-b dark:border-gray-800 bg-gray-50 dark:bg-gray-900 px-8 py-5 flex justify-between items-center sticky top-0 z-10">
-        <div className="flex items-center gap-4 h-full">
-          <button onClick={() => router.push('/portal')} className="p-2.5 hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-gray-300 rounded-full transition flex items-center justify-center">
-            <ChevronLeft size={22} />
-          </button>
-          <div className="flex flex-col justify-center">
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white leading-tight">{course.name}</h1>
-            <p className="text-xs text-gray-500 dark:text-gray-400 font-bold tracking-wide mt-0.5">
-                {course.semester.replace('GUZ', 'GÜZ').replace('2025-GÜZ', '2025 GÜZ')}
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <button 
-            onClick={handleExportCSV}
-            className="p-2.5 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-xl transition flex items-center justify-center"
-            title="Excel/CSV Olarak İndir"
-          >
-            <Download size={20} />
-          </button>
-
-          <button 
-            onClick={() => setIsSettingsOpen(true)}
-            className="p-2 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition"
-            title="Ders Ayarları"
-          >
-            <Settings size={20} />
-          </button>
-
-          <button 
-            onClick={() => setShowAnalysis(!showAnalysis)}
-            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium border rounded-lg transition ${ 
-              showAnalysis ? 'bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-900/30 dark:border-blue-800 dark:text-blue-400' : 'bg-white text-gray-700 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700'
-            }`}
-          >
-            <LayoutDashboard size={16} />
-            {showAnalysis ? 'Tabloya Dön' : 'Analiz'}
-          </button>
-          
-          <button 
-            onClick={saveChanges}
-            disabled={!hasChanges || isSaving}
-            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium text-white rounded-lg transition ${ 
-              !hasChanges ? 'bg-gray-300 dark:bg-gray-700 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
-            }`}
-          >
-            <Save size={16} />
-            {isSaving ? 'Kaydediliyor...' : hasChanges ? 'Kaydet' : 'Kaydedildi'}
-          </button>
-        </div>
-      </nav>
-
-      {/* Ana İçerik */}
-      <main className="p-8">
-        {showAnalysis && stats ? (
-          <div className="space-y-6 animate-in fade-in zoom-in-95 duration-200">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm">
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Sınıf Ortalaması</p>
-                <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">{stats.avg}</p>
-              </div>
-              <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm">
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">En Yüksek / En Düşük</p>
-                <p className="text-3xl font-bold text-gray-900 dark:text-white">{stats.max} <span className="text-gray-300 dark:text-gray-700 mx-2">/</span> {stats.min}</p>
-              </div>
-              <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm">
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Öğrenci Sayısı</p>
-                <p className="text-3xl font-bold text-gray-900 dark:text-white">{students.length}</p>
-              </div>
+    <AdminGuard>
+      <div className="min-h-screen bg-white dark:bg-gray-950">
+        {/* Üst Menü */}
+        <nav className="border-b dark:border-gray-800 bg-gray-50 dark:bg-gray-900 px-8 py-5 flex justify-between items-center sticky top-0 z-10">
+          <div className="flex items-center gap-4 h-full">
+            <button onClick={() => router.push('/portal')} className="p-2.5 hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-gray-300 rounded-full transition flex items-center justify-center">
+              <ChevronLeft size={22} />
+            </button>
+            <div className="flex flex-col justify-center">
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white leading-tight">{course.name}</h1>
+              <p className="text-xs text-gray-500 dark:text-gray-400 font-bold tracking-wide mt-0.5">
+                  {course.semester.replace('GUZ', 'GÜZ').replace('2025-GÜZ', '2025 GÜZ')}
+              </p>
             </div>
+          </div>
 
-            <div className="bg-white dark:bg-gray-900 p-8 rounded-xl border dark:border-gray-800 shadow-sm">
-              <h3 className="font-bold text-gray-900 dark:text-white mb-6">Harf Notu Dağılımı</h3>
-              <div className="space-y-4">
-                {['AA', 'BA', 'BB', 'CB', 'CC', 'DC', 'DD', 'FD', 'FF'].map(letter => {
-                  const count = stats.distribution[letter] || 0;
-                  const percent = students.length > 0 ? (count / students.length) * 100 : 0;
-                  return (
-                    <div key={letter} className="flex items-center gap-4">
-                      <span className="w-8 font-bold text-sm text-gray-600 dark:text-gray-300">{letter}</span>
-                      <div className="flex-1 h-4 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
-                        <div 
-                          className="h-full bg-blue-500 transition-all duration-500"
-                          style={{ width: `${percent}%` }}
-                        />
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={handleExportCSV}
+              className="p-2.5 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-xl transition flex items-center justify-center"
+              title="Excel/CSV Olarak İndir"
+            >
+              <Download size={20} />
+            </button>
+
+            <button 
+              onClick={() => setIsSettingsOpen(true)}
+              className="p-2 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition"
+              title="Ders Ayarları"
+            >
+              <Settings size={20} />
+            </button>
+
+            <button 
+              onClick={() => setShowAnalysis(!showAnalysis)}
+              className={`flex items-center gap-2 px-4 py-2 text-sm font-medium border rounded-lg transition ${ 
+                showAnalysis ? 'bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-900/30 dark:border-blue-800 dark:text-blue-400' : 'bg-white text-gray-700 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700'
+              }`}
+            >
+              <LayoutDashboard size={16} />
+              {showAnalysis ? 'Tabloya Dön' : 'Analiz'}
+            </button>
+            
+            <button 
+              onClick={saveChanges}
+              disabled={!hasChanges || isSaving}
+              className={`flex items-center gap-2 px-4 py-2 text-sm font-medium text-white rounded-lg transition ${ 
+                !hasChanges ? 'bg-gray-300 dark:bg-gray-700 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+              }`}
+            >
+              <Save size={16} />
+              {isSaving ? 'Kaydediliyor...' : hasChanges ? 'Kaydet' : 'Kaydedildi'}
+            </button>
+          </div>
+        </nav>
+
+        {/* Ana İçerik */}
+        <main className="p-8">
+          {showAnalysis && stats ? (
+            <div className="space-y-6 animate-in fade-in zoom-in-95 duration-200">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm">
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Sınıf Ortalaması</p>
+                  <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">{stats.avg}</p>
+                </div>
+                <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm">
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">En Yüksek / En Düşük</p>
+                  <p className="text-3xl font-bold text-gray-900 dark:text-white">{stats.max} <span className="text-gray-300 dark:text-gray-700 mx-2">/</span> {stats.min}</p>
+                </div>
+                <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm">
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Öğrenci Sayısı</p>
+                  <p className="text-3xl font-bold text-gray-900 dark:text-white">{students.length}</p>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-900 p-8 rounded-xl border dark:border-gray-800 shadow-sm">
+                <h3 className="font-bold text-gray-900 dark:text-white mb-6">Harf Notu Dağılımı</h3>
+                <div className="space-y-4">
+                  {['AA', 'BA', 'BB', 'CB', 'CC', 'DC', 'DD', 'FD', 'FF'].map(letter => {
+                    const count = stats.distribution[letter] || 0;
+                    const percent = students.length > 0 ? (count / students.length) * 100 : 0;
+                    return (
+                      <div key={letter} className="flex items-center gap-4">
+                        <span className="w-8 font-bold text-sm text-gray-600 dark:text-gray-300">{letter}</span>
+                        <div className="flex-1 h-4 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                          <div 
+                            className="h-full bg-blue-500 transition-all duration-500"
+                            style={{ width: `${percent}%` }}
+                          />
+                        </div>
+                        <span className="w-12 text-sm text-gray-500 dark:text-gray-400 text-right">{count} Kişi</span>
                       </div>
-                      <span className="w-12 text-sm text-gray-500 dark:text-gray-400 text-right">{count} Kişi</span>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
-        ) : (
-          <GradeTable 
-            students={sortedStudents} 
-            assignments={assignments} 
-            onScoreChange={handleScoreChange} 
-            onCalculateTarget={(s, pos) => {
-              setSelectedStudentForTarget(s);
-              setPopoverPosition(pos);
-            }}
-            onSort={handleSort}
-            sortConfig={sortConfig}
-            onFeedbackClick={(s, pos) => {
-                setSelectedStudentForFeedback(s);
-                setFeedbackPosition(pos);
-            }}
-            lastEditedStudentId={lastEditedStudentId}
-          />
-        )}
-      </main>
+          ) : (
+            <GradeTable 
+              students={sortedStudents} 
+              assignments={assignments} 
+              onScoreChange={handleScoreChange} 
+              onCalculateTarget={(s, pos) => {
+                setSelectedStudentForTarget(s);
+                setPopoverPosition(pos);
+              }}
+              onSort={handleSort}
+              sortConfig={sortConfig}
+              onFeedbackClick={(s, pos) => {
+                  setSelectedStudentForFeedback(s);
+                  setFeedbackPosition(pos);
+              }}
+              lastEditedStudentId={lastEditedStudentId}
+            />
+          )}
+        </main>
 
-      <WeightSettingsModal 
-        isOpen={isSettingsOpen} 
-        onClose={() => setIsSettingsOpen(false)} 
-        assignments={assignments} 
-        onSave={handleWeightSave} 
-      />
+        <WeightSettingsModal 
+          isOpen={isSettingsOpen} 
+          onClose={() => setIsSettingsOpen(false)} 
+          assignments={assignments} 
+          onSave={handleWeightSave} 
+        />
 
-      <TargetScorePopover
-        isOpen={!!selectedStudentForTarget}
-        onClose={() => {
-            setSelectedStudentForTarget(null);
-            setPopoverPosition(null);
-        }}
-        student={selectedStudentForTarget}
-        assignments={assignments}
-        position={popoverPosition}
-        onSelectScore={(assignId, val) => {
-            if (selectedStudentForTarget) {
-                handleScoreChange(selectedStudentForTarget.id, assignId, val.toString());
-            }
-            setSelectedStudentForTarget(null);
-            setPopoverPosition(null);
-        }}
-      />
+        <TargetScorePopover
+          isOpen={!!selectedStudentForTarget}
+          onClose={() => {
+              setSelectedStudentForTarget(null);
+              setPopoverPosition(null);
+          }}
+          student={selectedStudentForTarget}
+          assignments={assignments}
+          position={popoverPosition}
+          onSelectScore={(assignId, val) => {
+              if (selectedStudentForTarget) {
+                  handleScoreChange(selectedStudentForTarget.id, assignId, val.toString());
+              }
+              setSelectedStudentForTarget(null);
+              setPopoverPosition(null);
+          }}
+        />
 
-      <FeedbackPopover
-        isOpen={!!selectedStudentForFeedback}
-        onClose={() => setSelectedStudentForFeedback(null)}
-        studentName={selectedStudentForFeedback?.full_name || ''}
-        initialFeedback={selectedStudentForFeedback?.feedback || ''}
-        onSave={handleFeedbackSave}
-        position={feedbackPosition}
-      />
-    </div>
+        <FeedbackPopover
+          isOpen={!!selectedStudentForFeedback}
+          onClose={() => setSelectedStudentForFeedback(null)}
+          studentName={selectedStudentForFeedback?.full_name || ''}
+          initialFeedback={selectedStudentForFeedback?.feedback || ''}
+          onSave={handleFeedbackSave}
+          position={feedbackPosition}
+        />
+      </div>
+    </AdminGuard>
   );
 }
 
