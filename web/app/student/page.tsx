@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import { Search, ChevronLeft, GraduationCap, MessageSquare, Mail, Key } from 'lucide-react';
+import { User, ChevronLeft, GraduationCap, MessageSquare, Mail, Key } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { calculateStudentGrade } from '@/lib/calculator';
 import { sendOTPEmail } from '@/lib/otp-service';
@@ -201,7 +201,7 @@ export default function StudentPortal() {
                   className="w-full px-5 py-4 pl-12 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm text-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition dark:text-white placeholder-gray-400"
                   autoFocus
                 />
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors" size={20} />
+                <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors" size={20} />
                 
                 <button 
                   type="submit"
@@ -331,4 +331,5 @@ export default function StudentPortal() {
       </div>
     </div>
   );
+}
 }
