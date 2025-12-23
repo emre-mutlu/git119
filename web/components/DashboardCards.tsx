@@ -40,7 +40,7 @@ export default function DashboardCards() {
           <Link
             key={card.href}
             href={card.href}
-            className="bg-dark/70 backdrop-blur-md border border-primary/20 p-7 rounded-xl group shadow-xl shadow-black/30 flex cursor-pointer transition-all duration-150 ease-out hover:scale-[1.01] gap-4"
+            className="bg-dark/70 backdrop-blur-md border border-primary/20 p-7 rounded-xl group shadow-xl shadow-black/30 flex flex-col cursor-pointer transition-all duration-150 ease-out hover:scale-[1.01]"
             style={{ 
               ['--card-color' as string]: card.color,
               filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.4))',
@@ -55,7 +55,7 @@ export default function DashboardCards() {
             }}
           >
             <div
-              className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0 mt-1"
+              className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0 mb-5"
               style={{ backgroundColor: `${card.color}20` }}
             >
               <Icon
@@ -64,17 +64,16 @@ export default function DashboardCards() {
               />
             </div>
 
-            <div className="flex flex-col flex-1">
-              <h3 className="text-xl font-bold text-white leading-tight mb-3">{card.title}</h3>
-              <p className="text-slate-400 text-sm leading-relaxed flex-1">{card.description}</p>
-              <span
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold"
-                style={{ color: card.color }}
-              >
-                {card.linkText}
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-              </span>
-            </div>
+            <h3 className="text-xl font-bold text-white leading-tight mb-3">{card.title}</h3>
+            <p className="text-slate-400 text-sm leading-relaxed flex-1">{card.description}</p>
+            
+            <span
+              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold"
+              style={{ color: card.color }}
+            >
+              {card.linkText}
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+            </span>
           </Link>
         );
       })}
