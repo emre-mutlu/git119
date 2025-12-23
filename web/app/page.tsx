@@ -57,7 +57,7 @@ export default function Home() {
     <div className="bg-dark text-slate-200 font-sans selection:bg-accent/30 h-[calc(100vh-4rem)] overflow-hidden flex flex-col">
       
       {/* Hero Section - %70 */}
-      <header className="relative overflow-hidden bg-dark flex-shrink-0 flex flex-col justify-center border-b border-primary/20 h-[70%]">
+      <header className="relative overflow-hidden flex-shrink-0 flex flex-col justify-center border-b border-primary/20 flex-[7]">
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl md:max-w-5xl mx-auto text-center">
@@ -83,15 +83,18 @@ export default function Home() {
                   </span>
                 </Link>
                 <Link href="/haftalar" className="relative overflow-hidden px-6 py-3 bg-dark/50 backdrop-blur-md hover:bg-primary/20 text-slate-200 font-medium rounded-lg border border-primary/30 hover:border-accent/50 shadow-lg shadow-black/10 transform-gpu wave-button-secondary" style={{ transition: 'all 0.15s ease-out' }}>
-                  <span className="relative z-10">Haftalık Programa Git</span>
+                  <span className="relative z-10 flex items-center">
+                    Haftalık Programa Git
+                    <ArrowRight size={18} className="ml-2 group-hover:translate-x-1" style={{ transition: 'transform 0.15s ease-out' }} />
+                  </span>
                 </Link>
               </div>
 
-              {/* Daha Belirgin Notlar Butonu */}
-              <Link href="/student" className="relative overflow-hidden px-10 py-3 bg-gradient-to-r from-pink-600/20 to-purple-600/20 backdrop-blur-md hover:from-pink-600/30 hover:to-purple-600/30 text-pink-400 font-black rounded-full border-2 border-pink-500/30 hover:border-pink-500/60 shadow-[0_0_20px_rgba(236,72,153,0.2)] hover:shadow-[0_0_30px_rgba(236,72,153,0.4)] transition-all transform-gpu hover:scale-105 flex items-center group">
-                <span className="relative z-10 flex items-center gap-3 tracking-widest uppercase text-sm">
+              {/* Notlar Butonu - Diğerleriyle Uyumlu */}
+              <Link href="/student" className="relative overflow-hidden px-6 py-3 bg-dark/50 backdrop-blur-md hover:bg-pink/20 text-slate-200 font-medium rounded-lg border border-pink/30 hover:border-pink/50 shadow-lg shadow-black/10 transform-gpu wave-button-secondary" style={{ transition: 'all 0.15s ease-out' }}>
+                <span className="relative z-10 flex items-center">
                   Notları Gör
-                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight size={18} className="ml-2 group-hover:translate-x-1" style={{ transition: 'transform 0.15s ease-out' }} />
                 </span>
               </Link>
             </div>
@@ -124,11 +127,14 @@ export default function Home() {
       </header>
 
       {/* Dashboard Grid - %30 */}
-      <main className="bg-[#0D0620] flex-grow relative z-20 flex items-center overflow-hidden h-[30%]">
+      <main className="bg-[#0D0620] flex-shrink-0 relative z-20 flex items-center overflow-hidden flex-[3]">
         <div className="container mx-auto px-4 py-2">
           <DashboardCards />
         </div>
       </main>
+    </div>
+  );
+}
     </div>
   );
 }
