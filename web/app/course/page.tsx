@@ -424,8 +424,8 @@ function CourseDetailContent() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-0 flex-1">
                 {/* 2. HARF NOTU DAĞILIMI */}
                 <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col min-h-0">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2 flex-shrink-0">
-                    <span className="w-1 h-6 bg-blue-500 rounded-full"></span>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3 flex-shrink-0">
+                    <span className="w-1.5 h-6 bg-blue-500 rounded-full"></span>
                     Harf Notu Dağılımı
                   </h3>
                   <div className="space-y-3 overflow-y-auto pr-2 custom-scrollbar flex-1 mb-6">
@@ -439,8 +439,8 @@ function CourseDetailContent() {
                       else if (['DD', 'FF'].includes(letter)) barClass = 'from-red-600 to-pink-600';
 
                       return (
-                        <div key={letter} className="flex items-center gap-3 group">
-                          <span className={`w-8 font-bold text-base ${letter === 'FF' ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'}`}>{letter}</span>
+                        <div key={letter} className="flex items-center gap-4 group">
+                          <span className={`w-8 font-bold text-base ${letter === 'FF' ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'} text-left`}>{letter}</span>
                           <div className="flex-1 h-4 bg-gray-100 dark:bg-gray-800/50 rounded-full overflow-hidden border border-gray-200 dark:border-gray-700/50 relative">
                             <div 
                               className={`h-full bg-gradient-to-r ${barClass} transition-all duration-1000 ease-out relative`}
@@ -458,10 +458,10 @@ function CourseDetailContent() {
                   </div>
                   
                   {/* Yeni Alt Metrik Alanı */}
-                  <div className="mt-auto pt-6 border-t dark:border-gray-800 grid grid-cols-3 gap-4 flex-shrink-0">
+                  <div className="mt-auto pt-6 border-t dark:border-gray-800 grid grid-cols-3 gap-4 flex-shrink-0 text-left">
                     <div>
-                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Standart Sapma</p>
-                        <p className="text-lg font-black text-gray-700 dark:text-gray-200">
+                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter text-left">Standart Sapma</p>
+                        <p className="text-lg font-black text-gray-700 dark:text-gray-200 text-left">
                             {(() => {
                                 const avg = parseFloat(stats.avg);
                                 const squareDiffs = students.map(s => Math.pow(s.average - avg, 2));
@@ -471,14 +471,14 @@ function CourseDetailContent() {
                         </p>
                     </div>
                     <div>
-                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">En Sık Not</p>
-                        <p className="text-lg font-black text-blue-500">
+                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter text-left">En Sık Not</p>
+                        <p className="text-lg font-black text-blue-500 text-left">
                             {Object.entries(stats.distribution).sort((a: any, b: any) => b[1] - a[1])[0]?.[0] || "-"}
                         </p>
                     </div>
                     <div>
-                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Geçme/Kalma</p>
-                        <p className="text-lg font-black text-gray-700 dark:text-gray-200">
+                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter text-left">Geçme/Kalma</p>
+                        <p className="text-lg font-black text-gray-700 dark:text-gray-200 text-left">
                             {students.filter(s => s.letter_grade !== 'FF').length} <span className="text-gray-400 font-normal">/</span> {students.filter(s => s.letter_grade === 'FF').length}
                         </p>
                     </div>
@@ -487,8 +487,8 @@ function CourseDetailContent() {
 
                 {/* 3. ÖDEV PERFORMANSI */}
                 <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col min-h-0">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2 flex-shrink-0">
-                    <span className="w-1 h-6 bg-purple-500 rounded-full"></span>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3 flex-shrink-0">
+                    <span className="w-1.5 h-6 bg-purple-500 rounded-full"></span>
                     Ödev Bazlı Başarı
                   </h3>
                   <div className="space-y-5 overflow-y-auto pr-2 custom-scrollbar flex-1">
@@ -507,9 +507,9 @@ function CourseDetailContent() {
                       const barGradient = gradients[idx % gradients.length];
                       
                       return (
-                        <div key={assign.id} className="group">
+                        <div key={assign.id} className="group text-left">
                           <div className="flex justify-between items-end mb-1.5">
-                            <span className="text-sm font-bold text-gray-700 dark:text-gray-200 tracking-tight truncate max-w-[250px] group-hover:text-purple-400 transition-colors" title={assign.name}>{assign.name}</span>
+                            <span className="text-sm font-bold text-gray-700 dark:text-gray-200 tracking-tight truncate max-w-[250px] group-hover:text-purple-400 transition-colors text-left" title={assign.name}>{assign.name}</span>
                             <span className="text-sm font-black text-gray-900 dark:text-white">{avg.toFixed(1)}</span>
                           </div>
                           
@@ -531,8 +531,8 @@ function CourseDetailContent() {
               {/* 4. RİSKLİ ÖĞRENCİLER */}
               <div className="bg-white dark:bg-gray-900 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col min-h-0 max-h-[35%] flex-shrink-0 mb-4">
                  <div className="p-4 border-b dark:border-gray-800 bg-red-50/30 dark:bg-red-900/10 flex-shrink-0">
-                    <h3 className="text-lg font-bold text-red-700 dark:text-red-400 flex items-center gap-2">
-                        <span className="w-1 h-6 bg-red-500 rounded-full"></span>
+                    <h3 className="text-lg font-bold text-red-700 dark:text-red-400 flex items-center gap-3">
+                        <span className="w-1.5 h-6 bg-red-500 rounded-full"></span>
                         Risk Grubu (FF/DD veya &lt;50)
                     </h3>
                  </div>
@@ -540,7 +540,7 @@ function CourseDetailContent() {
                     <table className="w-full text-left border-separate border-spacing-0">
                         <thead className="bg-gray-50 dark:bg-gray-800 text-sm uppercase text-gray-500 font-bold sticky top-0 z-10">
                             <tr>
-                                <th className="p-3 pl-6 border-b dark:border-gray-700">Öğrenci</th>
+                                <th className="p-3 pl-6 border-b dark:border-gray-700 text-left">Öğrenci</th>
                                 <th className="p-3 text-center border-b dark:border-gray-700">Ortalama</th>
                                 <th className="p-3 text-center border-b dark:border-gray-700">Harf</th>
                                 <th className="p-3 text-center border-b dark:border-gray-700">Eksik Ödev</th>
