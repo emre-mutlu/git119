@@ -57,35 +57,36 @@ export default function Home() {
     <div className="bg-dark text-slate-200 font-sans selection:bg-accent/30 h-screen overflow-hidden flex flex-col">
       
       {/* Hero Section */}
-      <header className="relative overflow-hidden bg-dark flex-shrink-0 flex flex-col justify-center border-b border-primary/20 h-[65%]">
+      <header className="relative overflow-hidden bg-dark flex-shrink-0 flex flex-col justify-center border-b border-primary/20 h-[60%]">
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl md:max-w-5xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-primary/10 backdrop-blur-md border border-primary/30 rounded-full px-3 py-1 mb-6 shadow-lg shadow-primary/5">
+            <div className="inline-flex items-center space-x-2 bg-primary/10 backdrop-blur-md border border-primary/30 rounded-full px-3 py-1 mb-4 shadow-lg shadow-primary/5">
               <span className="neon-dot animate-pulse"></span>
               <span className="text-accent text-xs font-medium tracking-wide uppercase">2025 Bahar Dönemi</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
+            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-4">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon via-neon/50 to-accent">Dijital Tasarıma</span> Giriş
             </h1>
-            <p className="text-base md:text-lg text-slate-400 mb-8 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-slate-400 mb-6 leading-relaxed max-w-2xl mx-auto">
               <span className="font-black text-slate-200">git119</span>{' '}
               dersi kapsamında <span className="font-bold text-slate-200">Adobe Photoshop</span>, <span className="font-bold text-slate-200">Illustrator</span> ve <span className="font-bold text-slate-200">Üretken Yapay Zeka</span> araçlarını kullanarak yaratıcılığınızı dijital dünyaya taşıyın.
             </p>
-            <div className="flex flex-col items-center gap-4">
-              <div className="flex flex-wrap justify-center gap-4">
-                <Link href="/Mufredat/Syllabus" className="relative overflow-hidden px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg flex items-center group border border-white/10 transform-gpu neon-glow-button wave-button" style={{ transition: 'all 0.15s ease-out' }}>
-                  <span className="relative z-10 flex items-center">
-                    Syllabus’ı İncele
-                    <ArrowRight size={18} className="ml-2 group-hover:translate-x-1" style={{ transition: 'transform 0.15s ease-out' }} />
-                  </span>
-                </Link>
-                <Link href="/haftalar" className="relative overflow-hidden px-6 py-3 bg-dark/50 backdrop-blur-md hover:bg-primary/20 text-slate-200 font-medium rounded-lg border border-primary/30 hover:border-accent/50 shadow-lg shadow-black/10 transform-gpu wave-button-secondary" style={{ transition: 'all 0.15s ease-out' }}>
-                  <span className="relative z-10">Haftalık Programa Git</span>
-                </Link>
-              </div>
-              <Link href="/student" className="text-accent/70 hover:text-accent font-bold text-sm flex items-center gap-2 transition-all hover:scale-105 bg-accent/5 px-4 py-2 rounded-full border border-accent/10 hover:border-accent/30">
-                Öğrenci Not Portalı’na Giriş <ArrowRight size={14} />
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/Mufredat/Syllabus" className="relative overflow-hidden px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg flex items-center group border border-white/10 transform-gpu neon-glow-button wave-button" style={{ transition: 'all 0.15s ease-out' }}>
+                <span className="relative z-10 flex items-center">
+                  Syllabus’ı İncele
+                  <ArrowRight size={18} className="ml-2 group-hover:translate-x-1" style={{ transition: 'transform 0.15s ease-out' }} />
+                </span>
+              </Link>
+              <Link href="/haftalar" className="relative overflow-hidden px-6 py-3 bg-dark/50 backdrop-blur-md hover:bg-primary/20 text-slate-200 font-medium rounded-lg border border-primary/30 hover:border-accent/50 shadow-lg shadow-black/10 transform-gpu wave-button-secondary" style={{ transition: 'all 0.15s ease-out' }}>
+                <span className="relative z-10">Haftalık Programa Git</span>
+              </Link>
+              <Link href="/student" className="relative overflow-hidden px-6 py-3 bg-accent/10 backdrop-blur-md hover:bg-accent/20 text-accent font-bold rounded-lg border border-accent/30 hover:border-accent/50 shadow-lg shadow-black/10 transform-gpu wave-button-secondary flex items-center group" style={{ transition: 'all 0.15s ease-out' }}>
+                <span className="relative z-10 flex items-center">
+                  Notlarımı Gör
+                  <ArrowRight size={18} className="ml-2 group-hover:translate-x-1" style={{ transition: 'transform 0.15s ease-out' }} />
+                </span>
               </Link>
             </div>
           </div>

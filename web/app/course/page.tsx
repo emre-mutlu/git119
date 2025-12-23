@@ -213,17 +213,29 @@ function CourseDetailContent() {
   const handleFeedbackSave = async (feedback: string) => {
     if (!selectedStudentForFeedback) return;
     
+    // Sakla (Eski veri - hata durumunda geri dönmek için)
+    const oldFeedback = students.find(s => s.id === selectedStudentForFeedback.id)?.feedback;
+
     // Optimistic Update (Arayüzde anında göster)
     setStudents(prev => prev.map(s => 
         s.id === selectedStudentForFeedback.id ? { ...s, feedback } : s
     ));
 
     // Veritabanına kaydet
-    await supabase
+    const { error } = await supabase
         .from('enrollments')
         .update({ feedback })
         .eq('course_id', id)
         .eq('student_id', selectedStudentForFeedback.id);
+
+    if (error) {
+        console.error("Feedback Save Error:", error);
+        alert("Not kaydedilemedi: " + error.message);
+        // Hata durumunda geri al
+        setStudents(prev => prev.map(s => 
+            s.id === selectedStudentForFeedback.id ? { ...s, feedback: oldFeedback } : s
+        ));
+    }
   };
 
   // Kaydetme İşlemi
