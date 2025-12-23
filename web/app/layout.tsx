@@ -33,11 +33,11 @@ export default function RootLayout({
         <title>GİT 119 | Dijital Tasarıma Giriş</title>
         <meta name="description" content="TOBB ETÜ Görsel İletişim Tasarımı Bölümü - Dijital Tasarıma Giriş Dersi Web Sitesi" />
       </head>
-      <body className={`${outfit.variable} ${josefinSlab.variable} ${robotoCondensed.variable} ${rokkitt.variable} font-sans bg-slate-950 text-slate-200 antialiased overflow-x-hidden pt-16`}>
+      <body className={`${outfit.variable} ${josefinSlab.variable} ${robotoCondensed.variable} ${rokkitt.variable} font-sans bg-slate-950 text-slate-200 antialiased overflow-x-hidden`}>
         <RandomGradients />
-        <div className="min-h-screen w-full overflow-x-hidden">
+        <div className="relative w-full overflow-x-hidden flex flex-col">
           <Navbar />
-          {children}
+          <main>{children}</main>
         </div>
       </body>
     </html>

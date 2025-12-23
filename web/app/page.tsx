@@ -53,8 +53,9 @@ export default function Home() {
 
     return () => clearInterval(interval);
   }, []);
+
   return (
-    <div className="bg-dark text-slate-200 font-sans selection:bg-accent/30 h-[calc(100vh-4rem)] overflow-hidden flex flex-col">
+    <div className="bg-dark text-slate-200 font-sans selection:bg-accent/30 h-screen overflow-hidden flex flex-col pt-20">
       
       {/* Hero Section - %70 */}
       <header className="relative overflow-hidden flex-shrink-0 flex flex-col justify-center border-b border-primary/20 flex-[7]">

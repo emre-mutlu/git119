@@ -54,17 +54,19 @@ export default function DashboardCards() {
               e.currentTarget.style.boxShadow = '';
             }}
           >
-            <div
-              className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0 mb-5"
-              style={{ backgroundColor: `${card.color}20` }}
-            >
-              <Icon
-                style={{ color: card.color }}
-                size={22}
-              />
+            <div className="flex items-center gap-3 mb-4">
+              <div
+                className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0"
+                style={{ backgroundColor: `${card.color}20` }}
+              >
+                <Icon
+                  style={{ color: card.color }}
+                  size={22}
+                />
+              </div>
+              <h3 className="text-xl font-bold text-white leading-tight">{card.title}</h3>
             </div>
-
-            <h3 className="text-xl font-bold text-white leading-tight mb-3">{card.title}</h3>
+            
             <p className="text-slate-400 text-sm leading-relaxed flex-1">{card.description}</p>
             
             <span
