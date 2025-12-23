@@ -55,15 +55,11 @@ export default function DashboardCards() {
             }}
           >
             <div className="flex items-center gap-3 mb-4">
-              <div
-                className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0"
-                style={{ backgroundColor: `${card.color}20` }}
-              >
-                <Icon
-                  style={{ color: card.color }}
-                  size={22}
-                />
-              </div>
+              <Icon
+                style={{ color: card.color }}
+                size={24}
+                className="shrink-0"
+              />
               <h3 className="text-xl font-bold text-white leading-tight">{card.title}</h3>
             </div>
             
