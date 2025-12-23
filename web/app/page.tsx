@@ -72,20 +72,22 @@ export default function Home() {
               <span className="font-black text-slate-200">git119</span>{' '}
               dersi kapsamında <span className="font-bold text-slate-200">Adobe Photoshop</span>, <span className="font-bold text-slate-200">Illustrator</span> ve <span className="font-bold text-slate-200">Üretken Yapay Zeka</span> araçlarını kullanarak yaratıcılığınızı dijital dünyaya taşıyın.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/Mufredat/Syllabus" className="relative overflow-hidden px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg flex items-center group border border-white/10 transform-gpu neon-glow-button wave-button" style={{ transition: 'all 0.15s ease-out' }}>
-                <span className="relative z-10 flex items-center">
-                  Syllabus’ı İncele
-                  <ArrowRight size={18} className="ml-2 group-hover:translate-x-1" style={{ transition: 'transform 0.15s ease-out' }} />
-                </span>
-              </Link>
-              <Link href="/haftalar" className="relative overflow-hidden px-6 py-3 bg-dark/50 backdrop-blur-md hover:bg-primary/20 text-slate-200 font-medium rounded-lg border border-primary/30 hover:border-accent/50 shadow-lg shadow-black/10 transform-gpu wave-button-secondary" style={{ transition: 'all 0.15s ease-out' }}>
-                <span className="relative z-10">Haftalık Programa Git</span>
-              </Link>
-              <Link href="/student" className="relative overflow-hidden px-6 py-3 bg-accent/10 backdrop-blur-md hover:bg-accent/20 text-accent font-bold rounded-lg border border-accent/30 hover:border-accent/50 shadow-lg shadow-black/10 transform-gpu wave-button-secondary flex items-center group" style={{ transition: 'all 0.15s ease-out' }}>
-                <span className="relative z-10 flex items-center">
-                  Notlarımı Gör
-                  <ArrowRight size={18} className="ml-2 group-hover:translate-x-1" style={{ transition: 'transform 0.15s ease-out' }} />
+            <div className="flex flex-col items-center gap-6 mt-2">
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link href="/Mufredat/Syllabus" className="relative overflow-hidden px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg flex items-center group border border-white/10 transform-gpu neon-glow-button wave-button" style={{ transition: 'all 0.15s ease-out' }}>
+                  <span className="relative z-10 flex items-center">
+                    Syllabus’ı İncele
+                    <ArrowRight size={18} className="ml-2 group-hover:translate-x-1" style={{ transition: 'transform 0.15s ease-out' }} />
+                  </span>
+                </Link>
+                <Link href="/haftalar" className="relative overflow-hidden px-6 py-3 bg-dark/50 backdrop-blur-md hover:bg-primary/20 text-slate-200 font-medium rounded-lg border border-primary/30 hover:border-accent/50 shadow-lg shadow-black/10 transform-gpu wave-button-secondary" style={{ transition: 'all 0.15s ease-out' }}>
+                  <span className="relative z-10">Haftalık Programa Git</span>
+                </Link>
+              </div>
+              <Link href="/student" className="relative overflow-hidden px-8 py-2.5 bg-accent/5 backdrop-blur-sm hover:bg-accent/10 text-accent/80 hover:text-accent font-bold rounded-full border border-accent/20 hover:border-accent/40 shadow-lg transition-all transform-gpu hover:scale-105 flex items-center group text-sm">
+                <span className="relative z-10 flex items-center gap-2">
+                  Öğrenci Not Portalı’na Giriş
+                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
             </div>
@@ -118,8 +120,8 @@ export default function Home() {
       </header>
 
       {/* Dashboard Grid */}
-      <main className="bg-[#0D0620] flex-grow relative z-20 flex items-center overflow-hidden">
-        <div className="container mx-auto px-4 py-4">
+      <main className="bg-[#0D0620] flex-grow relative z-20 flex items-center overflow-hidden h-[40%]">
+        <div className="container mx-auto px-4 py-2">
           <DashboardCards />
         </div>
       </main>
