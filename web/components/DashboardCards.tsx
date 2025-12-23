@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Calendar, BookOpen, Layers, GraduationCap } from 'lucide-react';
+import { ArrowRight, Calendar, BookOpen, Layers } from 'lucide-react';
 import { iconColorMap } from '@/lib/iconColors';
 
 export default function DashboardCards() {
@@ -23,14 +23,6 @@ export default function DashboardCards() {
       color: iconColorMap.syllabus,
     },
     {
-      href: '/student',
-      icon: GraduationCap,
-      title: 'Notlar',
-      description: 'Dönem içi ödev ve proje notlarınızı buradan takip edebilirsiniz.',
-      linkText: 'Notlarımı Gör',
-      color: '#E536AB', // Pink color for grades
-    },
-    {
       href: '/Kaynaklar/Kaynakca',
       icon: Layers,
       title: 'Kaynaklar',
@@ -41,7 +33,7 @@ export default function DashboardCards() {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 max-w-full mx-auto">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 max-w-7xl mx-auto">
       {cards.map((card) => {
         const Icon = card.icon;
         return (
