@@ -398,42 +398,152 @@ function CourseDetailContent() {
         {/* Ana İçerik */}
         <main className="p-8">
           {showAnalysis && stats ? (
-            <div className="space-y-6 animate-in fade-in zoom-in-95 duration-200">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm">
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Sınıf Ortalaması</p>
-                  <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">{stats.avg}</p>
+            <div className="space-y-8 animate-in fade-in zoom-in-95 duration-200 pb-10">
+              {/* 1. ÖZET KARTLARI */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="bg-white dark:bg-gray-900 p-5 rounded-xl border dark:border-gray-800 shadow-sm">
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Sınıf Ortalaması</p>
+                  <p className="text-3xl font-black text-blue-600 dark:text-blue-400">{stats.avg}</p>
                 </div>
-                <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm">
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">En Yüksek / En Düşük</p>
-                  <p className="text-3xl font-bold text-gray-900 dark:text-white">{stats.max} <span className="text-gray-300 dark:text-gray-700 mx-2">/</span> {stats.min}</p>
+                <div className="bg-white dark:bg-gray-900 p-5 rounded-xl border dark:border-gray-800 shadow-sm">
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">En Yüksek / Düşük</p>
+                  <p className="text-3xl font-black text-gray-900 dark:text-white">{stats.max} <span className="text-gray-300 text-xl font-normal">/</span> {stats.min}</p>
                 </div>
-                <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm">
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Öğrenci Sayısı</p>
-                  <p className="text-3xl font-bold text-gray-900 dark:text-white">{students.length}</p>
+                <div className="bg-white dark:bg-gray-900 p-5 rounded-xl border dark:border-gray-800 shadow-sm">
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Öğrenci Sayısı</p>
+                  <p className="text-3xl font-black text-gray-900 dark:text-white">{students.length}</p>
+                </div>
+                <div className="bg-white dark:bg-gray-900 p-5 rounded-xl border dark:border-gray-800 shadow-sm">
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Başarı Oranı</p>
+                  <p className="text-3xl font-black text-green-600 dark:text-green-400">
+                    %{Math.round((students.filter(s => s.letter_grade !== 'FF').length / students.length) * 100)}
+                  </p>
                 </div>
               </div>
 
-              <div className="bg-white dark:bg-gray-900 p-8 rounded-xl border dark:border-gray-800 shadow-sm">
-                <h3 className="font-bold text-gray-900 dark:text-white mb-6">Harf Notu Dağılımı</h3>
-                <div className="space-y-4">
-                  {['AA', 'BA', 'BB', 'CB', 'CC', 'DC', 'DD', 'FF'].map(letter => {
-                    const count = stats.distribution[letter] || 0;
-                    const percent = students.length > 0 ? (count / students.length) * 100 : 0;
-                    return (
-                      <div key={letter} className="flex items-center gap-4">
-                        <span className="w-8 font-bold text-sm text-gray-600 dark:text-gray-300">{letter}</span>
-                        <div className="flex-1 h-4 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
-                          <div 
-                            className="h-full bg-blue-500 transition-all duration-500"
-                            style={{ width: `${percent}%` }}
-                          />
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* 2. HARF NOTU DAĞILIMI */}
+                <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                    <span className="w-1 h-6 bg-blue-500 rounded-full"></span>
+                    Harf Notu Dağılımı
+                  </h3>
+                  <div className="space-y-4 flex-1">
+                    {['AA', 'BA', 'BB', 'CB', 'CC', 'DC', 'DD', 'FF'].map(letter => {
+                      const count = stats.distribution[letter] || 0;
+                      const percent = students.length > 0 ? (count / students.length) * 100 : 0;
+                      
+                      // Renk Belirleme
+                      let barColor = 'bg-gray-400';
+                      if (['AA', 'BA', 'BB'].includes(letter)) barColor = 'bg-green-500';
+                      else if (['CB', 'CC', 'DC'].includes(letter)) barColor = 'bg-yellow-500';
+                      else if (['DD', 'FF'].includes(letter)) barColor = 'bg-red-500';
+
+                      return (
+                        <div key={letter} className="flex items-center gap-4 group">
+                          <span className={`w-8 font-bold text-sm ${letter === 'FF' ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'}`}>{letter}</span>
+                          <div className="flex-1 h-3 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden relative">
+                            <div 
+                              className={`h-full ${barColor} transition-all duration-700 ease-out relative`}
+                              style={{ width: `${percent}%` }}
+                            />
+                          </div>
+                          <div className="w-16 text-right flex flex-col items-end leading-none">
+                            <span className="text-sm font-bold text-gray-700 dark:text-white">{count}</span>
+                            <span className="text-[10px] text-gray-400">%{Math.round(percent)}</span>
+                          </div>
                         </div>
-                        <span className="w-12 text-sm text-gray-500 dark:text-gray-400 text-right">{count} Kişi</span>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
+
+                {/* 3. ÖDEV PERFORMANSI */}
+                <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border dark:border-gray-800 shadow-sm flex flex-col">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                    <span className="w-1 h-6 bg-purple-500 rounded-full"></span>
+                    Ödev Bazlı Başarı
+                  </h3>
+                  <div className="space-y-5 flex-1 overflow-y-auto max-h-[400px] pr-2 custom-scrollbar">
+                    {assignments.map(assign => {
+                      // Bu ödevin ortalamasını hesapla
+                      const scores = students.map(s => s.scores[assign.id] || 0);
+                      const avg = scores.length > 0 ? scores.reduce((a, b) => a + b, 0) / scores.length : 0;
+                      const percent = (avg / (assign.max_score || 100)) * 100;
+                      
+                      return (
+                        <div key={assign.id}>
+                          <div className="flex justify-between items-end mb-1">
+                            <span className="text-xs font-bold text-gray-600 dark:text-gray-300 uppercase truncate max-w-[200px]" title={assign.name}>{assign.name}</span>
+                            <span className="text-sm font-black text-gray-900 dark:text-white">{avg.toFixed(1)}</span>
+                          </div>
+                          <div className="h-2.5 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                             <div 
+                              className="h-full bg-purple-500 transition-all duration-700"
+                              style={{ width: `${percent}%` }}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. RİSKLİ ÖĞRENCİLER */}
+              <div className="bg-white dark:bg-gray-900 rounded-xl border dark:border-gray-800 shadow-sm overflow-hidden">
+                 <div className="p-6 border-b dark:border-gray-800 bg-red-50/30 dark:bg-red-900/10">
+                    <h3 className="text-lg font-bold text-red-700 dark:text-red-400 flex items-center gap-2">
+                        <span className="w-1 h-6 bg-red-500 rounded-full"></span>
+                        Risk Grubu (FF/DD veya &lt;50)
+                    </h3>
+                 </div>
+                 <div className="p-0">
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left">
+                            <thead className="bg-gray-50 dark:bg-gray-800 text-xs uppercase text-gray-500 font-bold">
+                                <tr>
+                                    <th className="p-4">Öğrenci</th>
+                                    <th className="p-4 text-center">Ortalama</th>
+                                    <th className="p-4 text-center">Harf</th>
+                                    <th className="p-4 text-center">Eksik Ödev</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+                                {students
+                                    .filter(s => s.average < 50 || ['FF', 'DD'].includes(s.letter_grade))
+                                    .sort((a, b) => a.average - b.average)
+                                    .map(student => {
+                                        // Eksik (0 olan) ödev sayısı
+                                        const missingCount = assignments.filter(a => !student.scores[a.id] || student.scores[a.id] === 0).length;
+                                        return (
+                                            <tr key={student.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                                                <td className="p-4 font-medium text-gray-900 dark:text-white">
+                                                    {student.full_name} <span className="text-gray-400 font-normal ml-1">({student.student_no})</span>
+                                                </td>
+                                                <td className="p-4 text-center font-bold text-gray-900 dark:text-white">{student.average}</td>
+                                                <td className="p-4 text-center">
+                                                    <span className="px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded text-xs font-bold">
+                                                        {student.letter_grade}
+                                                    </span>
+                                                </td>
+                                                <td className="p-4 text-center text-gray-500 text-sm">
+                                                    {missingCount > 0 ? <span className="text-red-500 font-bold">{missingCount} Ödev Eksik</span> : "-"}
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                {students.filter(s => s.average < 50 || ['FF', 'DD'].includes(s.letter_grade)).length === 0 && (
+                                    <tr>
+                                        <td colSpan={4} className="p-8 text-center text-gray-500">
+                                            Harika! Risk grubunda öğrenci bulunmuyor.
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                 </div>
               </div>
             </div>
           ) : (
