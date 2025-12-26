@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import DashboardCards from '@/components/DashboardCards';
-import { useState, useEffect } from 'react';
 
 export default function Home() {
   // Static blobs with varied properties for CSS animation

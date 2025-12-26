@@ -28,15 +28,19 @@ function mapUrlToPath(urlSegment: string): string {
 export interface MarkdownMeta {
   title?: string;
   description?: string;
-  week?: number;
+  date?: string;
+  author?: string;
+  tags?: string[];
+  week?: number | string;
   order?: number;
   category?: string;
   duration?: string;
-  [key: string]: unknown; // Daha güvenli bir genel tip
+  // Allow other properties but encourage using defined ones
+  [key: string]: unknown;
 }
 
 export interface MarkdownContent {
-  data: MarkdownMeta; // MarkdownMeta kullan
+  data: MarkdownMeta;
   content: string;
   slug: string;
 }
@@ -68,14 +72,14 @@ export function getMarkdownContent(relativePath: string): MarkdownContent | null
     const fileContents = fs.readFileSync(originalFullPath, 'utf8');
     const { data, content } = matter(fileContents);
     const slug = relativePath.replace(/\.md$/, '');
-    return { data, content, slug };
+    return { data: data as MarkdownMeta, content, slug };
   }
 
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
   const slug = relativePath.replace(/\.md$/, '');
 
-  return { data, content, slug };
+  return { data: data as MarkdownMeta, content, slug };
 }
 
 /**

@@ -40,19 +40,13 @@ export default function DashboardCards() {
           <Link
             key={card.href}
             href={card.href}
-            className="bg-dark/70 backdrop-blur-md border border-primary/20 p-7 rounded-xl group shadow-xl shadow-black/30 flex flex-col cursor-pointer transition-all duration-150 ease-out hover:scale-[1.01]"
+            className="bg-dark/70 backdrop-blur-md border border-primary/20 p-7 rounded-xl group shadow-xl shadow-black/30 flex flex-col cursor-pointer transition-all duration-150 ease-out hover:scale-[1.01] hover:border-[color:var(--card-color)] hover:shadow-[0_0_20px_var(--card-shadow-1),_0_15px_50px_var(--card-shadow-2)]"
             style={{ 
               ['--card-color' as string]: card.color,
+              ['--card-shadow-1' as string]: `${card.color.replace(')', ' / 0.3)')}`,
+              ['--card-shadow-2' as string]: `${card.color.replace(')', ' / 0.2)')}`,
               filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.4))',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = card.color;
-              e.currentTarget.style.boxShadow = `0 0 20px ${card.color}30, 0 15px 50px ${card.color}20`;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = '';
-              e.currentTarget.style.boxShadow = '';
-            }}
+            } as React.CSSProperties}
           >
             <div className="flex items-center gap-3 mb-4">
               <Icon
