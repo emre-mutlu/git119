@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import Papa from 'papaparse';
 import { v5 as uuidv5 } from 'uuid'; 
+import { calculateStudentGrade } from './calculator';
 
 // Not: UUID kütüphanesi ve Supabase client'ı projede kurulu olmalıdır.
 // npm install papaparse uuid
@@ -86,26 +87,49 @@ export async function importGraderCSV(
                 continue;
             }
 
-            // Enrollment (Upsert kullanarak duplicate hatasını önle)
-            await supabase
-              .from('enrollments')
-              .upsert(
-                { course_id: courseId, student_id: student.id },
-                { onConflict: 'course_id,student_id', ignoreDuplicates: true }
-              );
-
             // Notlar
             const scoresToInsert = [];
+            const scoresMap: Record<string, number> = {};
+
             for (const col of assignmentCols) {
               let val = parseFloat(row[col]);
               if (isNaN(val)) val = 0; // "-" veya boşsa 0
 
+              const assignmentId = assignmentMap[col];
               scoresToInsert.push({
-                assignment_id: assignmentMap[col],
+                assignment_id: assignmentId,
                 student_id: student.id,
                 value: val
               });
+              scoresMap[assignmentId] = val;
             }
+
+            // Calculate Grade
+            // Dummy assignments array with weight 0 as they are just created with default 0 weight
+            const dummyAssignments = Object.values(assignmentMap).map(id => ({
+                id,
+                course_id: courseId,
+                name: '', // Not needed for calc
+                category: 'Homework' as const,
+                weight: 0,
+                max_score: 100,
+                created_at: ''
+            }));
+
+            const gradeResult = calculateStudentGrade(scoresMap, dummyAssignments);
+
+            // Enrollment (Upsert with calculated grades)
+            await supabase
+              .from('enrollments')
+              .upsert(
+                {
+                    course_id: courseId,
+                    student_id: student.id,
+                    average_score: gradeResult.total,
+                    letter_grade: gradeResult.letter
+                },
+                { onConflict: 'course_id,student_id' }
+              );
 
             if (scoresToInsert.length > 0) {
               await supabase.from('scores').insert(scoresToInsert);

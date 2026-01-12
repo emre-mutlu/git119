@@ -179,10 +179,26 @@ function CourseDetailContent() {
       
       setAssignments(updatedAssignments);
       
-      setStudents(prev => prev.map(s => {
+      const newStudents = students.map(s => {
         const result = calculateStudentGrade(s.scores, updatedAssignments);
         return { ...s, average: result.total, letter_grade: result.letter };
+      });
+
+      setStudents(newStudents);
+
+      // Update enrollments with calculated averages
+      const enrollmentUpdates = newStudents.map(s => ({
+        course_id: id,
+        student_id: s.id,
+        average_score: s.average,
+        letter_grade: s.letter_grade
       }));
+
+      const { error: enrollError } = await supabase
+        .from('enrollments')
+        .upsert(enrollmentUpdates, { onConflict: 'course_id,student_id' });
+
+      if (enrollError) throw enrollError;
 
       alert("Ağırlık ayarları başarıyla güncellendi.");
     } catch (err: any) {
@@ -231,6 +247,20 @@ function CourseDetailContent() {
       }
       const { error } = await supabase.from('scores').upsert(updates, { onConflict: 'student_id,assignment_id' });
       if (error) throw error;
+
+      // Update enrollments with calculated averages
+      const enrollmentUpdates = students.map(s => ({
+        course_id: id,
+        student_id: s.id,
+        average_score: s.average,
+        letter_grade: s.letter_grade
+      }));
+
+      const { error: enrollError } = await supabase
+        .from('enrollments')
+        .upsert(enrollmentUpdates, { onConflict: 'course_id,student_id' });
+
+      if (enrollError) throw enrollError;
       
       setHasChanges(false);
       alert("Başarıyla kaydedildi.");
