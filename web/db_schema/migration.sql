@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS students CASCADE;
 DROP TABLE IF EXISTS courses CASCADE;
 CREATE TABLE courses (id uuid DEFAULT gen_random_uuid() PRIMARY KEY, code text NOT NULL, name text NOT NULL, semester text NOT NULL, created_at timestamptz DEFAULT now());
 CREATE TABLE students (id uuid DEFAULT gen_random_uuid() PRIMARY KEY, student_no text UNIQUE NOT NULL, full_name text NOT NULL, email text, created_at timestamptz DEFAULT now());
-CREATE TABLE enrollments (id uuid DEFAULT gen_random_uuid() PRIMARY KEY, course_id uuid REFERENCES courses(id) ON DELETE CASCADE NOT NULL, student_id uuid REFERENCES students(id) ON DELETE CASCADE NOT NULL, feedback text, UNIQUE(course_id, student_id));
+CREATE TABLE enrollments (id uuid DEFAULT gen_random_uuid() PRIMARY KEY, course_id uuid REFERENCES courses(id) ON DELETE CASCADE NOT NULL, student_id uuid REFERENCES students(id) ON DELETE CASCADE NOT NULL, average_score numeric DEFAULT 0, letter_grade text DEFAULT '-', feedback text, UNIQUE(course_id, student_id));
 CREATE TABLE assignments (id uuid DEFAULT gen_random_uuid() PRIMARY KEY, course_id uuid REFERENCES courses(id) ON DELETE CASCADE NOT NULL, name text NOT NULL, category text DEFAULT 'Homework', weight numeric DEFAULT 0, max_score numeric DEFAULT 100, created_at timestamptz DEFAULT now());
 CREATE TABLE scores (id uuid DEFAULT gen_random_uuid() PRIMARY KEY, assignment_id uuid REFERENCES assignments(id) ON DELETE CASCADE NOT NULL, student_id uuid REFERENCES students(id) ON DELETE CASCADE NOT NULL, value numeric DEFAULT 0, UNIQUE(assignment_id, student_id));
 
