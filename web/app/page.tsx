@@ -3,16 +3,56 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import DashboardCards from '@/components/DashboardCards';
+import { useState, useEffect } from 'react';
+
+// Core 6 Colors for animated blobs
+const blobColors = [
+  { color: 'rgba(255,0,0,', name: 'red' },         // #ff0000
+  { color: 'rgba(0,255,0,', name: 'lime' },        // #00ff00
+  { color: 'rgba(0,0,255,', name: 'blue' },        // #0000ff
+  { color: 'rgba(0,145,255,', name: 'ocean' },     // #0091ff
+  { color: 'rgba(92,3,188,', name: 'purple' },     // #5C03BC
+  { color: 'rgba(229,54,171,', name: 'pink' },     // #E536AB
+];
+
+interface Blob {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  color: string;
+  duration: number;
+  delay: number;
+}
+
+const generateBlobs = (): Blob[] => {
+  return Array.from({ length: 5 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100 - 20,
+    y: Math.random() * 100 - 20,
+    size: 300 + Math.random() * 300,
+    color: blobColors[Math.floor(Math.random() * blobColors.length)].color,
+    duration: 15 + Math.random() * 15,
+    delay: Math.random() * 5,
+  }));
+};
 
 export default function Home() {
-  // Static blobs with varied properties for CSS animation
-  // Using transform-based animation classes defined in globals.css or tailwind config is more performant than updating top/left via JS
-  const blobs = [
-    { color: 'bg-purple-600', left: '10%', top: '20%', size: 'w-96 h-96', anim: 'animate-blob-float', delay: '0s' },
-    { color: 'bg-blue-500', left: '70%', top: '50%', size: 'w-80 h-80', anim: 'animate-blob-float-reverse', delay: '2s' },
-    { color: 'bg-pink-500', left: '40%', top: '30%', size: 'w-72 h-72', anim: 'animate-blob-float', delay: '4s' },
-    { color: 'bg-cyan-400', left: '20%', top: '60%', size: 'w-64 h-64', anim: 'animate-blob-float-reverse', delay: '1s' },
-  ];
+  const [blobs, setBlobs] = useState<Blob[]>([]);
+
+  useEffect(() => {
+    setBlobs(generateBlobs());
+
+    // Change blob colors periodically
+    const interval = setInterval(() => {
+      setBlobs(prev => prev.map(blob => ({
+        ...blob,
+        color: blobColors[Math.floor(Math.random() * blobColors.length)].color,
+      })));
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="bg-dark text-slate-200 font-sans selection:bg-accent/30 h-screen overflow-hidden flex flex-col pt-20 relative">
@@ -48,7 +88,7 @@ export default function Home() {
               <div className="flex flex-wrap justify-center gap-4">
                 <Link href="/Mufredat/Syllabus" className="relative overflow-hidden px-6 py-3 bg-primary/90 backdrop-blur-md hover:bg-primary text-white font-semibold rounded-lg flex items-center group border border-white/10 transform-gpu neon-glow-button wave-button" style={{ transition: 'all 0.15s ease-out' }}>
                   <span className="relative z-10 flex items-center">
-                    Syllabus’ı İncele
+                    Syllabus'ı İncele
                     <ArrowRight size={18} className="ml-2 group-hover:translate-x-1" style={{ transition: 'transform 0.15s ease-out' }} />
                   </span>
                 </Link>
@@ -73,18 +113,25 @@ export default function Home() {
         
         {/* Animated Background Blobs */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-          {blobs.map((blob, i) => (
+          {blobs.map((blob) => (
             <div
-              key={i}
-              className={`absolute rounded-full mix-blend-screen filter blur-[80px] opacity-40 ${blob.color} ${blob.anim} will-change-transform`}
+              key={blob.id}
+              className="absolute rounded-full animate-blob-float"
               style={{
-                left: blob.left,
-                top: blob.top,
-                width: blob.size.split(' ')[0].replace('w-', '') === '96' ? '24rem' : '20rem',
-                height: blob.size.split(' ')[1].replace('h-', '') === '96' ? '24rem' : '20rem',
-                animationDelay: blob.delay,
+                left: `${blob.x}%`,
+                top: `${blob.y}%`,
+                width: `${blob.size}px`,
+                height: `${blob.size}px`,
+                backgroundColor: `${blob.color}0.15)`,
+                filter: 'blur(80px)',
+                WebkitFilter: 'blur(80px)',
+                transform: 'translate3d(0, 0, 0)',
+                willChange: 'transform',
+                animationDuration: `${blob.duration}s`,
+                animationDelay: `${blob.delay}s`,
+                transition: 'background-color 3s ease-in-out',
               }}
-            ></div>
+            />
           ))}
         </div>
       </header>
