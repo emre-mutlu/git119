@@ -4,26 +4,38 @@
 
 :root {
   --foreground-rgb: 226, 232, 240;
-  --background-color: #0E0725;
+  --background-color: oklch(0.13 0.04 285);
   
-  /* Core Color Palette (6 colors) */
-  --color-red: 255 0 0;          /* #ff0000 */
-  --color-lime: 0 255 0;         /* #00ff00 */
-  --color-blue: 0 0 255;         /* #0000ff */
-  --color-ocean: 0 145 255;      /* #0091ff */
-  --color-purple: 92 3 188;      /* #5C03BC */
-  --color-pink: 229 54 171;      /* #E536AB */
+  /* Core Color Palette (6 colors) - OKLCH format */
+  /* OKLCH: L (lightness 0-1), C (chroma 0-0.4), H (hue 0-360) */
+  --color-red: oklch(0.63 0.26 29);
+  --color-lime: oklch(0.87 0.29 142);
+  --color-blue: oklch(0.45 0.31 264);
+  --color-ocean: oklch(0.65 0.19 250);
+  --color-purple: oklch(0.40 0.27 295);
+  --color-pink: oklch(0.65 0.24 350);
   
-  /* Theme aliases (customizable via theme tool) */
+  /* Legacy RGB values for backwards compat with Tailwind alpha */
+  --color-red-rgb: 255 0 0;
+  --color-lime-rgb: 0 255 0;
+  --color-blue-rgb: 0 0 255;
+  --color-ocean-rgb: 0 145 255;
+  --color-purple-rgb: 92 3 188;
+  --color-pink-rgb: 229 54 171;
+  
+  /* Theme aliases */
   --color-primary: var(--color-purple);
+  --color-primary-rgb: var(--color-purple-rgb);
   --color-accent: var(--color-ocean);
+  --color-accent-rgb: var(--color-ocean-rgb);
   --color-neon: var(--color-lime);
+  --color-neon-rgb: var(--color-lime-rgb);
   
   /* Glitch effect colors */
-  --glitch-gradient-start: #ff0000;
-  --glitch-gradient-end: #0091ff;
-  --glitch-before-color: rgba(0, 0, 255, 0.9);
-  --glitch-after-color: rgba(0, 145, 255, 0.9);
+  --glitch-gradient-start: oklch(0.63 0.26 29);
+  --glitch-gradient-end: oklch(0.65 0.19 250);
+  --glitch-before-color: oklch(0.45 0.31 264 / 0.9);
+  --glitch-after-color: oklch(0.65 0.19 250 / 0.9);
 }
 
 body {
@@ -44,8 +56,8 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: rgb(var(--color-neon));
-  box-shadow: 0 0 8px rgb(var(--color-neon)), 0 0 12px rgb(var(--color-neon));
+  background-color: var(--color-neon);
+  box-shadow: 0 0 8px var(--color-neon), 0 0 12px var(--color-neon);
 }
 
 /* Prose spacing improvements */
@@ -87,14 +99,14 @@ body {
 .prose hr {
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
-  border-color: rgb(51 65 85 / 0.5);
+  border-color: oklch(0.40 0.02 250 / 0.5);
 }
 
 /* Green H1 titles for Syllabus, Kaynaklar, and Haftalar pages */
 .syllabus-prose h1,
 .kaynaklar-prose h1,
 .mesh-heading h1 {
-  color: rgb(var(--color-neon)) !important;
+  color: var(--color-neon) !important;
 }
 
 .logo-glitch {
@@ -104,7 +116,7 @@ body {
   isolation: isolate;
   font-weight: 900;
   letter-spacing: -0.02em;
-  text-shadow: 0 0 14px rgba(92, 3, 188, 0.35);
+  text-shadow: 0 0 14px oklch(0.40 0.27 295 / 0.35);
   transition: text-shadow 0.2s ease;
   /* Gradient animation setup */
   background-size: 200% auto;
@@ -124,7 +136,7 @@ body {
   inset: 0;
   pointer-events: none;
   mix-blend-mode: screen;
-  opacity: 0; /* Default hidden */
+  opacity: 0;
   transition: opacity 0.05s ease-out, transform 0.05s ease-out;
 }
 
@@ -133,7 +145,7 @@ body {
   opacity: 0.8;
   transform: translate(-2px, 0);
   color: transparent;
-  text-shadow: -2px 0 rgba(255, 0, 0, 0.9), 2px 0 rgba(0, 255, 255, 0.9);
+  text-shadow: -2px 0 oklch(0.63 0.26 29 / 0.9), 2px 0 oklch(0.75 0.15 195 / 0.9);
   animation: chromaticShift 0.1s cubic-bezier(.25, .46, .45, .94) both infinite;
 }
 
@@ -141,7 +153,7 @@ body {
   opacity: 0.8;
   transform: translate(2px, 0);
   color: transparent;
-  text-shadow: 2px 0 rgba(0, 255, 0, 0.9), -2px 0 rgba(255, 0, 255, 0.9);
+  text-shadow: 2px 0 oklch(0.87 0.29 142 / 0.9), -2px 0 oklch(0.70 0.25 330 / 0.9);
   animation: chromaticShift 0.1s cubic-bezier(.25, .46, .45, .94) both infinite reverse;
 }
 
@@ -150,14 +162,14 @@ body {
   opacity: calc(var(--glitch-proximity) * 0.4);
   transform: translate(calc(var(--glitch-proximity) * -1px), 0);
   color: transparent;
-  text-shadow: -1px 0 rgba(255, 0, 0, 0.7), 1px 0 rgba(0, 255, 255, 0.7);
+  text-shadow: -1px 0 oklch(0.63 0.26 29 / 0.7), 1px 0 oklch(0.75 0.15 195 / 0.7);
 }
 
 .logo-glitch-proximity::after {
   opacity: calc(var(--glitch-proximity) * 0.4);
   transform: translate(calc(var(--glitch-proximity) * 1px), 0);
   color: transparent;
-  text-shadow: 1px 0 rgba(0, 255, 0, 0.7), -1px 0 rgba(255, 0, 255, 0.7);
+  text-shadow: 1px 0 oklch(0.87 0.29 142 / 0.7), -1px 0 oklch(0.70 0.25 330 / 0.7);
 }
 
 /* Ensure hover always triggers max intensity regardless of proximity calc */
@@ -176,55 +188,42 @@ body {
 }
 
 
-/* ... (aradaki kodlar aynı kalır) ... */
-
 :root {
   --random-gradient-dir: 135deg;
 }
 
-/* Glassmorphism heading style for syllabus and kaynaklar - linear gradient fade up */
+/* Refined heading style - subtle left accent glow with glassmorphism */
 .syllabus-prose > h2,
 .syllabus-prose > h3,
 .kaynaklar-prose > h2,
 .kaynaklar-prose > h3,
 .mesh-heading {
-  --mesh-a: rgb(var(--color-primary) / 0.4);
-  --mesh-b: rgb(var(--color-accent) / 0.1);
-  
-  background: linear-gradient(to top, var(--mesh-a) 0%, var(--mesh-b) 40%, transparent 100%);
-  
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  position: relative;
+  background: oklch(0.18 0.03 285 / 0.6);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
   margin-left: -1rem;
   margin-right: -1rem;
-  padding: 0.8rem 1.1rem;
+  padding: 0.75rem 1.1rem 0.75rem 1.4rem;
   border-radius: 0;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.9);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  text-shadow: 0 1px 3px oklch(0 0 0 / 0.6);
+  border: none;
+  border-left: 3px solid var(--color-primary);
+  box-shadow: 
+    inset 0 0 30px oklch(0.40 0.27 295 / 0.06),
+    0 4px 20px oklch(0 0 0 / 0.2);
 }
 
-/* Different color combinations for each heading, tied to 6-color palette */
-/* Core 6 Colors: 
-   Red: 255,0,0 (#ff0000)
-   Lime: 0,255,0 (#00ff00)
-   Blue: 0,0,255 (#0000ff)
-   Ocean: 0,145,255 (#0091ff)
-   Purple: 92,3,188 (#5C03BC)
-   Pink: 229,54,171 (#E536AB)
-*/
-
+/* Rotating accent colors for left border - using theme colors */
 .syllabus-prose > h2:nth-of-type(5n+1),
 .syllabus-prose > h3:nth-of-type(5n+1),
 .kaynaklar-prose > h2:nth-of-type(5n+1),
 .kaynaklar-prose > h3:nth-of-type(5n+1),
 .mesh-heading:nth-of-type(5n+1) {
-  --mesh-a: rgba(255,0,0, 0.55);
-  --mesh-b: rgba(0,145,255, 0.42);
-  background: linear-gradient(var(--random-gradient-dir), var(--mesh-a) 0%, var(--mesh-b) 40%, transparent 65%);
+  border-left-color: var(--color-accent);
+  box-shadow: 
+    inset 0 0 30px oklch(0.65 0.19 250 / 0.08),
+    0 4px 20px oklch(0 0 0 / 0.2);
 }
 
 .syllabus-prose > h2:nth-of-type(5n+2),
@@ -232,9 +231,10 @@ body {
 .kaynaklar-prose > h2:nth-of-type(5n+2),
 .kaynaklar-prose > h3:nth-of-type(5n+2),
 .mesh-heading:nth-of-type(5n+2) {
-  --mesh-a: rgba(0,255,0, 0.35);
-  --mesh-b: rgba(0,0,255, 0.5);
-  background: linear-gradient(var(--random-gradient-dir), var(--mesh-a) 0%, var(--mesh-b) 35%, transparent 65%);
+  border-left-color: var(--color-neon);
+  box-shadow: 
+    inset 0 0 30px oklch(0.87 0.29 142 / 0.05),
+    0 4px 20px oklch(0 0 0 / 0.2);
 }
 
 .syllabus-prose > h2:nth-of-type(5n+3),
@@ -242,29 +242,32 @@ body {
 .kaynaklar-prose > h2:nth-of-type(5n+3),
 .kaynaklar-prose > h3:nth-of-type(5n+3),
 .mesh-heading:nth-of-type(5n+3) {
-  --mesh-a: rgba(229,54,171, 0.5);
-  --mesh-b: rgba(92,3,188, 0.3);
-  background: linear-gradient(var(--random-gradient-dir), var(--mesh-a) 0%, var(--mesh-b) 45%, transparent 65%);
+  border-left-color: var(--color-pink);
+  box-shadow: 
+    inset 0 0 30px oklch(0.65 0.24 350 / 0.06),
+    0 4px 20px oklch(0 0 0 / 0.2);
 }
 
 .syllabus-prose > h2:nth-of-type(5n+4),
-.syllabus-prose > h3:nth-of-type(5n+4),
+syllabus-prose > h3:nth-of-type(5n+4),
 .kaynaklar-prose > h2:nth-of-type(5n+4),
-.kaynaklar-prose > h3:nth-of-type(5n+4),
+kaynaklar-prose > h3:nth-of-type(5n+4),
 .mesh-heading:nth-of-type(5n+4) {
-  --mesh-a: rgba(0,145,255, 0.55);
-  --mesh-b: rgba(229,54,171, 0.4);
-  background: linear-gradient(var(--random-gradient-dir), var(--mesh-a) 0%, var(--mesh-b) 30%, transparent 65%);
+  border-left-color: var(--color-purple);
+  box-shadow: 
+    inset 0 0 30px oklch(0.40 0.27 295 / 0.08),
+    0 4px 20px oklch(0 0 0 / 0.2);
 }
 
 .syllabus-prose > h2:nth-of-type(5n),
 .syllabus-prose > h3:nth-of-type(5n),
 .kaynaklar-prose > h2:nth-of-type(5n),
-.kaynaklar-prose > h3:nth-of-type(5n),
+kaynaklar-prose > h3:nth-of-type(5n),
 .mesh-heading:nth-of-type(5n) {
-  --mesh-a: rgba(92,3,188, 0.5);
-  --mesh-b: rgba(255,0,0, 0.45);
-  background: linear-gradient(var(--random-gradient-dir), var(--mesh-a) 0%, var(--mesh-b) 50%, transparent 65%);
+  border-left-color: var(--color-red);
+  box-shadow: 
+    inset 0 0 30px oklch(0.63 0.26 29 / 0.06),
+    0 4px 20px oklch(0 0 0 / 0.2);
 }
 
 /* Logo condensed font */
@@ -308,9 +311,9 @@ body {
   animation: floatSlower 25s ease-in-out infinite;
 }
 
-/* Blob float animation with scale and movement */
+/* Blob float animations */
 @keyframes blobFloat {
-  0% {
+  0%, 100% {
     transform: translate(0, 0) scale(1);
   }
   25% {
@@ -322,9 +325,29 @@ body {
   75% {
     transform: translate(40px, 30px) scale(1.15);
   }
-  100% {
+}
+
+@keyframes blobFloatReverse {
+  0%, 100% {
     transform: translate(0, 0) scale(1);
   }
+  25% {
+    transform: translate(-25px, 35px) scale(1.12);
+  }
+  50% {
+    transform: translate(30px, -15px) scale(0.88);
+  }
+  75% {
+    transform: translate(-35px, -25px) scale(1.08);
+  }
+}
+
+.animate-blob-float {
+  animation: blobFloat 12s ease-in-out infinite;
+}
+
+.animate-blob-float-reverse {
+  animation: blobFloatReverse 14s ease-in-out infinite;
 }
 
 /* Custom Scrollbar */
@@ -338,19 +361,19 @@ body {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.1);
+  background: oklch(0.65 0.01 250 / 0.1);
   border-radius: 20px;
   transition: all 0.2s;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.3);
+  background: oklch(0.65 0.01 250 / 0.3);
 }
 
 /* For Firefox */
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(148, 163, 184, 0.1) transparent;
+  scrollbar-color: oklch(0.65 0.01 250 / 0.1) transparent;
 }
 
 .week-card-link {
@@ -370,7 +393,6 @@ body {
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     will-change: transform, filter;
-    /* Reduce rotation and translation by 1/3 using calc */
     transform: scale(var(--scale, 1)) rotateX(calc(var(--rotate-x, 0deg) / 3)) rotateY(calc(var(--rotate-y, 0deg) / 3)) translateY(calc(var(--translate-y, 0px) / 3));
   }
   .week-card-link:active .week-card {
@@ -391,4 +413,3 @@ body {
     transform: scale(var(--scale, 1.02)) rotateX(0deg) rotateY(0deg) translateY(0px) !important;
   }
 }
-
