@@ -82,7 +82,6 @@ export default function Home() {
                 top: blob.top,
                 width: blob.size.split(' ')[0].replace('w-', '') === '96' ? '24rem' : '20rem',
                 height: blob.size.split(' ')[1].replace('h-', '') === '96' ? '24rem' : '20rem',
-                animationDuration: '10s',
                 animationDelay: blob.delay,
               }}
             ></div>

@@ -33,6 +33,37 @@ module.exports = {
         mono: ['Courier New', 'Courier', 'monospace'],
         rokkitt: ['var(--font-rokkitt)', 'serif'],
       },
+      animation: {
+        'float-slow': 'floatSlow 20s ease-in-out infinite',
+        'float-slower': 'floatSlower 25s ease-in-out infinite',
+        'blob-float': 'blobFloat 12s ease-in-out infinite',
+        'blob-float-reverse': 'blobFloatReverse 14s ease-in-out infinite',
+      },
+      keyframes: {
+        floatSlow: {
+          '0%, 100%': { transform: 'translate(0, 0)' },
+          '25%': { transform: 'translate(15px, -20px)' },
+          '50%': { transform: 'translate(-10px, 15px)' },
+          '75%': { transform: 'translate(20px, 10px)' },
+        },
+        floatSlower: {
+          '0%, 100%': { transform: 'translate(0, 0)' },
+          '33%': { transform: 'translate(-20px, 15px)' },
+          '66%': { transform: 'translate(15px, -10px)' },
+        },
+        blobFloat: {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '25%': { transform: 'translate(30px, -40px) scale(1.1)' },
+          '50%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+          '75%': { transform: 'translate(40px, 30px) scale(1.15)' },
+        },
+        blobFloatReverse: {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '25%': { transform: 'translate(-25px, 35px) scale(1.12)' },
+          '50%': { transform: 'translate(30px, -15px) scale(0.88)' },
+          '75%': { transform: 'translate(-35px, -25px) scale(1.08)' },
+        },
+      },
     },
   },
   plugins: [
